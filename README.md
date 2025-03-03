@@ -6,3 +6,10 @@ Actualizacion
 
 ![image](https://github.com/user-attachments/assets/b5ca1e6b-91d1-4133-9a92-426464405221)
 
+Sidebar actual:
+
+![alt text](image-1.png)
+
+Diseño en proceso:
+
+![alt text](image.png)

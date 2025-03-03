@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sidebar.css">
+    <title>Software Evolution - Sidebar</title>
+    <!-- Incluir jQuery (puedes usar un CDN o un archivo local) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-container">
+                <img src="../Assets/logo-sidebar.png" alt="Software Evolution Logo" class="logo">
+                <div class="brand-name">Software<br>Evolution</div>
+            </div>
+            <button class="toggle-btn">◀</button>
+        </div>
+
+        <div class="sidebar-menu">
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M6.4 14.4v-4.8h3.2v4.8h4V8h2.4L8 1.6 0 8h2.4v6.4h4z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="menu-text">Inicio</div>
+            </div>
+
+            <div class="menu-item active">
+                <div class="menu-icon">
+                    <div class="icon-contacts">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+                <div class="menu-text">Contactos</div>
+                <div class="menu-arrow">▾</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 8c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="menu-text">Clientes</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="menu-text">Proveedores</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="2"/>
+                        <path d="M8 4v8M4 8h8" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="menu-text">Ingresos</div>
+                <div class="menu-arrow">▾</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M1 3h14v10H1V3zm3 12h8M4 1h8" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="menu-text">Compras</div>
+                <div class="menu-arrow">▾</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M13 2H3c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 9H4V4h8v7z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="menu-text">Cuentas</div>
+                <div class="menu-arrow">▾</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M14 4.5L8 1 2 4.5v7L8 15l6-3.5v-7z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="menu-text">Cajas</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M2 2h12v12H2z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M5 5h6M5 8h6M5 11h6" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="menu-text">Productos</div>
+                <div class="menu-arrow">▾</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M2 14V2h12v12H2z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M2 6h12" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="menu-text">Banco</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M14 8H2m12 0L8 2m6 6L8 14" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="menu-text">Despacho</div>
+            </div>
+
+            <div class="section-title">
+                Reportes
+                <span class="add-button">+</span>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M13 2H3c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 9H4V4h8v7z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="menu-text">Reportes</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M13 2H3c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 9H4V4h8v7z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="menu-text">Nóminas</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M13 2H3c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 9H4V4h8v7z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="menu-text">Contabilidad</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 8c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="menu-text">RRHH</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="sidebar.js"></script>
+</body>
+</html>

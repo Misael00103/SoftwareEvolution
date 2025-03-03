@@ -1,4 +1,4 @@
-  document.addEventListener('DOMContentLoaded', function() {s
+document.addEventListener('DOMContentLoaded', function() {s
     const urlParams = new URLSearchParams(window.location.search);
     const errorMsg = urlParams.get('error');
     
@@ -7,7 +7,6 @@
         errorContainer.textContent = errorMsg;
         errorContainer.style.display = 'flex';
     }
-    
     const formElements = document.querySelectorAll('.form-input, .button-primary');
     formElements.forEach((element, index) => {
         element.style.opacity = '0';
