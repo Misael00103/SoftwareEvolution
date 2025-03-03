@@ -10,7 +10,7 @@
     --sidebar-collapsed-width: 64px;
     --yellow: #FFC700;
     --text-color: #9899AC;
-    --active-bg: #2C2C2C; /* Fondo gris oscuro como en la imagen para el elemento activo */
+    --active-bg: #2C2C2C; 
 }
 
 body {

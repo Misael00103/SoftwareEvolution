@@ -1,3 +1,5 @@
+El proyecto consta de actualizar un sistema de inventarios generado en .Net implementar las pantallas y actualizar componentes que requerian solucion.
+
 Anterior Login
 
 ![image](https://github.com/user-attachments/assets/813e7213-f15c-414c-abc8-807d15f0dbb7)
