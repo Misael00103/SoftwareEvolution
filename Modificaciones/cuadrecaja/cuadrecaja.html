@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="stylesheet" href="/css/homeProducts/homeproductos.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container-principal">
+        <div class="container">
+            <header class="header">
+                <div class="header-left">
+                    <div class="header-icon">
+                        <span class="material-icons">inventory_2</span>
+                    </div>
+                    <div class="header-text">
+                        <h1>Cuadre de Caja</h1>
+                        <p>Para editar detalles del usuario, modifica o agrega</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="action-buttons">
+                        <button class="icon-button">
+                            <span class="material-icons">mail</span>
+                        </button>
+                        <button class="icon-button">
+                            <span class="material-icons">schedule</span>
+                        </button>
+                        <button class="icon-button">
+                            <span class="material-icons">print</span>
+                        </button>
+                    </div>
+                    <div class="search-container">
+                        <input type="text" placeholder="Buscar..." />
+                    </div>
+                    <button class="add-button" onclick="window.location.href='/CuadreCaja/Create';">
+                        <span class="material-icons">add</span>
+                        Agregar producto
+                    </button>
+                </div>
+            </header>
+
+            <div class="filters">
+                <div class="filter-group">
+                    <input type="text" placeholder="Descripción" />
+                    <button class="clear-filter">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="filter-group">
+                    <input type="text" placeholder="Categoría" />
+                    <button class="clear-filter">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="filter-group">
+                    <input type="text" placeholder="Sub-Categoría" />
+                    <button class="clear-filter">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="filter-group">
+                    <input type="text" placeholder="Almacén" />
+                    <button class="clear-filter">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <button class="filter-button">Filtrar</button>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="checkbox-column">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" />
+                                    <span class="checkmark"></span>
+                                </label>
+                            </th>
+                            <th>ID <span class="material-icons">arrow_downward</span></th>
+                            <th>Descripción</th>
+                            <th>Categoría</th>
+                            <th>Precio 1</th>
+                            <th>Precio 2</th>
+                            <th>Precio 3</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label class="checkbox-container">
+                                    <input type="checkbox" />
+                                    <span class="checkmark"></span>
+                                </label>
+                            </td>
+                            <td>1</td>
+                            <td>Label Item</td>
+                            <td>Label Item</td>
+                            <td>Label Item</td>
+                            <td>Label Item</td>
+                            <td>Label Item</td>
+                            <td>
+                                <button class="more-options">
+                                    <span class="material-icons">more_vert</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination">
+                <button class="page-nav">
+                    <span class="material-icons">chevron_left</span>
+                </button>
+                <button class="page-number active">1</button>
+                <button class="page-number">2</button>
+                <button class="page-number">3</button>
+                <button class="page-number">4</button>
+                <button class="page-number">5</button>
+                <button class="page-number">6</button>
+                <button class="page-nav">
+                    <span class="material-icons">chevron_right</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
