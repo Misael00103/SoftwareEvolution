@@ -1,0 +1,123 @@
+
+<!--Debes anidar este html con el html cuadrecaja-->
+
+<div class="container">
+    <div class="card">
+        <header class="header">
+            <div class="header-left">
+                <div class="header-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 3h18v18H3zM8 10h8M8 14h8M8 18h8"></path>
+                    </svg>
+                </div>
+                <div class="header-text">
+                    <h1>Cuadre de Caja General</h1>
+                    <p>Gestione el cuadre de caja diario</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="content">
+            <section class="form-section">
+                <h2>Datos de Arqueo</h2>
+                <div class="form-group-grid">
+                    <div class="form-group">
+                        <label for="fecha">Fecha:</label>
+                        <input type="date" id="fecha">
+                    </div>
+                    <div class="form-group">
+                        <label for="sucursal">Sucursal:</label>
+                        <select id="sucursal">
+                            <option>LOS PEPINES</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cajero">Cajero(a):</label>
+                        <input type="text" id="cajero" value="SOFTWARE EVOLUTION ARPA SRL">
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <h2>Detalle Efectivo</h2>
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Denominación</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var denominacion in new[] { 1, 5, 10, 20, 50, 100, 500, 1000, 2000 })
+                        {
+                            <tr>
+                                <td>@denominacion.00</td>
+                                <td><input type="number" min="0" value="0"></td>
+                                <td>0.00</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <label>Total Efectivo:</label>
+                    <input type="number" readonly value="0.00">
+                </div>
+            </section>
+
+            <section class="form-section">
+                <h2>Resumen de Operaciones</h2>
+                <div class="form-group-grid">
+                    <div class="form-group">
+                        <label>Venta de Contado:</label>
+                        <input type="number" readonly value="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Cobros Realizados:</label>
+                        <input type="number" readonly value="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Otros Ingresos:</label>
+                        <input type="number" readonly value="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Notas de Crédito:</label>
+                        <input type="number" readonly value="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Resumen:</label>
+                        <input type="number" readonly value="0.00">
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <h2>Totales</h2>
+                <div class="form-group-grid">
+                    <div class="form-group">
+                        <label>Total Cheques:</label>
+                        <input type="number" readonly value="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Tarjeta:</label>
+                        <input type="number" readonly value="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Transferencia:</label>
+                        <input type="number" readonly value="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Sobrante/Faltante:</label>
+                        <input type="number" readonly value="0.00">
+                    </div>
+                </div>
+            </section>
+
+            <div class="form-actions">
+                <button class="button-secondary">Obtener Valores</button>
+                <button class="button-primary">Aceptar</button>
+                <button class="button-secondary" onclick="window.location.href='/CuadreCaja/Index';">Cancelar</button>
+            </div>
+        </main>
+    </div>
+</div>
