@@ -15,3 +15,35 @@ Sidebar actual:
 Diseño en proceso:
 
 ![alt text](image.png)
+
+Facturacion Anterior:
+
+![alt text](image-2.png)
+
+![alt text](image-3.png)
+
+![alt text](image-4.png)
+
+![alt text](image-5.png)
+
+![alt text](image-6.png)
+
+Facturacion Actual:
+
+![alt text](image-7.png)
+
+![alt text](image-8.png)
+
+![alt text](image-9.png)
+
+![alt text](image-10.png)
+
+![alt text](image-11.png)
+
+![alt text](image-12.png)
+
+![alt text](image-13.png)
+
+![alt text](image-14.png)
+
+Se realizo una optimizacion en la velocidad de carga y manejo de eventos, se realizaron cambios en el responsive, se ingresaron actualizaciones dinamicas por lo que se obtuvo un diseño modal visualmente mas atractivo, se jugo con la paleta de colores y se ingresaron manejo de alerts dinamicos con cards todo manejado mediante el backend en javascript para asi mejorar la carga de las animaciones
