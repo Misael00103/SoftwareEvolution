@@ -47,3 +47,15 @@ Facturacion Actual:
 ![alt text](image-14.png)
 
 Se realizo una optimizacion en la velocidad de carga y manejo de eventos, se realizaron cambios en el responsive, se ingresaron actualizaciones dinamicas por lo que se obtuvo un diseño modal visualmente mas atractivo, se jugo con la paleta de colores y se ingresaron manejo de alerts dinamicos con cards todo manejado mediante el backend en javascript para asi mejorar la carga de las animaciones
+
+Usuarios anterior:
+
+![alt text](image-15.png)
+
+Nuevo usuarios:
+
+ ![alt text](image-16.png)
+
+![alt text](image-17.png)
+
+se ajusto el responsive y se mejoraron las vistas de la pantalla usuarios
