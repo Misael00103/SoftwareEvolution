@@ -10,7 +10,7 @@ Actualizacion
 
 Sidebar actual:
 
-![alt text](../SoftwareEvolution/Modificaciones//imagenes-reporte/image-1.png)
+![alt text](/Modificaciones//imagenes-reporte/)
 
 Diseño en proceso:
 

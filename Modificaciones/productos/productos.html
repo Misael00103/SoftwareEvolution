@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos</title>
+    <link rel="stylesheet" href="productos.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-left">
+                <div class="header-icon">
+                    <span class="material-icons">inventory_2</span>
+                </div>
+                <div class="header-text">
+                    <h1>Productos</h1>
+                    <p>Gestión y control de inventario</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="action-buttons">
+                    <button class="icon-button">
+                        <span class="material-icons">mail</span>
+                    </button>
+                    <button class="icon-button">
+                        <span class="material-icons">schedule</span>
+                    </button>
+                    <button class="icon-button">
+                        <span class="material-icons">print</span>
+                    </button>
+                </div>
+                <div class="search-container">
+                    <input type="text" placeholder="Buscar..." />
+                    <span class="material-icons">search</span>
+                </div>
+                <button class="add-button" onclick="window.location.href='/Productos/Create';">
+                    <span class="material-icons">add</span>
+                    Agregar producto
+                </button>
+            </div>
+        </header>
+
+        <div class="filters-card">
+            <div class="filters">
+                <div class="filter-group">
+                    <input type="text" placeholder="Descripción" />
+                    <button class="clear-filter">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="filter-group">
+                    <input type="text" placeholder="Categoría" />
+                    <button class="clear-filter">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="filter-group">
+                    <input type="text" placeholder="Sub-Categoría" />
+                    <button class="clear-filter">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="filter-group">
+                    <input type="text" placeholder="Almacén" />
+                    <button class="clear-filter">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <button class="filter-button">
+                    <span class="material-icons">filter_list</span>
+                    Filtrar
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>
+                    <span class="material-icons">inventory_2</span>
+                    Listado de Productos
+                </h2>
+                <div class="header-actions">
+                    <button class="action-btn">
+                        <span class="material-icons">file_download</span>
+                        Exportar
+                    </button>
+                    <button class="action-btn">
+                        <span class="material-icons">print</span>
+                        Imprimir
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="checkbox-column">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="selectAll" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </th>
+                                <th>ID <span class="material-icons sort-icon">arrow_downward</span></th>
+                                <th>Descripción</th>
+                                <th>Categoría</th>
+                                <th>Precio 1</th>
+                                <th>Precio 2</th>
+                                <th>Precio 3</th>
+                                <th>Existencia</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td>1</td>
+                                <td>CPU DELL CI5 DESKTOP</td>
+                                <td>Computadoras</td>
+                                <td>10,500.00</td>
+                                <td>10,000.00</td>
+                                <td>9,500.00</td>
+                                <td>5</td>
+                                <td>
+                                    <div class="row-actions">
+                                        <button class="icon-btn" title="Editar">
+                                            <span class="material-icons">edit</span>
+                                        </button>
+                                        <button class="icon-btn" title="Ver detalles">
+                                            <span class="material-icons">visibility</span>
+                                        </button>
+                                        <button class="icon-btn danger" title="Eliminar">
+                                            <span class="material-icons">delete</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td>2</td>
+                                <td>MONITOR DELL 24"</td>
+                                <td>Monitores</td>
+                                <td>5,200.00</td>
+                                <td>5,000.00</td>
+                                <td>4,800.00</td>
+                                <td>8</td>
+                                <td>
+                                    <div class="row-actions">
+                                        <button class="icon-btn" title="Editar">
+                                            <span class="material-icons">edit</span>
+                                        </button>
+                                        <button class="icon-btn" title="Ver detalles">
+                                            <span class="material-icons">visibility</span>
+                                        </button>
+                                        <button class="icon-btn danger" title="Eliminar">
+                                            <span class="material-icons">delete</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td>3</td>
+                                <td>TECLADO LOGITECH</td>
+                                <td>Periféricos</td>
+                                <td>1,200.00</td>
+                                <td>1,100.00</td>
+                                <td>1,000.00</td>
+                                <td>15</td>
+                                <td>
+                                    <div class="row-actions">
+                                        <button class="icon-btn" title="Editar">
+                                            <span class="material-icons">edit</span>
+                                        </button>
+                                        <button class="icon-btn" title="Ver detalles">
+                                            <span class="material-icons">visibility</span>
+                                        </button>
+                                        <button class="icon-btn danger" title="Eliminar">
+                                            <span class="material-icons">delete</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="pagination">
+                    <button class="page-nav" disabled>
+                        <span class="material-icons">chevron_left</span>
+                    </button>
+                    <button class="page-number active">1</button>
+                    <button class="page-number">2</button>
+                    <button class="page-number">3</button>
+                    <button class="page-number">4</button>
+                    <button class="page-number">5</button>
+                    <button class="page-nav">
+                        <span class="material-icons">chevron_right</span>
+                    </button>
+                </div>
+                <div class="page-info">
+                    Mostrando 1-10 de 45 productos
+                </div>
+            </div>
+        </div>
+
+        <div class="action-panel">
+            <div class="action-card">
+                <h3>Acciones rápidas</h3>
+                <div class="action-buttons-grid">
+                    <button class="action-btn">
+                        <span class="material-icons">category</span>
+                        Categorías
+                    </button>
+                    <button class="action-btn">
+                        <span class="material-icons">inventory</span>
+                        Almacenes
+                    </button>
+                    <button class="action-btn">
+                        <span class="material-icons">price_change</span>
+                        Actualizar precios
+                    </button>
+                    <button class="action-btn">
+                        <span class="material-icons">file_upload</span>
+                        Importar productos
+                    </button>
+                    <button class="action-btn">
+                        <span class="material-icons">file_download</span>
+                        Exportar productos
+                    </button>
+                    <button class="action-btn">
+                        <span class="material-icons">qr_code</span>
+                        Generar códigos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para agregar/editar producto -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <span class="material-icons">add</span>
+                    Agregar Producto
+                </h3>
+                <button class="modal-close">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-grid">
+                    <div class="field">
+                        <label>Código</label>
+                        <input type="text" placeholder="Código del producto" />
+                    </div>
+                    <div class="field">
+                        <label>Descripción</label>
+                        <input type="text" placeholder="Descripción del producto" />
+                    </div>
+                    <div class="field">
+                        <label>Categoría</label>
+                        <select>
+                            <option value="">Seleccionar categoría</option>
+                            <option value="1">Computadoras</option>
+                            <option value="2">Monitores</option>
+                            <option value="3">Periféricos</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Sub-Categoría</label>
+                        <select>
+                            <option value="">Seleccionar sub-categoría</option>
+                            <option value="1">Desktop</option>
+                            <option value="2">Laptop</option>
+                            <option value="3">Servidor</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Precio 1</label>
+                        <input type="number" placeholder="0.00" step="0.01" />
+                    </div>
+                    <div class="field">
+                        <label>Precio 2</label>
+                        <input type="number" placeholder="0.00" step="0.01" />
+                    </div>
+                    <div class="field">
+                        <label>Precio 3</label>
+                        <input type="number" placeholder="0.00" step="0.01" />
+                    </div>
+                    <div class="field">
+                        <label>Existencia</label>
+                        <input type="number" placeholder="0" />
+                    </div>
+                    <div class="field">
+                        <label>Almacén</label>
+                        <select>
+                            <option value="">Seleccionar almacén</option>
+                            <option value="1">Almacén Principal</option>
+                            <option value="2">Almacén Secundario</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Unidad de medida</label>
+                        <select>
+                            <option value="">Seleccionar unidad</option>
+                            <option value="1">Unidad</option>
+                            <option value="2">Caja</option>
+                            <option value="3">Paquete</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="field full-width">
+                    <label>Descripción detallada</label>
+                    <textarea rows="3" placeholder="Descripción detallada del producto"></textarea>
+                </div>
+                
+                <div class="image-upload">
+                    <label>Imagen del producto</label>
+                    <div class="image-preview">
+                        <img id="previewImage" src="/placeholder.svg?height=200&width=300" alt="Vista previa de imagen">
+                    </div>
+                    <div class="upload-actions">
+                        <input type="file" id="productImage" accept="image/*" style="display: none;">
+                        <button class="btn secondary" onclick="document.getElementById('productImage').click()">
+                            <span class="material-icons">upload</span>
+                            Seleccionar imagen
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary">Cancelar</button>
+                <button class="btn primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="notification">
+        <div class="toast-icon">
+            <span class="material-icons">check_circle</span>
+        </div>
+        <div class="toast-content">
+            <p class="toast-title">Éxito</p>
+            <p class="toast-message">Operación completada correctamente</p>
+        </div>
+        <button class="toast-close">
+            <span class="material-icons">close</span>
+        </button>
+    </div>
+
+    <script src="productos.js"></script>
+</body>
+</html>
