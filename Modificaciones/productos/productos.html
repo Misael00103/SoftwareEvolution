@@ -36,7 +36,7 @@
                     <input type="text" placeholder="Buscar..." />
                     <span class="material-icons">search</span>
                 </div>
-                <button class="add-button" onclick="window.location.href='/Productos/Create';">
+                <button class="add-button" id="openAddProductModal">
                     <span class="material-icons">add</span>
                     Agregar producto
                 </button>
@@ -95,7 +95,7 @@
             </div>
             <div class="card-body">
                 <div class="table-container">
-                    <table>
+                    <table id="productsTable">
                         <thead>
                             <tr>
                                 <th class="checkbox-column">
@@ -131,13 +131,13 @@
                                 <td>5</td>
                                 <td>
                                     <div class="row-actions">
-                                        <button class="icon-btn" title="Editar">
+                                        <button class="icon-btn edit-btn" title="Editar">
                                             <span class="material-icons">edit</span>
                                         </button>
-                                        <button class="icon-btn" title="Ver detalles">
+                                        <button class="icon-btn view-btn" title="Ver detalles">
                                             <span class="material-icons">visibility</span>
                                         </button>
-                                        <button class="icon-btn danger" title="Eliminar">
+                                        <button class="icon-btn danger delete-btn" title="Eliminar">
                                             <span class="material-icons">delete</span>
                                         </button>
                                     </div>
@@ -159,13 +159,13 @@
                                 <td>8</td>
                                 <td>
                                     <div class="row-actions">
-                                        <button class="icon-btn" title="Editar">
+                                        <button class="icon-btn edit-btn" title="Editar">
                                             <span class="material-icons">edit</span>
                                         </button>
-                                        <button class="icon-btn" title="Ver detalles">
+                                        <button class="icon-btn view-btn" title="Ver detalles">
                                             <span class="material-icons">visibility</span>
                                         </button>
-                                        <button class="icon-btn danger" title="Eliminar">
+                                        <button class="icon-btn danger delete-btn" title="Eliminar">
                                             <span class="material-icons">delete</span>
                                         </button>
                                     </div>
@@ -187,16 +187,24 @@
                                 <td>15</td>
                                 <td>
                                     <div class="row-actions">
-                                        <button class="icon-btn" title="Editar">
+                                        <button class="icon-btn edit-btn" title="Editar">
                                             <span class="material-icons">edit</span>
                                         </button>
-                                        <button class="icon-btn" title="Ver detalles">
+                                        <button class="icon-btn view-btn" title="Ver detalles">
                                             <span class="material-icons">visibility</span>
                                         </button>
-                                        <button class="icon-btn danger" title="Eliminar">
+                                        <button class="icon-btn danger delete-btn" title="Eliminar">
                                             <span class="material-icons">delete</span>
                                         </button>
                                     </div>
+                                </td>
+                            </tr>
+                            <tr class="empty-row">
+                                <td colspan="9">
+                                    <button class="add-row-btn" id="addRowBtn">
+                                        <span class="material-icons">add</span> 
+                                        Agregar producto
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -260,99 +268,124 @@
     <div class="modal" id="productModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>
+                <h3 id="modalTitle">
                     <span class="material-icons">add</span>
                     Agregar Producto
                 </h3>
-                <button class="modal-close">
+                <button class="modal-close" id="closeProductModal">
                     <span class="material-icons">close</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-grid">
-                    <div class="field">
-                        <label>Código</label>
-                        <input type="text" placeholder="Código del producto" />
+                <form id="productForm">
+                    <input type="hidden" id="productId" value="">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="productCode">Código</label>
+                            <input type="text" id="productCode" placeholder="Código del producto" required>
+                        </div>
+                        <div class="field">
+                            <label for="productName">Descripción</label>
+                            <input type="text" id="productName" placeholder="Descripción del producto" required>
+                        </div>
+                        <div class="field">
+                            <label for="productCategory">Categoría</label>
+                            <select id="productCategory" required>
+                                <option value="">Seleccionar categoría</option>
+                                <option value="Computadoras">Computadoras</option>
+                                <option value="Monitores">Monitores</option>
+                                <option value="Periféricos">Periféricos</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="productSubcategory">Sub-Categoría</label>
+                            <select id="productSubcategory">
+                                <option value="">Seleccionar sub-categoría</option>
+                                <option value="Desktop">Desktop</option>
+                                <option value="Laptop">Laptop</option>
+                                <option value="Servidor">Servidor</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="productPrice1">Precio 1</label>
+                            <input type="number" id="productPrice1" placeholder="0.00" step="0.01" min="0" required>
+                        </div>
+                        <div class="field">
+                            <label for="productPrice2">Precio 2</label>
+                            <input type="number" id="productPrice2" placeholder="0.00" step="0.01" min="0">
+                        </div>
+                        <div class="field">
+                            <label for="productPrice3">Precio 3</label>
+                            <input type="number" id="productPrice3" placeholder="0.00" step="0.01" min="0">
+                        </div>
+                        <div class="field">
+                            <label for="productStock">Existencia</label>
+                            <input type="number" id="productStock" placeholder="0" min="0" required>
+                        </div>
+                        <div class="field">
+                            <label for="productWarehouse">Almacén</label>
+                            <select id="productWarehouse" required>
+                                <option value="">Seleccionar almacén</option>
+                                <option value="Almacén Principal">Almacén Principal</option>
+                                <option value="Almacén Secundario">Almacén Secundario</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="productUnit">Unidad de medida</label>
+                            <select id="productUnit" required>
+                                <option value="">Seleccionar unidad</option>
+                                <option value="Unidad">Unidad</option>
+                                <option value="Caja">Caja</option>
+                                <option value="Paquete">Paquete</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="field">
-                        <label>Descripción</label>
-                        <input type="text" placeholder="Descripción del producto" />
+                    
+                    <div class="field full-width">
+                        <label for="productDescription">Descripción detallada</label>
+                        <textarea id="productDescription" rows="3" placeholder="Descripción detallada del producto"></textarea>
                     </div>
-                    <div class="field">
-                        <label>Categoría</label>
-                        <select>
-                            <option value="">Seleccionar categoría</option>
-                            <option value="1">Computadoras</option>
-                            <option value="2">Monitores</option>
-                            <option value="3">Periféricos</option>
-                        </select>
+                    
+                    <div class="image-upload">
+                        <label>Imagen del producto</label>
+                        <div class="image-preview">
+                            <img id="previewImage" src="/placeholder.svg?height=200&width=300" alt="Vista previa de imagen">
+                        </div>
+                        <div class="upload-actions">
+                            <input type="file" id="productImage" accept="image/*" style="display: none;">
+                            <button type="button" class="btn secondary" onclick="document.getElementById('productImage').click()">
+                                <span class="material-icons">upload</span>
+                                Seleccionar imagen
+                            </button>
+                        </div>
                     </div>
-                    <div class="field">
-                        <label>Sub-Categoría</label>
-                        <select>
-                            <option value="">Seleccionar sub-categoría</option>
-                            <option value="1">Desktop</option>
-                            <option value="2">Laptop</option>
-                            <option value="3">Servidor</option>
-                        </select>
-                    </div>
-                    <div class="field">
-                        <label>Precio 1</label>
-                        <input type="number" placeholder="0.00" step="0.01" />
-                    </div>
-                    <div class="field">
-                        <label>Precio 2</label>
-                        <input type="number" placeholder="0.00" step="0.01" />
-                    </div>
-                    <div class="field">
-                        <label>Precio 3</label>
-                        <input type="number" placeholder="0.00" step="0.01" />
-                    </div>
-                    <div class="field">
-                        <label>Existencia</label>
-                        <input type="number" placeholder="0" />
-                    </div>
-                    <div class="field">
-                        <label>Almacén</label>
-                        <select>
-                            <option value="">Seleccionar almacén</option>
-                            <option value="1">Almacén Principal</option>
-                            <option value="2">Almacén Secundario</option>
-                        </select>
-                    </div>
-                    <div class="field">
-                        <label>Unidad de medida</label>
-                        <select>
-                            <option value="">Seleccionar unidad</option>
-                            <option value="1">Unidad</option>
-                            <option value="2">Caja</option>
-                            <option value="3">Paquete</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="field full-width">
-                    <label>Descripción detallada</label>
-                    <textarea rows="3" placeholder="Descripción detallada del producto"></textarea>
-                </div>
-                
-                <div class="image-upload">
-                    <label>Imagen del producto</label>
-                    <div class="image-preview">
-                        <img id="previewImage" src="/placeholder.svg?height=200&width=300" alt="Vista previa de imagen">
-                    </div>
-                    <div class="upload-actions">
-                        <input type="file" id="productImage" accept="image/*" style="display: none;">
-                        <button class="btn secondary" onclick="document.getElementById('productImage').click()">
-                            <span class="material-icons">upload</span>
-                            Seleccionar imagen
-                        </button>
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button class="btn secondary">Cancelar</button>
-                <button class="btn primary">Guardar</button>
+                <button type="button" class="btn secondary" id="cancelProductBtn">Cancelar</button>
+                <button type="button" class="btn primary" id="saveProductBtn">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content confirm-content">
+            <div class="modal-header">
+                <h3>
+                    <span class="material-icons">help</span>
+                    Confirmar acción
+                </h3>
+                <button class="modal-close" id="closeConfirmModal">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">¿Está seguro que desea realizar esta acción?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn secondary" id="cancelConfirmBtn">Cancelar</button>
+                <button type="button" class="btn danger" id="confirmActionBtn">Eliminar</button>
             </div>
         </div>
     </div>
