@@ -1,8 +1,8 @@
 :root {
     --primary: #fbbf24;
     --primary-hover: #f59e0b;
-    --primary-light: #eef2ff;
-    --primary-dark: #3730a3;
+    --primary-light: #fef3c7;
+    --primary-dark: #92400e;
     --danger: #ef4444;
     --danger-hover: #dc2626;
     --success: #10b981;
@@ -230,8 +230,7 @@ main {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    
-color: var(--text);
+    color: var(--text);
 }
 
 .card-header h3 {
@@ -976,95 +975,174 @@ textarea:focus {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .app-container {
         padding: 0.5rem;
     }
-    
+
     header {
         flex-direction: column;
         align-items: flex-start;
         padding: 1rem;
     }
-    
-    .header-info, .action-bar {
+
+    .logo, .header-info, .action-bar {
         width: 100%;
-        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+
+    .action-bar {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 0.5rem;
     }
-    
+
     .action-bar button {
         width: 100%;
     }
-    
+
+    .tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+    }
+
+    .tab {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
     .form-row, .form-grid {
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
-    
-    .field {
-        width: 100%;
-    }
-    
+
     .payment-options {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .table-container {
         overflow-x: auto;
     }
-    
+
     table {
-        min-width: 600px;
+        min-width: 800px;
     }
-    
+
     .card-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
     }
-    
+
     .table-actions {
         width: 100%;
         flex-direction: column;
     }
-    
+
     .search-box {
         width: 100%;
     }
+
+    .side-panel {
+        grid-template-columns: 1fr;
+    }
 }
 
-@media (max-width: 480px) {
-    .tabs {
-        flex-wrap: wrap;
+@media (max-width: 768px) {
+    .header-info {
+        flex-direction: column;
     }
-    
-    .tab {
-        flex: 1 0 auto;
-        font-size: 0.8rem;
-        padding: 0.5rem;
+
+    .field {
+        width: 100%;
     }
-    
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    .input-group .input-small,
+    .input-group .input-main {
+        width: 100%;
+    }
+
+    .action-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .product-info-grid {
+        grid-template-columns: 1fr;
+    }
+
     .modal-content {
         width: 95%;
         max-height: 80vh;
     }
-    
+}
+
+@media (max-width: 576px) {
+    .logo {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .action-bar {
+        grid-template-columns: 1fr;
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab {
+        width: 100%;
+        text-align: left;
+    }
+
+    .action-grid {
+        grid-template-columns: 1fr;
+    }
+
     .toast {
         left: 0.5rem;
         right: 0.5rem;
         max-width: none;
     }
-    
-    .input-group {
-        flex-wrap: wrap;
+
+    .confirm-dialog-content {
+        width: 95%;
     }
-    
-    .input-small, .input-main {
-        width: 100% !important;
+
+    .main-actions {
+        flex-direction: column;
     }
-    
-    .action-grid {
-        grid-template-columns: 1fr;
+
+    .main-actions .btn {
+        width: 100%;
+    }
+}
+
+/* Ajustes adicionales para mejorar la usabilidad en dispositivos móviles */
+@media (hover: none) and (pointer: coarse) {
+    .btn,
+    .action-btn,
+    .icon-btn {
+        padding: 0.75rem 1rem;
+        min-height: 44px; /* Asegurar un tamaño mínimo para facilitar el toque */
+    }
+
+    .checkbox-mark,
+    .radio-mark {
+        min-width: 24px;
+        min-height: 24px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 16px; /* Prevenir zoom en iOS */
+        min-height: 44px;
     }
 }

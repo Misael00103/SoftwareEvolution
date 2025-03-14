@@ -3,175 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Evolution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="sidebar.css">
-    <title>Software Evolution - Sidebar</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <div class="logo-container">
-                <img src="../Assets/logo-sidebar.png" alt="Software Evolution Logo" class="logo">
-                <div class="brand-name">Software<br>Evolution</div>
-            </div>
-            <button class="toggle-btn">◀</button>
-        </div>
-
-        <div class="sidebar-menu">
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M6.4 14.4v-4.8h3.2v4.8h4V8h2.4L8 1.6 0 8h2.4v6.4h4z" fill="currentColor"/>
-                    </svg>
+    <div class="app-container">
+        <aside class="sidebar" data-state="expanded">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <div class="logo"><i data-lucide="zap"></i></div>
+                    <span>Software Evolution</span>
                 </div>
-                <div class="menu-text">Inicio</div>
+                <button class="collapse-btn" aria-label="Colapsar menú"><i data-lucide="chevron-left"></i></button>
             </div>
-
-            <div class="menu-item active">
-                <div class="menu-icon">
-                    <div class="icon-contacts">
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
+            <div class="sidebar-content">
+                <!-- Inicio -->
+                <div class="sidebar-group">
+                    <div class="sidebar-group-content">
+                        <ul class="sidebar-menu">
+                            <li class="sidebar-menu-item">
+                                <a href="../home.html" class="sidebar-menu-button active">
+                                    <i data-lucide="home"></i>
+                                    <span>Inicio</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="menu-text">Contactos</div>
-                <div class="menu-arrow">▾</div>
-            </div>
-
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M8 8c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="currentColor"/>
-                    </svg>
+                <!-- Contactos -->
+                <div class="sidebar-group">
+                    <div class="sidebar-group-content">
+                        <ul class="sidebar-menu">
+                            <li class="sidebar-menu-item">
+                                <button class="sidebar-menu-button has-submenu" aria-expanded="false">
+                                    <i data-lucide="users"></i>
+                                    <span>Contactos</span>
+                                    <i data-lucide="chevron-right" class="submenu-arrow"></i>
+                                </button>
+                                <ul class="sidebar-menu-sub">
+                                    <li class="sidebar-menu-sub-item">
+                                        <a href="../usuarios/usuarios.html" class="sidebar-menu-sub-button">Clientes</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="menu-text">Clientes</div>
-            </div>
-
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="2"/>
-                    </svg>
+                <!-- Facturación -->
+                <div class="sidebar-group">
+                    <div class="sidebar-group-content">
+                        <ul class="sidebar-menu">
+                            <li class="sidebar-menu-item">
+                                <button class="sidebar-menu-button has-submenu" aria-expanded="false">
+                                    <i data-lucide="file-text"></i>
+                                    <span>Facturación</span>
+                                    <i data-lucide="chevron-right" class="submenu-arrow"></i>
+                                </button>
+                                <ul class="sidebar-menu-sub">
+                                    <li class="sidebar-menu-sub-item">
+                                        <a href="../facturacion/facturacion.html" class="sidebar-menu-sub-button">Facturación</a>
+                                    </li>
+                                    <li class="sidebar-menu-sub-item">
+                                        <a href="../cuadrecaja/cuadrecaja.html" class="sidebar-menu-sub-button">Cuadre de Caja</a>
+                                    </li>
+                                    <li class="sidebar-menu-sub-item">
+                                        <a href="cuentasporcobrar.html" class="sidebar-menu-sub-button">Cuentas por Cobrar</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="menu-text">Proveedores</div>
-            </div>
-
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="2"/>
-                        <path d="M8 4v8M4 8h8" stroke="currentColor" stroke-width="2"/>
-                    </svg>
+                <!-- Usuarios -->
+                <div class="sidebar-group">
+                    <div class="sidebar-group-content">
+                        <ul class="sidebar-menu">
+                            <li class="sidebar-menu-item">
+                                <a href="../usuarios/usuarios.html" class="sidebar-menu-button">
+                                    <i data-lucide="users"></i>
+                                    <span>Usuarios</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="menu-text">Ingresos</div>
-                <div class="menu-arrow">▾</div>
-            </div>
-
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M1 3h14v10H1V3zm3 12h8M4 1h8" stroke="currentColor" stroke-width="2"/>
-                    </svg>
+                <!-- Compras -->
+                <div class="sidebar-group">
+                    <div class="sidebar-group-content">
+                        <ul class="sidebar-menu">
+                            <li class="sidebar-menu-item">
+                                <a href="compras.html" class="sidebar-menu-button">
+                                    <i data-lucide="shopping-cart"></i>
+                                    <span>Compras</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="menu-text">Compras</div>
-                <div class="menu-arrow">▾</div>
-            </div>
-
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M13 2H3c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 9H4V4h8v7z" fill="currentColor"/>
-                    </svg>
+                <!-- Recursos Humanos -->
+                <div class="sidebar-group">
+                    <div class="sidebar-group-content">
+                        <ul class="sidebar-menu">
+                            <li class="sidebar-menu-item">
+                                <button class="sidebar-menu-button has-submenu" aria-expanded="false">
+                                    <i data-lucide="book"></i>
+                                    <span>Recursos Humanos</span>
+                                    <i data-lucide="chevron-right" class="submenu-arrow"></i>
+                                </button>
+                                <ul class="sidebar-menu-sub">
+                                    <li class="sidebar-menu-sub-item">
+                                        <a href="empleados.html" class="sidebar-menu-sub-button">Empleados</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="menu-text">Cuentas</div>
-                <div class="menu-arrow">▾</div>
-            </div>
-
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M14 4.5L8 1 2 4.5v7L8 15l6-3.5v-7z" stroke="currentColor" stroke-width="2"/>
-                    </svg>
+                <!-- Productos -->
+                <div class="sidebar-group">
+                    <div class="sidebar-group-content">
+                        <ul class="sidebar-menu">
+                            <li class="sidebar-menu-item">
+                                <button class="sidebar-menu-button has-submenu" aria-expanded="false">
+                                    <i data-lucide="package"></i>
+                                    <span>Productos</span>
+                                    <i data-lucide="chevron-right" class="submenu-arrow"></i>
+                                </button>
+                                <ul class="sidebar-menu-sub">
+                                    <li class="sidebar-menu-sub-item">
+                                        <a href="../productos/productos.html" class="sidebar-menu-sub-button">Gestión de Productos</a>
+                                    </li>
+                                    <li class="sidebar-menu-sub-item">
+                                        <a href="gestionarticulos.html" class="sidebar-menu-sub-button">Gestión de Artículos</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="menu-text">Cajas</div>
             </div>
-
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M2 2h12v12H2z" stroke="currentColor" stroke-width="2"/>
-                        <path d="M5 5h6M5 8h6M5 11h6" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                </div>
-                <div class="menu-text">Productos</div>
-                <div class="menu-arrow">▾</div>
+            <div class="sidebar-footer">
+                <p>© 2025 Software Evolution</p>
             </div>
-
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M2 14V2h12v12H2z" stroke="currentColor" stroke-width="2"/>
-                        <path d="M2 6h12" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                </div>
-                <div class="menu-text">Banco</div>
-            </div>
-
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M14 8H2m12 0L8 2m6 6L8 14" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                </div>
-                <div class="menu-text">Despacho</div>
-            </div>
-
-            <div class="section-title">
-                Reportes
-                <span class="add-button">+</span>
-            </div>
-
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M13 2H3c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 9H4V4h8v7z" fill="currentColor"/>
-                    </svg>
-                </div>
-                <div class="menu-text">Reportes</div>
-            </div>
-
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M13 2H3c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 9H4V4h8v7z" fill="currentColor"/>
-                    </svg>
-                </div>
-                <div class="menu-text">Nóminas</div>
-            </div>
-
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M13 2H3c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 9H4V4h8v7z" fill="currentColor"/>
-                    </svg>
-                </div>
-                <div class="menu-text">Contabilidad</div>
-            </div>
-
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M8 8c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="currentColor"/>
-                    </svg>
-                </div>
-                <div class="menu-text">RRHH</div>
-            </div>
-        </div>
+            <button class="sidebar-rail" aria-label="Ajustar tamaño del sidebar"></button>
+        </aside>
+        <main class="content">
+            <button class="sidebar-trigger" aria-label="Abrir menú"><i data-lucide="menu"></i></button>
+            <div class="content-body" id="content-container"></div>
+        </main>
     </div>
-
+    <div class="sidebar-overlay"></div>
     <script src="sidebar.js"></script>
 </body>
 </html>
