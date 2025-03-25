@@ -1291,8 +1291,8 @@ textarea:focus {
     input[type="number"],
     select,
     textarea {
-        font-size: 16px; /* Minimum font size for mobile readability */
-        min-height: 44px; /* Minimum touch target size */
+        font-size: 16px; 
+        min-height: 44px; 
         padding: 0.75rem;
     }
 

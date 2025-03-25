@@ -56,7 +56,7 @@ header {
     background-color: var(--card);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
-    padding: 0.5rem; /* Reducido */
+    padding: 0.5rem; 
     margin-bottom: 0.5rem;
     display: flex;
     justify-content: space-between;
@@ -66,13 +66,13 @@ header {
 .header-left {
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* Reducido */
+    gap: 0.5rem; 
 }
 
 .header-icon {
     background-color: var(--primary);
     color: white;
-    width: 36px; /* Reducido */
+    width: 36px; 
     height: 36px;
     border-radius: var(--radius);
     display: flex;
@@ -81,18 +81,18 @@ header {
 }
 
 .header-icon .material-icons {
-    font-size: 1.25rem; /* Reducido */
+    font-size: 1.25rem; 
 }
 
 .header-text h1 {
-    font-size: 1.125rem; /* Reducido */
+    font-size: 1.125rem; 
     font-weight: 600;
     margin-bottom: 0.125rem;
 }
 
 .header-text p {
     color: var(--text-secondary);
-    font-size: 0.75rem; /* Reducido */
+    font-size: 0.75rem; 
 }
 
 .header-right {
@@ -110,7 +110,7 @@ header {
     background-color: var(--border-light);
     border: none;
     border-radius: var(--radius);
-    width: 32px; /* Reducido */
+    width: 32px; 
     height: 32px;
     display: flex;
     align-items: center;
@@ -150,7 +150,7 @@ header {
 
 .card-header {
     background-color: var(--card-header);
-    padding: 0.5rem; /* Reducido */
+    padding: 0.5rem; 
     border-bottom: 1px solid var(--border-light);
     display: flex;
     justify-content: space-between;
@@ -158,7 +158,7 @@ header {
 }
 
 .card-header h2 {
-    font-size: 1rem; /* Reducido */
+    font-size: 1rem; 
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -174,8 +174,8 @@ header {
     background-color: var(--border-light);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 0.375rem 0.625rem; /* Reducido */
-    font-size: 0.75rem; /* Reducido */
+    padding: 0.375rem 0.625rem; 
+    font-size: 0.75rem; 
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -188,16 +188,16 @@ header {
 }
 
 .card-body {
-    padding: 0.5rem; /* Reducido */
+    padding: 0.5rem; 
 }
 
 /* Form Styles */
 .form-section {
-    margin-bottom: 0.25rem; /* Reducido */
+    margin-bottom: 0.25rem; 
 }
 
 .form-section h3 {
-    font-size: 0.875rem; /* Reducido */
+    font-size: 0.875rem; 
     font-weight: 600;
     margin-bottom: 0.125rem;
     padding-bottom: 0.125rem;
@@ -209,30 +209,30 @@ header {
 .form-grid-container {
     display: grid;
     grid-template-columns: 2fr 1.5fr 1fr; /* Ajustado para equilibrar */
-    gap: 0.25rem; /* Reducido */
+    gap: 0.25rem; 
     margin-bottom: 0.25rem;
 }
 
 .form-section-left,
 .form-section-middle,
 .form-section-right {
-    padding: 0.125rem; /* Reducido */
+    padding: 0.125rem; 
 }
 
 .form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Reducido el tamaño mínimo */
-    gap: 0.125rem; /* Reducido */
+    gap: 0.125rem; 
 }
 
 .field {
-    margin-bottom: 0.125rem; /* Reducido */
+    margin-bottom: 0.125rem; 
 }
 
 .field label {
     display: block;
     margin-bottom: 0.125rem;
-    font-size: 0.75rem; /* Reducido */
+    font-size: 0.75rem; 
     font-weight: 500;
     color: var(--text-secondary);
 }
@@ -241,10 +241,10 @@ header {
 .field select,
 .field textarea {
     width: 100%;
-    padding: 0.375rem; /* Reducido */
+    padding: 0.375rem; 
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    font-size: 0.75rem; /* Reducido */
+    font-size: 0.75rem; 
     transition: var(--transition);
     font-family: inherit;
 }
@@ -275,8 +275,8 @@ header {
 /* Checkbox Grid for Configuraciones */
 .checkbox-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Reducido */
-    gap: 0.125rem; /* Reducido */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+    gap: 0.125rem; 
     margin-top: 0.125rem;
 }
 
@@ -284,13 +284,13 @@ header {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.75rem; /* Reducido */
+    font-size: 0.75rem; 
     color: var(--text);
     cursor: pointer;
 }
 
 .checkbox-grid input[type="checkbox"] {
-    width: 0.875rem; /* Reducido */
+    width: 0.875rem; 
     height: 0.875rem;
     accent-color: var(--primary);
     cursor: pointer;
@@ -300,7 +300,7 @@ header {
 .table-container {
     width: 100%;
     overflow-x: auto;
-    margin-bottom: 0.25rem; /* Reducido */
+    margin-bottom: 0.25rem; 
 }
 
 .custom-table {
@@ -310,10 +310,10 @@ header {
 
 .custom-table th,
 .custom-table td {
-    padding: 0.375rem; /* Reducido */
+    padding: 0.375rem; 
     text-align: left;
     border-bottom: 1px solid var(--border-light);
-    font-size: 0.75rem; /* Reducido */
+    font-size: 0.75rem; 
 }
 
 .custom-table th {
@@ -335,10 +335,10 @@ header {
 .custom-table input[type="text"],
 .custom-table select {
     width: 100%;
-    padding: 0.125rem; /* Reducido */
+    padding: 0.125rem; 
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    font-size: 0.75rem; /* Reducido */
+    font-size: 0.75rem; 
 }
 
 .custom-table input[type="number"]:focus,
@@ -359,14 +359,14 @@ header {
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-    margin-top: 0.25rem; /* Reducido */
+    margin-top: 0.25rem; 
 }
 
 .btn {
-    padding: 0.375rem 0.75rem; /* Reducido */
+    padding: 0.375rem 0.75rem; 
     border: none;
     border-radius: var(--radius);
-    font-size: 0.75rem; /* Reducido */
+    font-size: 0.75rem; 
     font-weight: 500;
     cursor: pointer;
     transition: var(--transition);
@@ -402,19 +402,19 @@ header {
 /* Toast Styles */
 .toast {
     position: fixed;
-    bottom: 1.5rem; /* Reducido */
+    bottom: 1.5rem; 
     right: 1.5rem;
     background-color: white;
     border-radius: var(--radius);
     box-shadow: var(--shadow-lg);
-    padding: 0.75rem; /* Reducido */
+    padding: 0.75rem; 
     display: flex;
     align-items: center;
     gap: 0.75rem;
     transform: translateY(150%);
     transition: transform 0.3s ease;
     z-index: 1000;
-    max-width: 350px; /* Reducido */
+    max-width: 350px; 
     border-left: 4px solid var(--success);
 }
 
@@ -436,11 +436,11 @@ header {
 .toast-title {
     font-weight: 600;
     margin-bottom: 0.125rem;
-    font-size: 0.875rem; /* Reducido */
+    font-size: 0.875rem; 
 }
 
 .toast-message {
-    font-size: 0.75rem; /* Reducido */
+    font-size: 0.75rem; 
     color: var(--text-secondary);
 }
 
@@ -481,7 +481,7 @@ header {
     border-radius: var(--radius);
     box-shadow: var(--shadow-lg);
     width: 100%;
-    max-width: 450px; /* Reducido */
+    max-width: 450px; 
     max-height: 90vh;
     display: flex;
     flex-direction: column;
@@ -489,7 +489,7 @@ header {
 }
 
 .modal-header {
-    padding: 0.75rem; /* Reducido */
+    padding: 0.75rem; 
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
@@ -497,7 +497,7 @@ header {
 }
 
 .modal-header h3 {
-    font-size: 1rem; /* Reducido */
+    font-size: 1rem; 
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -515,12 +515,12 @@ header {
 }
 
 .modal-body {
-    padding: 1rem; /* Reducido */
+    padding: 1rem; 
     overflow-y: auto;
 }
 
 .modal-footer {
-    padding: 0.75rem; /* Reducido */
+    padding: 0.75rem; 
     border-top: 1px solid var(--border);
     display: flex;
     justify-content: flex-end;
