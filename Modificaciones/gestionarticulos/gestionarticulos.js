@@ -1,21 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded and parsed'); // Depuración
-
     // Initialize Feather icons
     feather.replace();
-    
     // Set current date for creation and modification date fields
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('fcreado').value = today;
     document.getElementById('fmodificado').value = today;
-    
     // Array to store articles (simulating a database)
     let articles = [];
-    
     // Variable to track if we are editing an article and the index of the article being edited
     let isEditing = false;
     let editIndex = null;
-    
     // Get DOM elements
     const form = document.getElementById('articleForm');
     const cancelBtn = document.getElementById('cancelBtn');
@@ -31,13 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmDialogConfirm = document.getElementById('confirmDialogConfirm');
     const articleList = document.getElementById('articleList');
     const modalTitle = document.getElementById('modalTitle');
-    
     // Verificar que los elementos existen
     console.log('newArticleBtn:', newArticleBtn);
     console.log('articleModal:', articleModal);
     console.log('form:', form);
     console.log('confirmDialog:', confirmDialog);
-
     // Function to render the article list
     function renderArticleList() {
         articleList.innerHTML = '';
@@ -59,10 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             articleList.appendChild(row);
         });
-
         // Reemplazar los íconos de Feather después de agregar las filas
         feather.replace();
-
         // Agregar eventos a los botones de editar
         const editButtons = document.querySelectorAll('.edit-btn');
         editButtons.forEach(button => {
@@ -72,17 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-    
     // Function to edit an article
     function editArticle(index) {
         isEditing = true;
         editIndex = index;
         const article = articles[index];
-
         // Cambiar el título del modal
         modalTitle.innerHTML = '<i data-feather="edit"></i> Editar Artículo';
         feather.replace();
-
         // Cargar los datos del artículo en el formulario
         document.getElementById('codigo').value = article.codigo;
         document.getElementById('nombre').value = article.nombre;
@@ -93,12 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('fcreado').value = article.fcreado;
         document.getElementById('fmodificado').value = today; // Actualizar la fecha de modificación
         document.getElementById('activo').checked = article.activo;
-
         // Abrir el modal
         articleModal.classList.add('show');
         document.getElementById('codigo').focus();
     }
-    
     // Open modal when clicking "New Article" button
     if (newArticleBtn) {
         newArticleBtn.addEventListener('click', () => {
@@ -124,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('newArticleBtn not found');
     }
-    
     // Close modal
     if (closeArticleModal) {
         closeArticleModal.addEventListener('click', () => {
@@ -134,20 +119,17 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('closeArticleModal not found');
     }
-    
     // Form submission
     if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             console.log('Form submitted'); // Depuración
-            
             // Verificar si el formulario es válido
             if (!form.checkValidity()) {
                 console.log('Form validation failed');
                 form.reportValidity(); // Mostrar mensajes de validación del navegador
                 return;
             }
-            
             // Get form data
             const formData = new FormData(form);
             const articleData = {
@@ -161,9 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 fmodificado: formData.get('fmodificado'),
                 activo: formData.get('activo') === 'on'
             };
-            
             console.log('Article data:', articleData); // Depuración
-            
             // Verificar si el código ya existe (solo al agregar, no al editar)
             if (!isEditing) {
                 const codeExists = articles.some(article => article.codigo === articleData.codigo);
@@ -179,7 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
             }
-            
             // Populate confirmation modal
             confirmationDetails.innerHTML = `
                 <p><strong>Código:</strong> ${articleData.codigo}</p>
@@ -192,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p><strong>Fecha de Modificación:</strong> ${articleData.fmodificado}</p>
                 <p><strong>Activo:</strong> ${articleData.activo ? 'Sí' : 'No'}</p>
             `;
-            
             // Show confirmation dialog
             if (confirmDialog) {
                 confirmDialog.classList.add('show');
@@ -204,25 +182,21 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('form not found');
     }
-    
     // Confirm dialog actions
     if (closeConfirmDialog) {
         closeConfirmDialog.addEventListener('click', () => {
             confirmDialog.classList.remove('show');
         });
     }
-    
     if (cancelConfirmDialog) {
         cancelConfirmDialog.addEventListener('click', () => {
             confirmDialog.classList.remove('show');
         });
     }
-    
     if (confirmDialogConfirm) {
         confirmDialogConfirm.addEventListener('click', () => {
             console.log('Confirm button clicked'); // Depuración
             confirmDialog.classList.remove('show');
-            
             // Get form data again to add or update the articles array
             const formData = new FormData(form);
             const newArticle = {
@@ -236,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 fmodificado: formData.get('fmodificado'),
                 activo: formData.get('activo') === 'on'
             };
-            
             // Add or update the article in the array
             if (isEditing) {
                 articles[editIndex] = newArticle;
@@ -248,20 +221,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 toastMessage.textContent = 'Artículo guardado correctamente';
             }
             console.log('Articles array:', articles); // Depuración
-            
             // Update the article list
             renderArticleList();
-            
             // Get submit button
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalContent = submitBtn.innerHTML;
-            
             // Show loading state
             submitBtn.innerHTML = '<i data-feather="loader"></i> Guardando...';
             submitBtn.classList.add('bounce');
             submitBtn.disabled = true;
             feather.replace();
-            
             // Simulate API call (setTimeout)
             setTimeout(() => {
                 // Reset button state
@@ -269,17 +238,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.classList.remove('bounce');
                 submitBtn.disabled = false;
                 feather.replace();
-                
                 // Show success toast
                 showToast();
-                
                 // Reset form and close modal
                 resetForm();
                 articleModal.classList.remove('show');
             }, 1500);
         });
     }
-    
     // Cancel button functionality
     if (cancelBtn) {
         cancelBtn.addEventListener('click', () => {
@@ -287,7 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
             resetForm();
         });
     }
-    
     // Input focus animation
     const inputs = document.querySelectorAll('.input-container input, .input-container select');
     inputs.forEach(input => {
@@ -297,7 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 icon.style.color = 'var(--primary)';
             }
         });
-        
         input.addEventListener('blur', () => {
             const icon = input.nextElementSibling;
             if (icon && icon.classList.contains('input-icon') && !input.value) {
@@ -305,7 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-    
     // Function to reset the form
     function resetForm() {
         if (form && typeof form.reset === 'function') {
@@ -319,11 +282,9 @@ document.addEventListener('DOMContentLoaded', () => {
         isEditing = false;
         editIndex = null;
     }
-    
     // Function to show toast notification
     function showToast() {
         toast.classList.add('show');
-        
         setTimeout(() => {
             toast.classList.remove('show');
         }, 3000);

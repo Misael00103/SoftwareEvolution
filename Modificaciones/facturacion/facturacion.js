@@ -6,29 +6,24 @@ document.addEventListener("DOMContentLoaded", () => {
         { codigo: "13", referencia: "104", descripcion: "MOUSE INALÁMBRICO", precio: 800, impuesto: 144, existencia: 20 },
         { codigo: "14", referencia: "105", descripcion: "IMPRESORA LÁSER", precio: 7500, impuesto: 1350, existencia: 3 },
     ];
-
     const clientes = [
         { id: "1", nombre: "PABLO ALEJANDRO DIAZ CRUZ", telefono: "(809) 447-7816", direccion: "LOS LLANOS DE GURABO TIGAYGA #42, SANTIAGO" },
         { id: "2", nombre: "MARIA RODRIGUEZ", telefono: "(809) 555-1234", direccion: "CALLE PRINCIPAL #10, SANTO DOMINGO" },
         { id: "3", nombre: "JUAN PEREZ", telefono: "(809) 777-5678", direccion: "AVENIDA CENTRAL #25, LA ROMANA" },
     ];
-
     const vendedores = [
         { id: "1", nombre: "PABLO A DIAZ CRUZ" },
         { id: "2", nombre: "CARLOS MARTINEZ" },
         { id: "3", nombre: "ANA GOMEZ" },
     ];
-
     const pedidos = [
         { id: "P001", clienteId: "1", productos: [{ codigo: "10", cantidad: 2 }, { codigo: "12", cantidad: 1 }] },
         { id: "P002", clienteId: "2", productos: [{ codigo: "11", cantidad: 1 }, { codigo: "13", cantidad: 2 }] },
     ];
-
     const facturas = [
         { id: "F001", clienteId: "1", total: 22200, fecha: "2023-05-15" },
         { id: "F002", clienteId: "2", total: 6800, fecha: "2023-05-16" },
     ];
-
     // Logout
     const logoutBtn = document.getElementById("logoutBtn");
     logoutBtn.addEventListener("click", () => {
@@ -39,11 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 1500);
         });
     });
-
     // Tabs functionality
     const tabs = document.querySelectorAll(".tab");
     const tabContents = document.querySelectorAll(".tab-content");
-
     tabs.forEach((tab) => {
         tab.addEventListener("click", () => {
             const tabId = tab.getAttribute("data-tab");
@@ -56,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
     // Search Cliente
     const searchClienteBtn = document.getElementById("searchClienteBtn");
     searchClienteBtn.addEventListener("click", () => {
@@ -74,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
     // Search Vendedor
     const searchVendedorBtn = document.getElementById("searchVendedorBtn");
     searchVendedorBtn.addEventListener("click", () => {
@@ -89,21 +80,17 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
     // Add Product (desde la fila vacía)
     const addRowBtn = document.querySelector(".add-row-btn");
     addRowBtn.addEventListener("click", openProductModal);
-
     // Search Product in Table
     const searchProductInput = document.getElementById("searchProductInput");
     searchProductInput.addEventListener("input", (e) => {
         const searchTerm = e.target.value.toLowerCase();
         const rows = document.querySelectorAll("tbody tr:not(.empty-row)");
-
         rows.forEach((row) => {
             const descripcion = row.cells[3].textContent.toLowerCase();
             const codigo = row.cells[1].textContent.toLowerCase();
-
             if (descripcion.includes(searchTerm) || codigo.includes(searchTerm)) {
                 row.style.display = "";
             } else {
@@ -111,13 +98,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
     // Product Actions
     const productActionButtons = document.querySelectorAll(".action-grid button");
     productActionButtons.forEach((button) => {
         button.addEventListener("click", (e) => {
             const action = e.target.id || e.target.parentElement.id;
-
             switch (action) {
                 case "changePrice":
                     changePriceHandler();
@@ -143,19 +128,16 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
     // Row Actions (Edit and Delete)
     document.addEventListener("click", (e) => {
         const editBtn = e.target.closest(".icon-btn:not(.danger)");
         const deleteBtn = e.target.closest(".icon-btn.danger");
-
         if (editBtn) {
             const row = editBtn.closest("tr");
             if (row) {
                 changePriceHandler();
             }
         }
-
         if (deleteBtn) {
             const row = deleteBtn.closest("tr");
             if (row) {
@@ -163,7 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
-
     // Row Selection
     document.addEventListener("click", (e) => {
         const row = e.target.closest("tbody tr:not(.empty-row)");
@@ -171,11 +152,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const allRows = document.querySelectorAll("tbody tr");
             allRows.forEach((r) => r.classList.remove("selected"));
             row.classList.add("selected");
-
             const codigo = row.cells[1].textContent;
             const descripcion = row.cells[3].textContent;
             const precio = row.cells[5].textContent;
-
             const producto = productos.find((p) => p.codigo === codigo);
             if (producto) {
                 document.getElementById("productCode").value = codigo;
@@ -186,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
-
     // Quantity Update
     document.addEventListener("change", (e) => {
         if (e.target.classList.contains("qty-input")) {
@@ -197,7 +175,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
-
     // Save and Exit Buttons
     const saveButton = document.querySelector(".main-actions .btn.primary");
     saveButton.addEventListener("click", () => {
@@ -206,18 +183,15 @@ document.addEventListener("DOMContentLoaded", () => {
             showNotification("Debe agregar al menos un producto", "error");
             return;
         }
-
         const clienteInput = document.getElementById("clienteNombre");
         if (!clienteInput.value) {
             showNotification("Debe seleccionar un cliente", "error");
             return;
         }
-
         showNotification("Factura guardada correctamente", "success");
         const facturaNum = Math.floor(Math.random() * 1000).toString().padStart(3, "0");
         document.querySelector(".invoice-number").textContent = `FACT000${facturaNum}`;
     });
-
     const exitButton = document.querySelector(".main-actions .btn.danger");
     exitButton.addEventListener("click", () => {
         showConfirmDialog("¿Está seguro que desea salir? Los cambios no guardados se perderán.", () => {
@@ -227,7 +201,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 1500);
         });
     });
-
     // Modal Close
     const productModal = document.getElementById("productModal");
     const modalCloseButtons = document.querySelectorAll(".modal-close, .modal .btn.secondary");
@@ -236,17 +209,14 @@ document.addEventListener("DOMContentLoaded", () => {
             productModal.classList.remove("active"); // Cambiado de "show" a "active"
         });
     });
-
     // Modal Search
     const modalSearchInput = document.querySelector(".modal-body .search-box input");
     modalSearchInput.addEventListener("input", (e) => {
         const searchTerm = e.target.value.toLowerCase();
         const rows = document.querySelectorAll(".search-results tbody tr");
-
         rows.forEach((row) => {
             const codigo = row.cells[0].textContent.toLowerCase();
             const descripcion = row.cells[1].textContent.toLowerCase();
-
             if (codigo.includes(searchTerm) || descripcion.includes(searchTerm)) {
                 row.style.display = "";
             } else {
@@ -254,7 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
     // Modal Row Selection
     const selectableRows = document.querySelectorAll(".selectable");
     selectableRows.forEach((row) => {
@@ -263,7 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
             row.classList.add("selected");
         });
     });
-
     // Add Product from Modal
     const addFromModalButton = document.querySelector(".modal-footer .btn.primary");
     addFromModalButton.addEventListener("click", () => {
@@ -272,7 +240,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const code = selectedRow.cells[0].textContent;
             const description = selectedRow.cells[1].textContent;
             const price = selectedRow.cells[2].textContent;
-
             addProductToTable(code, description, price);
             productModal.classList.remove("active"); // Cambiado de "show" a "active"
             showNotification("Producto agregado", "success");
@@ -280,14 +247,12 @@ document.addEventListener("DOMContentLoaded", () => {
             showNotification("Por favor seleccione un producto", "warning");
         }
     });
-
     // Toast Close
     const toastCloseButton = document.querySelector(".toast-close");
     toastCloseButton.addEventListener("click", () => {
         const toast = document.getElementById("notification");
         toast.classList.remove("show");
     });
-
     // Payment Type
     const radioButtons = document.querySelectorAll('input[name="tipoPago"]');
     radioButtons.forEach((radio) => {
@@ -299,7 +264,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
     // ITBIS Checkbox
     const itbisCheckbox = document.getElementById("itbisEncima");
     itbisCheckbox.addEventListener("change", (e) => {
@@ -310,24 +274,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         updateTotals();
     });
-
     // Keyboard Shortcuts
     document.addEventListener("keydown", (e) => {
         if (e.key === "F11") {
             e.preventDefault();
             saveButton.click();
         }
-
         if (e.key === "F5") {
             e.preventDefault();
             document.getElementById("loadOrder").click();
         }
-
         if (e.key === "F8") {
             e.preventDefault();
             document.getElementById("authorize").click();
         }
-
         if (e.key === "Escape") {
             const modals = document.querySelectorAll(".modal.active"); // Cambiado de "show" a "active"
             modals.forEach((modal) => {
@@ -335,20 +295,17 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     });
-
     // Field Updates
     const fieldsToUpdate = [
         "limiteCredito", "direccionEnvio", "telefono", "celular", "moneda", "almacen",
         "proyecto", "tipoNCF", "tipoVenta", "tipoPapel", "porcentajeTarjeta", "tasa"
     ];
-
     fieldsToUpdate.forEach((fieldId) => {
         const field = document.getElementById(fieldId);
         field.addEventListener("change", (e) => {
             showNotification(`${fieldId} actualizado a: ${e.target.value}`, "success");
         });
     });
-
     // Comment Section
     const invoiceComment = document.getElementById("invoiceComment");
     const commentList = document.getElementById("commentList");
@@ -362,7 +319,6 @@ document.addEventListener("DOMContentLoaded", () => {
             showNotification("Comentario agregado", "success");
         }
     });
-
     // Client Management
     const addClientBtn = document.getElementById("addClientBtn");
     addClientBtn.addEventListener("click", () => {
@@ -381,7 +337,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     });
-
     const viewClientsBtn = document.getElementById("viewClientsBtn");
     viewClientsBtn.addEventListener("click", () => {
         let clientList = "Lista de Clientes:\n\n";
@@ -390,17 +345,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         showConfirmDialog(clientList);
     });
-
     // Order Management
     const createOrderBtn = document.getElementById("createOrderBtn");
     createOrderBtn.addEventListener("click", () => {
         showInputDialog("Ingrese ID del cliente:", (clienteId) => {
             const cliente = clientes.find((c) => c.id === clienteId);
-
             if (cliente) {
                 const pedidoId = "P" + (pedidos.length + 1).toString().padStart(3, "0");
                 const nuevoPedido = { id: pedidoId, clienteId, productos: [] };
-
                 function agregarProducto() {
                     showInputDialog("Ingrese código del producto:", (codigoProducto) => {
                         showInputDialog("Ingrese cantidad:", (cantidad) => {
@@ -418,14 +370,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         });
                     });
                 }
-
                 agregarProducto();
             } else {
                 showNotification("Cliente no encontrado", "error");
             }
         });
     });
-
     const viewOrdersBtn = document.getElementById("viewOrdersBtn");
     viewOrdersBtn.addEventListener("click", () => {
         let orderList = "Lista de Pedidos:\n\n";
@@ -440,7 +390,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         showConfirmDialog(orderList);
     });
-
     // Invoice Management
     const viewInvoicesBtn = document.getElementById("viewInvoicesBtn");
     viewInvoicesBtn.addEventListener("click", () => {
@@ -451,16 +400,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         showConfirmDialog(invoiceList);
     });
-
     // Change Image
     const changeImageBtn = document.getElementById("changeImageBtn");
     const changeImageInput = document.getElementById("changeImageInput");
     const productImage = document.getElementById("productImage");
-
     changeImageBtn.addEventListener("click", () => {
         changeImageInput.click();
     });
-
     changeImageInput.addEventListener("change", (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -472,7 +418,6 @@ document.addEventListener("DOMContentLoaded", () => {
             reader.readAsDataURL(file);
         }
     });
-
     // Export Buttons in Detalle Contable
     const exportButtons = document.querySelectorAll("#detalle-tab .export-btn");
     exportButtons.forEach((button) => {
@@ -480,7 +425,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const format = button.getAttribute("data-format");
             const accountingTable = document.getElementById("accountingTable");
             const rows = accountingTable.querySelectorAll("tbody tr");
-
             // Simular exportación
             let content = "Cuenta,Descripción,Débito,Crédito\n";
             rows.forEach((row) => {
@@ -488,7 +432,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const rowData = Array.from(cells).map((cell) => cell.textContent).join(",");
                 content += rowData + "\n";
             });
-
             // Simular exportación según el formato
             if (format === "csv") {
                 showNotification(`Exportado a CSV: ${content.length} bytes`, "success");
@@ -499,12 +442,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
     // Helper Functions
     function formatCurrency(value) {
         return parseFloat(value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
     }
-
     function updateRowTotal(row) {
         const qty = parseFloat(row.querySelector(".qty-input").value) || 0;
         const price = parseFloat(row.cells[5].textContent.replace(/,/g, "")) || 0;
@@ -512,12 +453,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const total = qty * (price + (itbisCheckbox.checked ? 0 : impuesto));
         row.cells[7].textContent = formatCurrency(total);
     }
-
     function updateTotals() {
         const rows = document.querySelectorAll("tbody tr:not(.empty-row)");
         let totalBruto = 0;
         let totalImpuesto = 0;
-
         rows.forEach((row) => {
             const qty = parseFloat(row.querySelector(".qty-input").value) || 0;
             const price = parseFloat(row.cells[5].textContent.replace(/,/g, "")) || 0;
@@ -525,11 +464,9 @@ document.addEventListener("DOMContentLoaded", () => {
             totalBruto += qty * price;
             totalImpuesto += qty * (itbisCheckbox.checked ? 0 : impuesto);
         });
-
         const baseImponible = totalBruto / (itbisCheckbox.checked ? 1.18 : 1);
         const itbis = itbisCheckbox.checked ? (totalBruto - baseImponible) : totalImpuesto;
         const totalNeto = totalBruto + (itbisCheckbox.checked ? 0 : totalImpuesto);
-
         document.getElementById("totalBruto").textContent = formatCurrency(totalBruto);
         document.getElementById("descuento1").textContent = formatCurrency(0);
         document.getElementById("descItems").textContent = formatCurrency(0);
@@ -540,18 +477,15 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("itbis30").textContent = formatCurrency(0);
         document.getElementById("totalNeto").textContent = formatCurrency(totalNeto);
     }
-
     function addProductToTable(code, description, price) {
         const tbody = document.querySelector("tbody");
         const rows = document.querySelectorAll("tbody tr:not(.empty-row)");
         const rowCount = rows.length + 1;
-
         const producto = productos.find((p) => p.codigo === code);
         if (!producto) {
             showNotification("Producto no encontrado", "error");
             return;
         }
-
         const newRow = document.createElement("tr");
         newRow.innerHTML = `
             <td>${rowCount}</td>
@@ -569,23 +503,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             </td>
         `;
-
         tbody.insertBefore(newRow, tbody.lastElementChild);
         updateTotals();
     }
-
     function openProductModal() {
         const modal = document.getElementById("productModal");
         modal.classList.add("active"); // Cambiado de "show" a "active"
     }
-
     function changePriceHandler() {
         const selectedRow = document.querySelector("tbody tr.selected");
         if (!selectedRow) {
             showNotification("Seleccione un producto para cambiar el precio", "warning");
             return;
         }
-
         showInputDialog("Ingrese el nuevo precio:", (newPrice) => {
             if (!isNaN(newPrice) && newPrice > 0) {
                 selectedRow.cells[5].textContent = formatCurrency(newPrice);
@@ -597,7 +527,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
     function applyDiscountHandler() {
         showInputDialog("Ingrese el porcentaje de descuento:", (discount) => {
             if (!isNaN(discount) && discount >= 0 && discount <= 100) {
@@ -615,28 +544,24 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
     function viewImageHandler() {
         const selectedRow = document.querySelector("tbody tr.selected");
         if (!selectedRow) {
             showNotification("Seleccione un producto para ver la imagen", "warning");
             return;
         }
-
         const codigo = selectedRow.cells[1].textContent;
         const producto = productos.find((p) => p.codigo === codigo);
         if (producto) {
             showNotification("Mostrando imagen del producto", "info");
         }
     }
-
     function deleteLineHandler() {
         const selectedRow = document.querySelector("tbody tr.selected");
         if (!selectedRow) {
             showNotification("Seleccione un producto para eliminar", "warning");
             return;
         }
-
         showConfirmDialog("¿Está seguro que desea eliminar este producto?", () => {
             selectedRow.remove();
 const rows = document.querySelectorAll("tbody tr:not(.empty-row)");
@@ -647,7 +572,6 @@ const rows = document.querySelectorAll("tbody tr:not(.empty-row)");
             showNotification("Producto eliminado", "success");
         });
     }
-
     function loadOrderHandler() {
         showInputDialog("Ingrese ID del pedido (por ejemplo: P001, P002):", (pedidoId) => {
             const pedido = pedidos.find((p) => p.id === pedidoId);
@@ -660,11 +584,9 @@ const rows = document.querySelectorAll("tbody tr:not(.empty-row)");
                     document.getElementById("telefono").value = cliente.telefono;
                     document.getElementById("celular").value = cliente.telefono;
                 }
-
                 const tbody = document.querySelector("tbody");
                 const rows = document.querySelectorAll("tbody tr:not(.empty-row)");
                 rows.forEach((row) => row.remove());
-
                 pedido.productos.forEach((prod, index) => {
                     const producto = productos.find((p) => p.codigo === prod.codigo);
                     if (producto) {
@@ -688,7 +610,6 @@ const rows = document.querySelectorAll("tbody tr:not(.empty-row)");
                         tbody.insertBefore(newRow, tbody.lastElementChild);
                     }
                 });
-
                 updateTotals();
                 showNotification(`Pedido ${pedidoId} cargado`, "success");
             } else {
@@ -696,27 +617,22 @@ const rows = document.querySelectorAll("tbody tr:not(.empty-row)");
             }
         });
     }
-
     function authorizeHandler() {
         showConfirmDialog("¿Está seguro que desea autorizar esta factura?", () => {
             showNotification("Factura autorizada", "success");
         });
     }
-
     function updateAccountingDetails() {
         const accountingTable = document.getElementById("accountingTable");
         const tbody = accountingTable.querySelector("tbody");
         tbody.innerHTML = "";
-
         const totalNeto = parseFloat(document.getElementById("totalNeto").textContent.replace(/,/g, "")) || 0;
         const itbis = parseFloat(document.getElementById("itbis").textContent.replace(/,/g, "")) || 0;
-
         const rows = [
             { cuenta: "1101", descripcion: "Caja", debito: totalNeto, credito: 0 },
             { cuenta: "4101", descripcion: "Ventas", debito: 0, credito: totalNeto - itbis },
             { cuenta: "2105", descripcion: "ITBIS por Pagar", debito: 0, credito: itbis },
         ];
-
         rows.forEach((row) => {
             const tr = document.createElement("tr");
             tr.innerHTML = `
@@ -728,27 +644,21 @@ const rows = document.querySelectorAll("tbody tr:not(.empty-row)");
             tbody.appendChild(tr);
         });
     }
-
     function showNotification(message, type) {
         const toast = document.getElementById("notification");
         const toastTitle = toast.querySelector(".toast-title");
         const toastMessage = toast.querySelector(".toast-message");
         const toastIcon = toast.querySelector(".toast-icon i");
-
         toastTitle.textContent = type === "error" ? "Error" : type === "warning" ? "Advertencia" : "Éxito";
         toastMessage.textContent = message;
-
         toast.classList.remove("success", "error", "warning");
         toast.classList.add(type);
-
         toastIcon.className = type === "error" ? "bx bx-error" : type === "warning" ? "bx bx-info-circle" : "bx bx-check-circle";
-
         toast.classList.add("show");
         setTimeout(() => {
             toast.classList.remove("show");
         }, 3000);
     }
-
     function showConfirmDialog(message, callback) {
         const dialog = document.createElement("div");
         dialog.className = "confirm-dialog";
@@ -762,24 +672,19 @@ const rows = document.querySelectorAll("tbody tr:not(.empty-row)");
                 </div>
             </div>
         `;
-
         document.body.appendChild(dialog);
         dialog.classList.add("active");
-
         const cancelBtn = dialog.querySelector(".btn.secondary");
         const acceptBtn = dialog.querySelector(".btn.primary");
-
         cancelBtn.addEventListener("click", () => {
             dialog.remove();
             if (callback) callback(false);
         });
-
         acceptBtn.addEventListener("click", () => {
             dialog.remove();
             if (callback) callback(true);
         });
     }
-
     function showInputDialog(message, callback) {
         const dialog = document.createElement("div");
         dialog.className = "confirm-dialog";
@@ -794,27 +699,21 @@ const rows = document.querySelectorAll("tbody tr:not(.empty-row)");
                 </div>
             </div>
         `;
-
         document.body.appendChild(dialog);
         dialog.classList.add("active");
-
         const input = dialog.querySelector(".dialog-input");
         const cancelBtn = dialog.querySelector(".btn.secondary");
         const acceptBtn = dialog.querySelector(".btn.primary");
-
         cancelBtn.addEventListener("click", () => {
             dialog.remove();
         });
-
         acceptBtn.addEventListener("click", () => {
             const value = input.value.trim();
             dialog.remove();
             if (callback) callback(value);
         });
-
         input.focus();
     }
-
     // Inicializar totales
     updateTotals();
 });
