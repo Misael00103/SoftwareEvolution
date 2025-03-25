@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compras</title>
+    <title>Ingreso de Mercancía</title>
     <link rel="stylesheet" href="compras.css">
+    <link rel="stylesheet" href="../facturacion/styles.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -16,7 +17,7 @@
                     <span class="material-icons">shopping_cart</span>
                 </div>
                 <div class="header-text">
-                    <h1>Compras</h1>
+                    <h1>Ingreso de Mercancía</h1>
                     <p>Gestione las compras y proveedores</p>
                 </div>
             </div>
@@ -28,182 +29,209 @@
                     <button class="icon-button" title="Historial">
                         <span class="material-icons">schedule</span>
                     </button>
-                    <button class="icon-button" id="printButton" title="Imprimir">
-                        <span class="material-icons">print</span>
-                    </button>
                 </div>
-                <div class="search-container">
-                    <input type="text" placeholder="Buscar compra..." />
-                    <span class="material-icons">search</span>
-                </div>
-                <button class="add-button" id="nuevaCompraBtn">
-                    <span class="material-icons">add</span>
-                    Nueva Compra
-                </button>
             </div>
         </header>
 
-        <div class="card" id="listadoCompras">
-            <div class="card-header">
-                <h2>
-                    <span class="material-icons">receipt_long</span>
-                    Listado de Compras
-                </h2>
-                <div class="header-actions">
-                    <button class="action-btn" id="exportarBtn">
-                        <span class="material-icons">file_download</span>
-                        Exportar
-                    </button>
-                    <button class="action-btn" id="imprimirListadoBtn">
-                        <span class="material-icons">print</span>
-                        Imprimir
-                    </button>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="table-container">
-                    <table class="custom-table" id="comprasTable">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Fecha</th>
-                                <th>Proveedor</th>
-                                <th>No. Factura</th>
-                                <th>Monto</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>15/03/2025</td>
-                                <td>Distribuidora XYZ</td>
-                                <td>F-12345</td>
-                                <td>25,500.00</td>
-                                <td><span class="badge success">Pagada</span></td>
-                                <td>
-                                    <div class="row-actions">
-                                        <button class="icon-button edit-btn" title="Editar" data-id="1">
-                                            <span class="material-icons">edit</span>
-                                        </button>
-                                        <button class="icon-button view-btn" title="Ver detalles" data-id="1">
-                                            <span class="material-icons">visibility</span>
-                                        </button>
-                                        <button class="icon-button delete-btn" title="Eliminar" data-id="1">
-                                            <span class="material-icons">delete</span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>14/03/2025</td>
-                                <td>Suministros ABC</td>
-                                <td>F-9876</td>
-                                <td>18,750.00</td>
-                                <td><span class="badge warning">Pendiente</span></td>
-                                <td>
-                                    <div class="row-actions">
-                                        <button class="icon-button edit-btn" title="Editar" data-id="2">
-                                            <span class="material-icons">edit</span>
-                                        </button>
-                                        <button class="icon-button view-btn" title="Ver detalles" data-id="2">
-                                            <span class="material-icons">visibility</span>
-                                        </button>
-                                        <button class="icon-button delete-btn" title="Eliminar" data-id="2">
-                                            <span class="material-icons">delete</span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>12/03/2025</td>
-                                <td>Importadora Global</td>
-                                <td>F-5432</td>
-                                <td>42,800.00</td>
-                                <td><span class="badge success">Pagada</span></td>
-                                <td>
-                                    <div class="row-actions">
-                                        <button class="icon-button edit-btn" title="Editar" data-id="3">
-                                            <span class="material-icons">edit</span>
-                                        </button>
-                                        <button class="icon-button view-btn" title="Ver detalles" data-id="3">
-                                            <span class="material-icons">visibility</span>
-                                        </button>
-                                        <button class="icon-button delete-btn" title="Eliminar" data-id="3">
-                                            <span class="material-icons">delete</span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="card" id="formularioCompra" style="display: none;">
+        <div class="card">
             <div class="card-header">
                 <h2>
                     <span class="material-icons">add_shopping_cart</span>
                     <span id="tituloFormulario">Nueva Compra</span>
                 </h2>
                 <div class="header-actions">
-                    <button class="action-btn" id="volverListadoBtn">
-                        <span class="material-icons">arrow_back</span>
-                        Volver al listado
+                    <button class="action-btn" id="exportarBtn">
+                        <span class="material-icons">file_download</span>
+                        Exportar
                     </button>
                 </div>
             </div>
             <div class="card-body">
+                <!-- Formulario de Compra -->
                 <form id="compraForm">
                     <input type="hidden" id="compraId" value="">
-                    
+
+                    <div class="form-grid-container">
+                        <!-- Proveedor Section -->
+                        <section class="form-section form-section-left">
+                            <h3>Proveedor</h3>
+                            <div class="form-grid">
+                                <div class="field">
+                                    <label for="proveedor">Proveedor:</label>
+                                    <select id="proveedor" required>
+                                        <option value="">Seleccionar proveedor</option>
+                                        <option value="1">ALMACEN PRINCIPAL</option>
+                                        <option value="2">MONTO USS</option>
+                                        <option value="3">MONTO BIENES</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label for="nombre">Nombre:</label>
+                                    <input type="text" id="nombre" placeholder="Nombre del proveedor">
+                                </div>
+                                <div class="field">
+                                    <label for="direccion">Dirección:</label>
+                                    <input type="text" id="direccion" placeholder="Dirección del proveedor">
+                                </div>
+                                <div class="field">
+                                    <label for="fechaVencimiento">Fecha Vencimiento:</label>
+                                    <input type="date" id="fechaVencimiento" value="2021-05-16">
+                                </div>
+                                <div class="field">
+                                    <label for="tipoCompra">Tipo Compra:</label>
+                                    <select id="tipoCompra">
+                                        <option value="interna">INTERNA</option>
+                                        <option value="externa">EXTERNA</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label for="moneda">Moneda:</label>
+                                    <select id="moneda">
+                                        <option value="0.00">0.00</option>
+                                        <option value="dop">DOP</option>
+                                        <option value="usd">USD</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label for="formaPago">Forma de Pago:</label>
+                                    <select id="formaPago">
+                                        <option value="0.00">0.00</option>
+                                        <option value="contado">Contado</option>
+                                        <option value="credito">Crédito</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label for="clasificacion">Clasificación:</label>
+                                    <select id="clasificacion">
+                                        <option value="0.00">0.00</option>
+                                        <option value="normal">Normal</option>
+                                        <option value="especial">Especial</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Documentos Section -->
+                        <section class="form-section form-section-middle">
+                            <h3>Documentos</h3>
+                            <div class="form-grid">
+                                <div class="field">
+                                    <label for="proyecto">Proyecto:</label>
+                                    <select id="proyecto">
+                                        <option value="">Seleccionar proyecto</option>
+                                        <option value="1">Proyecto A</option>
+                                        <option value="2">Proyecto B</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label for="fechaIngreso">Fecha Ingreso:</label>
+                                    <input type="date" id="fechaIngreso" value="2024-12-15">
+                                </div>
+                                <div class="field">
+                                    <label for="numeroFactura">Factura #:</label>
+                                    <input type="text" id="numeroFactura" placeholder="Número de factura">
+                                </div>
+                                <div class="field">
+                                    <label for="montoFactura">Monto Factura:</label>
+                                    <input type="text" id="montoFactura" value="0.00" readonly>
+                                </div>
+                                <div class="field">
+                                    <label for="fechaFacturaLlegada">Fecha factura llegada:</label>
+                                    <input type="date" id="fechaFacturaLlegada" value="2024-12-15">
+                                </div>
+                                <div class="field">
+                                    <label for="ajusteCompra">Ajuste Compra:</label>
+                                    <select id="ajusteCompra">
+                                        <option value="ordenCompra">ORDEN COMPRA</option>
+                                        <option value="sinAjuste">Sin Ajuste</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label for="ncf">NCF:</label>
+                                    <input type="text" id="ncf" placeholder="NCF">
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Totalización Section -->
+                        <section class="form-section form-section-right">
+                            <h3>Totalización</h3>
+                            <div class="form-grid">
+                                <div class="field">
+                                    <label for="totalBruto">Total Bruto:</label>
+                                    <input type="text" id="totalBruto" value="0.00" readonly>
+                                </div>
+                                <div class="field">
+                                    <label for="descuento1">Descuento 1:</label>
+                                    <input type="text" id="descuento1" value="0.00" readonly>
+                                </div>
+                                <div class="field">
+                                    <label for="descItems">Desc. Items:</label>
+                                    <input type="text" id="descItems" value="0.00" readonly>
+                                </div>
+                                <div class="field">
+                                    <label for="flete">Flete:</label>
+                                    <input type="text" id="flete" value="0.00" readonly>
+                                </div>
+                                <div class="field">
+                                    <label for="montoExento">Monto Exento:</label>
+                                    <input type="text" id="montoExento" value="0.00" readonly>
+                                </div>
+                                <div class="field">
+                                    <label for="baseImponible">Base Imponible:</label>
+                                    <input type="text" id="baseImponible" value="0.00" readonly>
+                                </div>
+                                <div class="field">
+                                    <label for="itbis">ITBIS:</label>
+                                    <input type="text" id="itbis" value="18.00" readonly>
+                                </div>
+                                <div class="field">
+                                    <label for="retencionImp">Retención Imp.:</label>
+                                    <input type="text" id="retencionImp" value="0.00" readonly>
+                                </div>
+                                <div class="field">
+                                    <label for="retencionISR">Retención ISR:</label>
+                                    <input type="text" id="retencionISR" value="0.00" readonly>
+                                </div>
+                                <div class="field">
+                                    <label for="totalNeto">Total Neto:</label>
+                                    <input type="text" id="totalNeto" value="0.00" readonly>
+                                </div>
+                                <div class="field">
+                                    <label for="diferencia">Diferencia:</label>
+                                    <input type="text" id="diferencia" value="0.00" readonly>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Configuraciones Section -->
                     <section class="form-section">
-                        <h3>Datos de la Compra</h3>
-                        <div class="form-grid">
-                            <div class="field">
-                                <label for="fechaCompra">Fecha:</label>
-                                <input type="date" id="fechaCompra" required>
-                            </div>
-                            <div class="field">
-                                <label for="numeroFactura">No. Factura:</label>
-                                <input type="text" id="numeroFactura" placeholder="Número de factura" required>
-                            </div>
-                            <div class="field">
-                                <label for="proveedor">Proveedor:</label>
-                                <select id="proveedor" required>
-                                    <option value="">Seleccionar proveedor</option>
-                                    <option value="1">Distribuidora XYZ</option>
-                                    <option value="2">Suministros ABC</option>
-                                    <option value="3">Importadora Global</option>
-                                </select>
-                            </div>
-                            <div class="field">
-                                <label for="condicionPago">Condición de Pago:</label>
-                                <select id="condicionPago" required>
-                                    <option value="contado">Contado</option>
-                                    <option value="credito30">Crédito 30 días</option>
-                                    <option value="credito60">Crédito 60 días</option>
-                                    <option value="credito90">Crédito 90 días</option>
-                                </select>
-                            </div>
+                        <h3>Configuraciones</h3>
+                        <div class="checkbox-grid">
+                            <label><input type="checkbox" id="impuestoIncluido"> Impuesto Incluido</label>
+                            <label><input type="checkbox" id="sinImpuesto"> Sin Impuesto</label>
+                            <label><input type="checkbox" id="actualizarPrecios"> Actualizar Precios</label>
+                            <label><input type="checkbox" id="calcularPrecioCosto"> Desea calcular el precio por el costo</label>
+                            <label><input type="checkbox" id="generarNCFGastoMenor"> Generar NCF Gasto Menor</label>
+                            <label><input type="checkbox" id="proveedorInformal"> Proveedor Informal (Compras)</label>
+                            <label><input type="checkbox" id="comprobantePagosExterior"> Comprobante para Pagos al Exterior Electrónico</label>
                         </div>
                     </section>
 
+                    <!-- Productos Section -->
                     <section class="form-section">
-                        <h3>Detalle de Productos</h3>
+                        <h3>Productos</h3>
                         <div class="table-container">
                             <table class="custom-table" id="detalleProductosTable">
                                 <thead>
                                     <tr>
                                         <th width="40">#</th>
-                                        <th>Producto</th>
+                                        <th>Referencia</th>
+                                        <th>Descripción</th>
+                                        <th width="100">ITBIS</th>
+                                        <th width="150">Costo</th>
                                         <th width="100">Cantidad</th>
-                                        <th width="150">Precio</th>
-                                        <th width="150">Subtotal</th>
                                         <th width="50"></th>
                                     </tr>
                                 </thead>
@@ -211,22 +239,20 @@
                                     <tr id="filaPlantilla" style="display: none;">
                                         <td class="numero-fila">1</td>
                                         <td>
-                                            <select class="producto-select">
-                                                <option value="">Seleccionar producto</option>
-                                                <option value="1">CPU DELL CI5 DESKTOP</option>
-                                                <option value="2">MONITOR DELL 24"</option>
-                                                <option value="3">TECLADO LOGITECH</option>
-                                                <option value="4">MOUSE INALÁMBRICO</option>
-                                                <option value="5">IMPRESORA LÁSER</option>
-                                            </select>
+                                            <input type="text" class="referencia-producto" placeholder="Referencia">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="descripcion-producto" placeholder="Descripción">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="itbis-producto" min="0" step="0.01" value="18.00">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="costo-producto" min="0" step="0.01" value="0.00">
                                         </td>
                                         <td>
                                             <input type="number" class="cantidad-producto" min="1" value="1">
                                         </td>
-                                        <td>
-                                            <input type="number" class="precio-producto" min="0" step="0.01" value="0.00">
-                                        </td>
-                                        <td class="subtotal-producto">0.00</td>
                                         <td>
                                             <button type="button" class="icon-button delete-btn eliminar-fila">
                                                 <span class="material-icons">delete</span>
@@ -236,11 +262,15 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="6">
-                                            <button type="button" class="btn secondary" id="agregarProductoBtn">
-                                                <span class="material-icons">add</span>
-                                                Agregar Producto
-                                            </button>
+                                        <td colspan="7">
+                                            <div class="table-actions">
+                                                <button type="button" class="icon-button add-product-btn" id="agregarProductoBtn">
+                                                    <span class="material-icons">add</span>
+                                                </button>
+                                                <button type="button" class="icon-button delete-product-btn">
+                                                    <span class="material-icons">remove</span>
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -248,70 +278,11 @@
                         </div>
                     </section>
 
-                    <section class="form-section">
-                        <h3>Totales</h3>
-                        <div class="form-grid">
-                            <div class="field">
-                                <label for="subtotalCompra">Subtotal:</label>
-                                <input type="text" id="subtotalCompra" value="0.00" readonly>
-                            </div>
-                            <div class="field">
-                                <label for="descuentoPorcentaje">Descuento (%):</label>
-                                <input type="number" id="descuentoPorcentaje" min="0" max="100" step="0.01" value="0">
-                            </div>
-                            <div class="field">
-                                <label for="descuentoMonto">Monto Descuento:</label>
-                                <input type="text" id="descuentoMonto" value="0.00" readonly>
-                            </div>
-                            <div class="field">
-                                <label for="impuestosCompra">Impuestos (18%):</label>
-                                <input type="text" id="impuestosCompra" value="0.00" readonly>
-                            </div>
-                            <div class="field">
-                                <label for="totalCompra">Total:</label>
-                                <input type="text" id="totalCompra" value="0.00" readonly>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="form-section">
-                        <h3>Observaciones</h3>
-                        <div class="form-grid">
-                            <div class="field" style="grid-column: 1 / -1;">
-                                <textarea id="observaciones" rows="4" placeholder="Observaciones o notas adicionales"></textarea>
-                            </div>
-                        </div>
-                    </section>
-
                     <div class="form-actions">
                         <button type="button" class="btn secondary" id="cancelarCompraBtn">Cancelar</button>
-                        <button type="submit" class="btn primary" id="guardarCompraBtn">Guardar Compra</button>
+                        <button type="submit" class="btn primary" id="guardarCompraBtn">Presentación</button>
                     </div>
                 </form>
-            </div>
-        </div>
-
-        <div class="action-panel">
-            <div class="action-card">
-                <h3>Acciones rápidas</h3>
-                <div class="action-buttons-grid">
-                    <button class="action-btn">
-                        <span class="material-icons">people</span>
-                        Proveedores
-                    </button>
-                    <button class="action-btn">
-                        <span class="material-icons">inventory</span>
-                        Productos
-                    </button>
-                    <button class="action-btn">
-                        <span class="material-icons">receipt_long</span>
-                        Órdenes de Compra
-                    </button>
-                    <button class="action-btn">
-                        <span class="material-icons">payments</span>
-                        Pagos a Proveedores
-                    </button>
-                </div>
             </div>
         </div>
     </div>
