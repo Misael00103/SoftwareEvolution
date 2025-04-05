@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Facturación</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="facturacion.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="card">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo">
+                        <i class='bx bx-receipt'></i>
+                        <h1>Facturación</h1>
+                    </div>
+                    <span class="invoice-number">FACT000274</span>
+                </div>
+                <div class="header-right">
+                    <div class="header-info">
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Perfil de usuario" class="profile-pic">
+                        <div class="user-info">
+                            <span class="user-name">SOFTWARE EVOLUTION ARPA SRL</span>
+                            <span class="user-role">Administrador</span>
+                            <span class="user-date">25/03/2025</span>
+                        </div>
+                        <button class="icon-btn" id="logoutBtn" title="Cerrar Sesión"><i class='bx bx-log-out'></i></button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="content-grid">
+                <div class="main-content">
+                    <div class="tabs">
+                        <button class="tab active" data-tab="factura-tab"><i class='bx bx-receipt'></i> Factura</button>
+                        <button class="tab" data-tab="detalle-tab"><i class='bx bx-spreadsheet'></i> Detalle Contable</button>
+                    </div>
+                    <div id="factura-tab" class="tab-content active">
+                        <div class="section-grid">
+                            <section class="card client-info">
+                                <div class="card-header">
+                                    <h2><i class='bx bx-user'></i> Cliente</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-grid">
+                                        <div class="field">
+                                            <label>Cliente</label>
+                                            <div class="input-group">
+                                                <input type="text" id="clienteId" value="1" class="input-small">
+                                                <input type="text" id="clienteNombre" value="PABLO ALEJANDRO DIAZ CRUZ" readonly class="input-main">
+                                                <button class="icon-btn" id="searchClienteBtn"><i class='bx bx-search'></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Límite Crédito</label>
+                                            <input type="text" id="limiteCredito" value="1,000,000.00">
+                                        </div>
+                                        <div class="field">
+                                            <label>Dirección</label>
+                                            <input type="text" id="direccionEnvio" value="LOS LLANOS DE GURABO TIGAYGA #42, SANTIAGO">
+                                        </div>
+                                        <div class="field">
+                                            <label>Teléfono</label>
+                                            <input type="text" id="telefono" value="(809) 447-7816">
+                                        </div>
+                                        <div class="field">
+                                            <label>Cel.</label>
+                                            <input type="text" id="celular" value="(809) 447-7816">
+                                        </div>
+                                        <div class="field">
+                                            <label>Vendedor</label>
+                                            <div class="input-group">
+                                                <input type="text" id="vendedorId" value="1" class="input-small">
+                                                <input type="text" id="vendedorNombre" value="PABLO A DIAZ CRUZ" readonly class="input-main">
+                                                <button class="icon-btn" id="searchVendedorBtn"><i class='bx bx-search'></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Moneda</label>
+                                            <select id="moneda">
+                                                <option selected>RD$</option>
+                                                <option>USD$</option>
+                                                <option>EUR€</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Almacén</label>
+                                            <select id="almacen">
+                                                <option selected>ALMACEN PRINCIPAL</option>
+                                                <option>ALMACEN SECUNDARIO</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Proyecto</label>
+                                            <select id="proyecto">
+                                                <option selected>SOFTWARE EVOLUTION ARPA SRL</option>
+                                                <option>PROYECTO NUEVO</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tipo NCF</label>
+                                            <select id="tipoNCF">
+                                                <option selected>FACTURA VALIDA CREDITO FISCAL</option>
+                                                <option>FACTURA DE CONSUMO</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tipo Venta</label>
+                                            <select id="tipoVenta">
+                                                <option selected>INGRESOS POR OPERACIONES NO FINA...</option>
+                                                <option>VENTA DE PRODUCTOS</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tipo Papel</label>
+                                            <select id="tipoPapel">
+                                                <option selected>FACTURA PEQUEÑA</option>
+                                                <option>FACTURA GRANDE</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>%Tarjeta</label>
+                                            <input type="text" id="porcentajeTarjeta" value="0.00" class="input-small">
+                                        </div>
+                                        <div class="field">
+                                            <label>Tasa</label>
+                                            <input type="text" id="tasa" value="1.00" class="input-small">
+                                        </div>
+                                    </div>
+                                    <div class="payment-options">
+                                        <div class="radio-group">
+                                            <label class="radio">
+                                                <input type="radio" name="tipoPago" value="contado">
+                                                <span class="radio-mark"></span>
+                                                <span>Contado</span>
+                                            </label>
+                                            <label class="radio">
+                                                <input type="radio" name="tipoPago" value="credito" checked>
+                                                <span class="radio-mark"></span>
+                                                <span>Crédito</span>
+                                            </label>
+                                        </div>
+                                        <div class="checkbox-group">
+                                            <label class="checkbox">
+                                                <input type="checkbox" id="itbisEncima" checked>
+                                                <span class="checkbox-mark"></span>
+                                                <span>Itbis Encima</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="card products">
+                                <div class="card-header">
+                                    <h2><i class='bx bx-package'></i> Productos</h2>
+                                    <div class="table-actions">
+                                        <div class="search-box">
+                                            <input type="text" id="searchProductInput" placeholder="Buscar...">
+                                            <i class='bx bx-search'></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-container">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Código</th>
+                                                    <th>Ref.</th>
+                                                    <th>Descripción</th>
+                                                    <th>Cant.</th>
+                                                    <th>Precio</th>
+                                                    <th>Imp.</th>
+                                                    <th>Total</th>
+                                                    <th>Acc.</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="selected">
+                                                    <td>1</td>
+                                                    <td>10</td>
+                                                    <td>101</td>
+                                                    <td>CPU DELL CI5 DESKTOP</td>
+                                                    <td>
+                                                        <input type="number" value="1" min="1" class="qty-input">
+                                                    </td>
+                                                    <td>10,500.00</td>
+                                                    <td>1,601.69</td>
+                                                    <td>10,500.00</td>
+                                                    <td>
+                                                        <div class="row-actions">
+                                                            <button class="icon-btn"><i class='bx bx-edit'></i></button>
+                                                            <button class="icon-btn danger"><i class='bx bx-trash'></i></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="empty-row">
+                                                    <td colspan="9">
+                                                        <button class="add-row-btn"><i class='bx bx-plus'></i> Agregar producto</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="section-grid">
+                            <section class="card totals">
+                                <div class="card-header">
+                                    <h3><i class='bx bx-calculator'></i> Totales</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="totals-grid">
+                                        <div class="total-item">
+                                            <span>Total Bruto:</span>
+                                            <span id="totalBruto">10,500.00</span>
+                                        </div>
+                                        <div class="total-item">
+                                            <span>Descuento 1:</span>
+                                            <span id="descuento1">0.00</span>
+                                        </div>
+                                        <div class="total-item">
+                                            <span>Desc. Items:</span>
+                                            <span id="descItems">0.00</span>
+                                        </div>
+                                        <div class="total-item">
+                                            <span>Flete:</span>
+                                            <span id="flete">0.00</span>
+                                        </div>
+                                        <div class="total-item">
+                                            <span>Monto Exento:</span>
+                                            <span id="montoExento">0.00</span>
+                                        </div>
+                                        <div class="total-item">
+                                            <span>Base Imponible:</span>
+                                            <span id="baseImponible">8,898.31</span>
+                                        </div>
+                                        <div class="total-item">
+                                            <span>Itbis:</span>
+                                            <span id="itbis">1,601.69</span>
+                                        </div>
+                                        <div class="total-item">
+                                            <span>30 % Itbis:</span>
+                                            <span id="itbis30">0.00</span>
+                                        </div>
+                                        <div class="total-item grand-total">
+                                            <span>Total Neto:</span>
+                                            <span id="totalNeto">10,500.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="card actions">
+                                <div class="card-header">
+                                    <h3><i class='bx bx-package'></i> Acciones</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="action-grid">
+                                        <button class="action-btn" id="changePrice"><i class='bx bx-dollar'></i> Precio</button>
+                                        <button class="action-btn" id="applyDiscount"><i class='bx bx-purchase-tag'></i> Descuento</button>
+                                        <button class="action-btn" id="searchProduct"><i class='bx bx-search'></i> Buscar</button>
+                                        <button class="action-btn" id="viewImage"><i class='bx bx-image'></i> Imagen</button>
+                                        <button class="action-btn" id="deleteLine"><i class='bx bx-trash'></i> Borrar</button>
+                                        <button class="action-btn" id="loadOrder"><i class='bx bx-cart'></i> Pedido [F5]</button>
+                                        <button class="action-btn" id="authorize"><i class='bx bx-check-shield'></i> Autorizar [F8]</button>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="section-grid">
+                            <section class="card product-details">
+                                <div class="card-header">
+                                    <h3><i class='bx bx-info-circle'></i> Detalle Producto</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="product-info-grid">
+                                        <div class="field">
+                                            <label>Código</label>
+                                            <input type="text" id="productCode" readonly value="10">
+                                        </div>
+                                        <div class="field">
+                                            <label>Descripción</label>
+                                            <input type="text" id="productDescription" readonly value="CPU DELL CI5 DESKTOP">
+                                        </div>
+                                        <div class="field">
+                                            <label>Precio 1</label>
+                                            <input type="text" id="productPrice1" readonly value="10,500.00">
+                                        </div>
+                                        <div class="field">
+                                            <label>Precio 2</label>
+                                            <input type="text" id="productPrice2" readonly value="10,500.00">
+                                        </div>
+                                        <div class="field">
+                                            <label>Existencia</label>
+                                            <input type="text" id="productStock" readonly value="5.00">
+                                        </div>
+                                    </div>
+                                    <div class="product-image-section">
+                                        <h4><i class='bx bx-image'></i> Imagen</h4>
+                                        <div class="image-wrapper">
+                                            <img id="productImage" src="https://http2.mlstatic.com/D_NQ_NP_797805-MLA54941431259_042023-O.webp" alt="Imagen del producto">
+                                        </div>
+                                        <input type="file" id="changeImageInput" accept="image/*" style="display: none;">
+                                        <button id="changeImageBtn" class="action-btn"><i class='bx bx-image-add'></i> Cambiar Imagen</button>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="card comments">
+                                <div class="card-header">
+                                    <h3><i class='bx bx-comment-detail'></i> Comentario</h3>
+                                </div>
+                                <div class="card-body">
+                                    <textarea id="invoiceComment" placeholder="Agregar comentario..."></textarea>
+                                    <div class="comment-history">
+                                        <h4>Historial</h4>
+                                        <ul id="commentList"></ul>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="section-grid-triple">
+                            <section class="card clients">
+                                <div class="card-header">
+                                    <h3><i class='bx bx-user-plus'></i> Clientes</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="button-stack">
+                                        <button id="addClientBtn" class="action-btn"><i class='bx bx-plus'></i> Nuevo</button>
+                                        <button id="viewClientsBtn" class="action-btn"><i class='bx bx-list-ul'></i> Ver</button>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="card orders">
+                                <div class="card-header">
+                                    <h3><i class='bx bx-package'></i> Pedidos</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="button-stack">
+                                        <button id="createOrderBtn" class="action-btn"><i class='bx bx-plus'></i> Crear</button>
+                                        <button id="viewOrdersBtn" class="action-btn"><i class='bx bx-list-ul'></i> Ver</button>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="card invoices">
+                                <div class="card-header">
+                                    <h3><i class='bx bx-file'></i> Facturas</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="button-stack">
+                                        <button id="viewInvoicesBtn" class="action-btn"><i class='bx bx-list-ul'></i> Ver</button>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="main-actions">
+                            <button class="btn primary"><i class='bx bx-save'></i> Salvar [F11]</button>
+                            <button class="btn danger"><i class='bx bx-exit'></i> Salir</button>
+                        </div>
+                    </div>
+                    <div id="detalle-tab" class="tab-content">
+                        <section class="card">
+                            <div class="card-header">
+                                <h2><i class='bx bx-spreadsheet'></i> Detalle Contable</h2>
+                                <div class="table-actions">
+                                    <button class="btn primary export-btn" data-format="pdf"><i class='bx bx-file'></i> Exportar PDF</button>
+                                    <button class="btn primary export-btn" data-format="excel"><i class='bx bx-spreadsheet'></i> Exportar Excel</button>
+                                    <button class="btn primary export-btn" data-format="csv"><i class='bx bx-table'></i> Exportar CSV</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-container">
+                                    <table id="accountingTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Cuenta</th>
+                                                <th>Descripción</th>
+                                                <th>Débito</th>
+                                                <th>Crédito</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="toast" id="notification">
+        <div class="toast-icon">
+            <i class='bx bx-check-circle'></i>
+        </div>
+        <div class="toast-content">
+            <p class="toast-title">Éxito</p>
+            <p class="toast-message">Operación completada correctamente</p>
+        </div>
+        <button class="toast-close"><i class='bx bx-x'></i></button>
+    </div>
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class='bx bx-package'></i> Agregar Producto</h3>
+                <button class="modal-close"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="field">
+                    <label>Código o Descripción</label>
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar producto...">
+                        <i class='bx bx-search'></i>
+                    </div>
+                </div>
+                <div class="search-results">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descripción</th>
+                                <th>Precio</th>
+                                <th>Existencia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="selectable">
+                                <td>10</td>
+                                <td>CPU DELL CI5 DESKTOP</td>
+                                <td>10,500.00</td>
+                                <td>5</td>
+                            </tr>
+                            <tr class="selectable">
+                                <td>11</td>
+                                <td>MONITOR DELL 24"</td>
+                                <td>5,200.00</td>
+                                <td>8</td>
+                            </tr>
+                            <tr class="selectable">
+                                <td>12</td>
+                                <td>TECLADO LOGITECH</td>
+                                <td>1,200.00</td>
+                                <td>15</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary">Cancelar</button>
+                <button class="btn primary">Agregar</button>
+            </div>
+        </div>
+    </div>
+    <script src="facturacion.js"></script>
+</body>
+</html>
