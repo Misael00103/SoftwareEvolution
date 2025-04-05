@@ -51,7 +51,6 @@ body {
     padding: 1rem;
 }
 
-/* Header Styles */
 header.card {
     background-color: var(--card);
     border-radius: var(--radius-lg);
@@ -117,7 +116,6 @@ header.card {
     gap: 0.5rem;
 }
 
-/* Button Styles */
 .action-buttons {
     display: flex;
     gap: 0.5rem;
@@ -177,7 +175,6 @@ header.card {
     height: 16px;
 }
 
-/* Estilo para el botón de editar en la tabla */
 .edit-btn {
     background-color: var(--warning-light);
     color: var(--warning);
@@ -193,13 +190,14 @@ header.card {
     color: white;
 }
 
-/* Main and Form Styles */
 main {
     background-color: var(--card);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     overflow: hidden;
     border: 1px solid var(--border-light);
+    position: relative;
+    min-height: 500px;
 }
 
 .content-grid {
@@ -283,7 +281,6 @@ main {
     box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
 }
 
-/* Input Styles */
 .input-container {
     position: relative;
     display: flex;
@@ -328,7 +325,6 @@ select:focus + .input-icon {
     transform: translateY(-50%) scale(1.1);
 }
 
-/* Checkbox Styles */
 .checkbox-group {
     padding-top: 0.5rem;
 }
@@ -384,7 +380,6 @@ select:focus + .input-icon {
     transform: rotate(45deg);
 }
 
-/* Form Actions */
 .main-actions {
     display: flex;
     gap: 1rem;
@@ -398,7 +393,6 @@ select:focus + .input-icon {
     max-width: 150px;
 }
 
-/* Table Styles */
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -427,7 +421,6 @@ select:focus + .input-icon {
     background-color: var(--border-light);
 }
 
-/* Toast Notification */
 .toast {
     position: fixed;
     bottom: 2rem;
@@ -490,7 +483,6 @@ select:focus + .input-icon {
     height: 20px;
 }
 
-/* Animations */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -501,12 +493,6 @@ select:focus + .input-icon {
     to { opacity: 0; }
 }
 
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-}
-
-/* Alinear las fechas horizontalmente */
 .date-section {
     display: flex;
     gap: 1rem;
@@ -515,10 +501,9 @@ select:focus + .input-icon {
 
 .date-section .field {
     flex: 1;
-    min-width: 200px; /* Asegura que los campos tengan un ancho mínimo */
+    min-width: 200px;
 }
 
-/* Confirmation Dialog */
 .confirm-dialog {
     position: fixed;
     top: 0;
@@ -594,39 +579,41 @@ select:focus + .input-icon {
     gap: 0.5rem;
 }
 
-/* Initial Client Selection Dialog Styles */
-.client-selection-list {
-    max-height: 50vh;
-    overflow-y: auto;
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius);
-    padding: 0.5rem;
+.view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
+    visibility: hidden;
+    opacity: 0;
 }
 
-.client-selection-item {
-    padding: 0.75rem;
-    border-bottom: 1px solid var(--border-light);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    transition: var(--transition);
+.view.active {
+    position: relative;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
-.client-selection-item:hover {
-    background-color: var(--border-light);
+/* Estilo del Spinner */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #ffffff;
+    border-top: 3px solid var(--primary-dark);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    margin-right: 0.5rem;
 }
 
-.client-selection-item:last-child {
-    border-bottom: none;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-.client-selection-item span {
-    font-size: 0.875rem;
-    color: var(--text);
-}
-
-/* Responsive Styles */
 @media (max-width: 768px) {
     .app-container {
         padding: 0.5rem;
