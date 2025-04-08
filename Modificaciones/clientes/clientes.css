@@ -1,32 +1,22 @@
 :root {
-    --primary: #fbbf24;
-    --primary-hover: #f59e0b;
-    --primary-light: #eef2ff;
-    --primary-dark: #3730a3;
-    --danger: #ef4444;
-    --danger-hover: #dc2626;
-    --success: #10b981;
-    --success-light: #d1fae5;
-    --warning: #f59e0b;
-    --warning-light: #fef3c7;
     --background: #ffffff;
+    --foreground: #0f172a;
     --card: #ffffff;
-    --card-header: #f8fafc;
-    --border: #e5e7eb;
-    --border-light: #f3f4f6;
-    --text: #1f2937;
-    --text-secondary: #6b7280;
-    --text-light: #9ca3af;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --radius-sm: 0.25rem;
+    --card-foreground: #0f172a;
+    --primary: #fbbf24;
+    --primary-foreground: #ffffff;
+    --secondary: #f1f5f9;
+    --secondary-foreground: #1e293b;
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+    --accent: #f1f5f9;
+    --accent-foreground: #1e293b;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --ring: #0f172a;
     --radius: 0.5rem;
-    --radius-md: 0.75rem;
-    --radius-lg: 1rem;
-    --transition: all 0.2s ease;
-    --transition-slow: all 0.3s ease;
 }
 
 * {
@@ -36,33 +26,32 @@
 }
 
 body {
-    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Inter', sans-serif;
+    color: var(--foreground);
     background-color: var(--background);
-    color: var(--text);
     line-height: 1.5;
     font-size: 0.9375rem;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 .app-container {
+    padding: 1rem;
+    width: 100%;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 1rem;
 }
 
 header.card {
     background-color: var(--card);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     padding: 1.25rem;
     margin-bottom: 1.5rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1rem;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid var(--border-light);
+    border: 1px solid var(--border);
 }
 
 .card-header {
@@ -73,6 +62,8 @@ header.card {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .header-content {
@@ -83,14 +74,14 @@ header.card {
 
 .header-icon {
     background-color: var(--primary);
-    color: white;
+    color: var(--primary-foreground);
     width: 48px;
     height: 48px;
     border-radius: var(--radius);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .header-icon i {
@@ -102,12 +93,12 @@ header.card {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.25rem;
-    color: var(--text);
+    color: var(--foreground);
 }
 
 .header-text p {
     font-size: 0.875rem;
-    color: var(--text-secondary);
+    color: var(--muted-foreground);
 }
 
 .header-actions {
@@ -129,7 +120,7 @@ header.card {
     font-size: 0.875rem;
     font-weight: 500;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -138,36 +129,36 @@ header.card {
 
 .btn.primary {
     background-color: var(--primary);
-    color: white;
-    box-shadow: var(--shadow-sm);
+    color: var(--primary-foreground);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .btn.primary:hover {
-    background-color: var(--primary-hover);
-    box-shadow: var(--shadow);
+    background-color: #f59e0b;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 .btn.secondary {
     background-color: var(--card);
-    color: var(--text);
+    color: var(--foreground);
     border: 1px solid var(--border);
 }
 
 .btn.secondary:hover {
-    background-color: var(--border-light);
+    background-color: var(--secondary);
 }
 
 .icon-btn {
     padding: 0.5rem;
-    background-color: var(--primary-light);
-    color: var(--primary-dark);
+    background-color: var(--accent);
+    color: var(--accent-foreground);
     border: none;
     border-radius: var(--radius);
 }
 
 .icon-btn:hover {
     background-color: var(--primary);
-    color: white;
+    color: var(--primary-foreground);
 }
 
 .icon-btn i {
@@ -176,26 +167,26 @@ header.card {
 }
 
 .edit-btn {
-    background-color: var(--warning-light);
-    color: var(--warning);
+    background-color: var(--accent);
+    color: var(--accent-foreground);
     padding: 0.5rem;
     border-radius: var(--radius);
     border: none;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.2s ease;
 }
 
 .edit-btn:hover {
-    background-color: var(--warning);
-    color: white;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
 }
 
 main {
     background-color: var(--card);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     overflow: hidden;
-    border: 1px solid var(--border-light);
+    border: 1px solid var(--border);
     position: relative;
     min-height: 500px;
 }
@@ -225,7 +216,7 @@ main {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--text);
+    color: var(--foreground);
 }
 
 .form-grid {
@@ -259,7 +250,7 @@ main {
 
 .field label {
     font-size: 0.875rem;
-    color: var(--text-secondary);
+    color: var(--muted-foreground);
     font-weight: 500;
 }
 
@@ -269,9 +260,9 @@ main {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     font-size: 0.875rem;
-    transition: var(--transition);
+    transition: all 0.2s ease;
     background-color: var(--card);
-    color: var(--text);
+    color: var(--foreground);
     font-family: inherit;
 }
 
@@ -294,9 +285,9 @@ main {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     font-size: 0.875rem;
-    transition: var(--transition);
+    transition: all 0.2s ease;
     background-color: var(--card);
-    color: var(--text);
+    color: var(--foreground);
     font-family: inherit;
 }
 
@@ -312,11 +303,11 @@ main {
     left: 0.75rem;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--text-secondary);
+    color: var(--muted-foreground);
     width: 16px;
     height: 16px;
     pointer-events: none;
-    transition: var(--transition);
+    transition: all 0.2s ease;
 }
 
 input:focus + .input-icon,
@@ -352,10 +343,10 @@ select:focus + .input-icon {
     display: inline-block;
     width: 18px;
     height: 18px;
-    background-color: white;
+    background-color: var(--card);
     border: 2px solid var(--border);
     border-radius: 4px;
-    transition: var(--transition);
+    transition: all 0.2s ease;
 }
 
 .checkbox input:checked ~ .checkbox-mark {
@@ -375,7 +366,7 @@ select:focus + .input-icon {
     top: 1px;
     width: 4px;
     height: 8px;
-    border: solid white;
+    border: solid var(--primary-foreground);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
@@ -393,9 +384,11 @@ select:focus + .input-icon {
     max-width: 150px;
 }
 
+/* Estilos base de la tabla */
 .table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: auto; 
 }
 
 .table th,
@@ -403,31 +396,114 @@ select:focus + .input-icon {
     padding: 0.75rem;
     text-align: left;
     border-bottom: 1px solid var(--border);
+    vertical-align: middle; 
 }
 
 .table th {
-    background-color: var(--card-header);
+    background-color: var(--secondary);
     font-weight: 600;
     font-size: 0.875rem;
-    color: var(--text-secondary);
+    color: var(--muted-foreground);
+    white-space: nowrap; 
 }
 
 .table td {
     font-size: 0.875rem;
-    color: var(--text);
+    color: var(--foreground);
+    word-break: break-word; 
 }
 
 .table tbody tr:hover {
-    background-color: var(--border-light);
+    background-color: var(--accent);
 }
 
+@media (max-width: 768px) {
+    .table {
+        display: block;
+        width: 100%; 
+        overflow-x: hidden; 
+    }
+
+    .table thead {
+        display: none;
+    }
+
+    .table tbody {
+        display: block;
+        width: 100%;
+    }
+
+    .table tbody tr {
+        display: block;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid var(--border);
+        background-color: var(--card);
+        border-radius: var(--radius);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        padding: 0.5rem; 
+    }
+
+    .table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0.75rem;
+        border-bottom: none;
+        font-size: 0.875rem;
+        width: 100%; 
+        box-sizing: border-box;
+    }
+
+    .table td:before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--muted-foreground);
+        margin-right: 0.5rem;
+        flex: 1; 
+        white-space: nowrap; 
+    }
+
+    .table td:not(:last-child) {
+        border-bottom: 1px solid var(--border); 
+    }
+
+    .table td[data-label="Acciones"] {
+        justify-content: flex-end;
+        padding: 0.25rem 0.75rem;
+    }
+
+    .table td[data-label="Acciones"]::before {
+        content: none; 
+    }
+
+    .edit-btn {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .table td {
+        font-size: 0.75rem; 
+        padding: 0.375rem 0.5rem;
+    }
+
+    .table tbody tr {
+        padding: 0.375rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .edit-btn {
+        padding: 0.375rem;
+    }
+}
 .toast {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    background-color: white;
+    background-color: var(--card);
     border-radius: var(--radius);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 1rem;
     display: flex;
     align-items: center;
@@ -436,7 +512,7 @@ select:focus + .input-icon {
     transition: transform 0.3s ease;
     z-index: 1000;
     max-width: 400px;
-    border-left: 4px solid var(--success);
+    border-left: 4px solid #10b981;
 }
 
 .toast.show {
@@ -445,7 +521,7 @@ select:focus + .input-icon {
 
 .toast-icon {
     font-size: 1.5rem;
-    color: var(--success);
+    color: #10b981;
 }
 
 .toast-icon i {
@@ -464,13 +540,13 @@ select:focus + .input-icon {
 
 .toast-message {
     font-size: 0.875rem;
-    color: var(--text-secondary);
+    color: var(--muted-foreground);
 }
 
 .toast-close {
     background: none;
     border: none;
-    color: var(--text-secondary);
+    color: var(--muted-foreground);
     cursor: pointer;
     font-size: 1.25rem;
     display: flex;
@@ -526,18 +602,18 @@ select:focus + .input-icon {
 
 .confirm-dialog-content {
     background-color: var(--card);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 90%;
     max-width: 500px;
     max-height: 80vh;
     overflow-y: auto;
-    border: 1px solid var(--border-light);
+    border: 1px solid var(--border);
 }
 
 .confirm-dialog .card-header {
     padding: 1rem;
-    border-bottom: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border);
 }
 
 .confirm-dialog .card-header h3 {
@@ -551,13 +627,13 @@ select:focus + .input-icon {
 .confirm-dialog-message {
     font-size: 0.875rem;
     margin-bottom: 1rem;
-    color: var(--text-secondary);
+    color: var(--muted-foreground);
 }
 
 .confirmation-details {
     margin-bottom: 1.5rem;
     font-size: 0.875rem;
-    color: var(--text);
+    color: var(--foreground);
 }
 
 .confirmation-details p {
@@ -567,13 +643,13 @@ select:focus + .input-icon {
 }
 
 .confirmation-details p strong {
-    color: var(--text-secondary);
+    color: var(--muted-foreground);
     margin-right: 0.5rem;
 }
 
 .confirm-dialog .main-actions {
     padding: 1rem;
-    border-top: 1px solid var(--border-light);
+    border-top: 1px solid var(--border);
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
@@ -601,8 +677,8 @@ select:focus + .input-icon {
 .spinner {
     width: 20px;
     height: 20px;
-    border: 3px solid #ffffff;
-    border-top: 3px solid var(--primary-dark);
+    border: 3px solid var(--primary-foreground);
+    border-top: 3px solid var(--foreground);
     border-radius: 50%;
     animation: spin 1s linear infinite;
     display: inline-block;
@@ -614,6 +690,7 @@ select:focus + .input-icon {
     100% { transform: rotate(360deg); }
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
     .app-container {
         padding: 0.5rem;
@@ -631,8 +708,7 @@ select:focus + .input-icon {
 
     .header-actions {
         width: 100%;
-        justify-content: space-between;
-        margin-top: 0.75rem;
+        justify-content: flex-end;
     }
 
     .form-grid,
@@ -642,6 +718,7 @@ select:focus + .input-icon {
 
     .main-actions {
         flex-direction: column;
+        gap: 0.5rem;
     }
 
     .main-actions .btn {
@@ -651,6 +728,7 @@ select:focus + .input-icon {
     .table {
         display: block;
         overflow-x: auto;
+        white-space: nowrap;
     }
 
     .table thead {
@@ -673,12 +751,23 @@ select:focus + .input-icon {
     .table td:before {
         content: attr(data-label);
         font-weight: 600;
-        color: var(--text-secondary);
+        color: var(--muted-foreground);
         margin-right: 0.5rem;
     }
 
     .date-section {
         flex-direction: column;
+    }
+
+    .toast {
+        left: 0.5rem;
+        right: 0.5rem;
+        max-width: none;
+    }
+
+    .confirm-dialog-content {
+        width: 95%;
+        max-height: 90vh;
     }
 }
 
@@ -691,9 +780,37 @@ select:focus + .input-icon {
         padding: 1rem;
     }
 
-    .toast {
+    .header-text h1 {
+        font-size: 1.125rem;
+    }
+
+    .header-text p {
+        font-size: 0.75rem;
+    }
+
+    .btn,
+    .icon-btn {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .table td {
+        font-size: 0.75rem;
+    }
+
+    .field label {
+        font-size: 0.75rem;
+    }
+
+    .input-container input,
+    .input-container select {
+        padding: 0.5rem 0.5rem 0.5rem 2rem;
+        font-size: 0.75rem;
+    }
+
+    .input-icon {
         left: 0.5rem;
-        right: 0.5rem;
-        max-width: none;
+        width: 14px;
+        height: 14px;
     }
 }

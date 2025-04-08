@@ -172,20 +172,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 <td data-label="Factura #">${compra.factura}</td>
                 <td data-label="Total Neto">${formatearNumero(compra.totalNeto)}</td>
                 <td data-label="Acciones">
-                    <div class="table-actions">
-                        <button class="btn secondary editar-compra">
-                            <i class="material-icons">edit</i>
-                            <span>Editar</span>
-                        </button>
-                        <button class="btn secondary eliminar-compra">
-                            <i class="material-icons">delete</i>
-                            <span>Eliminar</span>
-                        </button>
-                    </div>
+                    <button class="btn-icon edit-btn editar-compra" title="Editar compra">
+                        <i data-feather="edit"></i>
+                    </button>
+                    <button class="btn-icon btn-danger eliminar-compra" title="Eliminar compra">
+                        <i data-feather="trash"></i>
+                    </button>
                 </td>
             `;
             comprasTableBody.appendChild(row);
         });
+    
+        // Reemplazar los íconos de Feather después de agregar las filas
+        feather.replace();
     }
 
     // Función para mostrar el formulario

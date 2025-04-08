@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Software Evolution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="home-container">
+        <!-- Header -->
+        <header class="card header-hero">
+            <div class="card-header">
+                <div class="header-content">
+                    <div class="header-icon">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1>Software Evolution</h1>
+                        <p>Transformamos ideas en soluciones tecnológicas innovadoras</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="content-grid">
+            <!-- Banner Section -->
+            <section class="card banner-section">
+                <div class="banner-content">
+                    <h2>¡Bienvenido a Software Evolution!</h2>
+                    <p>Ofrecemos soluciones de software personalizadas para optimizar tu negocio. Desde sistemas de facturación hasta gestión de inventarios, estamos aquí para ayudarte a crecer.</p>
+                    <button class="btn primary" id="contactBtn">
+                        <i data-lucide="phone"></i>
+                        <span>Contáctanos</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- About Us Section -->
+            <section class="card">
+                <div class="card-header">
+                    <h2><i data-lucide="info"></i> Sobre Nosotros</h2>
+                </div>
+                <div class="card-body">
+                    <p>En <strong>Software Evolution</strong>, nos especializamos en desarrollar software de alta calidad que impulsa la eficiencia y el crecimiento de las empresas. Con más de 10 años de experiencia, nuestro equipo de expertos está comprometido con la innovación y la satisfacción del cliente.</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <i data-lucide="users"></i>
+                            <h3>50+</h3>
+                            <p>Clientes Satisfechos</p>
+                        </div>
+                        <div class="stat">
+                            <i data-lucide="code"></i>
+                            <h3>100+</h3>
+                            <p>Proyectos Completados</p>
+                        </div>
+                        <div class="stat">
+                            <i data-lucide="clock"></i>
+                            <h3>10+</h3>
+                            <p>Años de Experiencia</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section class="card">
+                <div class="card-header">
+                    <h2><i data-lucide="briefcase"></i> Nuestros Servicios</h2>
+                </div>
+                <div class="card-body">
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <i data-lucide="monitor"></i>
+                            <h3>Desarrollo de Software</h3>
+                            <p>Creación de aplicaciones personalizadas para tus necesidades específicas.</p>
+                        </div>
+                        <div class="service-item">
+                            <i data-lucide="database"></i>
+                            <h3>Gestión de Datos</h3>
+                            <p>Soluciones para organizar y analizar tus datos de manera eficiente.</p>
+                        </div>
+                        <div class="service-item">
+                            <i data-lucide="cloud"></i>
+                            <h3>Soluciones en la Nube</h3>
+                            <p>Implementación de sistemas basados en la nube para mayor accesibilidad.</p>
+                        </div>
+                        <div class="service-item">
+                            <i data-lucide="headphones"></i>
+                            <h3>Soporte Técnico</h3>
+                            <p>Asistencia 24/7 para garantizar el funcionamiento de tus sistemas.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Software Evolution</h3>
+                    <p>© 2025 Software Evolution. Todos los derechos reservados.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p><i data-lucide="mail"></i> info@softwareevolution.com</p>
+                    <p><i data-lucide="phone"></i> +1 234 567 890</p>
+                    <p><i data-lucide="map-pin"></i> 1234 Tech Street, Ciudad, País</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Síguenos</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Toast -->
+        <div id="toast" class="toast">
+            <div class="toast-icon">
+                <i data-lucide="check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <p class="toast-title">Éxito</p>
+                <p class="toast-message" id="toastMessage">Operación realizada correctamente</p>
+            </div>
+            <button class="toast-close"><i data-lucide="x"></i></button>
+        </div>
+    </div>
+    <script src="homepage.js"></script>
+</body>
+</html>

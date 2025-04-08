@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Clientes</title>
+    <title>Gestión de Clientes - Software Evolution</title>
     <link rel="stylesheet" href="clientes.css">
-    <script src="https://unpkg.com/feather-icons"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="app-container">
@@ -14,7 +14,7 @@
             <div class="card-header">
                 <div class="header-content">
                     <div class="header-icon">
-                        <i data-feather="users"></i>
+                        <i data-lucide="users"></i>
                     </div>
                     <div class="header-text">
                         <h1>Gestión de Clientes</h1>
@@ -23,9 +23,9 @@
                 </div>
                 <div class="header-actions">
                     <div class="action-buttons">
-                        <button class="icon-btn" aria-label="Correo"><i data-feather="mail"></i></button>
-                        <button class="icon-btn" aria-label="Imprimir"><i data-feather="printer"></i></button>
-                        <button class="icon-btn" aria-label="Descargar"><i data-feather="download"></i></button>
+                        <button class="icon-btn" aria-label="Correo"><i data-lucide="mail"></i></button>
+                        <button class="icon-btn" aria-label="Imprimir"><i data-lucide="printer"></i></button>
+                        <button class="icon-btn" aria-label="Descargar"><i data-lucide="download"></i></button>
                     </div>
                 </div>
             </div>
@@ -37,9 +37,9 @@
                     <div class="main-content">
                         <section class="card">
                             <div class="card-header">
-                                <h2><i data-feather="list"></i> Listado de Clientes</h2>
+                                <h2><i data-lucide="list"></i> Listado de Clientes</h2>
                                 <button class="btn primary" id="addClientBtn">
-                                    <i data-feather="user-plus"></i> Agregar Cliente
+                                    <i data-lucide="user-plus"></i> Agregar Cliente
                                 </button>
                             </div>
                             <div class="card-body">
@@ -69,9 +69,9 @@
                     <div class="main-content">
                         <section class="card">
                             <div class="card-header">
-                                <h2 id="formTitle"><i data-feather="user-plus"></i> Nuevo Cliente</h2>
+                                <h2 id="formTitle"><i data-lucide="user-plus"></i> Nuevo Cliente</h2>
                                 <button class="btn secondary" id="backBtn">
-                                    <i data-feather="arrow-left"></i> Volver
+                                    <i data-lucide="arrow-left"></i> Volver
                                 </button>
                             </div>
                             <div class="card-body">
@@ -81,49 +81,49 @@
                                             <label for="nombre">Nombre</label>
                                             <div class="input-container">
                                                 <input type="text" id="nombre" name="nombre" required>
-                                                <i data-feather="user" class="input-icon"></i>
+                                                <i data-lucide="user" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
                                             <label for="apellido">Apellido</label>
                                             <div class="input-container">
                                                 <input type="text" id="apellido" name="apellido" required>
-                                                <i data-feather="user" class="input-icon"></i>
+                                                <i data-lucide="user" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
                                             <label for="cedula">Cédula</label>
                                             <div class="input-container">
                                                 <input type="text" id="cedula" name="cedula" required>
-                                                <i data-feather="credit-card" class="input-icon"></i>
+                                                <i data-lucide="credit-card" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
                                             <label for="direccion">Dirección</label>
                                             <div class="input-container">
                                                 <input type="text" id="direccion" name="direccion" required>
-                                                <i data-feather="map-pin" class="input-icon"></i>
+                                                <i data-lucide="map-pin" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
                                             <label for="telefono">Teléfono</label>
                                             <div class="input-container">
                                                 <input type="tel" id="telefono" name="telefono" required>
-                                                <i data-feather="phone" class="input-icon"></i>
+                                                <i data-lucide="phone" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
                                             <label for="celular">Celular</label>
                                             <div class="input-container">
                                                 <input type="tel" id="celular" name="celular">
-                                                <i data-feather="smartphone" class="input-icon"></i>
+                                                <i data-lucide="smartphone" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
                                             <label for="correo">Correo Electrónico</label>
                                             <div class="input-container">
                                                 <input type="email" id="correo" name="correo" required>
-                                                <i data-feather="mail" class="input-icon"></i>
+                                                <i data-lucide="mail" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
@@ -134,7 +134,7 @@
                                                     <option value="individual">Individual</option>
                                                     <option value="empresa">Empresa</option>
                                                 </select>
-                                                <i data-feather="user-check" class="input-icon"></i>
+                                                <i data-lucide="user-check" class="input-icon"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -144,14 +144,14 @@
                                                 <label for="fcreado">Fecha de Creación</label>
                                                 <div class="input-container">
                                                     <input type="date" id="fcreado" name="fcreado" readonly>
-                                                    <i data-feather="calendar" class="input-icon"></i>
+                                                    <i data-lucide="calendar" class="input-icon"></i>
                                                 </div>
                                             </div>
                                             <div class="field">
                                                 <label for="fmodificado">Fecha de Modificación</label>
                                                 <div class="input-container">
                                                     <input type="date" id="fmodificado" name="fmodificado" readonly>
-                                                    <i data-feather="calendar" class="input-icon"></i>
+                                                    <i data-lucide="calendar" class="input-icon"></i>
                                                 </div>
                                             </div>
                                         </section>
@@ -165,10 +165,10 @@
                                     </div>
                                     <div class="form-actions main-actions">
                                         <button type="button" id="cancelBtn" class="btn secondary">
-                                            <i data-feather="x"></i> Cancelar
+                                            <i data-lucide="x"></i> Cancelar
                                         </button>
                                         <button type="submit" class="btn primary">
-                                            <i data-feather="save"></i> Guardar
+                                            <i data-lucide="save"></i> Guardar
                                         </button>
                                     </div>
                                 </form>
@@ -181,20 +181,20 @@
 
         <div id="toast" class="toast">
             <div class="toast-icon">
-                <i data-feather="check-circle"></i>
+                <i data-lucide="check-circle"></i>
             </div>
             <div class="toast-content">
                 <p class="toast-title">Éxito</p>
                 <p class="toast-message" id="toastMessage">Cliente guardado correctamente</p>
             </div>
-            <button class="toast-close"><i data-feather="x"></i></button>
+            <button class="toast-close"><i data-lucide="x"></i></button>
         </div>
 
         <div class="confirm-dialog" id="confirmDialog">
             <div class="confirm-dialog-content card">
                 <div class="card-header">
-                    <h3><i data-feather="check-circle"></i> Confirmar Guardado</h3>
-                    <button class="modal-close" id="closeConfirmDialog"><i data-feather="x"></i></button>
+                    <h3><i data-lucide="check-circle"></i> Confirmar Guardado</h3>
+                    <button class="modal-close" id="closeConfirmDialog"><i data-lucide="x"></i></button>
                 </div>
                 <div class="card-body">
                     <p class="confirm-dialog-message">Por favor, confirme la información del cliente:</p>

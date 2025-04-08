@@ -80,6 +80,23 @@
             </div>
             <button class="toast-close"><i data-feather="x"></i></button>
         </div>
+
+        <!-- Modal para confirmación -->
+        <div class="confirm-dialog" id="confirmModal">
+            <div class="confirm-dialog-content card">
+                <div class="card-header">
+                    <h3><i data-feather="info"></i> Confirmación</h3>
+                    <button class="modal-close close"><i data-feather="x"></i></button>
+                </div>
+                <div class="card-body">
+                    <div id="modalMessage"></div>
+                </div>
+                <div class="main-actions modal-actions">
+                    <button id="modalConfirm" class="btn primary">Confirmar</button>
+                    <button id="modalCancel" class="btn secondary">Cancelar</button>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="gestionarticulos.js"></script>
 </body>

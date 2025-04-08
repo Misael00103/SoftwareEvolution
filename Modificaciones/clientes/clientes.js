@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    feather.replace();
+    lucide.createIcons();
 
     const today = new Date().toISOString().split('T')[0];
     let clients = [
@@ -39,12 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td data-label="Tipo">${client.tipoCliente}</td>
                 <td data-label="Estado">${client.activo ? 'Activo' : 'Inactivo'}</td>
                 <td data-label="Acciones">
-                    <button class="edit-btn" data-index="${index}"><i data-feather="edit"></i></button>
+                    <button class="edit-btn" data-index="${index}"><i data-lucide="edit"></i></button>
                 </td>
             `;
             clientList.appendChild(row);
         });
-        feather.replace();
+        lucide.createIcons();
         document.querySelectorAll('.edit-btn').forEach(button => {
             button.addEventListener('click', (e) => {
                 const index = e.currentTarget.getAttribute('data-index');
@@ -57,8 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
         isEditing = true;
         editIndex = index;
         const client = clients[index];
-        formTitle.innerHTML = '<i data-feather="edit"></i> Editar Cliente';
-        feather.replace();
+        formTitle.innerHTML = '<i data-lucide="edit"></i> Editar Cliente';
+        lucide.createIcons();
         document.getElementById('nombre').value = client.nombre;
         document.getElementById('apellido').value = client.apellido;
         document.getElementById('cedula').value = client.cedula;
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         input.addEventListener('blur', () => {
             const icon = input.nextElementSibling;
-            if (icon && icon.classList.contains('input-icon') && !input.value) icon.style.color = 'var(--text-secondary)';
+            if (icon && icon.classList.contains('input-icon') && !input.value) icon.style.color = 'var(--muted-foreground)';
         });
     });
 
@@ -188,8 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('fcreado').value = today;
         document.getElementById('fmodificado').value = today;
         document.getElementById('activo').checked = true;
-        formTitle.innerHTML = '<i data-feather="user-plus"></i> Nuevo Cliente';
-        feather.replace();
+        formTitle.innerHTML = '<i data-lucide="user-plus"></i> Nuevo Cliente';
+        lucide.createIcons();
         isEditing = false;
         editIndex = null;
     }
