@@ -36,7 +36,7 @@
                     <input type="text" placeholder="Buscar..." />
                     <span class="material-icons">search</span>
                 </div>
-                <button class="add-button" id="openAddProductModal">
+                <button class="add-button" id="goToAddProduct">
                     <span class="material-icons">add</span>
                     Agregar producto
                 </button>
@@ -112,99 +112,8 @@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <label class="checkbox-container">
-                                        <input type="checkbox" />
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </td>
-                                <td>1</td>
-                                <td>CPU DELL CI5 DESKTOP</td>
-                                <td>Computadoras</td>
-                                <td>10,500.00</td>
-                                <td>10,000.00</td>
-                                <td>9,500.00</td>
-                                <td>5</td>
-                                <td>
-                                    <div class="row-actions">
-                                        <button class="icon-btn edit-btn" title="Editar">
-                                            <span class="material-icons">edit</span>
-                                        </button>
-                                        <button class="icon-btn view-btn" title="Ver detalles">
-                                            <span class="material-icons">visibility</span>
-                                        </button>
-                                        <button class="icon-btn danger delete-btn" title="Eliminar">
-                                            <span class="material-icons">delete</span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkbox-container">
-                                        <input type="checkbox" />
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </td>
-                                <td>2</td>
-                                <td>MONITOR DELL 24"</td>
-                                <td>Monitores</td>
-                                <td>5,200.00</td>
-                                <td>5,000.00</td>
-                                <td>4,800.00</td>
-                                <td>8</td>
-                                <td>
-                                    <div class="row-actions">
-                                        <button class="icon-btn edit-btn" title="Editar">
-                                            <span class="material-icons">edit</span>
-                                        </button>
-                                        <button class="icon-btn view-btn" title="Ver detalles">
-                                            <span class="material-icons">visibility</span>
-                                        </button>
-                                        <button class="icon-btn danger delete-btn" title="Eliminar">
-                                            <span class="material-icons">delete</span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkbox-container">
-                                        <input type="checkbox" />
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </td>
-                                <td>3</td>
-                                <td>TECLADO LOGITECH</td>
-                                <td>Periféricos</td>
-                                <td>1,200.00</td>
-                                <td>1,100.00</td>
-                                <td>1,000.00</td>
-                                <td>15</td>
-                                <td>
-                                    <div class="row-actions">
-                                        <button class="icon-btn edit-btn" title="Editar">
-                                            <span class="material-icons">edit</span>
-                                        </button>
-                                        <button class="icon-btn view-btn" title="Ver detalles">
-                                            <span class="material-icons">visibility</span>
-                                        </button>
-                                        <button class="icon-btn danger delete-btn" title="Eliminar">
-                                            <span class="material-icons">delete</span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="empty-row">
-                                <td colspan="9">
-                                    <button class="add-row-btn" id="addRowBtn">
-                                        <span class="material-icons">add</span> 
-                                        Agregar producto
-                                    </button>
-                                </td>
-                            </tr>
+                        <tbody id="productList">
+                            <!-- Productos se añadirán dinámicamente aquí -->
                         </tbody>
                     </table>
                 </div>
@@ -259,140 +168,18 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Modal para agregar/editar producto -->
-    <div class="modal" id="productModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">
-                    <span class="material-icons">add</span>
-                    Agregar Producto
-                </h3>
-                <button class="modal-close" id="closeProductModal">
-                    <span class="material-icons">close</span>
-                </button>
+        <div class="toast" id="notification">
+            <div class="toast-icon">
+                <span class="material-icons">check_circle</span>
             </div>
-            <div class="modal-body">
-                <form id="productForm">
-                    <input type="hidden" id="productId" value="">
-                    <div class="form-grid">
-                        <div class="field">
-                            <label for="productCode">Código</label>
-                            <input type="text" id="productCode" placeholder="Código del producto" required>
-                        </div>
-                        <div class="field">
-                            <label for="productName">Descripción</label>
-                            <input type="text" id="productName" placeholder="Descripción del producto" required>
-                        </div>
-                        <div class="field">
-                            <label for="productCategory">Categoría</label>
-                            <select id="productCategory" required>
-                                <option value="">Seleccionar categoría</option>
-                                <option value="Computadoras">Computadoras</option>
-                                <option value="Monitores">Monitores</option>
-                                <option value="Periféricos">Periféricos</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label for="productSubcategory">Sub-Categoría</label>
-                            <select id="productSubcategory">
-                                <option value="">Seleccionar sub-categoría</option>
-                                <option value="Desktop">Desktop</option>
-                                <option value="Laptop">Laptop</option>
-                                <option value="Servidor">Servidor</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label for="productPrice1">Precio 1</label>
-                            <input type="number" id="productPrice1" placeholder="0.00" step="0.01" min="0" required>
-                        </div>
-                        <div class="field">
-                            <label for="productPrice2">Precio 2</label>
-                            <input type="number" id="productPrice2" placeholder="0.00" step="0.01" min="0">
-                        </div>
-                        <div class="field">
-                            <label for="productPrice3">Precio 3</label>
-                            <input type="number" id="productPrice3" placeholder="0.00" step="0.01" min="0">
-                        </div>
-                        <div class="field">
-                            <label for="productStock">Existencia</label>
-                            <input type="number" id="productStock" placeholder="0" min="0" required>
-                        </div>
-                        <div class="field">
-                            <label for="productWarehouse">Almacén</label>
-                            <select id="productWarehouse" required>
-                                <option value="">Seleccionar almacén</option>
-                                <option value="Almacén Principal">Almacén Principal</option>
-                                <option value="Almacén Secundario">Almacén Secundario</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label for="productUnit">Unidad de medida</label>
-                            <select id="productUnit" required>
-                                <option value="">Seleccionar unidad</option>
-                                <option value="Unidad">Unidad</option>
-                                <option value="Caja">Caja</option>
-                                <option value="Paquete">Paquete</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="field full-width">
-                        <label for="productDescription">Descripción detallada</label>
-                        <textarea id="productDescription" rows="3" placeholder="Descripción detallada del producto"></textarea>
-                    </div>
-                    <div class="image-upload">
-                        <label>Imagen del producto</label>
-                        <div class="image-preview">
-                            <img id="previewImage" src="/placeholder.svg?height=200&width=300" alt="Vista previa de imagen">
-                        </div>
-                        <div class="upload-actions">
-                            <input type="file" id="productImage" accept="image/*" style="display: none;">
-                            <button type="button" class="btn secondary" onclick="document.getElementById('productImage').click()">
-                                <span class="material-icons">upload</span>
-                                Seleccionar imagen
-                            </button>
-                        </div>
-                    </div>
-                </form>
+            <div class="toast-content">
+                <p class="toast-title">Éxito</p>
+                <p class="toast-message">Operación completada correctamente</p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn secondary" id="cancelProductBtn">Cancelar</button>
-                <button type="button" class="btn primary" id="saveProductBtn">Guardar</button>
-            </div>
+            <button class="toast-close">
+                <span class="material-icons">close</span>
+            </button>
         </div>
-    </div>
-    <!-- Modal de confirmación -->
-    <div class="modal" id="confirmModal">
-        <div class="modal-content confirm-content">
-            <div class="modal-header">
-                <h3>
-                    <span class="material-icons">help</span>
-                    Confirmar acción
-                </h3>
-                <button class="modal-close" id="closeConfirmModal">
-                    <span class="material-icons">close</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p id="confirmMessage">¿Está seguro que desea realizar esta acción?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn secondary" id="cancelConfirmBtn">Cancelar</button>
-                <button type="button" class="btn danger" id="confirmActionBtn">Eliminar</button>
-            </div>
-        </div>
-    </div>
-    <div class="toast" id="notification">
-        <div class="toast-icon">
-            <span class="material-icons">check_circle</span>
-        </div>
-        <div class="toast-content">
-            <p class="toast-title">Éxito</p>
-            <p class="toast-message">Operación completada correctamente</p>
-        </div>
-        <button class="toast-close">
-            <span class="material-icons">close</span>
-        </button>
     </div>
     <script src="productos.js"></script>
 </body>

@@ -51,7 +51,6 @@ body {
     padding: 1rem;
 }
 
-/* Header Styles */
 header.card {
     background-color: var(--card);
     border-radius: var(--radius-lg);
@@ -117,7 +116,6 @@ header.card {
     gap: 0.5rem;
 }
 
-/* Button Styles */
 .action-buttons {
     display: flex;
     gap: 0.5rem;
@@ -177,7 +175,6 @@ header.card {
     height: 16px;
 }
 
-/* Estilo para el botón de editar en la tabla */
 .edit-btn {
     background-color: var(--warning-light);
     color: var(--warning);
@@ -193,7 +190,6 @@ header.card {
     color: white;
 }
 
-/* Main and Form Styles */
 main {
     background-color: var(--card);
     border-radius: var(--radius-lg);
@@ -279,7 +275,6 @@ main {
     box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
 }
 
-/* Input Styles */
 .input-container {
     position: relative;
     display: flex;
@@ -324,7 +319,6 @@ select:focus + .input-icon {
     transform: translateY(-50%) scale(1.1);
 }
 
-/* Checkbox Styles */
 .checkbox-group {
     padding-top: 0.5rem;
 }
@@ -380,7 +374,6 @@ select:focus + .input-icon {
     transform: rotate(45deg);
 }
 
-/* Form Actions */
 .main-actions {
     display: flex;
     gap: 1rem;
@@ -394,7 +387,6 @@ select:focus + .input-icon {
     max-width: 150px;
 }
 
-/* Table Styles */
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -423,68 +415,6 @@ select:focus + .input-icon {
     background-color: var(--border-light);
 }
 
-/* Modal Styles */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.modal.show {
-    display: flex;
-    opacity: 1;
-}
-
-.modal-content {
-    background-color: var(--card);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
-    width: 90%;
-    max-width: 800px;
-    max-height: 80vh;
-    overflow-y: auto;
-    border: 1px solid var(--border-light);
-}
-
-.modal .card-header {
-    padding: 1rem;
-    border-bottom: 1px solid var(--border-light);
-}
-
-.modal .card-header h3 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.modal-close {
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    font-size: 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-close i {
-    width: 20px;
-    height: 20px;
-}
-
-/* Toast Notification */
 .toast {
     position: fixed;
     bottom: 2rem;
@@ -547,7 +477,6 @@ select:focus + .input-icon {
     height: 20px;
 }
 
-/* Animations */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -563,7 +492,6 @@ select:focus + .input-icon {
     50% { transform: translateY(-5px); }
 }
 
-/* Alinear las fechas horizontalmente */
 .date-section {
     display: flex;
     gap: 1rem;
@@ -572,10 +500,9 @@ select:focus + .input-icon {
 
 .date-section .field {
     flex: 1;
-    min-width: 200px; /* Asegura que los campos tengan un ancho mínimo */
+    min-width: 200px;
 }
 
-/* Responsive Styles */
 @media (max-width: 768px) {
     .app-container {
         padding: 0.5rem;
@@ -658,80 +585,4 @@ select:focus + .input-icon {
         right: 0.5rem;
         max-width: none;
     }
-}
-
-/* Confirmation Modal */
-.confirm-dialog {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1100;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.confirm-dialog.show {
-    display: flex;
-    opacity: 1;
-}
-
-.confirm-dialog-content {
-    background-color: var(--card);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
-    width: 90%;
-    max-width: 500px;
-    max-height: 80vh;
-    overflow-y: auto;
-    border: 1px solid var(--border-light);
-}
-
-.confirm-dialog .card-header {
-    padding: 1rem;
-    border-bottom: 1px solid var(--border-light);
-}
-
-.confirm-dialog .card-header h3 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.confirm-dialog-message {
-    font-size: 0.875rem;
-    margin-bottom: 1rem;
-    color: var(--text-secondary);
-}
-
-.confirmation-details {
-    margin-bottom: 1.5rem;
-    font-size: 0.875rem;
-    color: var(--text);
-}
-
-.confirmation-details p {
-    margin: 0.5rem 0;
-    display: flex;
-    justify-content: space-between;
-}
-
-.confirmation-details p strong {
-    color: var(--text-secondary);
-    margin-right: 0.5rem;
-}
-
-.confirm-dialog .main-actions {
-    padding: 1rem;
-    border-top: 1px solid var(--border-light);
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.5rem;
 }

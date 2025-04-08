@@ -1,60 +1,80 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingreso de Mercancía</title>
+    <title>Gestión de Compras</title>
     <link rel="stylesheet" href="compras.css">
-    <link rel="stylesheet" href="../facturacion/styles.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="app-container">
-        <header>
+        <header class="card">
             <div class="header-left">
                 <div class="header-icon">
                     <span class="material-icons">shopping_cart</span>
                 </div>
                 <div class="header-text">
-                    <h1>Ingreso de Mercancía</h1>
-                    <p>Gestione las compras y proveedores</p>
-                </div>
-            </div>
-            <div class="header-right">
-                <div class="action-buttons">
-                    <button class="icon-button" title="Correo">
-                        <span class="material-icons">mail</span>
-                    </button>
-                    <button class="icon-button" title="Historial">
-                        <span class="material-icons">schedule</span>
-                    </button>
+                    <h1>Gestión de Compras</h1>
+                    <p>Administre las compras y proveedores</p>
                 </div>
             </div>
         </header>
 
-        <div class="card">
+        <!-- Lista de Compras -->
+        <div class="card" id="listaCompras">
+            <div class="card-header">
+                <h2>
+                    <span class="material-icons">list</span>
+                    Lista de Compras
+                </h2>
+                <button class="btn primary" id="nuevaCompraBtn">
+                    <span class="material-icons">add</span> Nueva Compra
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="table-container">
+                    <table class="custom-table" id="comprasTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha Ingreso</th>
+                                <th>Proveedor</th>
+                                <th>Factura #</th>
+                                <th>Total Neto</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comprasTableBody">
+                            <!-- Las filas se llenarán dinámicamente con JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulario de Compra (inicialmente oculto) -->
+        <div class="card" id="formularioCompra" style="display: none;">
             <div class="card-header">
                 <h2>
                     <span class="material-icons">add_shopping_cart</span>
                     <span id="tituloFormulario">Nueva Compra</span>
                 </h2>
-                <div class="header-actions">
-                    <button class="action-btn" id="exportarBtn">
-                        <span class="material-icons">file_download</span>
-                        Exportar
-                    </button>
-                </div>
+                <button class="btn secondary" id="volverListaBtn">
+                    <span class="material-icons">arrow_back</span> Volver
+                </button>
             </div>
             <div class="card-body">
-                <!-- Formulario de Compra -->
                 <form id="compraForm">
                     <input type="hidden" id="compraId" value="">
 
                     <div class="form-grid-container">
-                        <!-- Proveedor Section -->
-                        <section class="form-section form-section-left">
-                            <h3>Proveedor</h3>
+                        <!-- Sección de Proveedor -->
+                        <section class="form-section">
+                            <h3><span class="material-icons">person</span> Proveedor</h3>
                             <div class="form-grid">
                                 <div class="field">
                                     <label for="proveedor">Proveedor:</label>
@@ -77,6 +97,13 @@
                                     <label for="fechaVencimiento">Fecha Vencimiento:</label>
                                     <input type="date" id="fechaVencimiento" value="2021-05-16">
                                 </div>
+                            </div>
+                        </section>
+
+                        <!-- Sección de Documentos -->
+                        <section class="form-section">
+                            <h3><span class="material-icons">description</span> Documentos</h3>
+                            <div class="form-grid">
                                 <div class="field">
                                     <label for="tipoCompra">Tipo Compra:</label>
                                     <select id="tipoCompra">
@@ -87,7 +114,6 @@
                                 <div class="field">
                                     <label for="moneda">Moneda:</label>
                                     <select id="moneda">
-                                        <option value="0.00">0.00</option>
                                         <option value="dop">DOP</option>
                                         <option value="usd">USD</option>
                                     </select>
@@ -95,7 +121,6 @@
                                 <div class="field">
                                     <label for="formaPago">Forma de Pago:</label>
                                     <select id="formaPago">
-                                        <option value="0.00">0.00</option>
                                         <option value="contado">Contado</option>
                                         <option value="credito">Crédito</option>
                                     </select>
@@ -103,7 +128,6 @@
                                 <div class="field">
                                     <label for="clasificacion">Clasificación:</label>
                                     <select id="clasificacion">
-                                        <option value="0.00">0.00</option>
                                         <option value="normal">Normal</option>
                                         <option value="especial">Especial</option>
                                     </select>
@@ -111,9 +135,9 @@
                             </div>
                         </section>
 
-                        <!-- Documentos Section -->
-                        <section class="form-section form-section-middle">
-                            <h3>Documentos</h3>
+                        <!-- Sección de Facturación -->
+                        <section class="form-section">
+                            <h3><span class="material-icons">receipt</span> Facturación</h3>
                             <div class="form-grid">
                                 <div class="field">
                                     <label for="proyecto">Proyecto:</label>
@@ -132,96 +156,29 @@
                                     <input type="text" id="numeroFactura" placeholder="Número de factura">
                                 </div>
                                 <div class="field">
-                                    <label for="montoFactura">Monto Factura:</label>
-                                    <input type="text" id="montoFactura" value="0.00" readonly>
-                                </div>
-                                <div class="field">
-                                    <label for="fechaFacturaLlegada">Fecha factura llegada:</label>
-                                    <input type="date" id="fechaFacturaLlegada" value="2024-12-15">
-                                </div>
-                                <div class="field">
-                                    <label for="ajusteCompra">Ajuste Compra:</label>
-                                    <select id="ajusteCompra">
-                                        <option value="ordenCompra">ORDEN COMPRA</option>
-                                        <option value="sinAjuste">Sin Ajuste</option>
-                                    </select>
-                                </div>
-                                <div class="field">
                                     <label for="ncf">NCF:</label>
                                     <input type="text" id="ncf" placeholder="NCF">
                                 </div>
                             </div>
                         </section>
-
-                        <!-- Totalización Section -->
-                        <section class="form-section form-section-right">
-                            <h3>Totalización</h3>
-                            <div class="form-grid">
-                                <div class="field">
-                                    <label for="totalBruto">Total Bruto:</label>
-                                    <input type="text" id="totalBruto" value="0.00" readonly>
-                                </div>
-                                <div class="field">
-                                    <label for="descuento1">Descuento 1:</label>
-                                    <input type="text" id="descuento1" value="0.00" readonly>
-                                </div>
-                                <div class="field">
-                                    <label for="descItems">Desc. Items:</label>
-                                    <input type="text" id="descItems" value="0.00" readonly>
-                                </div>
-                                <div class="field">
-                                    <label for="flete">Flete:</label>
-                                    <input type="text" id="flete" value="0.00" readonly>
-                                </div>
-                                <div class="field">
-                                    <label for="montoExento">Monto Exento:</label>
-                                    <input type="text" id="montoExento" value="0.00" readonly>
-                                </div>
-                                <div class="field">
-                                    <label for="baseImponible">Base Imponible:</label>
-                                    <input type="text" id="baseImponible" value="0.00" readonly>
-                                </div>
-                                <div class="field">
-                                    <label for="itbis">ITBIS:</label>
-                                    <input type="text" id="itbis" value="18.00" readonly>
-                                </div>
-                                <div class="field">
-                                    <label for="retencionImp">Retención Imp.:</label>
-                                    <input type="text" id="retencionImp" value="0.00" readonly>
-                                </div>
-                                <div class="field">
-                                    <label for="retencionISR">Retención ISR:</label>
-                                    <input type="text" id="retencionISR" value="0.00" readonly>
-                                </div>
-                                <div class="field">
-                                    <label for="totalNeto">Total Neto:</label>
-                                    <input type="text" id="totalNeto" value="0.00" readonly>
-                                </div>
-                                <div class="field">
-                                    <label for="diferencia">Diferencia:</label>
-                                    <input type="text" id="diferencia" value="0.00" readonly>
-                                </div>
-                            </div>
-                        </section>
                     </div>
 
-                    <!-- Configuraciones Section -->
+                    <!-- Sección de Configuraciones -->
                     <section class="form-section">
-                        <h3>Configuraciones</h3>
+                        <h3><span class="material-icons">settings</span> Configuraciones</h3>
                         <div class="checkbox-grid">
                             <label><input type="checkbox" id="impuestoIncluido"> Impuesto Incluido</label>
                             <label><input type="checkbox" id="sinImpuesto"> Sin Impuesto</label>
                             <label><input type="checkbox" id="actualizarPrecios"> Actualizar Precios</label>
-                            <label><input type="checkbox" id="calcularPrecioCosto"> Desea calcular el precio por el costo</label>
+                            <label><input type="checkbox" id="calcularPrecioCosto"> Calcular precio por costo</label>
                             <label><input type="checkbox" id="generarNCFGastoMenor"> Generar NCF Gasto Menor</label>
-                            <label><input type="checkbox" id="proveedorInformal"> Proveedor Informal (Compras)</label>
-                            <label><input type="checkbox" id="comprobantePagosExterior"> Comprobante para Pagos al Exterior Electrónico</label>
+                            <label><input type="checkbox" id="proveedorInformal"> Proveedor Informal</label>
                         </div>
                     </section>
 
-                    <!-- Productos Section -->
+                    <!-- Sección de Productos -->
                     <section class="form-section">
-                        <h3>Productos</h3>
+                        <h3><span class="material-icons">inventory</span> Productos</h3>
                         <div class="table-container">
                             <table class="custom-table" id="detalleProductosTable">
                                 <thead>
@@ -237,50 +194,74 @@
                                 </thead>
                                 <tbody>
                                     <tr id="filaPlantilla" style="display: none;">
-                                        <td class="numero-fila">1</td>
-                                        <td>
+                                        <td class="numero-fila" data-label="#">1</td>
+                                        <td data-label="Referencia">
                                             <input type="text" class="referencia-producto" placeholder="Referencia">
                                         </td>
-                                        <td>
+                                        <td data-label="Descripción">
                                             <input type="text" class="descripcion-producto" placeholder="Descripción">
                                         </td>
-                                        <td>
-                                            <input type="number" class="itbis-producto" min="0" step="0.01" value="18.00">
+                                        <td data-label="ITBIS">
+                                            <input type="number" class="itbis-producto" min="0" step="0.01"
+                                                value="18.00">
                                         </td>
-                                        <td>
-                                            <input type="number" class="costo-producto" min="0" step="0.01" value="0.00">
+                                        <td data-label="Costo">
+                                            <input type="number" class="costo-producto" min="0" step="0.01"
+                                                value="0.00">
                                         </td>
-                                        <td>
+                                        <td data-label="Cantidad">
                                             <input type="number" class="cantidad-producto" min="1" value="1">
                                         </td>
                                         <td>
-                                            <button type="button" class="icon-button delete-btn eliminar-fila">
+                                            <button type="button" class="btn secondary eliminar-fila">
                                                 <span class="material-icons">delete</span>
                                             </button>
                                         </td>
                                     </tr>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="7">
-                                            <div class="table-actions">
-                                                <button type="button" class="icon-button add-product-btn" id="agregarProductoBtn">
-                                                    <span class="material-icons">add</span>
-                                                </button>
-                                                <button type="button" class="icon-button delete-product-btn">
-                                                    <span class="material-icons">remove</span>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tfoot>
                             </table>
+                            <div class="table-actions">
+                                <button type="button" class="btn primary" id="agregarProductoBtn">
+                                    <span class="material-icons">add</span> Agregar Producto
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Sección de Totales -->
+                    <section class="form-section">
+                        <h3><span class="material-icons">calculate</span> Totales</h3>
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="totalBruto">Total Bruto:</label>
+                                <input type="text" id="totalBruto" value="0.00" readonly>
+                            </div>
+                            <div class="field">
+                                <label for="descuento1">Descuento:</label>
+                                <input type="text" id="descuento1" value="0.00" readonly>
+                            </div>
+                            <div class="field">
+                                <label for="baseImponible">Base Imponible:</label>
+                                <input type="text" id="baseImponible" value="0.00" readonly>
+                            </div>
+                            <div class="field">
+                                <label for="itbis">ITBIS:</label>
+                                <input type="text" id="itbis" value="0.00" readonly>
+                            </div>
+                            <div class="field">
+                                <label for="totalNeto">Total Neto:</label>
+                                <input type="text" id="totalNeto" value="0.00" readonly>
+                            </div>
                         </div>
                     </section>
 
                     <div class="form-actions">
-                        <button type="button" class="btn secondary" id="cancelarCompraBtn">Cancelar</button>
-                        <button type="submit" class="btn primary" id="guardarCompraBtn">Presentación</button>
+                        <button type="button" class="btn secondary" id="cancelarCompraBtn">
+                            <span class="material-icons">close</span> Cancelar
+                        </button>
+                        <button type="submit" class="btn primary" id="guardarCompraBtn">
+                            <span class="material-icons">save</span> Guardar
+                        </button>
                     </div>
                 </form>
             </div>
@@ -300,24 +281,26 @@
         </button>
     </div>
 
+    <!-- Modal de Confirmación -->
     <div class="modal" id="confirmModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Confirmar acción</h3>
-                <button class="modal-close" id="closeConfirmModal">
+                <h2>Confirmar Acción</h2>
+                <button class="modal-close-btn" id="closeConfirmModal">
                     <span class="material-icons">close</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p id="confirmMessage">¿Está seguro que desea realizar esta acción?</p>
+                <p id="confirmMessage">¿Está seguro de que desea realizar esta acción?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn secondary" id="cancelConfirmBtn">Cancelar</button>
-                <button type="button" class="btn primary" id="confirmActionBtn">Confirmar</button>
+                <button class="btn secondary" id="cancelConfirmBtn">Cancelar</button>
+                <button class="btn primary" id="confirmActionBtn">Confirmar</button>
             </div>
         </div>
     </div>
 
     <script src="compras.js"></script>
 </body>
+
 </html>

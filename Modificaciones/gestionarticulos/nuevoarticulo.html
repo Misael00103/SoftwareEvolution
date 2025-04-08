@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Artículo</title>
+    <link rel="stylesheet" href="gestionarticulos.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="card">
+            <div class="card-header">
+                <div class="header-content">
+                    <div class="header-icon">
+                        <i data-feather="package"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1 id="pageTitle">Nuevo Artículo</h1>
+                        <p>Complete la información del artículo</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn secondary" id="backToList">
+                        <i data-feather="arrow-left"></i>
+                        <span>Volver</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="content-grid">
+                <div class="main-content">
+                    <section class="card">
+                        <div class="card-body">
+                            <form class="article-form" id="articleForm">
+                                <div class="form-grid">
+                                    <div class="field">
+                                        <label for="codigo">Código</label>
+                                        <div class="input-container">
+                                            <input type="text" id="codigo" name="codigo" required>
+                                            <i data-feather="hash" class="input-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label for="nombre">Nombre</label>
+                                        <div class="input-container">
+                                            <input type="text" id="nombre" name="nombre" required>
+                                            <i data-feather="tag" class="input-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label for="descripcion">Descripción</label>
+                                        <div class="input-container">
+                                            <input type="text" id="descripcion" name="descripcion" required>
+                                            <i data-feather="file-text" class="input-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label for="categoria">Categoría</label>
+                                        <div class="input-container">
+                                            <select id="categoria" name="categoria" required>
+                                                <option value="">Seleccionar categoría</option>
+                                                <option value="electronica">Electrónica</option>
+                                                <option value="ropa">Ropa</option>
+                                                <option value="hogar">Hogar</option>
+                                                <option value="otros">Otros</option>
+                                            </select>
+                                            <i data-feather="list" class="input-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label for="precio">Precio</label>
+                                        <div class="input-container">
+                                            <input type="number" id="precio" name="precio" step="0.01" min="0" required>
+                                            <i data-feather="dollar-sign" class="input-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label for="stock">Stock</label>
+                                        <div class="input-container">
+                                            <input type="number" id="stock" name="stock" min="0" required>
+                                            <i data-feather="box" class="input-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row multi-column">
+                                    <section class="form-section date-section">
+                                        <div class="field">
+                                            <label for="fcreado">Fecha de Creación</label>
+                                            <div class="input-container">
+                                                <input type="date" id="fcreado" name="fcreado" readonly>
+                                                <i data-feather="calendar" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="fmodificado">Fecha de Modificación</label>
+                                            <div class="input-container">
+                                                <input type="date" id="fmodificado" name="fmodificado" readonly>
+                                                <i data-feather="calendar" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section class="form-section checkbox-group">
+                                        <label class="checkbox">
+                                            <input type="checkbox" id="activo" name="activo" checked>
+                                            <span class="checkbox-mark"></span>
+                                            <span>Artículo activo</span>
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="form-actions main-actions">
+                                    <button type="button" id="cancelBtn" class="btn secondary">
+                                        <i data-feather="x"></i>
+                                        Cancelar
+                                    </button>
+                                    <button type="submit" class="btn primary">
+                                        <i data-feather="save"></i>
+                                        Guardar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+        <div id="toast" class="toast">
+            <div class="toast-icon">
+                <i data-feather="check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <p class="toast-title">Éxito</p>
+                <p class="toast-message" id="toastMessage">Artículo guardado correctamente</p>
+            </div>
+            <button class="toast-close"><i data-feather="x"></i></button>
+        </div>
+    </div>
+    <script src="nuevoarticulo.js"></script>
+</body>
+</html>

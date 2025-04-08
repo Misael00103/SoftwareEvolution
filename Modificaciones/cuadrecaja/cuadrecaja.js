@@ -1,253 +1,66 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Referencias a elementos del DOM
+    const cuadreListView = document.getElementById('cuadreListView');
+    const cuadreFormView = document.getElementById('cuadreFormView');
+    const addCuadreBtn = document.getElementById('addCuadreBtn');
+    const backBtn = document.getElementById('backBtn');
+    const cuadreList = document.getElementById('cuadreList');
+    const formTitle = document.getElementById('formTitle');
+    const cuadreId = document.getElementById('cuadreId');
     const cantidadInputs = document.querySelectorAll('.cantidad-input');
     const subtotalCells = document.querySelectorAll('.subtotal');
     const totalEfectivoCell = document.getElementById('totalEfectivo');
-    // Referencias a campos de operaciones
     const ventaContadoInput = document.getElementById('ventaContado');
     const cobrosRealizadosInput = document.getElementById('cobrosRealizados');
     const otrosIngresosInput = document.getElementById('otrosIngresos');
     const notasCreditoInput = document.getElementById('notasCredito');
     const totalResumenInput = document.getElementById('totalResumen');
-    // Referencias a campos de totales
     const totalChequesInput = document.getElementById('totalCheques');
     const totalTarjetaInput = document.getElementById('totalTarjeta');
     const totalTransferenciaInput = document.getElementById('totalTransferencia');
     const sobranteFaltanteInput = document.getElementById('sobranteFaltante');
-    // Referencias a botones
     const obtenerValoresBtn = document.getElementById('obtenerValoresBtn');
     const aceptarBtn = document.getElementById('aceptarBtn');
     const cancelarBtn = document.getElementById('cancelarBtn');
-    const newCuadreBtn = document.getElementById('newCuadreBtn');
     const printBtn = document.getElementById('printBtn');
-    // Referencias a notificaciones
     const notification = document.getElementById('notification');
     const notificationCloseBtn = document.querySelector('.toast-close');
-    // Establecer fecha actual
-    document.getElementById('fecha').valueAsDate = new Date();
-    // Calcular subtotales cuando cambia la cantidad
-    cantidadInputs.forEach(input => {
-        input.addEventListener('input', function() {
-            calcularSubtotales();
-            calcularTotalEfectivo();
-            calcularSobranteFaltante();
-        });
-    });
-    // Calcular totales cuando cambian los valores de operaciones
-    [ventaContadoInput, cobrosRealizadosInput, otrosIngresosInput, notasCreditoInput].forEach(input => {
-        input.addEventListener('input', function() {
-            calcularTotalResumen();
-            calcularSobranteFaltante();
-        });
-    });
-    // Calcular sobrante/faltante cuando cambian los totales
-    [totalChequesInput, totalTarjetaInput, totalTransferenciaInput].forEach(input => {
-        input.addEventListener('input', function() {
-            calcularSobranteFaltante();
-        });
-    });
-    // Botón para obtener valores
-    obtenerValoresBtn.addEventListener('click', function() {
-        // Simulación de obtener valores del sistema
-        ventaContadoInput.value = (Math.random() * 10000).toFixed(2);
-        cobrosRealizadosInput.value = (Math.random() * 5000).toFixed(2);
-        otrosIngresosInput.value = (Math.random() * 1000).toFixed(2);
-        notasCreditoInput.value = (Math.random() * 500).toFixed(2);
-        calcularTotalResumen();
-        totalChequesInput.value = (Math.random() * 3000).toFixed(2);
-        totalTarjetaInput.value = (Math.random() * 4000).toFixed(2);
-        totalTransferenciaInput.value = (Math.random() * 2000).toFixed(2);
-        calcularSobranteFaltante();
-        showNotification('Valores obtenidos', 'Se han cargado los valores del sistema correctamente');
-    });
-    // Botón para aceptar el cuadre
-    document.getElementById('cuadreForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        if (!validarFormulario()) {
-            showNotification('Error', 'Por favor complete todos los campos requeridos', 'error');
-            return;
+    const confirmModal = document.getElementById('confirmModal');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const modalCancelBtn = document.getElementById('modalCancelBtn');
+    const modalConfirmBtn = document.getElementById('modalConfirmBtn');
+
+    // Datos iniciales
+    let cuadres = [
+        {
+            id: 'CUADRE0001',
+            fecha: '2025-04-08',
+            sucursal: 'LOS PEPINES',
+            cajero: 'SOFTWARE EVOLUTION ARPA SRL',
+            efectivo: { '1': 10, '5': 5, '10': 0, '20': 0, '50': 0, '100': 0, '500': 0, '1000': 0, '2000': 0 },
+            totalEfectivo: 35.00,
+            ventaContado: 100.00,
+            cobrosRealizados: 50.00,
+            otrosIngresos: 0.00,
+            notasCredito: 10.00,
+            totalResumen: 140.00,
+            totalCheques: 0.00,
+            totalTarjeta: 0.00,
+            totalTransferencia: 0.00,
+            sobranteFaltante: -105.00
         }
-        // Aquí iría la lógica para guardar el cuadre
-        showNotification('Cuadre guardado', 'El cuadre de caja ha sido guardado correctamente');
-        // Simular redirección o actualización después de guardar
-        const btnAceptar = document.getElementById('aceptarBtn');
-        btnAceptar.disabled = true;
-        btnAceptar.innerHTML = '<span class="material-icons">check</span> Guardando...';
-        // Reiniciar formulario después de 1.5 segundos
-        setTimeout(() => {
-            btnAceptar.disabled = false;
-            btnAceptar.innerHTML = '<span class="material-icons">check</span> Aceptar';
-            crearNuevoCuadre();
-        }, 1500);
-    });
-    // Botón para cancelar
-    cancelarBtn.addEventListener('click', function() {
-        // Preguntar al usuario si está seguro
-        if (confirm('¿Está seguro que desea cancelar este cuadre de caja?')) {
-            resetearFormulario();
-            showNotification('Operación cancelada', 'Se ha cancelado el cuadre de caja');
-        }
-    });
-    // Botón para nuevo cuadre
-    newCuadreBtn.addEventListener('click', function() {
-        // Si hay datos en el formulario, preguntar antes de resetear
-        if (hayDatosEnFormulario()) {
-            if (confirm('¿Está seguro que desea crear un nuevo cuadre? Los datos no guardados se perderán.')) {
-                crearNuevoCuadre();
-            }
-        } else {
-            crearNuevoCuadre();
-        }
-    });
-    // Función para crear un nuevo cuadre
-    function crearNuevoCuadre() {
-        // Generar un nuevo ID de cuadre (simulado)
-        const nuevoId = Math.floor(Math.random() * 10000) + 1;
-        // Actualizar título del card (opcional)
-        const cardTitle = document.querySelector('.card-header h2');
-        cardTitle.innerHTML = `<span class="material-icons">account_balance_wallet</span> Cuadre de Caja #${nuevoId}`;
-        // Resetear el formulario
-        resetearFormulario();
-        // Mostrar notificación
-        showNotification('Nuevo cuadre', 'Se ha iniciado un nuevo cuadre de caja');
-        // Enfocar el primer campo después de fecha
-        setTimeout(() => {
-            document.getElementById('sucursal').focus();
-        }, 100);
+    ];
+    let isEditing = false;
+    let editIndex = null;
+    let modalCallback = null;
+
+    // Funciones de utilidad
+    function switchView(viewToShow, viewToHide) {
+        viewToHide.classList.remove('active');
+        viewToShow.classList.add('active');
     }
-    // Verificar si hay datos en el formulario
-    function hayDatosEnFormulario() {
-        // Verificar si hay cantidades de efectivo
-        let hayEfectivo = false;
-        cantidadInputs.forEach(input => {
-            if (parseInt(input.value) > 0) {
-                hayEfectivo = true;
-            }
-        });
-        // Verificar si hay valores en operaciones
-        const hayOperaciones = 
-            parseFloat(ventaContadoInput.value) > 0 ||
-            parseFloat(cobrosRealizadosInput.value) > 0 ||
-            parseFloat(otrosIngresosInput.value) > 0 ||
-            parseFloat(notasCreditoInput.value) > 0;
-        // Verificar si hay valores en otros medios de pago
-        const hayOtrosMedios = 
-            parseFloat(totalChequesInput.value) > 0 ||
-            parseFloat(totalTarjetaInput.value) > 0 ||
-            parseFloat(totalTransferenciaInput.value) > 0;
-        return hayEfectivo || hayOperaciones || hayOtrosMedios;
-    }
-    // Botón para imprimir
-    printBtn.addEventListener('click', function() {
-        // Preparar para imprimir
-        const originalTitle = document.title;
-        const fecha = document.getElementById('fecha').value;
-        const sucursal = document.getElementById('sucursal').value;
-        document.title = `Cuadre de Caja - ${sucursal} - ${fecha}`;
-        // Imprimir
-        window.print();
-        // Restaurar título
-        setTimeout(() => {
-            document.title = originalTitle;
-        }, 100);
-    });
-    // Cerrar notificación
-    notificationCloseBtn.addEventListener('click', function() {
-        notification.classList.remove('show');
-    });
-    // Función para calcular subtotales
-    function calcularSubtotales() {
-        const filas = document.querySelectorAll('#denominacionesTable tbody tr');
-        filas.forEach(fila => {
-            const valor = parseFloat(fila.getAttribute('data-valor'));
-            const cantidad = parseInt(fila.querySelector('.cantidad-input').value) || 0;
-            const subtotal = valor * cantidad;
-            fila.querySelector('.subtotal').textContent = formatearNumero(subtotal);
-        });
-    }
-    // Función para calcular total efectivo
-    function calcularTotalEfectivo() {
-        let total = 0;
-        const subtotales = document.querySelectorAll('#denominacionesTable tbody .subtotal');
-        subtotales.forEach(cell => {
-            total += parseFloat(cell.textContent.replace(/,/g, '')) || 0;
-        });
-        totalEfectivoCell.textContent = formatearNumero(total);
-    }
-    // Función para calcular total resumen
-    function calcularTotalResumen() {
-        const ventaContado = parseFloat(ventaContadoInput.value) || 0;
-        const cobrosRealizados = parseFloat(cobrosRealizadosInput.value) || 0;
-        const otrosIngresos = parseFloat(otrosIngresosInput.value) || 0;
-        const notasCredito = parseFloat(notasCreditoInput.value) || 0;
-        const total = ventaContado + cobrosRealizados + otrosIngresos - notasCredito;
-        totalResumenInput.value = formatearNumero(total);
-    }
-    // Función para calcular sobrante/faltante
-    function calcularSobranteFaltante() {
-        const totalEfectivo = parseFloat(totalEfectivoCell.textContent.replace(/,/g, '')) || 0;
-        const totalResumen = parseFloat(totalResumenInput.value.replace(/,/g, '')) || 0;
-        const totalCheques = parseFloat(totalChequesInput.value) || 0;
-        const totalTarjeta = parseFloat(totalTarjetaInput.value) || 0;
-        const totalTransferencia = parseFloat(totalTransferenciaInput.value) || 0;
-        const totalMediosPago = totalEfectivo + totalCheques + totalTarjeta + totalTransferencia;
-        const diferencia = totalMediosPago - totalResumen;
-        sobranteFaltanteInput.value = formatearNumero(diferencia);
-        // Cambiar color según sea sobrante o faltante
-        if (diferencia > 0) {
-            sobranteFaltanteInput.style.color = 'var(--success)';
-            sobranteFaltanteInput.style.backgroundColor = 'var(--success-light)';
-        } else if (diferencia < 0) {
-            sobranteFaltanteInput.style.color = 'var(--danger)';
-            sobranteFaltanteInput.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
-        } else {
-            sobranteFaltanteInput.style.color = 'var(--text)';
-            sobranteFaltanteInput.style.backgroundColor = '';
-        }
-    }
-    // Función para formatear números con separador de miles
-    function formatearNumero(numero) {
-        return new Intl.NumberFormat('es-DO', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }).format(numero);
-    }
-    // Función para validar el formulario
-    function validarFormulario() {
-        if (!document.getElementById('fecha').value) return false;
-        if (!document.getElementById('sucursal').value) return false;
-        if (!document.getElementById('cajero').value) return false;
-        return true;
-    }
-    // Función para resetear el formulario
-    function resetearFormulario() {
-        document.getElementById('fecha').valueAsDate = new Date();
-        document.getElementById('sucursal').value = 'LOS PEPINES';
-        // Resetear cantidades
-        cantidadInputs.forEach(input => {
-            input.value = 0;
-        });
-        // Resetear subtotales
-        subtotalCells.forEach(cell => {
-            cell.textContent = '0.00';
-        });
-        // Resetear total efectivo
-        totalEfectivoCell.textContent = '0.00';
-        // Resetear campos de operaciones
-        ventaContadoInput.value = '0.00';
-        cobrosRealizadosInput.value = '0.00';
-        otrosIngresosInput.value = '0.00';
-        notasCreditoInput.value = '0.00';
-        totalResumenInput.value = '0.00';
-        // Resetear campos de totales
-        totalChequesInput.value = '0.00';
-        totalTarjetaInput.value = '0.00';
-        totalTransferenciaInput.value = '0.00';
-        sobranteFaltanteInput.value = '0.00';
-        sobranteFaltanteInput.style.color = 'var(--text)';
-        sobranteFaltanteInput.style.backgroundColor = '';
-    }
-    // Función para mostrar notificaciones
+
     function showNotification(title, message, type = 'success') {
         const toastTitle = notification.querySelector('.toast-title');
         const toastMessage = notification.querySelector('.toast-message');
@@ -264,13 +77,290 @@ document.addEventListener('DOMContentLoaded', function() {
             toastIcon.style.color = 'var(--success)';
         }
         notification.classList.add('show');
-        setTimeout(() => {
-            notification.classList.remove('show');
-        }, 5000);
+        setTimeout(() => notification.classList.remove('show'), 5000);
     }
-    // Inicializar cálculos
-    calcularSubtotales();
-    calcularTotalEfectivo();
-    calcularTotalResumen();
-    calcularSobranteFaltante();
+
+    function showModal(message, callback) {
+        modalMessage.textContent = message;
+        modalCallback = callback;
+        confirmModal.classList.add('active');
+    }
+
+    function hideModal() {
+        confirmModal.classList.remove('active');
+        modalCallback = null;
+    }
+
+    // Renderizar lista de cuadres
+    function renderCuadreList() {
+        cuadreList.innerHTML = '';
+        cuadres.forEach((cuadre, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td data-label="ID Cuadre">${cuadre.id}</td>
+                <td data-label="Fecha">${cuadre.fecha}</td>
+                <td data-label="Sucursal">${cuadre.sucursal}</td>
+                <td data-label="Cajero">${cuadre.cajero}</td>
+                <td data-label="Total Efectivo">${formatearNumero(cuadre.totalEfectivo)}</td>
+                <td data-label="Sobrante/Faltante">${formatearNumero(cuadre.sobranteFaltante)}</td>
+                <td data-label="Acciones">
+                    <button class="icon-btn edit-btn" data-index="${index}"><span class="material-icons">edit</span></button>
+                    <button class="icon-btn btn-danger" data-index="${index}"><span class="material-icons">delete</span></button>
+                </td>
+            `;
+            cuadreList.appendChild(row);
+        });
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.currentTarget.getAttribute('data-index');
+                editCuadre(index);
+            });
+        });
+        document.querySelectorAll('.btn-danger').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.currentTarget.getAttribute('data-index');
+                showModal('¿Está seguro de que desea eliminar este cuadre?', () => {
+                    cuadres.splice(index, 1);
+                    renderCuadreList();
+                    showNotification('Cuadre eliminado', 'El cuadre de caja ha sido eliminado correctamente');
+                });
+            });
+        });
+    }
+
+    // Editar cuadre
+    function editCuadre(index) {
+        isEditing = true;
+        editIndex = index;
+        const cuadre = cuadres[index];
+        formTitle.textContent = 'Editar Cuadre de Caja';
+        cuadreId.textContent = cuadre.id;
+        document.getElementById('fecha').value = cuadre.fecha;
+        document.getElementById('sucursal').value = cuadre.sucursal;
+        document.getElementById('cajero').value = cuadre.cajero;
+        cantidadInputs.forEach(input => {
+            const valor = input.parentElement.parentElement.getAttribute('data-valor');
+            input.value = cuadre.efectivo[valor] || 0;
+        });
+        ventaContadoInput.value = cuadre.ventaContado.toFixed(2);
+        cobrosRealizadosInput.value = cuadre.cobrosRealizados.toFixed(2);
+        otrosIngresosInput.value = cuadre.otrosIngresos.toFixed(2);
+        notasCreditoInput.value = cuadre.notasCredito.toFixed(2);
+        totalChequesInput.value = cuadre.totalCheques.toFixed(2);
+        totalTarjetaInput.value = cuadre.totalTarjeta.toFixed(2);
+        totalTransferenciaInput.value = cuadre.totalTransferencia.toFixed(2);
+        calcularSubtotales();
+        calcularTotalEfectivo();
+        calcularTotalResumen();
+        calcularSobranteFaltante();
+        switchView(cuadreFormView, cuadreListView);
+    }
+
+    // Resetear formulario
+    function resetForm() {
+        formTitle.textContent = 'Nuevo Cuadre de Caja';
+        cuadreId.textContent = `CUADRE${String(cuadres.length + 1).padStart(4, '0')}`;
+        document.getElementById('fecha').valueAsDate = new Date();
+        document.getElementById('sucursal').value = 'LOS PEPINES';
+        document.getElementById('cajero').value = 'SOFTWARE EVOLUTION ARPA SRL';
+        cantidadInputs.forEach(input => input.value = 0);
+        subtotalCells.forEach(cell => cell.textContent = '0.00');
+        totalEfectivoCell.textContent = '0.00';
+        ventaContadoInput.value = '0.00';
+        cobrosRealizadosInput.value = '0.00';
+        otrosIngresosInput.value = '0.00';
+        notasCreditoInput.value = '0.00';
+        totalResumenInput.value = '0.00';
+        totalChequesInput.value = '0.00';
+        totalTarjetaInput.value = '0.00';
+        totalTransferenciaInput.value = '0.00';
+        sobranteFaltanteInput.value = '0.00';
+        sobranteFaltanteInput.style.color = 'var(--text)';
+        sobranteFaltanteInput.style.backgroundColor = '';
+        isEditing = false;
+        editIndex = null;
+    }
+
+    // Calcular subtotales
+    function calcularSubtotales() {
+        const filas = document.querySelectorAll('#denominacionesTable tbody tr');
+        filas.forEach(fila => {
+            const valor = parseFloat(fila.getAttribute('data-valor'));
+            const cantidad = parseInt(fila.querySelector('.cantidad-input').value) || 0;
+            const subtotal = valor * cantidad;
+            fila.querySelector('.subtotal').textContent = formatearNumero(subtotal);
+        });
+    }
+
+    // Calcular total efectivo
+    function calcularTotalEfectivo() {
+        let total = 0;
+        subtotalCells.forEach(cell => {
+            total += parseFloat(cell.textContent.replace(/,/g, '')) || 0;
+        });
+        totalEfectivoCell.textContent = formatearNumero(total);
+    }
+
+    // Calcular total resumen
+    function calcularTotalResumen() {
+        const ventaContado = parseFloat(ventaContadoInput.value) || 0;
+        const cobrosRealizados = parseFloat(cobrosRealizadosInput.value) || 0;
+        const otrosIngresos = parseFloat(otrosIngresosInput.value) || 0;
+        const notasCredito = parseFloat(notasCreditoInput.value) || 0;
+        const total = ventaContado + cobrosRealizados + otrosIngresos - notasCredito;
+        totalResumenInput.value = formatearNumero(total);
+    }
+
+    // Calcular sobrante/faltante
+    function calcularSobranteFaltante() {
+        const totalEfectivo = parseFloat(totalEfectivoCell.textContent.replace(/,/g, '')) || 0;
+        const totalResumen = parseFloat(totalResumenInput.value.replace(/,/g, '')) || 0;
+        const totalCheques = parseFloat(totalChequesInput.value) || 0;
+        const totalTarjeta = parseFloat(totalTarjetaInput.value) || 0;
+        const totalTransferencia = parseFloat(totalTransferenciaInput.value) || 0;
+        const totalMediosPago = totalEfectivo + totalCheques + totalTarjeta + totalTransferencia;
+        const diferencia = totalMediosPago - totalResumen;
+        sobranteFaltanteInput.value = formatearNumero(diferencia);
+        if (diferencia > 0) {
+            sobranteFaltanteInput.style.color = 'var(--success)';
+            sobranteFaltanteInput.style.backgroundColor = 'var(--success-light)';
+        } else if (diferencia < 0) {
+            sobranteFaltanteInput.style.color = 'var(--danger)';
+            sobranteFaltanteInput.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+        } else {
+            sobranteFaltanteInput.style.color = 'var(--text)';
+            sobranteFaltanteInput.style.backgroundColor = '';
+        }
+    }
+
+    // Formatear números
+    function formatearNumero(numero) {
+        return new Intl.NumberFormat('es-DO', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(numero);
+    }
+
+    // Validar formulario
+    function validarFormulario() {
+        if (!document.getElementById('fecha').value) return false;
+        if (!document.getElementById('sucursal').value) return false;
+        if (!document.getElementById('cajero').value) return false;
+        return true;
+    }
+
+    // Eventos
+    cantidadInputs.forEach(input => {
+        input.addEventListener('input', () => {
+            calcularSubtotales();
+            calcularTotalEfectivo();
+            calcularSobranteFaltante();
+        });
+    });
+
+    [ventaContadoInput, cobrosRealizadosInput, otrosIngresosInput, notasCreditoInput].forEach(input => {
+        input.addEventListener('input', () => {
+            calcularTotalResumen();
+            calcularSobranteFaltante();
+        });
+    });
+
+    [totalChequesInput, totalTarjetaInput, totalTransferenciaInput].forEach(input => {
+        input.addEventListener('input', calcularSobranteFaltante);
+    });
+
+    obtenerValoresBtn.addEventListener('click', () => {
+        ventaContadoInput.value = (Math.random() * 10000).toFixed(2);
+        cobrosRealizadosInput.value = (Math.random() * 5000).toFixed(2);
+        otrosIngresosInput.value = (Math.random() * 1000).toFixed(2);
+        notasCreditoInput.value = (Math.random() * 500).toFixed(2);
+        totalChequesInput.value = (Math.random() * 3000).toFixed(2);
+        totalTarjetaInput.value = (Math.random() * 4000).toFixed(2);
+        totalTransferenciaInput.value = (Math.random() * 2000).toFixed(2);
+        calcularTotalResumen();
+        calcularSobranteFaltante();
+        showNotification('Valores obtenidos', 'Se han cargado los valores del sistema correctamente');
+    });
+
+    document.getElementById('cuadreForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!validarFormulario()) {
+            showNotification('Error', 'Por favor complete todos los campos requeridos', 'error');
+            return;
+        }
+        const efectivo = {};
+        cantidadInputs.forEach(input => {
+            const valor = input.parentElement.parentElement.getAttribute('data-valor');
+            efectivo[valor] = parseInt(input.value) || 0;
+        });
+        const newCuadre = {
+            id: cuadreId.textContent,
+            fecha: document.getElementById('fecha').value,
+            sucursal: document.getElementById('sucursal').value,
+            cajero: document.getElementById('cajero').value,
+            efectivo: efectivo,
+            totalEfectivo: parseFloat(totalEfectivoCell.textContent.replace(/,/g, '')),
+            ventaContado: parseFloat(ventaContadoInput.value),
+            cobrosRealizados: parseFloat(cobrosRealizadosInput.value),
+            otrosIngresos: parseFloat(otrosIngresosInput.value),
+            notasCredito: parseFloat(notasCreditoInput.value),
+            totalResumen: parseFloat(totalResumenInput.value.replace(/,/g, '')),
+            totalCheques: parseFloat(totalChequesInput.value),
+            totalTarjeta: parseFloat(totalTarjetaInput.value),
+            totalTransferencia: parseFloat(totalTransferenciaInput.value),
+            sobranteFaltante: parseFloat(sobranteFaltanteInput.value.replace(/,/g, ''))
+        };
+        if (isEditing) {
+            cuadres[editIndex] = newCuadre;
+            showNotification('Cuadre actualizado', 'El cuadre de caja ha sido actualizado correctamente');
+        } else {
+            cuadres.push(newCuadre);
+            showNotification('Cuadre guardado', 'El cuadre de caja ha sido guardado correctamente');
+        }
+        renderCuadreList();
+        switchView(cuadreListView, cuadreFormView);
+    });
+
+    cancelarBtn.addEventListener('click', () => {
+        showModal('¿Está seguro de que desea cancelar este cuadre de caja?', () => {
+            resetForm();
+            switchView(cuadreListView, cuadreFormView);
+        });
+    });
+
+    backBtn.addEventListener('click', () => {
+        showModal('¿Está seguro de que desea volver sin guardar?', () => {
+            switchView(cuadreListView, cuadreFormView);
+        });
+    });
+
+    printBtn.addEventListener('click', () => {
+        const originalTitle = document.title;
+        const fecha = document.getElementById('fecha').value;
+        const sucursal = document.getElementById('sucursal').value;
+        document.title = `Cuadre de Caja - ${sucursal} - ${fecha}`;
+        window.print();
+        setTimeout(() => document.title = originalTitle, 100);
+    });
+
+    notificationCloseBtn.addEventListener('click', () => {
+        notification.classList.remove('show');
+    });
+
+    modalCloseBtn.addEventListener('click', hideModal);
+    modalCancelBtn.addEventListener('click', hideModal);
+    modalConfirmBtn.addEventListener('click', () => {
+        if (modalCallback) modalCallback();
+        hideModal();
+    });
+
+    addCuadreBtn.addEventListener('click', () => {
+        resetForm();
+        switchView(cuadreFormView, cuadreListView);
+    });
+
+    // Inicialización
+    cuadreListView.classList.add('active');
+    cuadreFormView.classList.remove('active');
+    renderCuadreList();
 });
