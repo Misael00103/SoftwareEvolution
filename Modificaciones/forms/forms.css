@@ -1,0 +1,46 @@
+.form-container {
+    max-width: 100%;
+    padding: var(--spacing-sm);
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+}
+
+.form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.form-label {
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.9rem;
+}
+
+.form-control {
+    height: 32px;
+    font-size: 0.9rem;
+}
+
+.form-select {
+    height: 32px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.input-group {
+    gap: var(--spacing-xs);
+}
+
+.input-group-text {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.9rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) 0;
+} 

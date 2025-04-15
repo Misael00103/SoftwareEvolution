@@ -2,7 +2,7 @@
     --primary: #fbbf24;
     --primary-hover: #f59e0b;
     --primary-light: #fef3c7;
-    --primary-dark: #92400e;
+    --primary-dark: #ffffff;
     --danger: #ef4444;
     --danger-hover: #dc2626;
     --success: #10b981;
@@ -27,7 +27,8 @@
     --radius-lg: 1rem;
     --transition: all 0.2s ease;
     --transition-slow: all 0.3s ease;
-}
+  }
+
 
 * {
     margin: 0;

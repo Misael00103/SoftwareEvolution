@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empleados - Software Evolution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="empleados.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Vista de Listado de Empleados -->
+        <section class="view active" id="employeeListView">
+            <header class="card header-card">
+                <div class="card-header">
+                    <div class="header-content">
+                        <div class="header-icon">
+                            <i data-feather="users"></i>
+                        </div>
+                        <div class="header-text">
+                            <h1>Listado de Empleados</h1>
+                            <p>Administre los empleados del sistema</p>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <div class="user-card">
+                            <div class="user-info">
+                                <img src="../Assets/perfil.jpg" alt="Usuario" class="user-image">
+                                <div class="user-details">
+                                    <span class="user-name">Juan Pérez</span>
+                                    <span class="user-date" id="employeeDateList">15/04/2025 10:00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="icon-btn" aria-label="Correo"><i data-feather="mail"></i></button>
+                            <button class="icon-btn" aria-label="Imprimir"><i data-feather="printer"></i></button>
+                            <button class="icon-btn" aria-label="Descargar"><i data-feather="download"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="content-wrapper">
+                <section class="card">
+                    <div class="card-header">
+                        <h2><i data-feather="list"></i> Empleados</h2>
+                        <button class="btn primary" id="addEmployeeBtn">
+                            <i data-feather="plus"></i> Nuevo Empleado
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID Empleado</th>
+                                        <th>Nombre</th>
+                                        <th>Departamento</th>
+                                        <th>Teléfono</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="employeeList"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- Vista de Formulario de Empleado -->
+        <section class="view" id="employeeFormView">
+            <header class="card header-card">
+                <div class="card-header">
+                    <div class="header-content">
+                        <div class="header-icon">
+                            <i data-feather="users"></i>
+                        </div>
+                        <div class="header-text">
+                            <h1 id="formTitle">Nuevo Empleado</h1>
+                            <p id="employeeId">EMP0001</p>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <div class="user-card">
+                            <div class="user-info">
+                                <img src="../Assets/perfil.jpg" alt="Usuario" class="user-image">
+                                <div class="user-details">
+                                    <span class="user-name">Juan Pérez</span>
+                                    <span class="user-date" id="employeeDate">15/04/2025 10:00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="icon-btn" aria-label="Correo"><i data-feather="mail"></i></button>
+                            <button class="icon-btn" aria-label="Imprimir"><i data-feather="printer"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-grid">
+                <!-- Columna izquierda -->
+                <div class="main-content">
+                    <section class="card">
+                        <div class="card-header">
+                            <h2><i data-feather="user"></i> Información del Empleado</h2>
+                            <button class="btn secondary" id="backBtn">
+                                <i data-feather="arrow-left"></i> Volver
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <form id="employeeForm">
+                                <section class="form-section">
+                                    <h3>Datos Generales</h3>
+                                    <div class="form-grid">
+                                        <div class="field">
+                                            <label>Nombre</label>
+                                            <div class="input-container">
+                                                <input type="text" id="employeeName" required>
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Cédula</label>
+                                            <div class="input-container">
+                                                <input type="text" id="cedula">
+                                                <i data-feather="file-text" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Dirección</label>
+                                            <div class="input-container">
+                                                <input type="text" id="address">
+                                                <i data-feather="map-pin" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Teléfono</label>
+                                            <div class="input-container">
+                                                <input type="text" id="phone">
+                                                <i data-feather="phone" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Correo Electrónico</label>
+                                            <div class="input-container">
+                                                <input type="email" id="email">
+                                                <i data-feather="mail" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Estado</label>
+                                            <div class="input-container">
+                                                <select id="status">
+                                                    <option value="Activo">Activo</option>
+                                                    <option value="Inactivo">Inactivo</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Departamento</label>
+                                            <div class="input-container">
+                                                <select id="department">
+                                                    <option value="Ventas">Ventas</option>
+                                                    <option value="Contabilidad">Contabilidad</option>
+                                                    <option value="Recursos Humanos">Recursos Humanos</option>
+                                                    <option value="TI">TI</option>
+                                                </select>
+                                                <i data-feather="briefcase" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Puesto</label>
+                                            <div class="input-container">
+                                                <input type="text" id="position">
+                                                <i data-feather="user-check" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Salario</label>
+                                            <div class="input-container">
+                                                <input type="number" id="salary">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Fecha de Contratación</label>
+                                            <div class="input-container">
+                                                <input type="date" id="hireDate">
+                                                <i data-feather="calendar" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Notas</label>
+                                            <div class="input-container">
+                                                <textarea id="notes" placeholder="Notas adicionales sobre el empleado..."></textarea>
+                                                <i data-feather="edit" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Columna derecha (Sidebar) -->
+                <aside class="side-panel">
+                    <!-- Comentario de Empleado -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h3><i data-feather="message-square"></i> Comentario de Empleado</h3>
+                        </div>
+                        <div class="card-body">
+                            <textarea id="employeeComment" placeholder="Agregar comentario..."></textarea>
+                            <div class="comment-history">
+                                <h4>Historial de comentarios</h4>
+                                <ul id="commentList"></ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Gestión de Empleados -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h3><i data-feather="users"></i> Gestión de Empleados</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="management-actions">
+                                <button class="btn secondary" data-action="add-employee"><i data-feather="plus"></i> Agregar Nuevo Empleado</button>
+                                <button class="btn secondary" data-action="view-employees"><i data-feather="list"></i> Ver Empleados</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Botones Finales -->
+                    <section class="card">
+                        <div class="card-body">
+                            <div class="main-actions">
+                                <button class="btn primary" data-action="save"><i data-feather="save"></i> Guardar Empleado</button>
+                                <button class="btn secondary" data-action="exit"><i data-feather="x"></i> Salir</button>
+                            </div>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Toast -->
+        <div id="toast" class="toast">
+            <div class="toast-icon">
+                <i data-feather="check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <p class="toast-title">Éxito</p>
+                <p class="toast-message" id="toastMessage">Acción completada correctamente</p>
+            </div>
+            <button class="toast-close"><i data-feather="x"></i></button>
+        </div>
+
+        <!-- Modal -->
+        <div class="confirm-dialog" id="myModal">
+            <div class="confirm-dialog-content card">
+                <div class="card-header">
+                    <h3><i data-feather="info"></i> Información</h3>
+                    <button class="modal-close close"><i data-feather="x"></i></button>
+                </div>
+                <div class="card-body">
+                    <div id="modalMessage"></div>
+                </div>
+                <div class="main-actions modal-actions">
+                    <button id="modalConfirm" class="btn primary">Confirmar</button>
+                    <button id="modalCancel" class="btn secondary">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="empleados.js"></script>
+</body>
+</html>

@@ -2,20 +2,14 @@
     --primary: #fbbf24;
     --primary-hover: #f59e0b;
     --primary-light: #fef3c7;
-    --primary-dark: #92400e;
+    --primary-dark: #f8f8f8;
     --danger: #ef4444;
     --danger-hover: #dc2626;
-    --danger-light: #fee2e2;
     --success: #10b981;
-    --success-hover: #059669;
     --success-light: #d1fae5;
     --warning: #f59e0b;
-    --warning-hover: #d97706;
     --warning-light: #fef3c7;
-    --info: #3b82f6;
-    --info-hover: #2563eb;
-    --info-light: #dbeafe;
-    --background: #f3f4f6;
+    --background: #ffffff;
     --card: #ffffff;
     --card-header: #f8fafc;
     --border: #e5e7eb;
@@ -33,7 +27,7 @@
     --radius-lg: 1rem;
     --transition: all 0.2s ease;
     --transition-slow: all 0.3s ease;
-}
+  }
 
 * {
     margin: 0;
@@ -434,9 +428,9 @@ header {
 
 .btn.primary {
     background-color: var(--primary);
-    color: var(--primary-dark);
-}
-
+    color: white;
+    box-shadow: var(--shadow-sm);
+  }
 .btn.primary:hover {
     background-color: var(--primary-hover);
 }

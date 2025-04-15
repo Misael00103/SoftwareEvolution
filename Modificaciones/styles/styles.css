@@ -1,0 +1,74 @@
+:root {
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+}
+
+.form-group {
+    margin-bottom: var(--spacing-sm);
+}
+
+.form-control {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+}
+
+.card {
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.table td, .table th {
+    padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    margin: var(--spacing-xs);
+}
+
+.modal-body {
+    padding: var(--spacing-sm);
+}
+
+.modal-header, .modal-footer {
+    padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.container {
+    padding: var(--spacing-sm);
+}
+
+.row {
+    margin: var(--spacing-xs) 0;
+}
+
+.col, [class*="col-"] {
+    padding: var(--spacing-xs);
+}
+
+.input-group {
+    margin-bottom: var(--spacing-xs);
+}
+
+.input-group-text {
+    padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.list-group-item {
+    padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.nav-link {
+    padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.alert {
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.card-header, .card-footer {
+    padding: var(--spacing-xs) var(--spacing-sm);
+} 

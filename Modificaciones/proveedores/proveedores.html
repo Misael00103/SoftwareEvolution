@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proveedores - Software Evolution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="proveedores.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Vista de Listado de Proveedores -->
+        <section class="view active" id="supplierListView">
+            <header class="card header-card">
+                <div class="card-header">
+                    <div class="header-content">
+                        <div class="header-icon">
+                            <i data-feather="truck"></i>
+                        </div>
+                        <div class="header-text">
+                            <h1>Listado de Proveedores</h1>
+                            <p>Administre los proveedores del sistema</p>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <div class="user-card">
+                            <div class="user-info">
+                                <img src="../Assets/perfil.jpg" alt="Usuario" class="user-image">
+                                <div class="user-details">
+                                    <span class="user-name">Juan Pérez</span>
+                                    <span class="user-date" id="supplierDateList">15/04/2025 10:00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="icon-btn" aria-label="Correo"><i data-feather="mail"></i></button>
+                            <button class="icon-btn" aria-label="Imprimir"><i data-feather="printer"></i></button>
+                            <button class="icon-btn" aria-label="Descargar"><i data-feather="download"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="content-wrapper">
+                <section class="card">
+                    <div class="card-header">
+                        <h2><i data-feather="list"></i> Proveedores</h2>
+                        <button class="btn primary" id="addSupplierBtn">
+                            <i data-feather="plus"></i> Nuevo Proveedor
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID Proveedor</th>
+                                        <th>Nombre</th>
+                                        <th>Contacto</th>
+                                        <th>Teléfono</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="supplierList"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- Vista de Formulario de Proveedor -->
+        <section class="view" id="supplierFormView">
+            <header class="card header-card">
+                <div class="card-header">
+                    <div class="header-content">
+                        <div class="header-icon">
+                            <i data-feather="truck"></i>
+                        </div>
+                        <div class="header-text">
+                            <h1 id="formTitle">Nuevo Proveedor</h1>
+                            <p id="supplierId">PROV0001</p>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <div class="user-card">
+                            <div class="user-info">
+                                <img src="../Assets/perfil.jpg" alt="Usuario" class="user-image">
+                                <div class="user-details">
+                                    <span class="user-name">Juan Pérez</span>
+                                    <span class="user-date" id="supplierDate">15/04/2025 10:00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="icon-btn" aria-label="Correo"><i data-feather="mail"></i></button>
+                            <button class="icon-btn" aria-label="Imprimir"><i data-feather="printer"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-grid">
+                <!-- Columna izquierda -->
+                <div class="main-content">
+                    <section class="card">
+                        <div class="card-header">
+                            <h2><i data-feather="truck"></i> Información del Proveedor</h2>
+                            <button class="btn secondary" id="backBtn">
+                                <i data-feather="arrow-left"></i> Volver
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <form id="supplierForm">
+                                <section class="form-section">
+                                    <h3>Datos Generales</h3>
+                                    <div class="form-grid">
+                                        <div class="field">
+                                            <label>Nombre</label>
+                                            <div class="input-container">
+                                                <input type="text" id="supplierName" required>
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>RNC</label>
+                                            <div class="input-container">
+                                                <input type="text" id="rnc">
+                                                <i data-feather="file-text" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Dirección</label>
+                                            <div class="input-container">
+                                                <input type="text" id="address">
+                                                <i data-feather="map-pin" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Teléfono</label>
+                                            <div class="input-container">
+                                                <input type="text" id="phone">
+                                                <i data-feather="phone" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Correo Electrónico</label>
+                                            <div class="input-container">
+                                                <input type="email" id="email">
+                                                <i data-feather="mail" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Contacto Principal</label>
+                                            <div class="input-container">
+                                                <input type="text" id="contactName">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Estado</label>
+                                            <div class="input-container">
+                                                <select id="status">
+                                                    <option value="Activo">Activo</option>
+                                                    <option value="Inactivo">Inactivo</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tipo Proveedor</label>
+                                            <div class="input-container">
+                                                <select id="supplierType">
+                                                    <option value="Nacional">Nacional</option>
+                                                    <option value="Internacional">Internacional</option>
+                                                </select>
+                                                <i data-feather="globe" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Condiciones de Pago</label>
+                                            <div class="input-container">
+                                                <input type="text" id="paymentTerms">
+                                                <i data-feather="calendar" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Moneda Preferida</label>
+                                            <div class="input-container">
+                                                <select id="currency">
+                                                    <option value="RD$">RD$</option>
+                                                    <option value="USD$">USD$</option>
+                                                    <option value="EUR€">EUR€</option>
+                                                </select>
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Notas</label>
+                                            <div class="input-container">
+                                                <textarea id="notes" placeholder="Notas adicionales sobre el proveedor..."></textarea>
+                                                <i data-feather="edit" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Columna derecha (Sidebar) -->
+                <aside class="side-panel">
+                    <!-- Comentario de Proveedor -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h3><i data-feather="message-square"></i> Comentario de Proveedor</h3>
+                        </div>
+                        <div class="card-body">
+                            <textarea id="supplierComment" placeholder="Agregar comentario..."></textarea>
+                            <div class="comment-history">
+                                <h4>Historial de comentarios</h4>
+                                <ul id="commentList"></ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Gestión de Proveedores -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h3><i data-feather="users"></i> Gestión de Proveedores</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="management-actions">
+                                <button class="btn secondary" data-action="add-supplier"><i data-feather="plus"></i> Agregar Nuevo Proveedor</button>
+                                <button class="btn secondary" data-action="view-suppliers"><i data-feather="list"></i> Ver Proveedores</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Botones Finales -->
+                    <section class="card">
+                        <div class="card-body">
+                            <div class="main-actions">
+                                <button class="btn primary" data-action="save"><i data-feather="save"></i> Guardar Proveedor</button>
+                                <button class="btn secondary" data-action="exit"><i data-feather="x"></i> Salir</button>
+                            </div>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Toast -->
+        <div id="toast" class="toast">
+            <div class="toast-icon">
+                <i data-feather="check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <p class="toast-title">Éxito</p>
+                <p class="toast-message" id="toastMessage">Acción completada correctamente</p>
+            </div>
+            <button class="toast-close"><i data-feather="x"></i></button>
+        </div>
+
+        <!-- Modal -->
+        <div class="confirm-dialog" id="myModal">
+            <div class="confirm-dialog-content card">
+                <div class="card-header">
+                    <h3><i data-feather="info"></i> Información</h3>
+                    <button class="modal-close close"><i data-feather="x"></i></button>
+                </div>
+                <div class="card-body">
+                    <div id="modalMessage"></div>
+                </div>
+                <div class="main-actions modal-actions">
+                    <button id="modalConfirm" class="btn primary">Confirmar</button>
+                    <button id="modalCancel" class="btn secondary">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="proveedores.js"></script>
+</body>
+</html>
