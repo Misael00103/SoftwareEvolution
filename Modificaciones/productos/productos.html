@@ -4,181 +4,285 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Productos</title>
-    <link rel="stylesheet" href="productos.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="productos.css">
 </head>
 <body>
     <div class="app-container">
-        <header>
-            <div class="header-left">
-                <div class="header-icon">
-                    <span class="material-icons">inventory_2</span>
+        <!-- Vista de Listado de Productos -->
+        <section class="view active" id="listView">
+            <header class="card">
+                <div class="card-header">
+                    <div class="header-content">
+                        <div class="header-icon">
+                            <span class="material-icons">inventory_2</span>
+                        </div>
+                        <div class="header-text">
+                            <h1>Gestión de Productos</h1>
+                            <p>Administre la información de los productos del sistema</p>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <div class="action-buttons">
+                            <button class="icon-btn" aria-label="Correo">
+                                <span class="material-icons">mail</span>
+                            </button>
+                            <button class="icon-btn" aria-label="Imprimir">
+                                <span class="material-icons">print</span>
+                            </button>
+                            <button class="icon-btn" aria-label="Descargar">
+                                <span class="material-icons">download</span>
+                            </button>
+                        </div>
+                        <button class="btn primary" id="newProductBtn">
+                            <span class="material-icons">add_circle</span>
+                            <span>Nuevo Producto</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="header-text">
-                    <h1>Productos</h1>
-                    <p>Gestión y control de inventario</p>
+            </header>
+            <main>
+                <div class="content-grid">
+                    <div class="main-content">
+                        <section class="card">
+                            <div class="card-header">
+                                <h2><span class="material-icons">list</span> Listado de Productos</h2>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Descripción</th>
+                                            <th>Categoría</th>
+                                            <th>Precio 1</th>
+                                            <th>Precio 2</th>
+                                            <th>Precio 3</th>
+                                            <th>Existencia</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="productList">
+                                        <!-- Los productos se agregarán aquí dinámicamente -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
                 </div>
-            </div>
-            <div class="header-right">
-                <div class="action-buttons">
-                    <button class="icon-button">
-                        <span class="material-icons">mail</span>
-                    </button>
-                    <button class="icon-button">
-                        <span class="material-icons">schedule</span>
-                    </button>
-                    <button class="icon-button">
-                        <span class="material-icons">print</span>
-                    </button>
+            </main>
+        </section>
+
+        <!-- Vista de Formulario de Producto -->
+        <section class="view" id="formView">
+            <header class="card">
+                <div class="card-header">
+                    <div class="header-content">
+                        <div class="header-icon">
+                            <span class="material-icons">inventory_2</span>
+                        </div>
+                        <div class="header-text">
+                            <h1 id="pageTitle">Nuevo Producto</h1>
+                            <p>Complete la información del producto</p>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn secondary" id="backToList">
+                            <span class="material-icons">arrow_back</span>
+                            <span>Volver</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="search-container">
-                    <input type="text" placeholder="Buscar..." />
-                    <span class="material-icons">search</span>
+            </header>
+            <main>
+                <div class="content-grid">
+                    <div class="main-content">
+                        <section class="card">
+                            <div class="card-body">
+                                <form class="product-form" id="productForm">
+                                    <div class="form-grid">
+                                        <div class="field">
+                                            <label for="codigo">Código</label>
+                                            <div class="input-container">
+                                                <input type="text" id="codigo" name="codigo" required>
+                                                <span class="material-icons input-icon">tag</span>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="descripcion">Descripción</label>
+                                            <div class="input-container">
+                                                <input type="text" id="descripcion" name="descripcion" required>
+                                                <span class="material-icons input-icon">description</span>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="categoria">Categoría</label>
+                                            <div class="input-container">
+                                                <select id="categoria" name="categoria" required>
+                                                    <option value="">Seleccionar categoría</option>
+                                                    <option value="Computadoras">Computadoras</option>
+                                                    <option value="Monitores">Monitores</option>
+                                                    <option value="Periféricos">Periféricos</option>
+                                                </select>
+                                                <span class="material-icons input-icon">category</span>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="subcategoria">Sub-Categoría</label>
+                                            <div class="input-container">
+                                                <select id="subcategoria" name="subcategoria">
+                                                    <option value="">Seleccionar sub-categoría</option>
+                                                    <option value="Desktop">Desktop</option>
+                                                    <option value="Laptop">Laptop</option>
+                                                    <option value="Servidor">Servidor</option>
+                                                </select>
+                                                <span class="material-icons input-icon">category</span>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="precio1">Precio 1</label>
+                                            <div class="input-container">
+                                                <input type="number" id="precio1" name="precio1" step="0.01" min="0" required>
+                                                <span class="material-icons input-icon">attach_money</span>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="precio2">Precio 2</label>
+                                            <div class="input-container">
+                                                <input type="number" id="precio2" name="precio2" step="0.01" min="0">
+                                                <span class="material-icons input-icon">attach_money</span>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="precio3">Precio 3</label>
+                                            <div class="input-container">
+                                                <input type="number" id="precio3" name="precio3" step="0.01" min="0">
+                                                <span class="material-icons input-icon">attach_money</span>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="existencia">Existencia</label>
+                                            <div class="input-container">
+                                                <input type="number" id="existencia" name="existencia" min="0" required>
+                                                <span class="material-icons input-icon">inventory</span>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="almacen">Almacén</label>
+                                            <div class="input-container">
+                                                <select id="almacen" name="almacen" required>
+                                                    <option value="">Seleccionar almacén</option>
+                                                    <option value="Almacén Principal">Almacén Principal</option>
+                                                    <option value="Almacén Secundario">Almacén Secundario</option>
+                                                </select>
+                                                <span class="material-icons input-icon">store</span>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="unidad">Unidad de medida</label>
+                                            <div class="input-container">
+                                                <select id="unidad" name="unidad" required>
+                                                    <option value="">Seleccionar unidad</option>
+                                                    <option value="Unidad">Unidad</option>
+                                                    <option value="Caja">Caja</option>
+                                                    <option value="Paquete">Paquete</option>
+                                                </select>
+                                                <span class="material-icons input-icon">straighten</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="field full-width">
+                                        <label for="detalles">Descripción detallada</label>
+                                        <div class="input-container">
+                                            <textarea id="detalles" name="detalles" rows="3"></textarea>
+                                            <span class="material-icons input-icon">notes</span>
+                                        </div>
+                                    </div>
+                                    <div class="image-upload">
+                                        <label>Imagen del producto</label>
+                                        <div class="image-preview">
+                                            <img id="previewImage" src="/placeholder.svg?height=200&width=300" alt="Vista previa de imagen">
+                                        </div>
+                                        <div class="upload-actions">
+                                            <input type="file" id="imagen" name="imagen" accept="image/*" style="display: none;">
+                                            <button type="button" class="btn secondary" onclick="document.getElementById('imagen').click()">
+                                                <span class="material-icons">upload</span>
+                                                Seleccionar imagen
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form-row multi-column">
+                                        <section class="form-section date-section">
+                                            <div class="field">
+                                                <label for="fcreado">Fecha de Creación</label>
+                                                <div class="input-container">
+                                                    <input type="date" id="fcreado" name="fcreado" readonly>
+                                                    <span class="material-icons input-icon">calendar_today</span>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <label for="fmodificado">Fecha de Modificación</label>
+                                                <div class="input-container">
+                                                    <input type="date" id="fmodificado" name="fmodificado" readonly>
+                                                    <span class="material-icons input-icon">calendar_today</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-section checkbox-group">
+                                            <label class="checkbox">
+                                                <input type="checkbox" id="activo" name="activo" checked>
+                                                <span class="checkbox-mark"></span>
+                                                <span>Producto activo</span>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="form-actions main-actions">
+                                        <button type="button" id="cancelBtn" class="btn secondary">
+                                            <span class="material-icons">close</span>
+                                            Cancelar
+                                        </button>
+                                        <button type="submit" class="btn primary">
+                                            <span class="material-icons">save</span>
+                                            Guardar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
                 </div>
-                <button class="add-button" id="goToAddProduct">
-                    <span class="material-icons">add</span>
-                    Agregar producto
-                </button>
-            </div>
-        </header>
-        <div class="filters-card">
-            <div class="filters">
-                <div class="filter-group">
-                    <input type="text" placeholder="Descripción" />
-                    <button class="clear-filter">
-                        <span class="material-icons">close</span>
-                    </button>
-                </div>
-                <div class="filter-group">
-                    <input type="text" placeholder="Categoría" />
-                    <button class="clear-filter">
-                        <span class="material-icons">close</span>
-                    </button>
-                </div>
-                <div class="filter-group">
-                    <input type="text" placeholder="Sub-Categoría" />
-                    <button class="clear-filter">
-                        <span class="material-icons">close</span>
-                    </button>
-                </div>
-                <div class="filter-group">
-                    <input type="text" placeholder="Almacén" />
-                    <button class="clear-filter">
-                        <span class="material-icons">close</span>
-                    </button>
-                </div>
-                <button class="filter-button">
-                    <span class="material-icons">filter_list</span>
-                    Filtrar
-                </button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <h2>
-                    <span class="material-icons">inventory_2</span>
-                    Listado de Productos
-                </h2>
-                <div class="header-actions">
-                    <button class="action-btn">
-                        <span class="material-icons">file_download</span>
-                        Exportar
-                    </button>
-                    <button class="action-btn">
-                        <span class="material-icons">print</span>
-                        Imprimir
-                    </button>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="table-container">
-                    <table id="productsTable">
-                        <thead>
-                            <tr>
-                                <th class="checkbox-column">
-                                    <label class="checkbox-container">
-                                        <input type="checkbox" id="selectAll" />
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </th>
-                                <th>ID <span class="material-icons sort-icon">arrow_downward</span></th>
-                                <th>Descripción</th>
-                                <th>Categoría</th>
-                                <th>Precio 1</th>
-                                <th>Precio 2</th>
-                                <th>Precio 3</th>
-                                <th>Existencia</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="productList">
-                            <!-- Productos se añadirán dinámicamente aquí -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="pagination">
-                    <button class="page-nav" disabled>
-                        <span class="material-icons">chevron_left</span>
-                    </button>
-                    <button class="page-number active">1</button>
-                    <button class="page-number">2</button>
-                    <button class="page-number">3</button>
-                    <button class="page-number">4</button>
-                    <button class="page-number">5</button>
-                    <button class="page-nav">
-                        <span class="material-icons">chevron_right</span>
-                    </button>
-                </div>
-                <div class="page-info">
-                    Mostrando 1-10 de 45 productos
-                </div>
-            </div>
-        </div>
-        <div class="action-panel">
-            <div class="action-card">
-                <h3>Acciones rápidas</h3>
-                <div class="action-buttons-grid">
-                    <button class="action-btn">
-                        <span class="material-icons">category</span>
-                        Categorías
-                    </button>
-                    <button class="action-btn">
-                        <span class="material-icons">inventory</span>
-                        Almacenes
-                    </button>
-                    <button class="action-btn">
-                        <span class="material-icons">price_change</span>
-                        Actualizar precios
-                    </button>
-                    <button class="action-btn">
-                        <span class="material-icons">file_upload</span>
-                        Importar productos
-                    </button>
-                    <button class="action-btn">
-                        <span class="material-icons">file_download</span>
-                        Exportar productos
-                    </button>
-                    <button class="action-btn">
-                        <span class="material-icons">qr_code</span>
-                        Generar códigos
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="toast" id="notification">
+            </main>
+        </section>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="toast">
             <div class="toast-icon">
                 <span class="material-icons">check_circle</span>
             </div>
             <div class="toast-content">
                 <p class="toast-title">Éxito</p>
-                <p class="toast-message">Operación completada correctamente</p>
+                <p class="toast-message" id="toastMessage">Operación realizada correctamente</p>
             </div>
-            <button class="toast-close">
-                <span class="material-icons">close</span>
-            </button>
+            <button class="toast-close"><span class="material-icons">close</span></button>
+        </div>
+
+        <!-- Modal para confirmación -->
+        <div class="confirm-dialog" id="confirmModal">
+            <div class="confirm-dialog-content card">
+                <div class="card-header">
+                    <h3><span class="material-icons">info</span> Confirmación</h3>
+                    <button class="modal-close close"><span class="material-icons">close</span></button>
+                </div>
+                <div class="card-body">
+                    <div id="modalMessage"></div>
+                </div>
+                <div class="main-actions modal-actions">
+                    <button id="modalConfirm" class="btn primary">Confirmar</button>
+                    <button id="modalCancel" class="btn secondary">Cancelar</button>
+                </div>
+            </div>
         </div>
     </div>
     <script src="productos.js"></script>

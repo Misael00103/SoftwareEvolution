@@ -1,149 +1,277 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar los iconos de Material
+    if (typeof M !== 'undefined' && M.AutoInit) {
+        M.AutoInit();
+    }
+
     // Referencias a elementos del DOM
-    const selectAllCheckbox = document.getElementById('selectAll');
-    const rowCheckboxes = document.querySelectorAll('tbody input[type="checkbox"]');
-    const filterButtons = document.querySelectorAll('.clear-filter');
-    const filterInputs = document.querySelectorAll('.filter-group input');
-    const filterButton = document.querySelector('.filter-button');
-    const goToAddProductBtn = document.getElementById('goToAddProduct');
+    const listView = document.getElementById('listView');
+    const formView = document.getElementById('formView');
+    const newProductBtn = document.getElementById('newProductBtn');
+    const backToListBtn = document.getElementById('backToList');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const productForm = document.getElementById('productForm');
     const productList = document.getElementById('productList');
-    const notification = document.getElementById('notification');
-    const notificationCloseBtn = document.querySelector('.toast-close');
+    const pageTitle = document.getElementById('pageTitle');
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toastMessage');
+    const toastClose = document.querySelector('.toast-close');
+    const modal = document.getElementById('confirmModal');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalConfirm = document.getElementById('modalConfirm');
+    const modalCancel = document.getElementById('modalCancel');
+    const modalClose = document.querySelector('.modal-close');
+    const productImageInput = document.getElementById('imagen');
+    const previewImage = document.getElementById('previewImage');
 
-    // Lista de productos inicial
-    let products = [
-        { id: 1, name: 'CPU DELL CI5 DESKTOP', category: 'Computadoras', price1: 10500, price2: 10000, price3: 9500, stock: 5 },
-        { id: 2, name: 'MONITOR DELL 24"', category: 'Monitores', price1: 5200, price2: 5000, price3: 4800, stock: 8 },
-        { id: 3, name: 'TECLADO LOGITECH', category: 'Periféricos', price1: 1200, price2: 1100, price3: 1000, stock: 15 }
-    ];
+    // Variables de estado
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+    let currentProductIndex = null;
 
-    // Renderizar lista de productos
+    // Función para mostrar la vista de formulario
+    function showFormView(isEdit = false) {
+        listView.classList.remove('active');
+        formView.classList.add('active');
+        
+        // Establecer fecha actual
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('fcreado').value = today;
+        document.getElementById('fmodificado').value = today;
+        
+        if (isEdit && currentProductIndex !== null) {
+            pageTitle.textContent = 'Editar Producto';
+            const product = products[currentProductIndex];
+            
+            document.getElementById('codigo').value = product.codigo;
+            document.getElementById('descripcion').value = product.descripcion;
+            document.getElementById('categoria').value = product.categoria;
+            document.getElementById('subcategoria').value = product.subcategoria || '';
+            document.getElementById('precio1').value = product.precio1;
+            document.getElementById('precio2').value = product.precio2 || '';
+            document.getElementById('precio3').value = product.precio3 || '';
+            document.getElementById('existencia').value = product.existencia;
+            document.getElementById('almacen').value = product.almacen || '';
+            document.getElementById('unidad').value = product.unidad || '';
+            document.getElementById('detalles').value = product.detalles || '';
+            document.getElementById('fcreado').value = product.fcreado;
+            document.getElementById('fmodificado').value = today;
+            document.getElementById('activo').checked = product.activo;
+            
+            if (product.imagen) {
+                previewImage.src = product.imagen;
+            } else {
+                previewImage.src = '/placeholder.svg?height=200&width=300';
+            }
+        } else {
+            pageTitle.textContent = 'Nuevo Producto';
+            productForm.reset();
+            previewImage.src = '/placeholder.svg?height=200&width=300';
+        }
+    }
+
+    // Función para mostrar la vista de listado
+    function showListView() {
+        formView.classList.remove('active');
+        listView.classList.add('active');
+        currentProductIndex = null;
+        renderProductList();
+    }
+
+    // Función para renderizar la lista de productos
     function renderProductList() {
         productList.innerHTML = '';
-        products.forEach(product => {
+        products.forEach((product, index) => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>
-                    <label class="checkbox-container">
-                        <input type="checkbox" />
-                        <span class="checkmark"></span>
-                    </label>
-                </td>
-                <td>${product.id}</td>
-                <td>${product.name}</td>
-                <td>${product.category}</td>
-                <td>${product.price1.toLocaleString('es-DO')}</td>
-                <td>${product.price2.toLocaleString('es-DO')}</td>
-                <td>${product.price3.toLocaleString('es-DO')}</td>
-                <td>${product.stock}</td>
-                <td>
-                    <div class="row-actions">
-                        <button class="icon-btn edit-btn" data-id="${product.id}" title="Editar">
-                            <span class="material-icons">edit</span>
-                        </button>
-                        <button class="icon-btn view-btn" data-id="${product.id}" title="Ver detalles">
-                            <span class="material-icons">visibility</span>
-                        </button>
-                        <button class="icon-btn danger delete-btn" data-id="${product.id}" title="Eliminar">
-                            <span class="material-icons">delete</span>
-                        </button>
-                    </div>
+                <td data-label="Código">${product.codigo}</td>
+                <td data-label="Descripción">${product.descripcion}</td>
+                <td data-label="Categoría">${product.categoria}</td>
+                <td data-label="Precio 1">${parseFloat(product.precio1).toFixed(2)}</td>
+                <td data-label="Precio 2">${product.precio2 ? parseFloat(product.precio2).toFixed(2) : '-'}</td>
+                <td data-label="Precio 3">${product.precio3 ? parseFloat(product.precio3).toFixed(2) : '-'}</td>
+                <td data-label="Existencia">${product.existencia}</td>
+                <td data-label="Estado">${product.activo ? 'Activo' : 'Inactivo'}</td>
+                <td data-label="Acciones">
+                    <button class="edit-btn" data-index="${index}">
+                        <span class="material-icons">edit</span>
+                    </button>
+                    <button class="btn-danger" data-index="${index}">
+                        <span class="material-icons">delete</span>
+                    </button>
                 </td>
             `;
             productList.appendChild(row);
         });
-    }
 
-    // Seleccionar/deseleccionar todos los checkboxes
-    if (selectAllCheckbox) {
-        selectAllCheckbox.addEventListener('change', function() {
-            rowCheckboxes.forEach(checkbox => {
-                checkbox.checked = selectAllCheckbox.checked;
+        // Agregar eventos a los botones de edición y eliminación
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.currentTarget.getAttribute('data-index');
+                currentProductIndex = parseInt(index);
+                showFormView(true);
+            });
+        });
+
+        document.querySelectorAll('.btn-danger').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.currentTarget.getAttribute('data-index');
+                currentProductIndex = parseInt(index);
+                showModal('¿Está seguro de que desea eliminar este producto?', () => {
+                    products.splice(currentProductIndex, 1);
+                    localStorage.setItem('products', JSON.stringify(products));
+                    renderProductList();
+                    showToast('Producto eliminado correctamente');
+                });
             });
         });
     }
 
-    // Limpiar campos de filtro
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const input = this.previousElementSibling;
-            input.value = '';
-            input.focus();
-        });
-    });
-
-    // Filtrar productos
-    if (filterButton) {
-        filterButton.addEventListener('click', function() {
-            const filters = {};
-            filterInputs.forEach(input => {
-                if (input.value.trim() !== '') {
-                    filters[input.placeholder] = input.value.trim();
-                }
-            });
-            console.log('Filtros aplicados:', filters);
-            showNotification('Filtros aplicados', 'Se han aplicado los filtros seleccionados');
-        });
+    // Función para mostrar el modal de confirmación
+    function showModal(message, onConfirm) {
+        modalMessage.textContent = message;
+        modal.classList.add('show');
+        
+        modalConfirm.onclick = () => {
+            onConfirm();
+            modal.classList.remove('show');
+        };
+        
+        modalCancel.onclick = () => {
+            modal.classList.remove('show');
+        };
+        
+        modalClose.onclick = () => {
+            modal.classList.remove('show');
+        };
     }
 
-    // Ir a pantalla de agregar producto
-    if (goToAddProductBtn) {
-        goToAddProductBtn.addEventListener('click', function() {
-            localStorage.removeItem('editProductId'); // Limpiar cualquier edición
-            window.location.href = 'gestion-producto.html';
-        });
-    }
-
-    // Acciones de fila
-    productList.addEventListener('click', function(e) {
-        const target = e.target.closest('button');
-        if (!target) return;
-        const id = target.getAttribute('data-id');
-        const product = products.find(p => p.id == id);
-
-        if (target.classList.contains('edit-btn')) {
-            localStorage.setItem('editProductId', id);
-            window.location.href = 'gestion-producto.html';
-        } else if (target.classList.contains('view-btn')) {
-            showNotification('Detalles del producto', `Viendo detalles del producto #${id}`);
-        } else if (target.classList.contains('delete-btn')) {
-            if (confirm(`¿Está seguro que desea eliminar el producto #${id}?`)) {
-                products = products.filter(p => p.id != id);
-                renderProductList();
-                showNotification('Producto eliminado', `El producto #${id} ha sido eliminado correctamente`);
-            }
-        }
-    });
-
-    // Cerrar notificación
-    if (notificationCloseBtn) {
-        notificationCloseBtn.addEventListener('click', function() {
-            notification.classList.remove('show');
-        });
-    }
-
-    // Mostrar notificaciones
-    function showNotification(title, message, type = 'success') {
-        const toastTitle = notification.querySelector('.toast-title');
-        const toastMessage = notification.querySelector('.toast-message');
-        const toastIcon = notification.querySelector('.toast-icon .material-icons');
-        toastTitle.textContent = title;
+    // Función para mostrar notificaciones toast
+    function showToast(message) {
         toastMessage.textContent = message;
-        if (type === 'error') {
-            toastIcon.textContent = 'error';
-            notification.style.borderLeftColor = 'var(--danger)';
-            toastIcon.style.color = 'var(--danger)';
-        } else {
-            toastIcon.textContent = 'check_circle';
-            notification.style.borderLeftColor = 'var(--success)';
-            toastIcon.style.color = 'var(--success)';
-        }
-        notification.classList.add('show');
+        toast.classList.add('show');
         setTimeout(() => {
-            notification.classList.remove('show');
-        }, 5000);
+            toast.classList.remove('show');
+        }, 3000);
     }
 
-    // Inicializar lista
+    // Vista previa de imagen
+    if (productImageInput) {
+        productImageInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // Evento para el botón de nuevo producto
+    if (newProductBtn) {
+        newProductBtn.addEventListener('click', () => {
+            currentProductIndex = null;
+            showFormView(false);
+        });
+    }
+
+    // Evento para el botón volver
+    if (backToListBtn) {
+        backToListBtn.addEventListener('click', () => {
+            showListView();
+        });
+    }
+
+    // Evento para el botón cancelar
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', () => {
+            showListView();
+        });
+    }
+
+    // Evento para cerrar el toast
+    if (toastClose) {
+        toastClose.addEventListener('click', () => {
+            toast.classList.remove('show');
+        });
+    }
+
+    // Manejar el envío del formulario
+    if (productForm) {
+        productForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!productForm.checkValidity()) {
+                productForm.reportValidity();
+                return;
+            }
+
+            const formData = new FormData(productForm);
+            const productData = {
+                codigo: formData.get('codigo'),
+                descripcion: formData.get('descripcion'),
+                categoria: formData.get('categoria'),
+                subcategoria: formData.get('subcategoria'),
+                precio1: formData.get('precio1'),
+                precio2: formData.get('precio2'),
+                precio3: formData.get('precio3'),
+                existencia: formData.get('existencia'),
+                almacen: formData.get('almacen'),
+                unidad: formData.get('unidad'),
+                detalles: formData.get('detalles'),
+                fcreado: formData.get('fcreado'),
+                fmodificado: formData.get('fmodificado'),
+                activo: formData.get('activo') === 'on',
+                imagen: previewImage.src !== '/placeholder.svg?height=200&width=300' ? previewImage.src : null
+            };
+
+            if (currentProductIndex === null) {
+                // Nuevo producto
+                const codeExists = products.some(product => product.codigo === productData.codigo);
+                if (codeExists) {
+                    showModal('El código ya existe. Por favor, use un código único.', () => {});
+                    return;
+                }
+                products.push(productData);
+                showToast('Producto guardado correctamente');
+            } else {
+                // Editar producto existente
+                const codeExists = products.some((product, idx) => 
+                    idx != currentProductIndex && product.codigo === productData.codigo
+                );
+                if (codeExists) {
+                    showModal('El código ya existe en otro producto. Por favor, use un código único.', () => {});
+                    return;
+                }
+                products[currentProductIndex] = productData;
+                showToast('Producto actualizado correctamente');
+            }
+
+            localStorage.setItem('products', JSON.stringify(products));
+            setTimeout(() => {
+                showListView();
+            }, 1500);
+        });
+    }
+
+    // Efectos visuales para los inputs
+    const inputs = document.querySelectorAll('.input-container input, .input-container select, .input-container textarea');
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            const icon = input.nextElementSibling;
+            if (icon && icon.classList.contains('input-icon')) {
+                icon.style.color = 'var(--primary)';
+            }
+        });
+        input.addEventListener('blur', () => {
+            const icon = input.nextElementSibling;
+            if (icon && icon.classList.contains('input-icon') && !input.value) {
+                icon.style.color = 'var(--text-secondary)';
+            }
+        });
+    });
+
+    // Inicializar la aplicación
     renderProductList();
 });
