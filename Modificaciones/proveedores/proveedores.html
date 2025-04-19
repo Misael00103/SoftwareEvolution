@@ -101,8 +101,8 @@
                 </div>
             </header>
 
-            <div class="content-grid">
-                <!-- Columna izquierda -->
+            <div class="content-wrapper">
+                <!-- Contenido principal -->
                 <div class="main-content">
                     <section class="card">
                         <div class="card-header">
@@ -196,29 +196,35 @@
                                                 <i data-feather="dollar-sign" class="input-icon"></i>
                                             </div>
                                         </div>
-                                        <div class="field">
-                                            <label>Notas</label>
-                                            <div class="input-container">
-                                                <textarea id="notes" placeholder="Notas adicionales sobre el proveedor..."></textarea>
-                                                <i data-feather="edit" class="input-icon"></i>
-                                            </div>
-                                        </div>
                                     </div>
                                 </section>
                             </form>
                         </div>
                     </section>
-                </div>
 
-                <!-- Columna derecha (Sidebar) -->
-                <aside class="side-panel">
-                    <!-- Comentario de Proveedor -->
+                    <!-- Notas Adicionales (ahora dentro de main-content) -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h3><i data-feather="edit"></i> Notas Adicionales</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="input-container">
+                                <textarea id="notes" placeholder="Notas adicionales sobre el proveedor..."></textarea>
+                                <i data-feather="edit" class="input-icon"></i>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Comentario de Proveedor (ahora dentro de main-content) -->
                     <section class="card">
                         <div class="card-header">
                             <h3><i data-feather="message-square"></i> Comentario de Proveedor</h3>
                         </div>
                         <div class="card-body">
-                            <textarea id="supplierComment" placeholder="Agregar comentario..."></textarea>
+                            <div class="input-container">
+                                <textarea id="supplierComment" placeholder="Agregar comentario..."></textarea>
+                                <i data-feather="message-square" class="input-icon"></i>
+                            </div>
                             <div class="comment-history">
                                 <h4>Historial de comentarios</h4>
                                 <ul id="commentList"></ul>
@@ -226,7 +232,7 @@
                         </div>
                     </section>
 
-                    <!-- Gestión de Proveedores -->
+                    <!-- Gestión de Proveedores (ahora dentro de main-content) -->
                     <section class="card">
                         <div class="card-header">
                             <h3><i data-feather="users"></i> Gestión de Proveedores</h3>
@@ -239,7 +245,7 @@
                         </div>
                     </section>
 
-                    <!-- Botones Finales -->
+                    <!-- Botones Finales (ahora dentro de main-content) -->
                     <section class="card">
                         <div class="card-body">
                             <div class="main-actions">
@@ -248,7 +254,7 @@
                             </div>
                         </div>
                     </section>
-                </aside>
+                </div>
             </div>
         </section>
 

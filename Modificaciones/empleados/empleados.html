@@ -29,7 +29,7 @@
                                 <img src="../Assets/perfil.jpg" alt="Usuario" class="user-image">
                                 <div class="user-details">
                                     <span class="user-name">Juan Pérez</span>
-                                    <span class="user-date" id="employeeDateList">15/04/2025 10:00</span>
+                                    <span class="user-date" id="employeeDateList">19/04/2025 10:00</span>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
             </div>
         </section>
 
-        <!-- Vista de Formulario de Empleado -->
+        <!-- Vista de Gestión de Empleado -->
         <section class="view" id="employeeFormView">
             <header class="card header-card">
                 <div class="card-header">
@@ -79,7 +79,7 @@
                             <i data-feather="users"></i>
                         </div>
                         <div class="header-text">
-                            <h1 id="formTitle">Nuevo Empleado</h1>
+                            <h1 id="formHeaderTitle">Gestión de Empleado</h1>
                             <p id="employeeId">EMP0001</p>
                         </div>
                     </div>
@@ -89,32 +89,39 @@
                                 <img src="../Assets/perfil.jpg" alt="Usuario" class="user-image">
                                 <div class="user-details">
                                     <span class="user-name">Juan Pérez</span>
-                                    <span class="user-date" id="employeeDate">15/04/2025 10:00</span>
+                                    <span class="user-date" id="employeeDate">19/04/2025 10:00</span>
                                 </div>
                             </div>
                         </div>
                         <div class="action-buttons">
                             <button class="icon-btn" aria-label="Correo"><i data-feather="mail"></i></button>
                             <button class="icon-btn" aria-label="Imprimir"><i data-feather="printer"></i></button>
+                            <button class="icon-btn" aria-label="Descargar"><i data-feather="download"></i></button>
                         </div>
                     </div>
                 </div>
             </header>
-
             <div class="content-grid">
-                <!-- Columna izquierda -->
+                <!-- Columna principal -->
                 <div class="main-content">
+                    <!-- Información del Empleado -->
                     <section class="card">
                         <div class="card-header">
-                            <h2><i data-feather="user"></i> Información del Empleado</h2>
-                            <button class="btn secondary" id="backBtn">
-                                <i data-feather="arrow-left"></i> Volver
-                            </button>
+                            <div class="tabs-container">
+                                <div class="tabs">
+                                    <button type="button" class="tab active" data-tab="general"><i data-feather="user"></i> Datos Generales</button>
+                                    <button type="button" class="tab" data-tab="labor"><i data-feather="briefcase"></i> Información Laboral</button>
+                                    <button type="button" class="tab" data-tab="personal"><i data-feather="info"></i> Información Personal</button>
+                                    <button type="button" class="tab" data-tab="family"><i data-feather="users"></i> Información Familiar</button>
+                                    <button type="button" class="tab" data-tab="financial"><i data-feather="dollar-sign"></i> Información Financiera</button>
+                                    <button type="button" class="tab" data-tab="other"><i data-feather="more-horizontal"></i> Otros Datos</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <form id="employeeForm">
-                                <section class="form-section">
-                                    <h3>Datos Generales</h3>
+                                <div id="general" class="tab-content active">
+                                    <h3><i data-feather="user"></i> Datos Generales</h3>
                                     <div class="form-grid">
                                         <div class="field">
                                             <label>Nombre</label>
@@ -124,9 +131,23 @@
                                             </div>
                                         </div>
                                         <div class="field">
+                                            <label>Apellido</label>
+                                            <div class="input-container">
+                                                <input type="text" id="employeeLastName">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
                                             <label>Cédula</label>
                                             <div class="input-container">
                                                 <input type="text" id="cedula">
+                                                <i data-feather="file-text" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tipo de Identificación</label>
+                                            <div class="input-container">
+                                                <input type="text" id="identificationType">
                                                 <i data-feather="file-text" class="input-icon"></i>
                                             </div>
                                         </div>
@@ -145,9 +166,23 @@
                                             </div>
                                         </div>
                                         <div class="field">
+                                            <label>Celular</label>
+                                            <div class="input-container">
+                                                <input type="text" id="cellphone">
+                                                <i data-feather="smartphone" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
                                             <label>Correo Electrónico</label>
                                             <div class="input-container">
                                                 <input type="email" id="email">
+                                                <i data-feather="mail" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Correo Electrónico 2</label>
+                                            <div class="input-container">
+                                                <input type="email" id="email2">
                                                 <i data-feather="mail" class="input-icon"></i>
                                             </div>
                                         </div>
@@ -162,6 +197,22 @@
                                             </div>
                                         </div>
                                         <div class="field">
+                                            <label>Activo en Nómina</label>
+                                            <div class="input-container">
+                                                <select id="activePayroll">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="labor" class="tab-content">
+                                    <h3><i data-feather="briefcase"></i> Información Laboral</h3>
+                                    <div class="form-grid">
+                                        <div class="field">
                                             <label>Departamento</label>
                                             <div class="input-container">
                                                 <select id="department">
@@ -174,6 +225,13 @@
                                             </div>
                                         </div>
                                         <div class="field">
+                                            <label>Subdepartamento</label>
+                                            <div class="input-container">
+                                                <input type="number" id="subDepartment">
+                                                <i data-feather="briefcase" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
                                             <label>Puesto</label>
                                             <div class="input-container">
                                                 <input type="text" id="position">
@@ -181,58 +239,1119 @@
                                             </div>
                                         </div>
                                         <div class="field">
-                                            <label>Salario</label>
+                                            <label>Subpuesto</label>
                                             <div class="input-container">
-                                                <input type="number" id="salary">
-                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                                <input type="number" id="subPosition">
+                                                <i data-feather="user-check" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
-                                            <label>Fecha de Contratación</label>
+                                            <label>Fecha de Entrada</label>
                                             <div class="input-container">
                                                 <input type="date" id="hireDate">
                                                 <i data-feather="calendar" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
-                                            <label>Notas</label>
+                                            <label>Fecha de Reingreso</label>
                                             <div class="input-container">
-                                                <textarea id="notes" placeholder="Notas adicionales sobre el empleado..."></textarea>
-                                                <i data-feather="edit" class="input-icon"></i>
+                                                <input type="date" id="reentryDate">
+                                                <i data-feather="calendar" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Fecha de Término</label>
+                                            <div class="input-container">
+                                                <input type="date" id="terminationDate">
+                                                <i data-feather="calendar" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Sueldo</label>
+                                            <div class="input-container">
+                                                <input type="number" id="salary">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Sueldo Mensual</label>
+                                            <div class="input-container">
+                                                <input type="number" id="monthlySalary">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Sueldo por Hora</label>
+                                            <div class="input-container">
+                                                <select id="hourlySalary">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Valor Hora Extra</label>
+                                            <div class="input-container">
+                                                <input type="number" id="overtimeHour">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Horario</label>
+                                            <div class="input-container">
+                                                <input type="number" id="schedule">
+                                                <i data-feather="clock" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Turno</label>
+                                            <div class="input-container">
+                                                <input type="text" id="shift">
+                                                <i data-feather="clock" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tipo de Empleado</label>
+                                            <div class="input-container">
+                                                <input type="number" id="employeeType">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Área</label>
+                                            <div class="input-container">
+                                                <input type="number" id="area">
+                                                <i data-feather="map" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Subárea</label>
+                                            <div class="input-container">
+                                                <input type="number" id="subArea">
+                                                <i data-feather="map" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Clasificación</label>
+                                            <div class="input-container">
+                                                <input type="number" id="classification">
+                                                <i data-feather="list" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Proyecto</label>
+                                            <div class="input-container">
+                                                <input type="number" id="project">
+                                                <i data-feather="briefcase" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Supervisor</label>
+                                            <div class="input-container">
+                                                <input type="number" id="supervisor">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Vendedor</label>
+                                            <div class="input-container">
+                                                <input type="number" id="vendor">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Cobrador</label>
+                                            <div class="input-container">
+                                                <input type="number" id="collector">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Usuario</label>
+                                            <div class="input-container">
+                                                <input type="number" id="user">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Forma de Pago</label>
+                                            <div class="input-container">
+                                                <input type="text" id="paymentForm">
+                                                <i data-feather="credit-card" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tipo de Cobro</label>
+                                            <div class="input-container">
+                                                <input type="text" id="paymentType">
+                                                <i data-feather="credit-card" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tipo de Contrato</label>
+                                            <div class="input-container">
+                                                <input type="text" id="contractType">
+                                                <i data-feather="file-text" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tipo de Nómina</label>
+                                            <div class="input-container">
+                                                <input type="number" id="payrollType">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tipo de Ingresos</label>
+                                            <div class="input-container">
+                                                <input type="number" id="incomeType">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tipo de Ingreso TSS</label>
+                                            <div class="input-container">
+                                                <input type="number" id="tssIncomeType">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Fecha Salida TSS</label>
+                                            <div class="input-container">
+                                                <input type="date" id="tssDepartureDate">
+                                                <i data-feather="calendar" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Sucursal</label>
+                                            <div class="input-container">
+                                                <input type="number" id="branch">
+                                                <i data-feather="map-pin" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Seguro</label>
+                                            <div class="input-container">
+                                                <input type="number" id="insurance">
+                                                <i data-feather="shield" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Seguro Médico</label>
+                                            <div class="input-container">
+                                                <input type="number" id="medicalInsurance">
+                                                <i data-feather="shield" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>SDSS</label>
+                                            <div class="input-container">
+                                                <input type="text" id="sdss">
+                                                <i data-feather="file-text" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>AFP</label>
+                                            <div class="input-container">
+                                                <input type="number" id="afp">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>AFP 2</label>
+                                            <div class="input-container">
+                                                <input type="number" id="afp2">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>ISR</label>
+                                            <div class="input-container">
+                                                <input type="number" id="isr">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Deducciones ISR</label>
+                                            <div class="input-container">
+                                                <select id="isrDeductions">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Deducciones AFP</label>
+                                            <div class="input-container">
+                                                <select id="afpDeductions">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Deducciones ARS</label>
+                                            <div class="input-container">
+                                                <select id="arsDeductions">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Otros Ingresos</label>
+                                            <div class="input-container">
+                                                <input type="number" id="otherIncome">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Otros Egresos</label>
+                                            <div class="input-container">
+                                                <input type="number" id="otherExpenses">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Otros Descuentos</label>
+                                            <div class="input-container">
+                                                <input type="number" id="otherDeductions">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Monto Incentivo</label>
+                                            <div class="input-container">
+                                                <input type="number" id="incentiveAmount">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Bonificación</label>
+                                            <div class="input-container">
+                                                <select id="bonus">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Cobra Comisión</label>
+                                            <div class="input-container">
+                                                <select id="chargesCommission">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Porcentaje Comisión</label>
+                                            <div class="input-container">
+                                                <input type="number" id="commissionPercentage">
+                                                <i data-feather="percent" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Producción Completa</label>
+                                            <div class="input-container">
+                                                <select id="fullProduction">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Producción Grupal</label>
+                                            <div class="input-container">
+                                                <select id="groupProduction">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Producción Extra</label>
+                                            <div class="input-container">
+                                                <select id="extraProduction">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Porcentaje Grupal</label>
+                                            <div class="input-container">
+                                                <input type="number" id="groupPercentage">
+                                                <i data-feather="percent" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Módulo</label>
+                                            <div class="input-container">
+                                                <input type="number" id="module">
+                                                <i data-feather="box" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Hora Extra</label>
+                                            <div class="input-container">
+                                                <select id="overtimeHourFlag">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Hora Nocturna</label>
+                                            <div class="input-container">
+                                                <select id="nightHour">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Sueldo Producción</label>
+                                            <div class="input-container">
+                                                <select id="productionSalary">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Sueldo Promedio</label>
+                                            <div class="input-container">
+                                                <select id="averageSalary">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Saldo a Favor</label>
+                                            <div class="input-container">
+                                                <input type="number" id="positiveBalance">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Uniforme</label>
+                                            <div class="input-container">
+                                                <input type="number" id="uniform">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Profesión</label>
+                                            <div class="input-container">
+                                                <input type="number" id="profession">
+                                                <i data-feather="briefcase" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Ocupación</label>
+                                            <div class="input-container">
+                                                <input type="number" id="occupation">
+                                                <i data-feather="briefcase" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Número de Orden</label>
+                                            <div class="input-container">
+                                                <input type="number" id="orderNumber">
+                                                <i data-feather="list" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Días Inicio</label>
+                                            <div class="input-container">
+                                                <input type="number" id="startDays">
+                                                <i data-feather="calendar" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Cuenta Contable</label>
+                                            <div class="input-container">
+                                                <input type="text" id="accountingAccount">
+                                                <i data-feather="file-text" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Cuenta Egreso</label>
+                                            <div class="input-container">
+                                                <input type="text" id="expenseAccount">
+                                                <i data-feather="file-text" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Liquidado</label>
+                                            <div class="input-container">
+                                                <select id="settled">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Salida Término</label>
+                                            <div class="input-container">
+                                                <select id="terminationDeparture">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Forzar</label>
+                                            <div class="input-container">
+                                                <select id="force">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Poncha</label>
+                                            <div class="input-container">
+                                                <select id="punches">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Clave Ponche</label>
+                                            <div class="input-container">
+                                                <input type="number" id="punchKey">
+                                                <i data-feather="key" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Comida</label>
+                                            <div class="input-container">
+                                                <select id="food">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
                                             </div>
                                         </div>
                                     </div>
-                                </section>
+                                </div>
+
+                                <div id="personal" class="tab-content">
+                                    <h3><i data-feather="info"></i> Información Personal</h3>
+                                    <div class="form-grid">
+                                        <div class="field">
+                                            <label>Fecha de Nacimiento</label>
+                                            <div class="input-container">
+                                                <input type="date" id="birthDate">
+                                                <i data-feather="calendar" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Lugar de Nacimiento</label>
+                                            <div class="input-container">
+                                                <input type="text" id="birthPlace">
+                                                <i data-feather="map-pin" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Edad</label>
+                                            <div class="input-container">
+                                                <input type="number" id="age">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tipo de Sangre</label>
+                                            <div class="input-container">
+                                                <input type="text" id="bloodType">
+                                                <i data-feather="droplet" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Sexo</label>
+                                            <div class="input-container">
+                                                <input type="text" id="gender">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Estado Civil</label>
+                                            <div class="input-container">
+                                                <input type="text" id="maritalStatus">
+                                                <i data-feather="heart" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Estatura</label>
+                                            <div class="input-container">
+                                                <input type="number" id="height">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Nacionalidad</label>
+                                            <div class="input-container">
+                                                <input type="text" id="nationality">
+                                                <i data-feather="globe" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Extranjero</label>
+                                            <div class="input-container">
+                                                <select id="foreigner">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>País</label>
+                                            <div class="input-container">
+                                                <input type="number" id="country">
+                                                <i data-feather="globe" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Región</label>
+                                            <div class="input-container">
+                                                <input type="number" id="region">
+                                                <i data-feather="map" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Estado</label>
+                                            <div class="input-container">
+                                                <input type="number" id="state">
+                                                <i data-feather="map" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Ciudad</label>
+                                            <div class="input-container">
+                                                <input type="number" id="city">
+                                                <i data-feather="map" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Municipio</label>
+                                            <div class="input-container">
+                                                <input type="number" id="municipality">
+                                                <i data-feather="map" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Peso</label>
+                                            <div class="input-container">
+                                                <input type="number" id="weight">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Talla Calzado</label>
+                                            <div class="input-container">
+                                                <input type="number" id="shoeSize">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Talla Pantalón</label>
+                                            <div class="input-container">
+                                                <input type="number" id="pantsSize">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Talla Camisa</label>
+                                            <div class="input-container">
+                                                <input type="number" id="shirtSize">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Usa Lentes</label>
+                                            <div class="input-container">
+                                                <select id="usesGlasses">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="family" class="tab-content">
+                                    <h3><i data-feather="users"></i> Información Familiar</h3>
+                                    <div class="form-grid">
+                                        <div class="field">
+                                            <label>Nombre del Padre</label>
+                                            <div class="input-container">
+                                                <input type="text" id="fatherName">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Dirección del Padre</label>
+                                            <div class="input-container">
+                                                <input type="text" id="fatherAddress">
+                                                <i data-feather="map-pin" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Teléfono del Padre</label>
+                                            <div class="input-container">
+                                                <input type="text" id="fatherPhone">
+                                                <i data-feather="phone" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Nombre de la Madre</label>
+                                            <div class="input-container">
+                                                <input type="text" id="motherName">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Dirección de la Madre</label>
+                                            <div class="input-container">
+                                                <input type="text" id="motherAddress">
+                                                <i data-feather="map-pin" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Teléfono de la Madre</label>
+                                            <div class="input-container">
+                                                <input type="text" id="motherPhone">
+                                                <i data-feather="phone" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Nombre del Esposo</label>
+                                            <div class="input-container">
+                                                <input type="text" id="spouseName">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Cantidad de Hijos</label>
+                                            <div class="input-container">
+                                                <input type="number" id="childrenCount">
+                                                <i data-feather="users" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Número de Dependientes</label>
+                                            <div class="input-container">
+                                                <input type="number" id="dependentsCount">
+                                                <i data-feather="users" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="financial" class="tab-content">
+                                    <h3><i data-feather="dollar-sign"></i> Información Financiera</h3>
+                                    <div class="form-grid">
+                                        <div class="field">
+                                            <label>Cuenta Bancaria</label>
+                                            <div class="input-container">
+                                                <input type="text" id="bankAccount">
+                                                <i data-feather="credit-card" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Cuenta Bancaria Deuda</label>
+                                            <div class="input-container">
+                                                <input type="text" id="bankAccountDebt">
+                                                <i data-feather="credit-card" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tipo de Cuenta</label>
+                                            <div class="input-container">
+                                                <input type="text" id="accountType">
+                                                <i data-feather="credit-card" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>ID Banco</label>
+                                            <div class="input-container">
+                                                <input type="number" id="bankId">
+                                                <i data-feather="credit-card" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Cuenta Cooperativa</label>
+                                            <div class="input-container">
+                                                <input type="text" id="cooperativeAccount">
+                                                <i data-feather="credit-card" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Depósito Cooperativa</label>
+                                            <div class="input-container">
+                                                <input type="number" id="cooperativeDeposit">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Ahorro Cooperativa</label>
+                                            <div class="input-container">
+                                                <input type="number" id="cooperativeSavings">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Cuenta Ahorro</label>
+                                            <div class="input-container">
+                                                <input type="text" id="savingsAccount">
+                                                <i data-feather="credit-card" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Monto Ahorro</label>
+                                            <div class="input-container">
+                                                <input type="number" id="savingsAmount">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tarjeta de Crédito</label>
+                                            <div class="input-container">
+                                                <input type="text" id="creditCard">
+                                                <i data-feather="credit-card" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Límite Crédito Tarjeta</label>
+                                            <div class="input-container">
+                                                <input type="number" id="creditCardLimit">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Monto Préstamo</label>
+                                            <div class="input-container">
+                                                <input type="number" id="loanAmount">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Fecha Préstamo</label>
+                                            <div class="input-container">
+                                                <input type="date" id="loanDate">
+                                                <i data-feather="calendar" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Fecha Vencimiento Préstamo</label>
+                                            <div class="input-container">
+                                                <input type="date" id="loanDueDate">
+                                                <i data-feather="calendar" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Cantidad Cuotas</label>
+                                            <div class="input-container">
+                                                <input type="number" id="installmentCount">
+                                                <i data-feather="list" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Monto Cuota</label>
+                                            <div class="input-container">
+                                                <input type="number" id="installmentAmount">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Balance Préstamo</label>
+                                            <div class="input-container">
+                                                <input type="number" id="loanBalance">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Balance Contrato</label>
+                                            <div class="input-container">
+                                                <input type="number" id="contractBalance">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>CXC</label>
+                                            <div class="input-container">
+                                                <input type="number" id="cxc">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Beneficiario 1</label>
+                                            <div class="input-container">
+                                                <input type="text" id="beneficiary1">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Cédula Beneficiario 1</label>
+                                            <div class="input-container">
+                                                <input type="text" id="beneficiaryId1">
+                                                <i data-feather="file-text" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Parentesco 1</label>
+                                            <div class="input-container">
+                                                <input type="text" id="relationship1">
+                                                <i data-feather="users" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Monto Beneficiario 1</label>
+                                            <div class="input-container">
+                                                <input type="number" id="beneficiaryAmount1">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Beneficiario 2</label>
+                                            <div class="input-container">
+                                                <input type="text" id="beneficiary2">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Cédula Beneficiario 2</label>
+                                            <div class="input-container">
+                                                <input type="text" id="beneficiaryId2">
+                                                <i data-feather="file-text" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Parentesco 2</label>
+                                            <div class="input-container">
+                                                <input type="text" id="relationship2">
+                                                <i data-feather="users" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Monto Beneficiario 2</label>
+                                            <div class="input-container">
+                                                <input type="number" id="beneficiaryAmount2">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="other" class="tab-content">
+                                    <h3><i data-feather="more-horizontal"></i> Otros Datos</h3>
+                                    <div class="form-grid">
+                                        <div class="field">
+                                            <label>Foto</label>
+                                            <div class="input-container">
+                                                <input type="text" id="photo">
+                                                <i data-feather="image" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Celular Asignado</label>
+                                            <div class="input-container">
+                                                <input type="text" id="assignedCellphone">
+                                                <i data-feather="smartphone" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Salida Celular</label>
+                                            <div class="input-container">
+                                                <select id="cellphoneDeparture">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Licencia de Conducir</label>
+                                            <div class="input-container">
+                                                <input type="text" id="driverLicense">
+                                                <i data-feather="file-text" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Clase Licencia de Conducir</label>
+                                            <div class="input-container">
+                                                <input type="text" id="driverLicenseClass">
+                                                <i data-feather="file-text" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tiene Licencia</label>
+                                            <div class="input-container">
+                                                <select id="hasLicense">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Incapacidad</label>
+                                            <div class="input-container">
+                                                <select id="disability">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Nombre Emergencia</label>
+                                            <div class="input-container">
+                                                <input type="text" id="emergencyName">
+                                                <i data-feather="user" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Teléfono Contacto</label>
+                                            <div class="input-container">
+                                                <input type="text" id="contactPhone">
+                                                <i data-feather="phone" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Salida Vacaciones</label>
+                                            <div class="input-container">
+                                                <select id="vacationDeparture">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Fecha Vacaciones</label>
+                                            <div class="input-container">
+                                                <input type="date" id="vacationDate">
+                                                <i data-feather="calendar" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Fecha Regreso Vacaciones</label>
+                                            <div class="input-container">
+                                                <input type="date" id="vacationReturnDate">
+                                                <i data-feather="calendar" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Fecha Real Vacaciones</label>
+                                            <div class="input-container">
+                                                <input type="date" id="realVacationDate">
+                                                <i data-feather="calendar" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Vacaciones</label>
+                                            <div class="input-container">
+                                                <input type="number" id="vacations">
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>SC</label>
+                                            <div class="input-container">
+                                                <select id="sc">
+                                                    <option value="true">Sí</option>
+                                                    <option value="false">No</option>
+                                                </select>
+                                                <i data-feather="check-circle" class="input-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </section>
                 </div>
 
-                <!-- Columna derecha (Sidebar) -->
+                <!-- Columna lateral (Sidebar) -->
                 <aside class="side-panel">
-                    <!-- Comentario de Empleado -->
+                    <!-- Botón de regresar -->
+                    <div class="back-btn-wrapper">
+                        <button class="btn primary" id="backBtn">
+                            <i data-feather="arrow-left"></i> Volver
+                        </button>
+                    </div>
+                    
+                    <!-- Botones de Acción -->
                     <section class="card">
                         <div class="card-header">
-                            <h3><i data-feather="message-square"></i> Comentario de Empleado</h3>
+                            <h3><i data-feather="settings"></i> Acciones</h3>
                         </div>
                         <div class="card-body">
-                            <textarea id="employeeComment" placeholder="Agregar comentario..."></textarea>
-                            <div class="comment-history">
-                                <h4>Historial de comentarios</h4>
-                                <ul id="commentList"></ul>
+                            <div class="management-actions">
+                                <button class="btn secondary" data-action="print-employee">
+                                    <i data-feather="printer"></i> Imprimir
+                                </button>
+                                <button class="btn secondary" data-action="export-employee">
+                                    <i data-feather="download"></i> Exportar
+                                </button>
+                                <button class="btn secondary" data-action="email-employee">
+                                    <i data-feather="mail"></i> Enviar Email
+                                </button>
                             </div>
                         </div>
                     </section>
 
-                    <!-- Gestión de Empleados -->
+                    <!-- Documentos del Empleado -->
                     <section class="card">
                         <div class="card-header">
-                            <h3><i data-feather="users"></i> Gestión de Empleados</h3>
+                            <h3><i data-feather="file-text"></i> Documentos</h3>
                         </div>
                         <div class="card-body">
                             <div class="management-actions">
-                                <button class="btn secondary" data-action="add-employee"><i data-feather="plus"></i> Agregar Nuevo Empleado</button>
-                                <button class="btn secondary" data-action="view-employees"><i data-feather="list"></i> Ver Empleados</button>
+                                <button class="btn secondary" data-action="add-document">
+                                    <i data-feather="plus"></i> Añadir
+                                </button>
+                                <button class="btn secondary" data-action="view-documents">
+                                    <i data-feather="list"></i> Ver Todos
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Historial de Cambios -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h3><i data-feather="clock"></i> Historial</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="management-actions">
+                                <button class="btn secondary" data-action="view-history">
+                                    <i data-feather="list"></i> Ver Historial
+                                </button>
                             </div>
                         </div>
                     </section>
@@ -241,8 +1360,12 @@
                     <section class="card">
                         <div class="card-body">
                             <div class="main-actions">
-                                <button class="btn primary" data-action="save"><i data-feather="save"></i> Guardar Empleado</button>
-                                <button class="btn secondary" data-action="exit"><i data-feather="x"></i> Salir</button>
+                                <button class="btn primary" id="saveBtn">
+                                    <i data-feather="save"></i> Guardar
+                                </button>
+                                <button class="btn secondary" id="cancelBtn">
+                                    <i data-feather="x"></i> Cancelar
+                                </button>
                             </div>
                         </div>
                     </section>
@@ -250,35 +1373,36 @@
             </div>
         </section>
 
-        <!-- Toast -->
-        <div id="toast" class="toast">
+        <!-- Confirm Dialog -->
+        <div class="confirm-dialog" id="confirmDialog">
+            <div class="confirm-dialog-content card">
+                <div class="card-header">
+                    <h3><i data-feather="alert-triangle"></i> Confirmar Acción</h3>
+                    <button class="modal-close" id="closeDialogBtn"><i data-feather="x"></i></button>
+                </div>
+                <div class="card-body">
+                    <p id="confirmMessage">¿Estás seguro de que deseas eliminar este empleado?</p>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn secondary" id="cancelDialogBtn">Cancelar</button>
+                    <button class="btn danger" id="confirmDeleteBtn">Eliminar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast">
             <div class="toast-icon">
                 <i data-feather="check-circle"></i>
             </div>
             <div class="toast-content">
-                <p class="toast-title">Éxito</p>
-                <p class="toast-message" id="toastMessage">Acción completada correctamente</p>
+                <div class="toast-title">Éxito</div>
+                <div class="toast-message" id="toastMessage">Acción completada con éxito.</div>
             </div>
-            <button class="toast-close"><i data-feather="x"></i></button>
-        </div>
-
-        <!-- Modal -->
-        <div class="confirm-dialog" id="myModal">
-            <div class="confirm-dialog-content card">
-                <div class="card-header">
-                    <h3><i data-feather="info"></i> Información</h3>
-                    <button class="modal-close close"><i data-feather="x"></i></button>
-                </div>
-                <div class="card-body">
-                    <div id="modalMessage"></div>
-                </div>
-                <div class="main-actions modal-actions">
-                    <button id="modalConfirm" class="btn primary">Confirmar</button>
-                    <button id="modalCancel" class="btn secondary">Cancelar</button>
-                </div>
-            </div>
+            <button class="toast-close" id="closeToastBtn"><i data-feather="x"></i></button>
         </div>
     </div>
+
     <script src="empleados.js"></script>
 </body>
 </html>

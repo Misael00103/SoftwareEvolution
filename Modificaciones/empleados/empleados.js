@@ -1,253 +1,247 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar los iconos de Feather
     feather.replace();
 
     // Elementos del DOM
-    const employeeListView = document.getElementById("employeeListView");
-    const employeeFormView = document.getElementById("employeeFormView");
-    const addEmployeeBtn = document.getElementById("addEmployeeBtn");
-    const backBtn = document.getElementById("backBtn");
-    const employeeList = document.getElementById("employeeList");
-    const formTitle = document.getElementById("formTitle");
-    const employeeId = document.getElementById("employeeId");
-    const employeeDate = document.getElementById("employeeDate");
-    const employeeDateList = document.getElementById("employeeDateList");
-    const toast = document.getElementById("toast");
-    const toastMessage = document.getElementById("toastMessage");
-    const modal = document.getElementById("myModal");
-    const modalMessage = document.getElementById("modalMessage");
-    const modalConfirm = document.getElementById("modalConfirm");
-    const modalCancel = document.getElementById("modalCancel");
-    const tabs = document.querySelectorAll(".tab");
-    const tabContents = document.querySelectorAll(".tab-content");
-    const saveBtn = document.querySelector('[data-action="save"]');
-    const exitBtn = document.querySelector('[data-action="exit"]');
-    const viewEmployeesBtn = document.querySelector('[data-action="view-employees"]');
-    const addEmployeeSideBtn = document.querySelector('[data-action="add-employee"]');
-    let isEditing = false;
-    let editIndex = null;
+    const employeeListView = document.getElementById('employeeListView');
+    const employeeFormView = document.getElementById('employeeFormView');
+    const employeeList = document.getElementById('employeeList');
+    const addEmployeeBtn = document.getElementById('addEmployeeBtn');
+    const backBtn = document.getElementById('backBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const formHeaderTitle = document.getElementById('formHeaderTitle');
+    const employeeId = document.getElementById('employeeId');
+    const employeeDate = document.getElementById('employeeDate');
+    const employeeDateList = document.getElementById('employeeDateList');
+    const employeeForm = document.getElementById('employeeForm');
+    const confirmDialog = document.getElementById('confirmDialog');
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+    const cancelDialogBtn = document.getElementById('cancelDialogBtn');
+    const closeDialogBtn = document.getElementById('closeDialogBtn');
+    const confirmMessage = document.getElementById('confirmMessage');
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toastMessage');
+    const closeToastBtn = document.getElementById('closeToastBtn');
 
-    const employees = [
-        {
-            id: "EMP0001",
-            nombre: "María González",
-            cedula: "402-1234567-8",
-            direccion: "Calle Secundaria #456, Santiago",
-            telefono: "(809) 555-9876",
-            email: "maria.gonzalez@empresa.com",
-            estado: "Activo",
-            departamento: "Ventas",
-            puesto: "Analista",
-            salario: 35000,
-            fechaContratacion: "2024-01-15",
-            notas: "",
-            comentarios: ["Excelente desempeño en el último trimestre"],
-        },
-        {
-            id: "EMP0002",
-            nombre: "Carlos Rodríguez",
-            cedula: "031-9876543-2",
-            direccion: "Avenida Principal #789, Santo Domingo",
-            telefono: "(809) 555-4321",
-            email: "carlos.rodriguez@empresa.com",
-            estado: "Activo",
-            departamento: "TI",
-            puesto: "Desarrollador",
-            salario: 45000,
-            fechaContratacion: "2023-06-01",
-            notas: "Especialista en sistemas ERP",
-            comentarios: [],
-        },
+    // Manejo de tabs
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            tab.classList.add('active');
+            document.getElementById(tab.dataset.tab).classList.add('active');
+        });
+    });
+
+    // Datos simulados de empleados (en un entorno real, esto vendría de una API o base de datos)
+    let employees = [
+        { id: 'EMP0001', name: 'Juan Pérez', department: 'Ventas', phone: '809-555-1234', status: 'Activo' },
+        { id: 'EMP0002', name: 'María Gómez', department: 'TI', phone: '809-555-5678', status: 'Activo' }
     ];
 
-    function switchView(viewToShow, viewToHide) {
-        viewToHide.classList.remove("active");
-        setTimeout(() => {
-            viewToShow.classList.add("active");
-        }, 300);
-    }
+    let currentEmployeeId = null;
 
-    function showToast(message) {
-        toastMessage.textContent = message;
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 3000);
-    }
-
-    function showModal(message, onConfirm) {
-        modalMessage.innerHTML = message;
-        modal.classList.add("show");
-        modalConfirm.onclick = () => {
-            onConfirm();
-            modal.classList.remove("show");
-        };
-        modalCancel.onclick = () => modal.classList.remove("show");
-        document.querySelector(".modal-close").onclick = () => modal.classList.remove("show");
-    }
-
+    // Función para mostrar la lista de empleados
     function renderEmployeeList() {
-        employeeList.innerHTML = "";
-        employees.forEach((employee, index) => {
-            const row = document.createElement("tr");
+        employeeList.innerHTML = '';
+        employees.forEach(employee => {
+            const row = document.createElement('tr');
             row.innerHTML = `
-                <td data-label="ID Empleado">${employee.id}</td>
-                <td data-label="Nombre">${employee.nombre}</td>
-                <td data-label="Departamento">${employee.departamento}</td>
-                <td data-label="Teléfono">${employee.telefono}</td>
-                <td data-label="Estado">${employee.estado}</td>
-                <td data-label="Acciones">
-                    <button class="btn-icon edit-btn" data-index="${index}"><i data-feather="edit"></i></button>
-                    <button class="btn-icon btn-danger" data-index="${index}"><i data-feather="trash"></i></button>
+                <td>${employee.id}</td>
+                <td>${employee.name}</td>
+                <td>${employee.department}</td>
+                <td>${employee.phone}</td>
+                <td>${employee.status}</td>
+                <td>
+                    <button class="edit-btn" data-id="${employee.id}">
+                        <i data-feather="edit"></i>
+                    </button>
+                    <button class="btn-danger" data-id="${employee.id}">
+                        <i data-feather="trash-2"></i>
+                    </button>
                 </td>
             `;
             employeeList.appendChild(row);
         });
+
+        // Reemplazar íconos de Feather después de renderizar
         feather.replace();
-        document.querySelectorAll(".edit-btn").forEach((button) => {
-            button.addEventListener("click", (e) => {
-                const index = e.currentTarget.getAttribute("data-index");
-                editEmployee(index);
-            });
+
+        // Añadir eventos a los botones de edición y eliminación
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', () => editEmployee(btn.dataset.id));
         });
-        document.querySelectorAll(".btn-danger").forEach((button) => {
-            button.addEventListener("click", (e) => {
-                const index = e.currentTarget.getAttribute("data-index");
-                showModal("¿Estás seguro de que deseas eliminar este empleado?", () => {
-                    employees.splice(index, 1);
-                    renderEmployeeList();
-                    showToast("Empleado eliminado correctamente");
-                });
-            });
+
+        document.querySelectorAll('.btn-danger').forEach(btn => {
+            btn.addEventListener('click', () => showConfirmDialog(btn.dataset.id));
         });
     }
 
-    function editEmployee(index) {
-        isEditing = true;
-        editIndex = index;
-        const employee = employees[index];
-        formTitle.textContent = "Editar Empleado";
-        employeeId.textContent = employee.id;
-        employeeDate.textContent = new Date().toLocaleString("es-ES", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-        });
-        document.getElementById("employeeName").value = employee.nombre;
-        document.getElementById("cedula").value = employee.cedula;
-        document.getElementById("address").value = employee.direccion;
-        document.getElementById("phone").value = employee.telefono;
-        document.getElementById("email").value = employee.email;
-        document.getElementById("status").value = employee.estado;
-        document.getElementById("department").value = employee.departamento;
-        document.getElementById("position").value = employee.puesto;
-        document.getElementById("salary").value = employee.salario;
-        document.getElementById("hireDate").value = employee.fechaContratacion;
-        document.getElementById("notes").value = employee.notas;
-        document.getElementById("employeeComment").value = "";
-        const commentList = document.getElementById("commentList");
-        commentList.innerHTML = employee.comentarios.map(comment => `<li>${comment}</li>`).join("");
-        switchView(employeeFormView, employeeListView);
+    // Función para cambiar de vista
+    function switchView(fromView, toView) {
+        fromView.classList.remove('active');
+        setTimeout(() => {
+            toView.classList.add('active');
+        }, 100);
     }
 
+    // Función para limpiar el formulario
     function resetForm() {
-        formTitle.textContent = "Nuevo Empleado";
-        employeeId.textContent = `EMP${String(employees.length + 1).padStart(4, "0")}`;
-        const currentDate = new Date().toLocaleString("es-ES", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-        });
-        employeeDate.textContent = currentDate;
-        employeeDateList.textContent = currentDate;
-        document.getElementById("employeeName").value = "";
-        document.getElementById("cedula").value = "";
-        document.getElementById("address").value = "";
-        document.getElementById("phone").value = "";
-        document.getElementById("email").value = "";
-        document.getElementById("status").value = "Activo";
-        document.getElementById("department").value = "Ventas";
-        document.getElementById("position").value = "";
-        document.getElementById("salary").value = "";
-        document.getElementById("hireDate").value = "";
-        document.getElementById("notes").value = "";
-        document.getElementById("employeeComment").value = "";
-        document.getElementById("commentList").innerHTML = "";
-        isEditing = false;
-        editIndex = null;
+        employeeForm.reset();
+        formHeaderTitle.textContent = 'Nuevo Empleado';
+        currentEmployeeId = null;
+        employeeId.textContent = generateEmployeeId();
     }
 
-    tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-            tabs.forEach((t) => t.classList.remove("active"));
-            tabContents.forEach((content) => content.classList.remove("active"));
-            tab.classList.add("active");
-            document.getElementById(tab.getAttribute("data-tab")).classList.add("active");
+    // Función para generar un ID de empleado
+    function generateEmployeeId() {
+        const lastId = employees.length ? employees[employees.length - 1].id : 'EMP0000';
+        const number = parseInt(lastId.replace('EMP', '')) + 1;
+        return `EMP${number.toString().padStart(4, '0')}`;
+    }
+
+    // Función para actualizar la fecha y hora
+    function updateDateTime() {
+        const now = new Date();
+        const formattedDate = now.toLocaleDateString('es-ES', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
         });
+        employeeDateList.textContent = formattedDate;
+        employeeDate.textContent = formattedDate;
+    }
+
+    // Función para mostrar el formulario para agregar un nuevo empleado
+    addEmployeeBtn.addEventListener('click', () => {
+        resetForm();
+        updateDateTime();
+        switchView(employeeListView, employeeFormView);
     });
 
-    addEmployeeBtn.addEventListener("click", () => {
-        resetForm();
+    // Función para volver a la lista desde el formulario
+    backBtn.addEventListener('click', () => {
         switchView(employeeFormView, employeeListView);
     });
 
-    addEmployeeSideBtn.addEventListener("click", () => {
-        resetForm();
+    // Función para cancelar la edición/creación
+    cancelBtn.addEventListener('click', () => {
         switchView(employeeFormView, employeeListView);
     });
 
-    backBtn.addEventListener("click", () => {
-        showModal("¿Estás seguro de que deseas volver sin guardar?", () => {
-            switchView(employeeListView, employeeFormView);
-        });
-    });
+    // Función para guardar un empleado
+    saveBtn.addEventListener('click', () => {
+        const employeeName = document.getElementById('employeeName').value;
+        const employeeLastName = document.getElementById('employeeLastName').value;
+        const department = document.getElementById('department').value;
+        const phone = document.getElementById('phone').value;
+        const status = document.getElementById('status').value;
 
-    saveBtn.addEventListener("click", () => {
-        const newEmployee = {
-            id: employeeId.textContent,
-            nombre: document.getElementById("employeeName").value,
-            cedula: document.getElementById("cedula").value,
-            direccion: document.getElementById("address").value,
-            telefono: document.getElementById("phone").value,
-            email: document.getElementById("email").value,
-            estado: document.getElementById("status").value,
-            departamento: document.getElementById("department").value,
-            puesto: document.getElementById("position").value,
-            salario: parseFloat(document.getElementById("salary").value) || 0,
-            fechaContratacion: document.getElementById("hireDate").value,
-            notas: document.getElementById("notes").value,
-            comentarios: [
-                ...(isEditing ? employees[editIndex].comentarios : []),
-                document.getElementById("employeeComment").value,
-            ].filter((c) => c),
-        };
-        if (isEditing) {
-            employees[editIndex] = newEmployee;
-            showToast("Empleado actualizado correctamente");
-        } else {
-            employees.push(newEmployee);
-            showToast("Empleado creado correctamente");
+        if (!employeeName) {
+            showToast('Por favor, ingrese el nombre del empleado.');
+            return;
         }
+
+        const employeeData = {
+            id: currentEmployeeId || generateEmployeeId(),
+            name: `${employeeName} ${employeeLastName}`.trim(),
+            department: department || '',
+            phone: phone || '',
+            status: status || 'Activo'
+        };
+
+        if (currentEmployeeId) {
+            // Actualizar empleado existente
+            const index = employees.findIndex(emp => emp.id === currentEmployeeId);
+            employees[index] = employeeData;
+            showToast('Empleado actualizado con éxito.');
+        } else {
+            // Agregar nuevo empleado
+            employees.push(employeeData);
+            showToast('Empleado agregado con éxito.');
+        }
+
         renderEmployeeList();
+        switchView(employeeFormView, employeeListView);
+    });
+
+    // Función para editar un empleado
+    function editEmployee(id) {
+        const employee = employees.find(emp => emp.id === id);
+        if (!employee) return;
+
+        currentEmployeeId = id;
+        formHeaderTitle.textContent = 'Editar Empleado';
+        employeeId.textContent = id;
+        updateDateTime();
+
+        // Separar el nombre completo en nombre y apellido (si es posible)
+        const nameParts = employee.name.split(' ');
+        const firstName = nameParts[0] || '';
+        const lastName = nameParts.slice(1).join(' ') || '';
+
+        // Llenar el formulario con los datos del empleado
+        document.getElementById('employeeName').value = firstName;
+        document.getElementById('employeeLastName').value = lastName;
+        document.getElementById('department').value = employee.department || '';
+        document.getElementById('phone').value = employee.phone || '';
+        document.getElementById('status').value = employee.status || 'Activo';
+
         switchView(employeeListView, employeeFormView);
+    }
+
+    // Función para mostrar el diálogo de confirmación
+    function showConfirmDialog(id) {
+        currentEmployeeId = id;
+        confirmMessage.textContent = `¿Estás seguro de que deseas eliminar este empleado (${id})?`;
+        confirmDialog.classList.add('show');
+    }
+
+    // Función para cerrar el diálogo de confirmación
+    function closeConfirmDialog() {
+        confirmDialog.classList.remove('show');
+        currentEmployeeId = null;
+    }
+
+    // Eventos del diálogo de confirmación
+    confirmDeleteBtn.addEventListener('click', () => {
+        if (currentEmployeeId) {
+            employees = employees.filter(emp => emp.id !== currentEmployeeId);
+            renderEmployeeList();
+            showToast('Empleado eliminado con éxito.');
+            closeConfirmDialog();
+        }
     });
 
-    exitBtn.addEventListener("click", () => {
-        showModal("¿Estás seguro de que deseas salir sin guardar?", () => {
-            switchView(employeeListView, employeeFormView);
-        });
+    cancelDialogBtn.addEventListener('click', closeConfirmDialog);
+    closeDialogBtn.addEventListener('click', closeConfirmDialog);
+
+    // Función para mostrar notificaciones toast
+    function showToast(message) {
+        toastMessage.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // Cerrar toast manualmente
+    closeToastBtn.addEventListener('click', () => {
+        toast.classList.remove('show');
     });
 
-    viewEmployeesBtn.addEventListener("click", () => {
-        switchView(employeeListView, employeeFormView);
-    });
+    // Inicializar la fecha y hora
+    updateDateTime();
+    // Actualizar cada minuto
+    setInterval(updateDateTime, 60000);
 
-    employeeListView.classList.add("active");
-    employeeFormView.classList.remove("active");
+    // Inicializar la lista de empleados
     renderEmployeeList();
-
-    document.querySelector(".toast-close").addEventListener("click", () => {
-        toast.classList.remove("show");
-    });
 });

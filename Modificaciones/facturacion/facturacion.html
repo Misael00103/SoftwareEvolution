@@ -20,7 +20,7 @@
                         </div>
                         <div class="header-text">
                             <h1>Listado de Facturas</h1>
-                            <p>Administre las facturas del sistema</p>
+                            <p>Administre las facturas</p> <!-- Shortened text -->
                         </div>
                     </div>
                     <div class="header-actions">
@@ -46,15 +46,15 @@
                     <div class="card-header">
                         <h2><i data-feather="list"></i> Facturas</h2>
                         <button class="btn primary" id="addInvoiceBtn">
-                            <i data-feather="plus"></i> Nueva Factura
-                        </button>
+                            <i data-feather="plus"></i> Nueva
+                        </button> <!-- Shortened button text -->
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>ID Factura</th>
+                                        <th>ID</th> <!-- Shortened -->
                                         <th>Fecha</th>
                                         <th>Cliente</th>
                                         <th>Total</th>
@@ -83,7 +83,6 @@
                             <p id="invoiceId">FACT000274</p>
                         </div>
                     </div>
-                    <!-- Modificar la estructura de la tarjeta de usuario para mejorar responsive -->
                     <div class="header-actions">
                         <div class="user-card">
                             <div class="user-info">
@@ -107,7 +106,7 @@
                             <div class="tabs-container">
                                 <div class="tabs">
                                     <button type="button" class="tab active" data-tab="factura-tab"><i data-feather="file-text"></i> Factura</button>
-                                    <button type="button" class="tab" data-tab="detalle-tab"><i data-feather="book-open"></i> Detalle Contable</button>
+                                    <button type="button" class="tab" data-tab="detalle-tab"><i data-feather="book-open"></i> Detalle</button> <!-- Shortened -->
                                     <button class="btn secondary" id="backBtn">
                                         <i data-feather="arrow-left"></i> Volver
                                     </button>
@@ -116,7 +115,7 @@
                         </div>
                         <div class="card-body">
                             <div id="factura-tab" class="tab-content active">
-                                <h3><i data-feather="user"></i> Información del Cliente</h3>
+                                <h3><i data-feather="user"></i> Info. Cliente</h3> <!-- Shortened -->
                                 <div class="form-grid">
                                     <div class="field">
                                         <label>Cliente</label>
@@ -126,35 +125,35 @@
                                                 <i data-feather="user" class="input-icon"></i>
                                             </div>
                                             <div class="input-container">
-                                                <input type="text" id="clientName" value="PABLO ALEJANDRO DIAZ CRUZ" readonly>
+                                                <input type="text" id="clientName" value="PABLO A. DIAZ" readonly> <!-- Shortened value -->
                                                 <i data-feather="user" class="input-icon"></i>
                                             </div>
                                             <button type="button" class="btn-icon search-client"><i data-feather="search"></i></button>
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <label>Límite Crédito</label>
+                                        <label>Límite</label> <!-- Shortened -->
                                         <div class="input-container">
-                                            <input type="text" id="creditLimit" value="1,000,000.00" readonly>
+                                            <input type="text" id="creditLimit" value="1M" readonly> <!-- Shortened value -->
                                             <i data-feather="dollar-sign" class="input-icon"></i>
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <label>Dirección Envío</label>
+                                        <label>Dirección</label> <!-- Shortened -->
                                         <div class="input-container">
-                                            <input type="text" id="shippingAddress" value="LOS LLANOS DE GURABO TIGAYGA #42, SANTIAGO">
+                                            <input type="text" id="shippingAddress" value="LLANOS GURABO #42, STI">
                                             <i data-feather="map-pin" class="input-icon"></i>
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <label>Teléfono</label>
+                                        <label>Tel.</label> <!-- Shortened -->
                                         <div class="input-container">
                                             <input type="text" id="phone" value="(809) 447-7816">
                                             <i data-feather="phone" class="input-icon"></i>
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <label>Celular</label>
+                                        <label>Cel.</label> <!-- Shortened -->
                                         <div class="input-container">
                                             <input type="text" id="mobile" value="(809) 447-7816">
                                             <i data-feather="smartphone" class="input-icon"></i>
@@ -168,7 +167,7 @@
                                                 <i data-feather="user" class="input-icon"></i>
                                             </div>
                                             <div class="input-container">
-                                                <input type="text" id="vendorName" value="PABLO A DIAZ CRUZ" readonly>
+                                                <input type="text" id="vendorName" value="PABLO DIAZ" readonly> <!-- Shortened -->
                                                 <i data-feather="user" class="input-icon"></i>
                                             </div>
                                             <button type="button" class="btn-icon search-vendor"><i data-feather="search"></i></button>
@@ -189,8 +188,8 @@
                                         <label>Almacén</label>
                                         <div class="input-container">
                                             <select id="warehouse">
-                                                <option value="ALMACEN PRINCIPAL">ALMACEN PRINCIPAL</option>
-                                                <option value="ALMACEN SECUNDARIO">ALMACEN SECUNDARIO</option>
+                                                <option value="ALMACEN PRINCIPAL">PRINCIPAL</option> <!-- Shortened -->
+                                                <option value="ALMACEN SECUNDARIO">SECUNDARIO</option> <!-- Shortened -->
                                             </select>
                                             <i data-feather="package" class="input-icon"></i>
                                         </div>
@@ -199,38 +198,38 @@
                                         <label>Proyecto</label>
                                         <div class="input-container">
                                             <select id="project">
-                                                <option value="SOFTWARE EVOLUTION ARPA SRL">SOFTWARE EVOLUTION ARPA SRL</option>
-                                                <option value="PROYECTO NUEVO">PROYECTO NUEVO</option>
+                                                <option value="SOFTWARE EVOLUTION ARPA SRL">SOFT. EVO.</option> <!-- Shortened -->
+                                                <option value="PROYECTO NUEVO">NUEVO</option> <!-- Shortened -->
                                             </select>
                                             <i data-feather="briefcase" class="input-icon"></i>
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <label>Tipo NCF</label>
+                                        <label>NCF</label> <!-- Shortened -->
                                         <div class="input-container">
                                             <select id="ncfType">
-                                                <option value="FACTURA VALIDA CREDITO FISCAL">FACTURA VALIDA CREDITO FISCAL</option>
-                                                <option value="FACTURA DE CONSUMO">FACTURA DE CONSUMO</option>
+                                                <option value="FACTURA VALIDA CREDITO FISCAL">CRÉDITO FISCAL</option> <!-- Shortened -->
+                                                <option value="FACTURA DE CONSUMO">CONSUMO</option> <!-- Shortened -->
                                             </select>
                                             <i data-feather="file-text" class="input-icon"></i>
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <label>Tipo Venta</label>
+                                        <label>Venta</label> <!-- Shortened -->
                                         <div class="input-container">
                                             <select id="saleType">
-                                                <option value="INGRESOS POR OPERACIONES NO FINANCIERAS">INGRESOS POR OPERACIONES NO FINANCIERAS</option>
-                                                <option value="VENTA DE PRODUCTOS">VENTA DE PRODUCTOS</option>
+                                                <option value="INGRESOS POR OPERACIONES NO FINANCIERAS">INGRESOS</option> <!-- Shortened -->
+                                                <option value="VENTA DE PRODUCTOS">PRODUCTOS</option> <!-- Shortened -->
                                             </select>
                                             <i data-feather="shopping-cart" class="input-icon"></i>
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <label>Tipo Papel</label>
+                                        <label>Papel</label> <!-- Shortened -->
                                         <div class="input-container">
                                             <select id="paperType">
-                                                <option value="FACTURA PEQUEÑA">FACTURA PEQUEÑA</option>
-                                                <option value="FACTURA GRANDE">FACTURA GRANDE</option>
+                                                <option value="FACTURA PEQUEÑA">PEQUEÑA</option> <!-- Shortened -->
+                                                <option value="FACTURA GRANDE">GRANDE</option> <!-- Shortened -->
                                             </select>
                                             <i data-feather="printer" class="input-icon"></i>
                                         </div>
@@ -252,7 +251,7 @@
                                     <label class="checkbox">
                                         <input type="checkbox" id="itbisIncluded" checked>
                                         <span class="checkbox-mark"></span>
-                                        <span>Itbis Encima</span>
+                                        <span>Itbis</span> <!-- Shortened -->
                                     </label>
                                     <div class="field">
                                         <label>%Tarjeta</label>
@@ -272,13 +271,13 @@
                             </div>
 
                             <div id="detalle-tab" class="tab-content">
-                                <h3><i data-feather="book-open"></i> Detalle Contable</h3>
+                                <h3><i data-feather="book-open"></i> Detalle</h3> <!-- Shortened -->
                                 <div class="table-responsive">
                                     <table class="table" id="accountingTable">
                                         <thead>
                                             <tr>
                                                 <th>Cuenta</th>
-                                                <th>Descripción</th>
+                                                <th>Desc.</th> <!-- Shortened -->
                                                 <th>Débito</th>
                                                 <th>Crédito</th>
                                             </tr>
@@ -297,7 +296,7 @@
                             <div class="table-actions">
                                 <button class="btn primary" data-action="add-product"><i data-feather="plus"></i> Añadir</button>
                                 <div class="search-container">
-                                    <input type="text" id="productSearch" placeholder="Buscar producto...">
+                                    <input type="text" id="productSearch" placeholder="Buscar..."> <!-- Shortened placeholder -->
                                     <i data-feather="search"></i>
                                 </div>
                             </div>
@@ -309,13 +308,13 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Código</th>
-                                            <th>Referencia</th>
-                                            <th>Descripción</th>
+                                            <th>Ref.</th> <!-- Shortened -->
+                                            <th>Desc.</th> <!-- Shortened -->
                                             <th>Cant.</th>
                                             <th>Precio</th>
-                                            <th>Impuesto</th>
+                                            <th>Imp.</th> <!-- Shortened -->
                                             <th>Total</th>
-                                            <th>Acciones</th>
+                                            <th>Acc.</th> <!-- Shortened -->
                                         </tr>
                                     </thead>
                                     <tbody id="productList"></tbody>
@@ -330,28 +329,48 @@
                     <!-- Comentario de Factura -->
                     <section class="card">
                         <div class="card-header">
-                            <h3><i data-feather="message-square"></i> Comentario de Factura</h3>
+                            <h3><i data-feather="message-square"></i> Comentario</h3> <!-- Shortened -->
                         </div>
                         <div class="card-body">
-                            <textarea id="invoiceComment" placeholder="Agregar comentario..."></textarea>
+                            <textarea id="invoiceComment" placeholder="Agregar..."></textarea> <!-- Shortened placeholder -->
                             <div class="comment-history">
-                                <h4>Historial de comentarios</h4>
+                                <h4>Historial</h4> <!-- Shortened -->
                                 <ul id="commentList">
-                                    <li>Cliente recibió su producto</li>
+                                    <li>Cliente recibió producto</li> <!-- Shortened -->
                                 </ul>
                             </div>
                         </div>
                     </section>
 
+                     <!-- Totales -->
+                     <section class="card">
+                        <div class="card-header">
+                            <h3><i data-feather="calculator"></i> Totales</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="totals-grid">
+                                <div class="total-item"><span>Bruto:</span><span id="grossTotal">26,196</span></div> <!-- Shortened -->
+                                <div class="total-item"><span>Desc. 1:</span><span id="discount1">0.00</span></div> <!-- Shortened -->
+                                <div class="total-item"><span>Desc. It.:</span><span id="itemDiscount">0.00</span></div> <!-- Shortened -->
+                                <div class="total-item"><span>Flete:</span><span id="shipping">0.00</span></div> <!-- Shortened -->
+                                <div class="total-item"><span>Exento:</span><span id="exemptAmount">0.00</span></div> <!-- Shortened -->
+                                <div class="total-item"><span>Base:</span><span id="taxableBase">22,200</span></div> <!-- Shortened -->
+                                <div class="total-item"><span>Itbis:</span><span id="itbis">3,996</span></div> <!-- Shortened -->
+                                <div class="total-item"><span>30% Itbis:</span><span id="itbis30">0.00</span></div>
+                                <div class="total-item total"><span>Neto:</span><span id="netTotal">26,196</span></div> <!-- Shortened -->
+                            </div>
+                        </div>
+                    </section>
+                    
                     <!-- Gestión de Clientes -->
                     <section class="card">
                         <div class="card-header">
-                            <h3><i data-feather="users"></i> Gestión de Clientes</h3>
+                            <h3><i data-feather="users"></i> Clientes</h3> <!-- Shortened -->
                         </div>
                         <div class="card-body">
                             <div class="management-actions">
-                                <button class="btn secondary" data-action="add-client"><i data-feather="plus"></i> Agregar Nuevo Cliente</button>
-                                <button class="btn secondary" data-action="view-clients"><i data-feather="list"></i> Ver Clientes</button>
+                                <button class="btn secondary" data-action="add-client"><i data-feather="plus"></i> Nuevo</button> <!-- Shortened -->
+                                <button class="btn secondary" data-action="view-clients"><i data-feather="list"></i> Ver</button> <!-- Shortened -->
                             </div>
                         </div>
                     </section>
@@ -359,12 +378,12 @@
                     <!-- Gestión de Pedidos -->
                     <section class="card">
                         <div class="card-header">
-                            <h3><i data-feather="package"></i> Gestión de Pedidos</h3>
+                            <h3><i data-feather="package"></i> Pedidos</h3> <!-- Shortened -->
                         </div>
                         <div class="card-body">
                             <div class="management-actions">
-                                <button class="btn secondary" data-action="create-order"><i data-feather="plus"></i> Crear Pedido</button>
-                                <button class="btn secondary" data-action="view-orders"><i data-feather="list"></i> Ver Pedidos</button>
+                                <button class="btn secondary" data-action="create-order"><i data-feather="plus"></i> Crear</button> <!-- Shortened -->
+                                <button class="btn secondary" data-action="view-orders"><i data-feather="list"></i> Ver</button> <!-- Shortened -->
                             </div>
                         </div>
                     </section>
@@ -372,16 +391,14 @@
                     <!-- Gestión de Facturas -->
                     <section class="card">
                         <div class="card-header">
-                            <h3><i data-feather="file-text"></i> Gestión de Facturas</h3>
+                            <h3><i data-feather="file-text"></i> Facturas</h3> <!-- Shortened -->
                         </div>
                         <div class="card-body">
                             <div class="management-actions">
-                                <button class="btn secondary" data-action="view-invoices"><i data-feather="list"></i> Ver Facturas</button>
+                                <button class="btn secondary" data-action="view-invoices"><i data-feather="list"></i> Ver</button> <!-- Shortened -->
                             </div>
                         </div>
                     </section>
-
-                   
 
                     <!-- Botones de Acción -->
                     <section class="card">
@@ -390,13 +407,13 @@
                         </div>
                         <div class="card-body">
                             <div class="management-actions">
-                                <button class="btn secondary" data-action="change-price"><i data-feather="dollar-sign"></i> Cambiar Precio</button>
-                                <button class="btn secondary" data-action="apply-discount"><i data-feather="percent"></i> Descuento Items</button>
-                                <button class="btn secondary" data-action="search-product"><i data-feather="search"></i> Buscar Producto</button>
-                                <button class="btn secondary" data-action="view-image"><i data-feather="image"></i> Ver Imagen</button>
-                                <button class="btn secondary" data-action="delete-line"><i data-feather="trash"></i> Borrar Línea</button>
-                                <button class="btn secondary" data-action="load-order"><i data-feather="shopping-cart"></i> Cargar Pedido [F5]</button>
-                                <button class="btn secondary" data-action="authorize"><i data-feather="check-circle"></i> Autorización [F8]</button>
+                                <button class="btn secondary" data-action="change-price"><i data-feather="dollar-sign"></i> Precio</button> <!-- Shortened -->
+                                <button class="btn secondary" data-action="apply-discount"><i data-feather="percent"></i> Desc.</button> <!-- Shortened -->
+                                <button class="btn secondary" data-action="search-product"><i data-feather="search"></i> Buscar</button> <!-- Shortened -->
+                                <button class="btn secondary" data-action="view-image"><i data-feather="image"></i> Imagen</button> <!-- Shortened -->
+                                <button class="btn secondary" data-action="delete-line"><i data-feather="trash"></i> Borrar</button> <!-- Shortened -->
+                                <button class="btn secondary" data-action="load-order"><i data-feather="shopping-cart"></i> Pedido [F5]</button> <!-- Shortened -->
+                                <button class="btn secondary" data-action="authorize"><i data-feather="check-circle"></i> Aut. [F8]</button> <!-- Shortened -->
                             </div>
                         </div>
                     </section>
@@ -404,7 +421,7 @@
                     <!-- Detalles del Producto -->
                     <section class="card">
                         <div class="card-header">
-                            <h3><i data-feather="info"></i> Detalles del Producto</h3>
+                            <h3><i data-feather="info"></i> Detalle Prod.</h3> <!-- Shortened -->
                         </div>
                         <div class="card-body">
                             <div class="info-grid">
@@ -416,28 +433,28 @@
                                     </div>
                                 </div>
                                 <div class="field">
-                                    <label>Descripción</label>
+                                    <label>Desc.</label> <!-- Shortened -->
                                     <div class="input-container">
-                                        <input type="text" id="productDescription" value="CPU DELL CI5 DESKTOP" readonly>
+                                        <input type="text" id="productDescription" value="CPU DELL CI5" readonly> <!-- Shortened -->
                                         <i data-feather="info" class="input-icon"></i>
                                     </div>
                                 </div>
                                 <div class="field">
                                     <label>Precio 1</label>
                                     <div class="input-container">
-                                        <input type="text" id="productPrice1" value="10,500.00" readonly>
+                                        <input type="text" id="productPrice1" value="10,500" readonly> <!-- Shortened -->
                                         <i data-feather="dollar-sign" class="input-icon"></i>
                                     </div>
                                 </div>
                                 <div class="field">
                                     <label>Precio 2</label>
                                     <div class="input-container">
-                                        <input type="text" id="productPrice2" value="10,500.00" readonly>
+                                        <input type="text" id="productPrice2" value="10,500" readonly> <!-- Shortened -->
                                         <i data-feather="dollar-sign" class="input-icon"></i>
                                     </div>
                                 </div>
                                 <div class="field">
-                                    <label>Existencia</label>
+                                    <label>Exist.</label> <!-- Shortened -->
                                     <div class="input-container">
                                         <input type="text" id="productStock" value="5.00" readonly>
                                         <i data-feather="package" class="input-icon"></i>
@@ -450,33 +467,13 @@
                     <!-- Imagen del Producto -->
                     <section class="card">
                         <div class="card-header">
-                            <h3><i data-feather="image"></i> Imagen del Producto</h3>
+                            <h3><i data-feather="image"></i> Imagen</h3> <!-- Shortened -->
                         </div>
                         <div class="card-body">
                             <div class="image-container">
                                 <img id="productImage" src="https://via.placeholder.com/150" alt="Imagen del producto">
                             </div>
-                            <button class="btn secondary" data-action="change-image"><i data-feather="image"></i> Cambiar Imagen</button>
-                        </div>
-                    </section>
-
-                     <!-- Totales -->
-                     <section class="card">
-                        <div class="card-header">
-                            <h3><i data-feather="calculator"></i> Totales</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="totals-grid">
-                                <div class="total-item"><span>Total Bruto:</span><span id="grossTotal">26,196.00</span></div>
-                                <div class="total-item"><span>Descuento 1:</span><span id="discount1">0.00</span></div>
-                                <div class="total-item"><span>Desc. Items:</span><span id="itemDiscount">0.00</span></div>
-                                <div class="total-item"><span>Flete (Envío):</span><span id="shipping">0.00</span></div>
-                                <div class="total-item"><span>Monto Exento:</span><span id="exemptAmount">0.00</span></div>
-                                <div class="total-item"><span>Base Imponible:</span><span id="taxableBase">22,200.00</span></div>
-                                <div class="total-item"><span>Itbis:</span><span id="itbis">3,996.00</span></div>
-                                <div class="total-item"><span>30 % Itbis:</span><span id="itbis30">0.00</span></div>
-                                <div class="total-item total"><span>Total Neto:</span><span id="netTotal">26,196.00</span></div>
-                            </div>
+                            <button class="btn secondary" data-action="change-image"><i data-feather="image"></i> Cambiar</button> <!-- Shortened -->
                         </div>
                     </section>
 
@@ -484,7 +481,7 @@
                     <section class="card">
                         <div class="card-body">
                             <div class="main-actions">
-                                <button class="btn primary" data-action="save"><i data-feather="save"></i> Salvar Factura [F11]</button>
+                                <button class="btn primary" data-action="save"><i data-feather="save"></i> Guardar [F11]</button> <!-- Shortened -->
                                 <button class="btn secondary" data-action="exit"><i data-feather="x"></i> Salir</button>
                             </div>
                         </div>
@@ -500,7 +497,7 @@
             </div>
             <div class="toast-content">
                 <p class="toast-title">Éxito</p>
-                <p class="toast-message" id="toastMessage">Acción completada correctamente</p>
+                <p class="toast-message" id="toastMessage">Acción completada</p> <!-- Shortened -->
             </div>
             <button class="toast-close"><i data-feather="x"></i></button>
         </div>
@@ -509,7 +506,7 @@
         <div class="confirm-dialog" id="myModal">
             <div class="confirm-dialog-content card">
                 <div class="card-header">
-                    <h3><i data-feather="info"></i> Información</h3>
+                    <h3><i data-feather="info"></i> Info.</h3> <!-- Shortened -->
                     <button class="modal-close close"><i data-feather="x"></i></button>
                 </div>
                 <div class="card-body">
@@ -526,12 +523,12 @@
         <div class="confirm-dialog" id="productModal">
             <div class="confirm-dialog-content card">
                 <div class="card-header">
-                    <h3><i data-feather="package"></i> Seleccionar Producto</h3>
+                    <h3><i data-feather="package"></i> Seleccionar</h3> <!-- Shortened -->
                     <button class="modal-close close product-modal-close"><i data-feather="x"></i></button>
                 </div>
                 <div class="card-body">
                     <div class="search-container mb-3">
-                        <input type="text" id="modalProductSearch" placeholder="Buscar producto por código o descripción...">
+                        <input type="text" id="modalProductSearch" placeholder="Buscar..."> <!-- Shortened -->
                         <i data-feather="search"></i>
                     </div>
                     <div class="table-responsive">
@@ -539,10 +536,10 @@
                             <thead>
                                 <tr>
                                     <th>Código</th>
-                                    <th>Descripción</th>
+                                    <th>Desc.</th> 
                                     <th>Precio</th>
-                                    <th>Existencia</th>
-                                    <th>Acciones</th>
+                                    <th>Exist.</th>
+                                    <th>Acc.</th> <!-- Shortened -->
                                 </tr>
                             </thead>
                             <tbody id="modalProductList"></tbody>
@@ -558,4 +555,3 @@
     <script src="facturacion.js"></script>
 </body>
 </html>
-

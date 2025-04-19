@@ -27,7 +27,7 @@
     --radius-lg: 1rem;
     --transition: all 0.2s ease;
     --transition-slow: all 0.3s ease;
-  }
+}
 
 * {
     margin: 0;
@@ -48,15 +48,15 @@ body {
 .app-container {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 1.5rem;
+    padding: 0.5rem;
 }
 
 header {
     background-color: var(--card);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
-    padding: 1.25rem;
-    margin-bottom: 1.5rem;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -84,7 +84,7 @@ header {
 }
 
 .header-text h1 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.25rem;
 }
@@ -97,7 +97,7 @@ header {
 .header-right {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 .action-buttons {
@@ -149,8 +149,7 @@ header {
 
 .search-container input {
     width: 100%;
-    padding: 0.75rem 1rem;
-    padding-right: 2.5rem;
+    padding: 0.625rem 2.25rem 0.625rem 0.625rem;
     border: 1px solid var(--border);
     border-radius: var(--radius);
     font-size: 0.875rem;
@@ -173,10 +172,10 @@ header {
 
 .add-button {
     background-color: var(--primary);
-    color: var(--primary-dark);
+    color: white;
     border: none;
     border-radius: var(--radius);
-    padding: 0.75rem 1rem;
+    padding: 0.625rem 1rem;
     font-size: 0.875rem;
     font-weight: 500;
     display: flex;
@@ -194,13 +193,13 @@ header {
     background-color: var(--card);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     overflow: hidden;
 }
 
 .card-header {
     background-color: var(--card-header);
-    padding: 1.25rem;
+    padding: 0.75rem;
     border-bottom: 1px solid var(--border-light);
     display: flex;
     justify-content: space-between;
@@ -208,7 +207,7 @@ header {
 }
 
 .card-header h2 {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -225,7 +224,7 @@ header {
     background-color: var(--border-light);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 0.5rem 0.75rem;
+    padding: 0.625rem 1rem;
     font-size: 0.875rem;
     display: flex;
     align-items: center;
@@ -244,7 +243,7 @@ header {
 }
 
 .filter-group select {
-    padding: 0.5rem;
+    padding: 0.625rem;
     border: 1px solid var(--border);
     border-radius: var(--radius);
     font-size: 0.875rem;
@@ -252,11 +251,11 @@ header {
 }
 
 .card-body {
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 .form-section {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .form-section h3 {
@@ -290,7 +289,7 @@ header {
 .field select,
 .field textarea {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.625rem;
     border: 1px solid var(--border);
     border-radius: var(--radius);
     font-size: 0.875rem;
@@ -345,6 +344,11 @@ header {
     background-color: var(--card-header);
     font-weight: 600;
     color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.custom-table td {
+    font-size: 0.875rem;
 }
 
 .custom-table tbody tr:hover {
@@ -359,7 +363,7 @@ header {
 .custom-table input[type="number"],
 .custom-table select {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.625rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     font-size: 0.875rem;
@@ -382,7 +386,7 @@ header {
     display: inline-block;
     padding: 0.25rem 0.5rem;
     border-radius: var(--radius);
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     font-weight: 500;
 }
 
@@ -409,12 +413,12 @@ header {
 .form-actions {
     display: flex;
     justify-content: flex-end;
-    gap: 0.75rem;
-    margin-top: 2rem;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .btn {
-    padding: 0.75rem 1rem;
+    padding: 0.625rem 1rem;
     border: none;
     border-radius: var(--radius);
     font-size: 0.875rem;
@@ -430,7 +434,8 @@ header {
     background-color: var(--primary);
     color: white;
     box-shadow: var(--shadow-sm);
-  }
+}
+
 .btn.primary:hover {
     background-color: var(--primary-hover);
 }
@@ -452,15 +457,15 @@ header {
 
 .action-panel {
     display: flex;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .action-card {
     background-color: var(--card);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
-    padding: 1.25rem;
+    padding: 1rem;
     flex: 1;
 }
 
@@ -478,7 +483,7 @@ header {
 
 .action-buttons-grid .action-btn {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.625rem;
     justify-content: flex-start;
 }
 
@@ -562,8 +567,8 @@ header {
     border-radius: var(--radius);
     box-shadow: var(--shadow-lg);
     width: 100%;
-    max-width: 500px;
-    max-height: 90vh;
+    max-width: 800px;
+    max-height: 80vh;
     display: flex;
     flex-direction: column;
     animation: modalFadeIn 0.3s ease;
@@ -590,7 +595,7 @@ header {
 }
 
 .modal-body {
-    padding: 1.5rem;
+    padding: 1rem;
     overflow-y: auto;
 }
 
@@ -599,7 +604,7 @@ header {
     border-top: 1px solid var(--border);
     display: flex;
     justify-content: flex-end;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
 @keyframes modalFadeIn {
@@ -623,7 +628,7 @@ header {
     background-color: var(--border-light);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 0.5rem;
+    padding: 0.625rem;
     min-width: 36px;
     height: 36px;
     display: flex;
@@ -639,7 +644,7 @@ header {
 
 .page-btn.active {
     background-color: var(--primary);
-    color: var(--primary-dark);
+    color: white;
     border-color: var(--primary);
 }
 
@@ -654,7 +659,7 @@ header {
 }
 
 @media (max-width: 1024px) {
-    .app-container { padding: 1rem; }
+    .app-container { padding: 0.5rem; }
     .header-right { flex-wrap: wrap; }
     .search-container { width: 100%; order: 3; margin-top: 0.5rem; }
     .action-buttons-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
@@ -662,9 +667,9 @@ header {
 
 @media (max-width: 768px) {
     header { flex-direction: column; align-items: flex-start; }
-    .header-right { width: 100%; margin-top: 1rem; justify-content: space-between; }
+    .header-right { width: 100%; margin-top: 0.5rem; justify-content: space-between; }
     .add-button { width: 100%; justify-content: center; }
-    .card-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .card-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
     .header-actions { width: 100%; justify-content: space-between; }
     .form-grid { grid-template-columns: 1fr; }
     .form-actions { flex-direction: column; }
@@ -674,11 +679,41 @@ header {
 
 @media (max-width: 480px) {
     .action-buttons { display: none; }
-    .toast { left: 1rem; right: 1rem; max-width: none; }
+    .header-text h1 {
+        font-size: 1rem;
+    }
+    .header-text p {
+        font-size: 0.75rem;
+    }
+    .header-icon {
+        width: 36px;
+        height: 36px;
+    }
+    .header-icon .material-icons {
+        font-size: 1.25rem;
+    }
+    .btn,
+    .action-btn,
+    .icon-button {
+        padding: 0.375rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    .field label {
+        font-size: 0.75rem;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+        padding: 0.5rem;
+        font-size: 0.8125rem;
+    }
+    .custom-table th, .custom-table td {
+        padding: 0.5rem;
+        font-size: 0.8125rem;
+    }
+    .toast { left: 0.5rem; right: 0.5rem; max-width: none; }
     .row-actions { flex-direction: column; }
     .row-actions .icon-button { width: 100%; }
-    .custom-table { font-size: 0.8125rem; }
-    .custom-table th, .custom-table td { padding: 0.5rem; }
 }
 
 @media print {

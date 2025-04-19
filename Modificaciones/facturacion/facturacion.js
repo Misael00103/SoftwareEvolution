@@ -1,38 +1,38 @@
 document.addEventListener("DOMContentLoaded", () => {
-    feather.replace()
-  
-    // Elementos del DOM
-    const invoiceListView = document.getElementById("invoiceListView")
-    const invoiceFormView = document.getElementById("invoiceFormView")
-    const addInvoiceBtn = document.getElementById("addInvoiceBtn")
-    const backBtn = document.getElementById("backBtn")
-    const invoiceList = document.getElementById("invoiceList")
-    const formTitle = document.getElementById("formTitle")
-    const invoiceId = document.getElementById("invoiceId")
-    const invoiceDate = document.getElementById("invoiceDate")
-    const invoiceDateList = document.getElementById("invoiceDateList")
-    const toast = document.getElementById("toast")
-    const toastMessage = document.getElementById("toastMessage")
-    const modal = document.getElementById("myModal")
-    const modalMessage = document.getElementById("modalMessage")
-    const modalConfirm = document.getElementById("modalConfirm")
-    const modalCancel = document.getElementById("modalCancel")
-    const productModal = document.getElementById("productModal")
-    const modalProductList = document.getElementById("modalProductList")
-    const productModalCancel = document.getElementById("productModalCancel")
-    const tabs = document.querySelectorAll(".tab")
-    const tabContents = document.querySelectorAll(".tab-content")
-    const productList = document.getElementById("productList")
-    const addProductBtn = document.querySelector('[data-action="add-product"]')
-    const searchClientBtn = document.querySelector(".search-client")
-    const searchVendorBtn = document.querySelector(".search-vendor")
-    const saveBtn = document.querySelector('[data-action="save"]')
-    const exitBtn = document.querySelector('[data-action="exit"]')
-    const viewInvoicesBtn = document.querySelector('[data-action="view-invoices"]')
-    let isEditing = false
-    let editIndex = null
-    let editingProduct = false
-    let editingProductIndex = null
+  feather.replace();
+
+  // Elementos del DOM
+  const invoiceListView = document.getElementById("invoiceListView");
+  const invoiceFormView = document.getElementById("invoiceFormView");
+  const addInvoiceBtn = document.getElementById("addInvoiceBtn");
+  const backBtn = document.getElementById("backBtn");
+  const invoiceList = document.getElementById("invoiceList");
+  const formTitle = document.getElementById("formTitle");
+  const invoiceId = document.getElementById("invoiceId");
+  const invoiceDate = document.getElementById("invoiceDate");
+  const invoiceDateList = document.getElementById("invoiceDateList");
+  const toast = document.getElementById("toast");
+  const toastMessage = document.getElementById("toastMessage");
+  const modal = document.getElementById("myModal");
+  const modalMessage = document.getElementById("modalMessage");
+  const modalConfirm = document.getElementById("modalConfirm");
+  const modalCancel = document.getElementById("modalCancel");
+  const productModal = document.getElementById("productModal");
+  const modalProductList = document.getElementById("modalProductList");
+  const productModalCancel = document.getElementById("productModalCancel");
+  const tabs = document.querySelectorAll(".tab");
+  const tabContents = document.querySelectorAll(".tab-content");
+  const productList = document.getElementById("productList");
+  const addProductBtn = document.querySelector('[data-action="add-product"]');
+  const searchClientBtn = document.querySelector(".search-client");
+  const searchVendorBtn = document.querySelector(".search-vendor");
+  const saveBtn = document.querySelector('[data-action="save"]');
+  const exitBtn = document.querySelector('[data-action="exit"]');
+  const viewInvoicesBtn = document.querySelector('[data-action="view-invoices"]');
+  let isEditing = false;
+  let editIndex = null;
+  let editingProduct = false;
+  let editingProductIndex = null;
   
     // Datos iniciales
     const invoices = [
