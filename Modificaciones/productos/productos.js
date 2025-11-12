@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar los iconos de Material
-    if (typeof M !== 'undefined' && M.AutoInit) {
-        M.AutoInit();
-    }
+    // Inicializar los iconos de Feather
+    feather.replace();
 
     // Referencias a elementos del DOM
     const listView = document.getElementById('listView');
@@ -92,16 +90,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td data-label="Existencia">${product.existencia}</td>
                 <td data-label="Estado">${product.activo ? 'Activo' : 'Inactivo'}</td>
                 <td data-label="Acciones">
-                    <button class="edit-btn" data-index="${index}">
-                        <span class="material-icons">edit</span>
+                    <button class="btn-icon edit-btn" data-index="${index}" title="Editar producto">
+                        <i data-feather="edit"></i>
                     </button>
-                    <button class="btn-danger" data-index="${index}">
-                        <span class="material-icons">delete</span>
+                    <button class="btn-icon btn-danger" data-index="${index}" title="Eliminar producto">
+                        <i data-feather="trash"></i>
                     </button>
                 </td>
             `;
             productList.appendChild(row);
         });
+
+        // Reemplazar los íconos de Feather después de agregar las filas
+        if (typeof feather !== 'undefined') {
+            feather.replace();
+        }
 
         // Agregar eventos a los botones de edición y eliminación
         document.querySelectorAll('.edit-btn').forEach(button => {

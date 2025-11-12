@@ -147,12 +147,14 @@ document.addEventListener('DOMContentLoaded', function() {
             overlay.classList.remove('active');
         }
     });
-    // Carga inicial
-    const defaultLink = Array.from(navLinks).find(link => link.classList.contains('active'));
-    if (defaultLink) {
-        const url = defaultLink.getAttribute('href');
-        setActiveLink(defaultLink);
-        loadContent(url);
+    // Carga inicial - solo si no hay contenido estático
+    if (contentContainer.children.length === 0) {
+        const defaultLink = Array.from(navLinks).find(link => link.classList.contains('active'));
+        if (defaultLink) {
+            const url = defaultLink.getAttribute('href');
+            setActiveLink(defaultLink);
+            loadContent(url);
+        }
     }
     window.loadContent = loadContent;
 });

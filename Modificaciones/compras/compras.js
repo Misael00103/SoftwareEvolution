@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Asegurar que Feather Icons esté cargado antes de renderizar
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    } else {
+        // Si no está cargado, esperar un poco y volver a intentar
+        setTimeout(function() {
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        }, 100);
+    }
+    
     // Referencias a elementos del DOM
     const listaCompras = document.getElementById('listaCompras');
     const formularioCompra = document.getElementById('formularioCompra');
@@ -39,129 +51,171 @@ document.addEventListener('DOMContentLoaded', function() {
     mostrarListaCompras();
 
     // Botón para nueva compra
-    nuevaCompraBtn.addEventListener('click', function() {
-        mostrarFormularioCompra();
-        resetearFormulario();
-        tituloFormulario.textContent = 'Nueva Compra';
-        compraIdInput.value = '';
-    });
+    if (nuevaCompraBtn) {
+        nuevaCompraBtn.addEventListener('click', function() {
+            mostrarFormularioCompra();
+            resetearFormulario();
+            if (tituloFormulario) tituloFormulario.textContent = 'Nueva Compra';
+            if (compraIdInput) compraIdInput.value = '';
+        });
+    }
 
     // Botón para volver a la lista
-    volverListaBtn.addEventListener('click', function() {
-        if (hayDatosEnFormulario()) {
-            showModal('¿Está seguro que desea volver? Los cambios no guardados se perderán.', mostrarListaCompras);
-        } else {
-            mostrarListaCompras();
-        }
-    });
+    if (volverListaBtn) {
+        volverListaBtn.addEventListener('click', function() {
+            if (hayDatosEnFormulario()) {
+                showModal('¿Está seguro que desea volver? Los cambios no guardados se perderán.', mostrarListaCompras);
+            } else {
+                mostrarListaCompras();
+            }
+        });
+    }
 
     // Agregar producto
-    agregarProductoBtn.addEventListener('click', function() {
-        agregarFilaProducto();
-        calcularTotales();
-    });
+    if (agregarProductoBtn) {
+        agregarProductoBtn.addEventListener('click', function() {
+            agregarFilaProducto();
+            calcularTotales();
+        });
+    }
 
     // Guardar compra
-    compraForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        if (!validarFormulario()) {
-            showNotification('Error', 'Por favor complete todos los campos requeridos', 'error');
-            return;
-        }
-        guardarCompraBtn.disabled = true;
-        guardarCompraBtn.innerHTML = '<span class="material-icons">save</span> Guardando...';
-        setTimeout(() => {
-            guardarCompraBtn.disabled = false;
-            guardarCompraBtn.innerHTML = '<span class="material-icons">save</span> Guardar';
-            const compraData = recolectarDatosCompra();
-            if (compraIdInput.value) {
-                actualizarCompra(compraData);
-                showNotification('Compra actualizada', 'La compra ha sido actualizada correctamente');
-            } else {
-                agregarCompra(compraData);
-                showNotification('Compra guardada', 'La compra ha sido guardada correctamente');
+    if (compraForm) {
+        compraForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!validarFormulario()) {
+                showNotification('Error', 'Por favor complete todos los campos requeridos', 'error');
+                return;
             }
-            mostrarListaCompras();
-        }, 1500);
-    });
+            if (guardarCompraBtn) {
+                guardarCompraBtn.disabled = true;
+                guardarCompraBtn.innerHTML = '<i data-feather="save"></i> Guardando...';
+                feather.replace();
+            }
+            setTimeout(() => {
+                if (guardarCompraBtn) {
+                    guardarCompraBtn.disabled = false;
+                    guardarCompraBtn.innerHTML = '<i data-feather="save"></i> Guardar';
+                    feather.replace();
+                }
+                const compraData = recolectarDatosCompra();
+                if (compraIdInput && compraIdInput.value) {
+                    actualizarCompra(compraData);
+                    showNotification('Compra actualizada', 'La compra ha sido actualizada correctamente');
+                } else {
+                    agregarCompra(compraData);
+                    showNotification('Compra guardada', 'La compra ha sido guardada correctamente');
+                }
+                mostrarListaCompras();
+            }, 1500);
+        });
+    }
 
     // Cancelar compra
-    cancelarCompraBtn.addEventListener('click', function() {
-        if (hayDatosEnFormulario()) {
-            showModal('¿Está seguro que desea cancelar esta compra? Los cambios no guardados se perderán.', resetearFormulario);
-        } else {
-            resetearFormulario();
-        }
-    });
+    if (cancelarCompraBtn) {
+        cancelarCompraBtn.addEventListener('click', function() {
+            if (hayDatosEnFormulario()) {
+                showModal('¿Está seguro que desea cancelar esta compra? Los cambios no guardados se perderán.', resetearFormulario);
+            } else {
+                resetearFormulario();
+            }
+        });
+    }
 
     // Manejo del modal
-    closeConfirmModal.addEventListener('click', hideModal);
-    cancelConfirmBtn.addEventListener('click', hideModal);
-    confirmActionBtn.addEventListener('click', () => {
-        if (modalCallback) modalCallback();
-        hideModal();
-        if (deleteType === 'fila' && elementToDelete) {
-            elementToDelete.remove();
-            renumerarFilas();
-            calcularTotales();
-            elementToDelete = null;
-            deleteType = null;
-        } else if (deleteType === 'compra' && elementToDelete) {
-            eliminarCompra(elementToDelete);
-            elementToDelete = null;
-            deleteType = null;
-        }
-    });
+    if (closeConfirmModal) {
+        closeConfirmModal.addEventListener('click', hideModal);
+    }
+    if (cancelConfirmBtn) {
+        cancelConfirmBtn.addEventListener('click', hideModal);
+    }
+    if (confirmActionBtn) {
+        confirmActionBtn.addEventListener('click', () => {
+            if (modalCallback) modalCallback();
+            hideModal();
+            if (deleteType === 'fila' && elementToDelete) {
+                elementToDelete.remove();
+                renumerarFilas();
+                calcularTotales();
+                elementToDelete = null;
+                deleteType = null;
+            } else if (deleteType === 'compra' && elementToDelete) {
+                eliminarCompra(elementToDelete);
+                elementToDelete = null;
+                deleteType = null;
+            }
+        });
+    }
 
     // Cerrar notificación
-    notificationCloseBtn.addEventListener('click', function() {
-        notification.classList.remove('show');
-    });
+    if (notificationCloseBtn) {
+        notificationCloseBtn.addEventListener('click', function() {
+            if (notification) {
+                notification.classList.remove('show');
+            }
+        });
+    }
 
     // Delegación de eventos para la tabla de productos
-    document.getElementById('detalleProductosTable').addEventListener('click', function(e) {
-        const target = e.target.closest('button');
-        if (!target || !target.classList.contains('eliminar-fila')) return;
-        const row = target.closest('tr');
-        const filas = document.querySelectorAll('#detalleProductosTable tbody tr:not([style="display: none;"])');
-        if (filas.length === 1) {
-            showNotification('Error', 'Debe haber al menos un producto en la compra', 'error');
-            return;
-        }
-        elementToDelete = row;
-        deleteType = 'fila';
-        showModal('¿Está seguro que desea eliminar este producto de la compra?', () => {});
-    });
+    const detalleProductosTable = document.getElementById('detalleProductosTable');
+    if (detalleProductosTable) {
+        detalleProductosTable.addEventListener('click', function(e) {
+            const target = e.target.closest('button');
+            if (!target || !target.classList.contains('eliminar-fila')) return;
+            const row = target.closest('tr');
+            const filas = document.querySelectorAll('#detalleProductosTable tbody tr:not([style="display: none;"])');
+            if (filas.length === 1) {
+                showNotification('Error', 'Debe haber al menos un producto en la compra', 'error');
+                return;
+            }
+            elementToDelete = row;
+            deleteType = 'fila';
+            showModal('¿Está seguro que desea eliminar este producto de la compra?', () => {});
+        });
+    }
 
     // Delegación de eventos para cambios en productos
-    document.getElementById('detalleProductosTable').addEventListener('input', function(e) {
-        const target = e.target;
-        if (target.classList.contains('cantidad-producto') || 
-            target.classList.contains('costo-producto') || 
-            target.classList.contains('itbis-producto')) {
-            calcularTotales();
-        }
-    });
+    const detalleProductosTableEl = document.getElementById('detalleProductosTable');
+    if (detalleProductosTableEl) {
+        detalleProductosTableEl.addEventListener('input', function(e) {
+            const target = e.target;
+            if (target.classList.contains('cantidad-producto') || 
+                target.classList.contains('costo-producto') || 
+                target.classList.contains('itbis-producto')) {
+                calcularTotales();
+            }
+        });
+    }
 
     // Delegación de eventos para la tabla de compras
-    comprasTableBody.addEventListener('click', function(e) {
-        const target = e.target.closest('button');
-        if (!target) return;
-        const id = target.closest('tr').dataset.id;
-        if (target.classList.contains('editar-compra')) {
-            editarCompra(id);
-        } else if (target.classList.contains('eliminar-compra')) {
-            elementToDelete = id;
-            deleteType = 'compra';
-            showModal(`¿Está seguro que desea eliminar la compra #${id}?`, () => {});
-        }
-    });
+    if (comprasTableBody) {
+        comprasTableBody.addEventListener('click', function(e) {
+            const target = e.target.closest('button');
+            if (!target) return;
+            const row = target.closest('tr');
+            if (!row) return;
+            const id = row.dataset.id;
+            if (target.classList.contains('editar-compra')) {
+                editarCompra(id);
+            } else if (target.classList.contains('eliminar-compra')) {
+                elementToDelete = id;
+                deleteType = 'compra';
+                showModal(`¿Está seguro que desea eliminar la compra #${id}?`, () => {});
+            }
+        });
+    }
 
     // Función para mostrar la lista de compras
     function mostrarListaCompras() {
-        listaCompras.style.display = 'block';
-        formularioCompra.style.display = 'none';
-        comprasTableBody.innerHTML = '';
+        if (listaCompras) {
+            listaCompras.style.display = 'block';
+            listaCompras.classList.add('active');
+        }
+        if (formularioCompra) {
+            formularioCompra.style.display = 'none';
+            formularioCompra.classList.remove('active');
+        }
+        if (comprasTableBody) comprasTableBody.innerHTML = '';
         compras.forEach((compra, index) => {
             const row = document.createElement('tr');
             row.dataset.id = compra.id;
@@ -184,13 +238,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     
         // Reemplazar los íconos de Feather después de agregar las filas
-        feather.replace();
+        if (typeof feather !== 'undefined') {
+            feather.replace();
+        }
     }
 
     // Función para mostrar el formulario
     function mostrarFormularioCompra() {
-        listaCompras.style.display = 'none';
-        formularioCompra.style.display = 'block';
+        if (listaCompras) {
+            listaCompras.style.display = 'none';
+            listaCompras.classList.remove('active');
+        }
+        if (formularioCompra) {
+            formularioCompra.style.display = 'block';
+            formularioCompra.classList.add('active');
+        }
+        if (typeof feather !== 'undefined') {
+            feather.replace();
+        }
     }
 
     // Función para editar una compra
@@ -313,15 +378,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para resetear el formulario
     function resetearFormulario() {
-        compraForm.reset();
-        document.getElementById('fechaIngreso').valueAsDate = new Date();
+        if (compraForm) {
+            compraForm.reset();
+        }
+        const fechaIngreso = document.getElementById('fechaIngreso');
+        if (fechaIngreso) {
+            fechaIngreso.valueAsDate = new Date();
+        }
         const tbody = document.querySelector('#detalleProductosTable tbody');
-        tbody.querySelectorAll('tr:not(#filaPlantilla)').forEach(row => row.remove());
-        totalBruto.value = '0.00';
-        descuento1.value = '0.00';
-        baseImponible.value = '0.00';
-        itbis.value = '0.00';
-        totalNeto.value = '0.00';
+        if (tbody) {
+            tbody.querySelectorAll('tr:not(#filaPlantilla)').forEach(row => row.remove());
+        }
+        if (totalBruto) totalBruto.value = '0.00';
+        if (descuento1) descuento1.value = '0.00';
+        if (baseImponible) baseImponible.value = '0.00';
+        if (itbis) itbis.value = '0.00';
+        if (totalNeto) totalNeto.value = '0.00';
         agregarFilaProducto();
     }
 
@@ -344,12 +416,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function showModal(message, callback) {
         confirmMessage.textContent = message;
         modalCallback = callback;
-        confirmModal.classList.add('active');
+        confirmModal.classList.add('show');
     }
 
     // Función para ocultar el modal
     function hideModal() {
-        confirmModal.classList.remove('active');
+        confirmModal.classList.remove('show');
         modalCallback = null;
     }
 
@@ -365,17 +437,18 @@ document.addEventListener('DOMContentLoaded', function() {
     function showNotification(title, message, type = 'success') {
         const toastTitle = notification.querySelector('.toast-title');
         const toastMessage = notification.querySelector('.toast-message');
-        const toastIcon = notification.querySelector('.toast-icon .material-icons');
+        const toastIcon = notification.querySelector('.toast-icon i');
         toastTitle.textContent = title;
         toastMessage.textContent = message;
-        if (type === 'error') {
-            toastIcon.textContent = 'error';
-            notification.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
-            toastIcon.style.backgroundColor = 'var(--danger)';
-        } else {
-            toastIcon.textContent = 'check_circle';
-            notification.style.backgroundColor = 'var(--success-light)';
-            toastIcon.style.backgroundColor = 'var(--success)';
+        if (toastIcon) {
+            if (type === 'error') {
+                toastIcon.setAttribute('data-feather', 'alert-circle');
+                notification.style.borderLeftColor = 'var(--danger)';
+            } else {
+                toastIcon.setAttribute('data-feather', 'check-circle');
+                notification.style.borderLeftColor = 'var(--success)';
+            }
+            feather.replace();
         }
         notification.classList.add('show');
         setTimeout(() => notification.classList.remove('show'), 5000);

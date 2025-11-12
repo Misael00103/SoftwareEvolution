@@ -11,93 +11,70 @@
 <body>
     <div class="app-container">
         <!-- Vista de Listado de Facturas -->
-        <section class="view" id="invoiceListView">
-            <header class="card header-card">
-                <div class="card-header">
-                    <div class="header-content">
-                        <div class="header-icon">
-                            <i data-feather="file-text"></i>
-                        </div>
-                        <div class="header-text">
-                            <h1>Listado de Facturas</h1>
-                            <p>Administre las facturas</p> <!-- Shortened text -->
-                        </div>
+        <header class="card">
+            <div class="card-header">
+                <div class="header-content">
+                    <div class="header-icon">
+                        <i data-feather="file-text"></i>
                     </div>
-                    <div class="header-actions">
-                        <div class="user-card">
-                            <div class="user-info">
-                                <img src="../Assets/perfil.jpg" alt="Usuario" class="user-image">
-                                <div class="user-details">
-                                    <span class="user-name">Juan Pérez</span>
-                                    <span class="user-date" id="invoiceDateList">19/12/2024 14:30</span>
-                                </div>
+                    <div class="header-text">
+                        <h1>Gestión de Facturas</h1>
+                        <p>Administre las facturas del sistema</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <div class="action-buttons">
+                        <button class="icon-btn" aria-label="Correo"><i data-feather="mail"></i></button>
+                        <button class="icon-btn" aria-label="Imprimir"><i data-feather="printer"></i></button>
+                        <button class="icon-btn" aria-label="Descargar"><i data-feather="download"></i></button>
+                    </div>
+                    <div class="user-card">
+                        <div class="user-info">
+                            <img src="../Assets/user-avatar.png" alt="Usuario" class="user-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2732%27 height=%2732%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2716%27 fill=%27%23fbbf24%27/%3E%3Ctext x=%2716%27 y=%2721%27 font-size=%2718%27 text-anchor=%27middle%27 fill=%27white%27 font-weight=%27bold%27%3EU%3C/text%3E%3C/svg%3E'">
+                            <div class="user-details">
+                                <span class="user-name">Usuario Actual</span>
+                                <span class="user-date" id="currentDate"></span>
                             </div>
-                        </div>
-                        <div class="action-buttons">
-                            <button class="icon-btn" aria-label="Correo"><i data-feather="mail"></i></button>
-                            <button class="icon-btn" aria-label="Imprimir"><i data-feather="printer"></i></button>
-                            <button class="icon-btn" aria-label="Descargar"><i data-feather="download"></i></button>
                         </div>
                     </div>
                 </div>
-            </header>
-            <div class="content-wrapper">
-                <section class="card">
-                    <div class="card-header">
-                        <h2><i data-feather="list"></i> Facturas</h2>
-                        <button class="btn primary" id="addInvoiceBtn">
-                            <i data-feather="plus"></i> Nueva
-                        </button> <!-- Shortened button text -->
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th> <!-- Shortened -->
-                                        <th>Fecha</th>
-                                        <th>Cliente</th>
-                                        <th>Total</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="invoiceList"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
             </div>
-        </section>
+        </header>
 
-        <!-- Vista de Configuración de Factura -->
-        <section class="view" id="invoiceFormView">
-            <header class="card header-card">
-                <div class="card-header">
-                    <div class="header-content">
-                        <div class="header-icon">
-                            <i data-feather="file-text"></i>
-                        </div>
-                        <div class="header-text">
-                            <h1 id="formTitle">Nueva Factura</h1>
-                            <p id="invoiceId">FACT000274</p>
-                        </div>
-                    </div>
-                    <div class="header-actions">
-                        <div class="user-card">
-                            <div class="user-info">
-                                <img src="../Assets/perfil.jpg" alt="Usuario" class="user-image">
-                                <div class="user-details">
-                                    <span class="user-name">Juan Pérez</span>
-                                    <span class="user-date" id="invoiceDate">19/12/2024 14:30</span>
-                                </div>
+        <main>
+            <section class="view active" id="invoiceListView">
+                <div class="content-grid">
+                    <div class="main-content">
+                        <section class="card">
+                            <div class="card-header">
+                                <h2><i data-feather="list"></i> Listado de Facturas</h2>
+                                <button class="btn primary" id="addInvoiceBtn">
+                                    <i data-feather="plus"></i> Nueva Factura
+                                </button>
                             </div>
-                        </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Fecha</th>
+                                            <th>Cliente</th>
+                                            <th>Total</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="invoiceList"></tbody>
+                                </table>
+                            </div>
+                        </section>
                     </div>
                 </div>
-            </header>
+            </section>
 
-            <div class="content-grid">
+            <!-- Vista de Configuración de Factura -->
+            <section class="view" id="invoiceFormView">
+                <div class="content-grid">
                 <!-- Columna izquierda -->
                 <div class="main-content">
                     <!-- Información del Cliente -->
@@ -272,19 +249,17 @@
 
                             <div id="detalle-tab" class="tab-content">
                                 <h3><i data-feather="book-open"></i> Detalle</h3> <!-- Shortened -->
-                                <div class="table-responsive">
-                                    <table class="table" id="accountingTable">
-                                        <thead>
-                                            <tr>
-                                                <th>Cuenta</th>
-                                                <th>Desc.</th> <!-- Shortened -->
-                                                <th>Débito</th>
-                                                <th>Crédito</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
+                                <table class="table" id="accountingTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Cuenta</th>
+                                            <th>Descripción</th>
+                                            <th>Débito</th>
+                                            <th>Crédito</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
                             </div>
                         </div>
                     </section>
@@ -302,24 +277,22 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Código</th>
-                                            <th>Ref.</th> <!-- Shortened -->
-                                            <th>Desc.</th> <!-- Shortened -->
-                                            <th>Cant.</th>
-                                            <th>Precio</th>
-                                            <th>Imp.</th> <!-- Shortened -->
-                                            <th>Total</th>
-                                            <th>Acc.</th> <!-- Shortened -->
-                                        </tr>
-                                    </thead>
-                                    <tbody id="productList"></tbody>
-                                </table>
-                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Código</th>
+                                        <th>Referencia</th>
+                                        <th>Descripción</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio</th>
+                                        <th>Impuesto</th>
+                                        <th>Total</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productList"></tbody>
+                            </table>
                         </div>
                     </section>
                 </div>
@@ -345,7 +318,7 @@
                      <!-- Totales -->
                      <section class="card">
                         <div class="card-header">
-                            <h3><i data-feather="calculator"></i> Totales</h3>
+                            <h3><i data-feather="hash"></i> Totales</h3>
                         </div>
                         <div class="card-body">
                             <div class="totals-grid">
@@ -487,8 +460,9 @@
                         </div>
                     </section>
                 </aside>
-            </div>
-        </section>
+                </div>
+            </section>
+        </main>
 
         <!-- Toast -->
         <div id="toast" class="toast">
@@ -531,20 +505,18 @@
                         <input type="text" id="modalProductSearch" placeholder="Buscar..."> <!-- Shortened -->
                         <i data-feather="search"></i>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Código</th>
-                                    <th>Desc.</th> 
-                                    <th>Precio</th>
-                                    <th>Exist.</th>
-                                    <th>Acc.</th> <!-- Shortened -->
-                                </tr>
-                            </thead>
-                            <tbody id="modalProductList"></tbody>
-                        </table>
-                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descripción</th>
+                                <th>Precio</th>
+                                <th>Existencia</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modalProductList"></tbody>
+                    </table>
                 </div>
                 <div class="main-actions modal-actions">
                     <button id="productModalCancel" class="btn secondary">Cancelar</button>

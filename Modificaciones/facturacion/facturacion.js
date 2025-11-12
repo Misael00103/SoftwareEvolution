@@ -6,6 +6,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const invoiceFormView = document.getElementById("invoiceFormView");
   const addInvoiceBtn = document.getElementById("addInvoiceBtn");
   const backBtn = document.getElementById("backBtn");
+  
+  // Verificar que los elementos existan
+  if (!addInvoiceBtn) {
+    console.error("addInvoiceBtn no encontrado");
+  }
+  if (!invoiceListView) {
+    console.error("invoiceListView no encontrado");
+  }
+  if (!invoiceFormView) {
+    console.error("invoiceFormView no encontrado");
+  }
   const invoiceList = document.getElementById("invoiceList");
   const formTitle = document.getElementById("formTitle");
   const invoiceId = document.getElementById("invoiceId");
@@ -167,10 +178,13 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // Funciones de utilidad
     function switchView(viewToShow, viewToHide) {
-      viewToHide.classList.remove("active")
-      setTimeout(() => {
-        viewToShow.classList.add("active")
-      }, 300)
+      if (viewToHide) {
+        viewToHide.classList.remove("active")
+        viewToHide.style.display = "none"
+      }
+      viewToShow.classList.add("active")
+      viewToShow.style.display = "block"
+      feather.replace()
     }
   
     function showToast(message) {
@@ -431,8 +445,8 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // Resetear formulario
     function resetForm() {
-      formTitle.textContent = "Nueva Factura"
-      invoiceId.textContent = `FACT${String(invoices.length + 1).padStart(6, "0")}`
+      if (formTitle) formTitle.textContent = "Nueva Factura"
+      if (invoiceId) invoiceId.textContent = `FACT${String(invoices.length + 1).padStart(6, "0")}`
       const currentDate = new Date().toLocaleString("es-ES", {
         day: "2-digit",
         month: "2-digit",
@@ -440,27 +454,55 @@ document.addEventListener("DOMContentLoaded", () => {
         hour: "2-digit",
         minute: "2-digit",
       })
-      invoiceDate.textContent = currentDate
-      invoiceDateList.textContent = currentDate
-      document.getElementById("clientId").value = clientes[0].id
-      document.getElementById("clientName").value = clientes[0].nombre
-      document.getElementById("creditLimit").value = clientes[0].limiteCredito
-      document.getElementById("shippingAddress").value = clientes[0].direccion
-      document.getElementById("phone").value = clientes[0].telefono
-      document.getElementById("mobile").value = clientes[0].celular
-      document.getElementById("vendorId").value = vendedores[0].id
-      document.getElementById("vendorName").value = vendedores[0].nombre
-      document.getElementById("currency").value = "RD$"
-      document.getElementById("warehouse").value = "ALMACEN PRINCIPAL"
-      document.getElementById("project").value = "SOFTWARE EVOLUTION ARPA SRL"
-      document.getElementById("ncfType").value = "FACTURA VALIDA CREDITO FISCAL"
-      document.getElementById("saleType").value = "INGRESOS POR OPERACIONES NO FINANCIERAS"
-      document.getElementById("paperType").value = "FACTURA PEQUEÑA"
-      document.querySelector('input[name="paymentType"][value="credito"]').checked = true
-      document.getElementById("itbisIncluded").checked = true
-      document.getElementById("cardPercentage").value = "0.00"
-      document.getElementById("rate").value = "1.00"
-      document.getElementById("invoiceComment").value = ""
+      if (invoiceDate) invoiceDate.textContent = currentDate
+      if (invoiceDateList) invoiceDateList.textContent = currentDate
+      
+      // Actualizar fecha en la card de usuario
+      const userDateEl = document.getElementById("currentDate");
+      if (userDateEl) {
+        userDateEl.textContent = currentDate;
+      }
+      
+      const clientIdEl = document.getElementById("clientId")
+      const clientNameEl = document.getElementById("clientName")
+      const creditLimitEl = document.getElementById("creditLimit")
+      const shippingAddressEl = document.getElementById("shippingAddress")
+      const phoneEl = document.getElementById("phone")
+      const mobileEl = document.getElementById("mobile")
+      const vendorIdEl = document.getElementById("vendorId")
+      const vendorNameEl = document.getElementById("vendorName")
+      
+      if (clientIdEl && clientes[0]) clientIdEl.value = clientes[0].id
+      if (clientNameEl && clientes[0]) clientNameEl.value = clientes[0].nombre
+      if (creditLimitEl && clientes[0]) creditLimitEl.value = clientes[0].limiteCredito
+      if (shippingAddressEl && clientes[0]) shippingAddressEl.value = clientes[0].direccion
+      if (phoneEl && clientes[0]) phoneEl.value = clientes[0].telefono
+      if (mobileEl && clientes[0]) mobileEl.value = clientes[0].celular
+      if (vendorIdEl && vendedores[0]) vendorIdEl.value = vendedores[0].id
+      if (vendorNameEl && vendedores[0]) vendorNameEl.value = vendedores[0].nombre
+      const currencyEl = document.getElementById("currency")
+      const warehouseEl = document.getElementById("warehouse")
+      const projectEl = document.getElementById("project")
+      const ncfTypeEl = document.getElementById("ncfType")
+      const saleTypeEl = document.getElementById("saleType")
+      const paperTypeEl = document.getElementById("paperType")
+      const paymentTypeEl = document.querySelector('input[name="paymentType"][value="credito"]')
+      const itbisIncludedEl = document.getElementById("itbisIncluded")
+      const cardPercentageEl = document.getElementById("cardPercentage")
+      const rateEl = document.getElementById("rate")
+      
+      if (currencyEl) currencyEl.value = "RD$"
+      if (warehouseEl) warehouseEl.value = "ALMACEN PRINCIPAL"
+      if (projectEl) projectEl.value = "SOFTWARE EVOLUTION ARPA SRL"
+      if (ncfTypeEl) ncfTypeEl.value = "FACTURA VALIDA CREDITO FISCAL"
+      if (saleTypeEl) saleTypeEl.value = "INGRESOS POR OPERACIONES NO FINANCIERAS"
+      if (paperTypeEl) paperTypeEl.value = "FACTURA PEQUEÑA"
+      if (paymentTypeEl) paymentTypeEl.checked = true
+      if (itbisIncludedEl) itbisIncludedEl.checked = true
+      if (cardPercentageEl) cardPercentageEl.value = "0.00"
+      if (rateEl) rateEl.value = "1.00"
+      const invoiceCommentEl = document.getElementById("invoiceComment")
+      if (invoiceCommentEl) invoiceCommentEl.value = ""
       productos = []
       renderProductList()
       updateTotals()
@@ -560,10 +602,12 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   
     // Eventos principales
-    addInvoiceBtn.addEventListener("click", () => {
-      resetForm()
-      switchView(invoiceFormView, invoiceListView)
-    })
+    if (addInvoiceBtn) {
+      addInvoiceBtn.addEventListener("click", () => {
+        resetForm()
+        switchView(invoiceFormView, invoiceListView)
+      })
+    }
   
     backBtn.addEventListener("click", () => {
       showModal("¿Estás seguro de que deseas volver sin guardar?", () => {
@@ -571,9 +615,30 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     })
   
+    // Función para actualizar la fecha en la card de usuario
+    function updateUserDate() {
+      const userDateEl = document.getElementById("currentDate");
+      if (userDateEl) {
+        const currentDate = new Date().toLocaleString("es-ES", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        userDateEl.textContent = currentDate;
+      }
+    }
+    
+    // Actualizar fecha inicialmente y luego cada minuto
+    updateUserDate();
+    setInterval(updateUserDate, 60000);
+
     // Inicialización
     invoiceListView.classList.add("active")
+    invoiceListView.style.display = "block"
     invoiceFormView.classList.remove("active")
+    invoiceFormView.style.display = "none"
     renderInvoiceList()
   
     // Cerrar toast al hacer clic en el botón de cerrar

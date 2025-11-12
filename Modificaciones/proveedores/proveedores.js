@@ -148,8 +148,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function resetForm() {
-        formTitle.textContent = "Nuevo Proveedor";
-        supplierId.textContent = `PROV${String(suppliers.length + 1).padStart(4, "0")}`;
+        if (formTitle) formTitle.textContent = "Nuevo Proveedor";
+        if (supplierId) supplierId.textContent = `PROV${String(suppliers.length + 1).padStart(4, "0")}`;
         const currentDate = new Date().toLocaleString("es-ES", {
             day: "2-digit",
             month: "2-digit",
@@ -157,40 +157,59 @@ document.addEventListener("DOMContentLoaded", () => {
             hour: "2-digit",
             minute: "2-digit",
         });
-        supplierDate.textContent = currentDate;
-        supplierDateList.textContent = currentDate;
-        document.getElementById("supplierName").value = "";
-        document.getElementById("rnc").value = "";
-        document.getElementById("address").value = "";
-        document.getElementById("phone").value = "";
-        document.getElementById("email").value = "";
-        document.getElementById("contactName").value = "";
-        document.getElementById("status").value = "Activo";
-        document.getElementById("supplierType").value = "Nacional";
-        document.getElementById("paymentTerms").value = "";
-        document.getElementById("currency").value = "RD$";
-        document.getElementById("notes").value = "";
-        document.getElementById("supplierComment").value = "";
-        document.getElementById("commentList").innerHTML = "";
+        if (supplierDate) supplierDate.textContent = currentDate;
+        if (supplierDateList) supplierDateList.textContent = currentDate;
+        const supplierName = document.getElementById("supplierName");
+        if (supplierName) supplierName.value = "";
+        const rnc = document.getElementById("rnc");
+        if (rnc) rnc.value = "";
+        const address = document.getElementById("address");
+        if (address) address.value = "";
+        const phone = document.getElementById("phone");
+        if (phone) phone.value = "";
+        const email = document.getElementById("email");
+        if (email) email.value = "";
+        const contactName = document.getElementById("contactName");
+        if (contactName) contactName.value = "";
+        const status = document.getElementById("status");
+        if (status) status.value = "Activo";
+        const supplierType = document.getElementById("supplierType");
+        if (supplierType) supplierType.value = "Nacional";
+        const paymentTerms = document.getElementById("paymentTerms");
+        if (paymentTerms) paymentTerms.value = "";
+        const currency = document.getElementById("currency");
+        if (currency) currency.value = "RD$";
+        const notes = document.getElementById("notes");
+        if (notes) notes.value = "";
+        const supplierComment = document.getElementById("supplierComment");
+        if (supplierComment) supplierComment.value = "";
+        const commentList = document.getElementById("commentList");
+        if (commentList) commentList.innerHTML = "";
         isEditing = false;
         editIndex = null;
     }
 
-    addSupplierBtn.addEventListener("click", () => {
-        resetForm();
-        switchView(supplierFormView, supplierListView);
-    });
-
-    addSupplierSideBtn.addEventListener("click", () => {
-        resetForm();
-        switchView(supplierFormView, supplierListView);
-    });
-
-    backBtn.addEventListener("click", () => {
-        showModal("¿Estás seguro de que deseas volver sin guardar?", () => {
-            switchView(supplierListView, supplierFormView);
+    if (addSupplierBtn) {
+        addSupplierBtn.addEventListener("click", () => {
+            resetForm();
+            switchView(supplierFormView, supplierListView);
         });
-    });
+    }
+
+    if (addSupplierSideBtn) {
+        addSupplierSideBtn.addEventListener("click", () => {
+            resetForm();
+            switchView(supplierFormView, supplierListView);
+        });
+    }
+
+    if (backBtn) {
+        backBtn.addEventListener("click", () => {
+            showModal("¿Estás seguro de que deseas volver sin guardar?", () => {
+                switchView(supplierListView, supplierFormView);
+            });
+        });
+    }
 
     saveBtn.addEventListener("click", () => {
         const supplierForm = document.getElementById("supplierForm");

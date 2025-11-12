@@ -130,6 +130,20 @@ body {
     padding: 1.5rem 0;
 }
 
+@media (max-width: 768px) {
+    .content-grid {
+        gap: 1rem;
+        padding: 1rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-grid {
+        gap: 0.75rem;
+        padding: 0.75rem 0;
+    }
+}
+
 .card {
     background-color: var(--card);
     border-radius: var(--radius);
@@ -375,6 +389,22 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    .home-container {
+        padding: 0.75rem;
+    }
+    
+    .header-hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
 @media (max-width: 768px) {
     .home-container {
         padding: 0.5rem;
@@ -382,6 +412,23 @@ body {
 
     .header-hero {
         padding: 1rem;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    
+    .header-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .header-text h1 {
+        font-size: 1.25rem;
     }
 
     .banner-content h2 {
@@ -391,9 +438,25 @@ body {
     .banner-content p {
         font-size: 0.875rem;
     }
+    
+    .about-stats {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.75rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
 
     .footer-content {
         text-align: center;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .social-links {
+        justify-content: center;
     }
 }
 
@@ -401,14 +464,57 @@ body {
     .home-container {
         padding: 0.375rem;
     }
+    
+    .header-hero {
+        padding: 0.75rem;
+    }
+    
+    .header-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .header-text h1 {
+        font-size: 1.125rem;
+    }
+    
+    .header-text p {
+        font-size: 0.75rem;
+    }
 
     .banner-content h2 {
         font-size: 1.25rem;
+    }
+    
+    .banner-content p {
+        font-size: 0.8125rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8125rem;
+    }
+    
+    .about-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat {
+        padding: 0.75rem;
+    }
+    
+    .service-item {
+        padding: 1rem;
+    }
+    
+    .footer {
+        padding: 1.5rem 0.75rem;
     }
 
     .toast {
         left: 0.5rem;
         right: 0.5rem;
         max-width: none;
+        padding: 0.75rem;
     }
 }

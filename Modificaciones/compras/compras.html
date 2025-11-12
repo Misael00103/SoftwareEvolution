@@ -6,77 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Compras</title>
     <link rel="stylesheet" href="compras.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Agregar Feather Icons para los botones de acción -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 
 <body>
     <div class="app-container">
         <header class="card">
-            <div class="header-left">
-                <div class="header-icon">
-                    <span class="material-icons">shopping_cart</span>
+            <div class="card-header">
+                <div class="header-content">
+                    <div class="header-icon">
+                        <i data-feather="shopping-cart"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1>Gestión de Compras</h1>
+                        <p>Administre las compras y proveedores del sistema</p>
+                    </div>
                 </div>
-                <div class="header-text">
-                    <h1>Gestión de Compras</h1>
-                    <p>Administre las compras y proveedores</p>
+                <div class="header-actions">
+                    <div class="action-buttons">
+                        <button class="icon-btn" aria-label="Correo"><i data-feather="mail"></i></button>
+                        <button class="icon-btn" aria-label="Imprimir"><i data-feather="printer"></i></button>
+                        <button class="icon-btn" aria-label="Descargar"><i data-feather="download"></i></button>
+                    </div>
                 </div>
             </div>
         </header>
 
-        <!-- Lista de Compras -->
-        <div class="card" id="listaCompras">
-            <div class="card-header">
-                <h2>
-                    <span class="material-icons">list</span>
-                    Lista de Compras
-                </h2>
-                <button class="btn primary" id="nuevaCompraBtn">
-                    <span class="material-icons">add</span> Nueva Compra
-                </button>
-            </div>
-            <div class="card-body">
-                <div class="table-container">
-                    <table class="custom-table" id="comprasTable">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Fecha Ingreso</th>
-                                <th>Proveedor</th>
-                                <th>Factura #</th>
-                                <th>Total Neto</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="comprasTableBody">
-                            <!-- Las filas se llenarán dinámicamente con JS -->
-                        </tbody>
-                    </table>
-                </div>
+        <main>
+            <section class="view active" id="listaCompras">
+                <div class="content-grid">
+                    <div class="main-content">
+                        <section class="card">
+                            <div class="card-header">
+                                <h2><i data-feather="list"></i> Lista de Compras</h2>
+                                <button class="btn primary" id="nuevaCompraBtn">
+                                    <i data-feather="plus"></i> Nueva Compra
+                                </button>
+                            </div>
+                            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Proveedor</th>
+                            <th>Factura #</th>
+                            <th>Total Neto</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comprasTableBody">
+                        <!-- Las filas se llenarán dinámicamente con JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
             </div>
         </div>
+    </section>
 
-        <!-- Formulario de Compra (inicialmente oculto) -->
-        <div class="card" id="formularioCompra" style="display: none;">
-            <div class="card-header">
-                <h2>
-                    <span class="material-icons">add_shopping_cart</span>
-                    <span id="tituloFormulario">Nueva Compra</span>
-                </h2>
-                <button class="btn secondary" id="volverListaBtn">
-                    <span class="material-icons">arrow_back</span> Volver
-                </button>
-            </div>
-            <div class="card-body">
+    <!-- Formulario de Compra (inicialmente oculto) -->
+    <section class="view" id="formularioCompra" style="display: none;">
+        <div class="content-grid">
+            <div class="main-content">
+                <section class="card">
+                    <div class="card-header">
+                        <h2><i data-feather="shopping-cart"></i> <span id="tituloFormulario">Nueva Compra</span></h2>
+                        <button class="btn secondary" id="volverListaBtn">
+                            <i data-feather="arrow-left"></i> Volver
+                        </button>
+                    </div>
+                    <div class="card-body">
                 <form id="compraForm">
                     <input type="hidden" id="compraId" value="">
 
                     <div class="form-grid-container">
                         <!-- Sección de Proveedor -->
                         <section class="form-section">
-                            <h3><span class="material-icons">person</span> Proveedor</h3>
+                            <h3><i data-feather="user"></i> Proveedor</h3>
                             <div class="form-grid">
                                 <div class="field">
                                     <label for="proveedor">Proveedor:</label>
@@ -104,7 +112,7 @@
 
                         <!-- Sección de Documentos -->
                         <section class="form-section">
-                            <h3><span class="material-icons">description</span> Documentos</h3>
+                            <h3><i data-feather="file-text"></i> Documentos</h3>
                             <div class="form-grid">
                                 <div class="field">
                                     <label for="tipoCompra">Tipo Compra:</label>
@@ -139,7 +147,7 @@
 
                         <!-- Sección de Facturación -->
                         <section class="form-section">
-                            <h3><span class="material-icons">receipt</span> Facturación</h3>
+                            <h3><i data-feather="file"></i> Facturación</h3>
                             <div class="form-grid">
                                 <div class="field">
                                     <label for="proyecto">Proyecto:</label>
@@ -167,7 +175,7 @@
 
                     <!-- Sección de Configuraciones -->
                     <section class="form-section">
-                        <h3><span class="material-icons">settings</span> Configuraciones</h3>
+                        <h3><i data-feather="settings"></i> Configuraciones</h3>
                         <div class="checkbox-grid">
                             <label><input type="checkbox" id="impuestoIncluido"> Impuesto Incluido</label>
                             <label><input type="checkbox" id="sinImpuesto"> Sin Impuesto</label>
@@ -180,59 +188,57 @@
 
                     <!-- Sección de Productos -->
                     <section class="form-section">
-                        <h3><span class="material-icons">inventory</span> Productos</h3>
-                        <div class="table-container">
-                            <table class="custom-table" id="detalleProductosTable">
-                                <thead>
-                                    <tr>
-                                        <th width="40">#</th>
-                                        <th>Referencia</th>
-                                        <th>Descripción</th>
-                                        <th width="100">ITBIS</th>
-                                        <th width="150">Costo</th>
-                                        <th width="100">Cantidad</th>
-                                        <th width="50"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr id="filaPlantilla" style="display: none;">
-                                        <td class="numero-fila" data-label="#">1</td>
-                                        <td data-label="Referencia">
-                                            <input type="text" class="referencia-producto" placeholder="Referencia">
-                                        </td>
-                                        <td data-label="Descripción">
-                                            <input type="text" class="descripcion-producto" placeholder="Descripción">
-                                        </td>
-                                        <td data-label="ITBIS">
-                                            <input type="number" class="itbis-producto" min="0" step="0.01"
-                                                value="18.00">
-                                        </td>
-                                        <td data-label="Costo">
-                                            <input type="number" class="costo-producto" min="0" step="0.01"
-                                                value="0.00">
-                                        </td>
-                                        <td data-label="Cantidad">
-                                            <input type="number" class="cantidad-producto" min="1" value="1">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn secondary eliminar-fila">
-                                                <span class="material-icons">delete</span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="table-actions">
-                                <button type="button" class="btn primary" id="agregarProductoBtn">
-                                    <span class="material-icons">add</span> Agregar Producto
-                                </button>
-                            </div>
+                        <h3><i data-feather="package"></i> Productos</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th width="40">#</th>
+                                    <th>Referencia</th>
+                                    <th>Descripción</th>
+                                    <th width="100">ITBIS</th>
+                                    <th width="150">Costo</th>
+                                    <th width="100">Cantidad</th>
+                                    <th width="50"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="filaPlantilla" style="display: none;">
+                                    <td class="numero-fila" data-label="#">1</td>
+                                    <td data-label="Referencia">
+                                        <input type="text" class="referencia-producto" placeholder="Referencia">
+                                    </td>
+                                    <td data-label="Descripción">
+                                        <input type="text" class="descripcion-producto" placeholder="Descripción">
+                                    </td>
+                                    <td data-label="ITBIS">
+                                        <input type="number" class="itbis-producto" min="0" step="0.01"
+                                            value="18.00">
+                                    </td>
+                                    <td data-label="Costo">
+                                        <input type="number" class="costo-producto" min="0" step="0.01"
+                                            value="0.00">
+                                    </td>
+                                    <td data-label="Cantidad">
+                                        <input type="number" class="cantidad-producto" min="1" value="1">
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn secondary eliminar-fila">
+                                            <i data-feather="trash-2"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="table-actions">
+                            <button type="button" class="btn primary" id="agregarProductoBtn">
+                                <i data-feather="plus"></i> Agregar Producto
+                            </button>
                         </div>
                     </section>
 
                     <!-- Sección de Totales -->
                     <section class="form-section">
-                        <h3><span class="material-icons">calculate</span> Totales</h3>
+                        <h3><i data-feather="hash"></i> Totales</h3>
                         <div class="form-grid">
                             <div class="field">
                                 <label for="totalBruto">Total Bruto:</label>
@@ -257,45 +263,45 @@
                         </div>
                     </section>
 
-                    <div class="form-actions">
-                        <button type="button" class="btn secondary" id="cancelarCompraBtn">
-                            <span class="material-icons">close</span> Cancelar
-                        </button>
-                        <button type="submit" class="btn primary" id="guardarCompraBtn">
-                            <span class="material-icons">save</span> Guardar
-                        </button>
+                            <div class="main-actions">
+                                <button type="button" class="btn secondary" id="cancelarCompraBtn">
+                                    <i data-feather="x"></i> Cancelar
+                                </button>
+                                <button type="submit" class="btn primary" id="guardarCompraBtn">
+                                    <i data-feather="save"></i> Guardar
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </section>
             </div>
         </div>
+    </section>
+        </main>
     </div>
 
-    <div class="toast" id="notification">
+    <div id="toast" class="toast">
         <div class="toast-icon">
-            <span class="material-icons">check_circle</span>
+            <i data-feather="check-circle"></i>
         </div>
         <div class="toast-content">
             <p class="toast-title">Éxito</p>
-            <p class="toast-message">Operación completada correctamente</p>
+            <p class="toast-message" id="toastMessage">Operación completada correctamente</p>
         </div>
-        <button class="toast-close">
-            <span class="material-icons">close</span>
-        </button>
+        <button class="toast-close"><i data-feather="x"></i></button>
     </div>
 
     <!-- Modal de Confirmación -->
-    <div class="modal" id="confirmModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Confirmar Acción</h2>
-                <button class="modal-close-btn" id="closeConfirmModal">
-                    <span class="material-icons">close</span>
-                </button>
+    <div class="confirm-dialog" id="confirmModal">
+        <div class="confirm-dialog-content card">
+            <div class="card-header">
+                <h3><i data-feather="check-circle"></i> Confirmar Acción</h3>
+                <button class="modal-close" id="closeConfirmModal"><i data-feather="x"></i></button>
             </div>
-            <div class="modal-body">
+            <div class="card-body">
                 <p id="confirmMessage">¿Está seguro de que desea realizar esta acción?</p>
             </div>
-            <div class="modal-footer">
+            <div class="main-actions">
                 <button class="btn secondary" id="cancelConfirmBtn">Cancelar</button>
                 <button class="btn primary" id="confirmActionBtn">Confirmar</button>
             </div>
@@ -303,6 +309,20 @@
     </div>
 
     <script src="compras.js"></script>
+    <script>
+        // Asegurar que los iconos se rendericen después de cargar la página
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof feather !== 'undefined') {
+                    feather.replace();
+                }
+            });
+        } else {
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        }
+    </script>
 </body>
 
 </html>

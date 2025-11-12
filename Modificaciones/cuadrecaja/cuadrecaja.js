@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    feather.replace();
     // Referencias a elementos del DOM
     const cuadreListView = document.getElementById('cuadreListView');
     const cuadreFormView = document.getElementById('cuadreFormView');
@@ -104,12 +105,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 <td data-label="Total Efectivo">${formatearNumero(cuadre.totalEfectivo)}</td>
                 <td data-label="Sobrante/Faltante">${formatearNumero(cuadre.sobranteFaltante)}</td>
                 <td data-label="Acciones">
-                    <button class="icon-btn edit-btn" data-index="${index}"><span class="material-icons">edit</span></button>
-                    <button class="icon-btn btn-danger" data-index="${index}"><span class="material-icons">delete</span></button>
+                    <button class="icon-btn edit-btn" data-index="${index}"><i data-feather="edit"></i></button>
+                    <button class="icon-btn btn-danger" data-index="${index}"><i data-feather="trash-2"></i></button>
                 </td>
             `;
             cuadreList.appendChild(row);
         });
+        feather.replace(); // Re-renderizar iconos Feather
         document.querySelectorAll('.edit-btn').forEach(button => {
             button.addEventListener('click', (e) => {
                 const index = e.currentTarget.getAttribute('data-index');
@@ -133,22 +135,27 @@ document.addEventListener('DOMContentLoaded', function() {
         isEditing = true;
         editIndex = index;
         const cuadre = cuadres[index];
-        formTitle.textContent = 'Editar Cuadre de Caja';
-        cuadreId.textContent = cuadre.id;
-        document.getElementById('fecha').value = cuadre.fecha;
-        document.getElementById('sucursal').value = cuadre.sucursal;
-        document.getElementById('cajero').value = cuadre.cajero;
+        if (formTitle) formTitle.textContent = 'Editar Cuadre de Caja';
+        if (cuadreId) cuadreId.textContent = cuadre.id;
+        const fecha = document.getElementById('fecha');
+        if (fecha) fecha.value = cuadre.fecha;
+        const sucursal = document.getElementById('sucursal');
+        if (sucursal) sucursal.value = cuadre.sucursal;
+        const cajero = document.getElementById('cajero');
+        if (cajero) cajero.value = cuadre.cajero;
         cantidadInputs.forEach(input => {
-            const valor = input.parentElement.parentElement.getAttribute('data-valor');
-            input.value = cuadre.efectivo[valor] || 0;
+            if (input && input.parentElement && input.parentElement.parentElement) {
+                const valor = input.parentElement.parentElement.getAttribute('data-valor');
+                if (valor) input.value = cuadre.efectivo[valor] || 0;
+            }
         });
-        ventaContadoInput.value = cuadre.ventaContado.toFixed(2);
-        cobrosRealizadosInput.value = cuadre.cobrosRealizados.toFixed(2);
-        otrosIngresosInput.value = cuadre.otrosIngresos.toFixed(2);
-        notasCreditoInput.value = cuadre.notasCredito.toFixed(2);
-        totalChequesInput.value = cuadre.totalCheques.toFixed(2);
-        totalTarjetaInput.value = cuadre.totalTarjeta.toFixed(2);
-        totalTransferenciaInput.value = cuadre.totalTransferencia.toFixed(2);
+        if (ventaContadoInput) ventaContadoInput.value = cuadre.ventaContado.toFixed(2);
+        if (cobrosRealizadosInput) cobrosRealizadosInput.value = cuadre.cobrosRealizados.toFixed(2);
+        if (otrosIngresosInput) otrosIngresosInput.value = cuadre.otrosIngresos.toFixed(2);
+        if (notasCreditoInput) notasCreditoInput.value = cuadre.notasCredito.toFixed(2);
+        if (totalChequesInput) totalChequesInput.value = cuadre.totalCheques.toFixed(2);
+        if (totalTarjetaInput) totalTarjetaInput.value = cuadre.totalTarjeta.toFixed(2);
+        if (totalTransferenciaInput) totalTransferenciaInput.value = cuadre.totalTransferencia.toFixed(2);
         calcularSubtotales();
         calcularTotalEfectivo();
         calcularTotalResumen();
@@ -158,25 +165,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Resetear formulario
     function resetForm() {
-        formTitle.textContent = 'Nuevo Cuadre de Caja';
-        cuadreId.textContent = `CUADRE${String(cuadres.length + 1).padStart(4, '0')}`;
-        document.getElementById('fecha').valueAsDate = new Date();
-        document.getElementById('sucursal').value = 'LOS PEPINES';
-        document.getElementById('cajero').value = 'SOFTWARE EVOLUTION ARPA SRL';
-        cantidadInputs.forEach(input => input.value = 0);
-        subtotalCells.forEach(cell => cell.textContent = '0.00');
-        totalEfectivoCell.textContent = '0.00';
-        ventaContadoInput.value = '0.00';
-        cobrosRealizadosInput.value = '0.00';
-        otrosIngresosInput.value = '0.00';
-        notasCreditoInput.value = '0.00';
-        totalResumenInput.value = '0.00';
-        totalChequesInput.value = '0.00';
-        totalTarjetaInput.value = '0.00';
-        totalTransferenciaInput.value = '0.00';
-        sobranteFaltanteInput.value = '0.00';
-        sobranteFaltanteInput.style.color = 'var(--text)';
-        sobranteFaltanteInput.style.backgroundColor = '';
+        if (formTitle) formTitle.textContent = 'Nuevo Cuadre de Caja';
+        if (cuadreId) cuadreId.textContent = `CUADRE${String(cuadres.length + 1).padStart(4, '0')}`;
+        const fecha = document.getElementById('fecha');
+        if (fecha) fecha.valueAsDate = new Date();
+        const sucursal = document.getElementById('sucursal');
+        if (sucursal) sucursal.value = 'LOS PEPINES';
+        const cajero = document.getElementById('cajero');
+        if (cajero) cajero.value = 'SOFTWARE EVOLUTION ARPA SRL';
+        cantidadInputs.forEach(input => {
+            if (input) input.value = 0;
+        });
+        subtotalCells.forEach(cell => {
+            if (cell) cell.textContent = '0.00';
+        });
+        if (totalEfectivoCell) totalEfectivoCell.textContent = '0.00';
+        if (ventaContadoInput) ventaContadoInput.value = '0.00';
+        if (cobrosRealizadosInput) cobrosRealizadosInput.value = '0.00';
+        if (otrosIngresosInput) otrosIngresosInput.value = '0.00';
+        if (notasCreditoInput) notasCreditoInput.value = '0.00';
+        if (totalResumenInput) totalResumenInput.value = '0.00';
+        if (totalChequesInput) totalChequesInput.value = '0.00';
+        if (totalTarjetaInput) totalTarjetaInput.value = '0.00';
+        if (totalTransferenciaInput) totalTransferenciaInput.value = '0.00';
+        if (sobranteFaltanteInput) {
+            sobranteFaltanteInput.value = '0.00';
+            sobranteFaltanteInput.style.color = 'var(--text)';
+            sobranteFaltanteInput.style.backgroundColor = '';
+        }
         isEditing = false;
         editIndex = null;
     }
@@ -269,20 +285,24 @@ document.addEventListener('DOMContentLoaded', function() {
         input.addEventListener('input', calcularSobranteFaltante);
     });
 
-    obtenerValoresBtn.addEventListener('click', () => {
-        ventaContadoInput.value = (Math.random() * 10000).toFixed(2);
-        cobrosRealizadosInput.value = (Math.random() * 5000).toFixed(2);
-        otrosIngresosInput.value = (Math.random() * 1000).toFixed(2);
-        notasCreditoInput.value = (Math.random() * 500).toFixed(2);
-        totalChequesInput.value = (Math.random() * 3000).toFixed(2);
-        totalTarjetaInput.value = (Math.random() * 4000).toFixed(2);
-        totalTransferenciaInput.value = (Math.random() * 2000).toFixed(2);
-        calcularTotalResumen();
-        calcularSobranteFaltante();
-        showNotification('Valores obtenidos', 'Se han cargado los valores del sistema correctamente');
-    });
+    if (obtenerValoresBtn) {
+        obtenerValoresBtn.addEventListener('click', () => {
+            if (ventaContadoInput) ventaContadoInput.value = (Math.random() * 10000).toFixed(2);
+            if (cobrosRealizadosInput) cobrosRealizadosInput.value = (Math.random() * 5000).toFixed(2);
+            if (otrosIngresosInput) otrosIngresosInput.value = (Math.random() * 1000).toFixed(2);
+            if (notasCreditoInput) notasCreditoInput.value = (Math.random() * 500).toFixed(2);
+            if (totalChequesInput) totalChequesInput.value = (Math.random() * 3000).toFixed(2);
+            if (totalTarjetaInput) totalTarjetaInput.value = (Math.random() * 4000).toFixed(2);
+            if (totalTransferenciaInput) totalTransferenciaInput.value = (Math.random() * 2000).toFixed(2);
+            calcularTotalResumen();
+            calcularSobranteFaltante();
+            showNotification('Valores obtenidos', 'Se han cargado los valores del sistema correctamente');
+        });
+    }
 
-    document.getElementById('cuadreForm').addEventListener('submit', (e) => {
+    const cuadreForm = document.getElementById('cuadreForm');
+    if (cuadreForm) {
+        cuadreForm.addEventListener('submit', (e) => {
         e.preventDefault();
         if (!validarFormulario()) {
             showNotification('Error', 'Por favor complete todos los campos requeridos', 'error');
@@ -319,48 +339,73 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         renderCuadreList();
         switchView(cuadreListView, cuadreFormView);
-    });
+        });
+    }
 
-    cancelarBtn.addEventListener('click', () => {
-        showModal('¿Está seguro de que desea cancelar este cuadre de caja?', () => {
+    if (cancelarBtn) {
+        cancelarBtn.addEventListener('click', () => {
+            showModal('¿Está seguro de que desea cancelar este cuadre de caja?', () => {
+                resetForm();
+                switchView(cuadreListView, cuadreFormView);
+            });
+        });
+    }
+
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            showModal('¿Está seguro de que desea volver sin guardar?', () => {
+                switchView(cuadreListView, cuadreFormView);
+            });
+        });
+    }
+
+    if (printBtn) {
+        printBtn.addEventListener('click', () => {
+            const originalTitle = document.title;
+            const fecha = document.getElementById('fecha');
+            const sucursal = document.getElementById('sucursal');
+            if (fecha && sucursal) {
+                document.title = `Cuadre de Caja - ${sucursal.value} - ${fecha.value}`;
+                window.print();
+                setTimeout(() => document.title = originalTitle, 100);
+            }
+        });
+    }
+
+    if (notificationCloseBtn) {
+        notificationCloseBtn.addEventListener('click', () => {
+            if (notification) {
+                notification.classList.remove('show');
+            }
+        });
+    }
+
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', hideModal);
+    }
+    if (modalCancelBtn) {
+        modalCancelBtn.addEventListener('click', hideModal);
+    }
+    if (modalConfirmBtn) {
+        modalConfirmBtn.addEventListener('click', () => {
+            if (modalCallback) modalCallback();
+            hideModal();
+        });
+    }
+
+    if (addCuadreBtn) {
+        addCuadreBtn.addEventListener('click', () => {
             resetForm();
-            switchView(cuadreListView, cuadreFormView);
+            switchView(cuadreFormView, cuadreListView);
         });
-    });
-
-    backBtn.addEventListener('click', () => {
-        showModal('¿Está seguro de que desea volver sin guardar?', () => {
-            switchView(cuadreListView, cuadreFormView);
-        });
-    });
-
-    printBtn.addEventListener('click', () => {
-        const originalTitle = document.title;
-        const fecha = document.getElementById('fecha').value;
-        const sucursal = document.getElementById('sucursal').value;
-        document.title = `Cuadre de Caja - ${sucursal} - ${fecha}`;
-        window.print();
-        setTimeout(() => document.title = originalTitle, 100);
-    });
-
-    notificationCloseBtn.addEventListener('click', () => {
-        notification.classList.remove('show');
-    });
-
-    modalCloseBtn.addEventListener('click', hideModal);
-    modalCancelBtn.addEventListener('click', hideModal);
-    modalConfirmBtn.addEventListener('click', () => {
-        if (modalCallback) modalCallback();
-        hideModal();
-    });
-
-    addCuadreBtn.addEventListener('click', () => {
-        resetForm();
-        switchView(cuadreFormView, cuadreListView);
-    });
+    }
 
     // Inicialización
-    cuadreListView.classList.add('active');
-    cuadreFormView.classList.remove('active');
+    if (cuadreListView) {
+        cuadreListView.classList.add('active');
+    }
+    if (cuadreFormView) {
+        cuadreFormView.classList.remove('active');
+    }
     renderCuadreList();
 });

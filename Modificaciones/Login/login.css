@@ -21,6 +21,7 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+    overflow-x: hidden;
 }
 
 .container {
@@ -158,17 +159,106 @@ label {
     transition: transform 0.6s ease;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    .container {
+        max-width: 100%;
+    }
+    
     .card {
-        padding: 30px 20px;
+        padding: 35px 25px;
         border-radius: 20px;
+    }
+    
+    .logo {
+        max-width: 180px;
+    }
+    
+    h2 {
+        font-size: 24px;
+    }
+    
+    .form-input {
+        padding: 15px 18px;
+        font-size: 15px;
+    }
+    
+    .button-primary {
+        padding: 15px 18px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .card {
+        padding: 25px 20px;
+        border-radius: 16px;
+    }
+    
+    .logo {
+        max-width: 160px;
+    }
+    
+    h2 {
+        font-size: 22px;
+        margin-bottom: 25px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    label {
+        font-size: 14px;
+        margin-bottom: 8px;
     }
 
     .form-input {
         padding: 14px 16px;
+        font-size: 14px;
+        border-radius: 14px;
     }
 
     .button-primary {
         padding: 14px 16px;
+        font-size: 14px;
+        border-radius: 14px;
+    }
+    
+    .error-message {
+        font-size: 13px;
+        padding: 8px 12px;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    .card {
+        padding: 20px 15px;
+    }
+    
+    .logo {
+        max-width: 140px;
+    }
+    
+    h2 {
+        font-size: 20px;
+    }
+    
+    .form-input {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+    
+    .button-primary {
+        padding: 12px 14px;
+        font-size: 13px;
     }
 }

@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    feather.replace();
     const listadoCuentas = document.getElementById('listadoCuentas');
     const formularioCuenta = document.getElementById('formularioCuenta');
     const formularioPago = document.getElementById('formularioPago');
@@ -32,9 +33,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('fechaFactura').valueAsDate = new Date();
 
+    function switchView(hideView, showView) {
+        hideView.classList.remove('active');
+        hideView.style.display = 'none';
+        showView.classList.add('active');
+        showView.style.display = 'block';
+        feather.replace();
+    }
+
     nuevaCuentaBtn.addEventListener('click', function() {
-        listadoCuentas.style.display = 'none';
-        formularioCuenta.style.display = 'block';
+        switchView(listadoCuentas, formularioCuenta);
         cuentaForm.reset();
         document.getElementById('fechaFactura').valueAsDate = new Date();
         document.querySelector('#detallePagosTable tbody').innerHTML = '';
@@ -76,8 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmMessage.textContent = '¿Está seguro que desea volver al listado? Los cambios no guardados se perderán.';
             confirmActionBtn.textContent = 'Volver';
             elementToDelete = function() {
-                formularioCuenta.style.display = 'none';
-                listadoCuentas.style.display = 'block';
+                switchView(formularioCuenta, listadoCuentas);
                 cuentaForm.reset();
                 document.getElementById('fechaFactura').valueAsDate = new Date();
                 document.querySelector('#detallePagosTable tbody').innerHTML = '';
@@ -87,8 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             confirmModal.classList.add('show');
         } else {
-            formularioCuenta.style.display = 'none';
-            listadoCuentas.style.display = 'block';
+            switchView(formularioCuenta, listadoCuentas);
             cuentaForm.reset();
             document.getElementById('fechaFactura').valueAsDate = new Date();
             document.querySelector('#detallePagosTable tbody').innerHTML = '';
@@ -104,14 +110,12 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmMessage.textContent = '¿Está seguro que desea volver al listado? Los cambios no guardados se perderán.';
             confirmActionBtn.textContent = 'Volver';
             elementToDelete = function() {
-                formularioPago.style.display = 'none';
-                listadoCuentas.style.display = 'block';
+                switchView(formularioPago, listadoCuentas);
                 pagoForm.reset();
             };
             confirmModal.classList.add('show');
         } else {
-            formularioPago.style.display = 'none';
-            listadoCuentas.style.display = 'block';
+            switchView(formularioPago, listadoCuentas);
             pagoForm.reset();
         }
     });
@@ -126,9 +130,10 @@ document.addEventListener('DOMContentLoaded', function() {
             <td><select class="metodo-pago" required><option value="">Seleccionar método</option><option value="efectivo">Efectivo</option><option value="transferencia">Transferencia</option><option value="cheque">Cheque</option><option value="tarjeta">Tarjeta</option></select></td>
             <td><input type="text" class="referencia-pago" placeholder="No. Referencia"></td>
             <td><input type="number" class="monto-pago" min="0" step="0.01" value="0.00" required></td>
-            <td><button type="button" class="icon-button eliminar-fila"><span class="material-icons">delete</span></button></td>
+            <td><button type="button" class="icon-button eliminar-fila" title="Eliminar"><i data-feather="trash-2"></i></button></td>
         `;
         tbody.appendChild(fila);
+        feather.replace();
     });
 
     cuentaForm.addEventListener('submit', function(e) {
@@ -190,8 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
             notification.querySelector('.toast-icon .material-icons').textContent = 'check_circle';
             notification.classList.add('show');
             setTimeout(() => notification.classList.remove('show'), 5000);
-            formularioCuenta.style.display = 'none';
-            listadoCuentas.style.display = 'block';
+            switchView(formularioCuenta, listadoCuentas);
             cuentaForm.reset();
             document.getElementById('fechaFactura').valueAsDate = new Date();
             document.querySelector('#detallePagosTable tbody').innerHTML = '';
@@ -207,8 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmMessage.textContent = '¿Está seguro que desea cancelar esta cuenta? Los cambios no guardados se perderán.';
             confirmActionBtn.textContent = 'Cancelar';
             elementToDelete = function() {
-                formularioCuenta.style.display = 'none';
-                listadoCuentas.style.display = 'block';
+                switchView(formularioCuenta, listadoCuentas);
                 cuentaForm.reset();
                 document.getElementById('fechaFactura').valueAsDate = new Date();
                 document.querySelector('#detallePagosTable tbody').innerHTML = '';
@@ -218,8 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             confirmModal.classList.add('show');
         } else {
-            formularioCuenta.style.display = 'none';
-            listadoCuentas.style.display = 'block';
+            switchView(formularioCuenta, listadoCuentas);
             cuentaForm.reset();
             document.getElementById('fechaFactura').valueAsDate = new Date();
             document.querySelector('#detallePagosTable tbody').innerHTML = '';
@@ -262,8 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
             notification.querySelector('.toast-icon .material-icons').textContent = 'check_circle';
             notification.classList.add('show');
             setTimeout(() => notification.classList.remove('show'), 5000);
-            formularioPago.style.display = 'none';
-            listadoCuentas.style.display = 'block';
+            switchView(formularioPago, listadoCuentas);
             pagoForm.reset();
         }, 1500);
     });
@@ -274,14 +275,12 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmMessage.textContent = '¿Está seguro que desea cancelar este pago? Los cambios no guardados se perderán.';
             confirmActionBtn.textContent = 'Cancelar';
             elementToDelete = function() {
-                formularioPago.style.display = 'none';
-                listadoCuentas.style.display = 'block';
+                switchView(formularioPago, listadoCuentas);
                 pagoForm.reset();
             };
             confirmModal.classList.add('show');
         } else {
-            formularioPago.style.display = 'none';
-            listadoCuentas.style.display = 'block';
+            switchView(formularioPago, listadoCuentas);
             pagoForm.reset();
         }
     });
@@ -329,8 +328,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const row = target.closest('tr');
         const cuentaId = target.getAttribute('data-id');
         if (target.classList.contains('edit-btn')) {
-            listadoCuentas.style.display = 'none';
-            formularioCuenta.style.display = 'block';
+            switchView(listadoCuentas, formularioCuenta);
             tituloFormulario.textContent = `Editar Cuenta #${cuentaId}`;
             cuentaIdInput.value = cuentaId;
             document.getElementById('cliente').value = Array.from(document.getElementById('cliente').options).find(opt => opt.text === row.cells[1].textContent).value;
@@ -356,8 +354,7 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmActionBtn.textContent = 'Eliminar';
             confirmModal.classList.add('show');
         } else if (target.classList.contains('payment-btn')) {
-            listadoCuentas.style.display = 'none';
-            formularioPago.style.display = 'block';
+            switchView(listadoCuentas, formularioPago);
             document.getElementById('pagoIdCuenta').value = cuentaId;
             document.getElementById('pagoCliente').value = row.cells[1].textContent;
             document.getElementById('pagoFactura').value = row.cells[2].textContent;

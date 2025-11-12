@@ -10,98 +10,62 @@
 </head>
 <body>
     <div class="app-container">
-        <!-- Vista de Listado de Proveedores -->
-        <section class="view active" id="supplierListView">
-            <header class="card header-card">
-                <div class="card-header">
-                    <div class="header-content">
-                        <div class="header-icon">
-                            <i data-feather="truck"></i>
-                        </div>
-                        <div class="header-text">
-                            <h1>Listado de Proveedores</h1>
-                            <p>Administre los proveedores del sistema</p>
-                        </div>
+        <header class="card">
+            <div class="card-header">
+                <div class="header-content">
+                    <div class="header-icon">
+                        <i data-feather="truck"></i>
                     </div>
-                    <div class="header-actions">
-                        <div class="user-card">
-                            <div class="user-info">
-                                <img src="../Assets/perfil.jpg" alt="Usuario" class="user-image">
-                                <div class="user-details">
-                                    <span class="user-name">Juan Pérez</span>
-                                    <span class="user-date" id="supplierDateList">15/04/2025 10:00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="action-buttons">
-                            <button class="icon-btn" aria-label="Correo"><i data-feather="mail"></i></button>
-                            <button class="icon-btn" aria-label="Imprimir"><i data-feather="printer"></i></button>
-                            <button class="icon-btn" aria-label="Descargar"><i data-feather="download"></i></button>
-                        </div>
+                    <div class="header-text">
+                        <h1>Gestión de Proveedores</h1>
+                        <p>Administre los proveedores del sistema</p>
                     </div>
                 </div>
-            </header>
-            <div class="content-wrapper">
-                <section class="card">
-                    <div class="card-header">
-                        <h2><i data-feather="list"></i> Proveedores</h2>
-                        <button class="btn primary" id="addSupplierBtn">
-                            <i data-feather="plus"></i> Nuevo Proveedor
-                        </button>
+                <div class="header-actions">
+                    <div class="action-buttons">
+                        <button class="icon-btn" aria-label="Correo"><i data-feather="mail"></i></button>
+                        <button class="icon-btn" aria-label="Imprimir"><i data-feather="printer"></i></button>
+                        <button class="icon-btn" aria-label="Descargar"><i data-feather="download"></i></button>
                     </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>ID Proveedor</th>
-                                        <th>Nombre</th>
-                                        <th>Contacto</th>
-                                        <th>Teléfono</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="supplierList"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
+                </div>
             </div>
-        </section>
+        </header>
 
-        <!-- Vista de Formulario de Proveedor -->
-        <section class="view" id="supplierFormView">
-            <header class="card header-card">
-                <div class="card-header">
-                    <div class="header-content">
-                        <div class="header-icon">
-                            <i data-feather="truck"></i>
-                        </div>
-                        <div class="header-text">
-                            <h1 id="formTitle">Nuevo Proveedor</h1>
-                            <p id="supplierId">PROV0001</p>
-                        </div>
-                    </div>
-                    <div class="header-actions">
-                        <div class="user-card">
-                            <div class="user-info">
-                                <img src="../Assets/perfil.jpg" alt="Usuario" class="user-image">
-                                <div class="user-details">
-                                    <span class="user-name">Juan Pérez</span>
-                                    <span class="user-date" id="supplierDate">15/04/2025 10:00</span>
-                                </div>
+        <main>
+            <!-- Vista de Listado de Proveedores -->
+            <section class="view active" id="supplierListView">
+                <div class="content-grid">
+                    <div class="main-content">
+                        <section class="card">
+                            <div class="card-header">
+                                <h2><i data-feather="list"></i> Listado de Proveedores</h2>
+                                <button class="btn primary" id="addSupplierBtn">
+                                    <i data-feather="plus"></i> Nuevo Proveedor
+                                </button>
                             </div>
-                        </div>
-                        <div class="action-buttons">
-                            <button class="icon-btn" aria-label="Correo"><i data-feather="mail"></i></button>
-                            <button class="icon-btn" aria-label="Imprimir"><i data-feather="printer"></i></button>
-                        </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Proveedor</th>
+                                            <th>Nombre</th>
+                                            <th>Contacto</th>
+                                            <th>Teléfono</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="supplierList"></tbody>
+                                </table>
+                            </div>
+                        </section>
                     </div>
                 </div>
-            </header>
+            </section>
 
-            <div class="content-wrapper">
+            <!-- Vista de Formulario de Proveedor -->
+            <section class="view" id="supplierFormView">
+                <div class="content-grid">
                 <!-- Contenido principal -->
                 <div class="main-content">
                     <section class="card">
@@ -255,8 +219,8 @@
                         </div>
                     </section>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
 
         <!-- Toast -->
         <div id="toast" class="toast">

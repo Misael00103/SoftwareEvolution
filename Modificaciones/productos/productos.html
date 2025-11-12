@@ -4,50 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Productos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="productos.css">
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
     <div class="app-container">
-        <!-- Vista de Listado de Productos -->
-        <section class="view active" id="listView">
-            <header class="card">
-                <div class="card-header">
-                    <div class="header-content">
-                        <div class="header-icon">
-                            <span class="material-icons">inventory_2</span>
-                        </div>
-                        <div class="header-text">
-                            <h1>Gestión de Productos</h1>
-                            <p>Administre la información de los productos del sistema</p>
-                        </div>
+        <header class="card">
+            <div class="card-header">
+                <div class="header-content">
+                    <div class="header-icon">
+                        <i data-feather="package"></i>
                     </div>
-                    <div class="header-actions">
-                        <div class="action-buttons">
-                            <button class="icon-btn" aria-label="Correo">
-                                <span class="material-icons">mail</span>
-                            </button>
-                            <button class="icon-btn" aria-label="Imprimir">
-                                <span class="material-icons">print</span>
-                            </button>
-                            <button class="icon-btn" aria-label="Descargar">
-                                <span class="material-icons">download</span>
-                            </button>
-                        </div>
-                        <button class="btn primary" id="newProductBtn">
-                            <span class="material-icons">add_circle</span>
-                            <span>Nuevo Producto</span>
-                        </button>
+                    <div class="header-text">
+                        <h1>Gestión de Productos</h1>
+                        <p>Administre la información de los productos del sistema</p>
                     </div>
                 </div>
-            </header>
-            <main>
+                <div class="header-actions">
+                    <div class="action-buttons">
+                        <button class="icon-btn" aria-label="Correo"><i data-feather="mail"></i></button>
+                        <button class="icon-btn" aria-label="Imprimir"><i data-feather="printer"></i></button>
+                        <button class="icon-btn" aria-label="Descargar"><i data-feather="download"></i></button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Vista de Listado de Productos -->
+            <section class="view active" id="listView">
                 <div class="content-grid">
                     <div class="main-content">
                         <section class="card">
                             <div class="card-header">
-                                <h2><span class="material-icons">list</span> Listado de Productos</h2>
+                                <h2><i data-feather="list"></i> Listado de Productos</h2>
+                                <button class="btn primary" id="newProductBtn">
+                                    <i data-feather="plus"></i> Nuevo Producto
+                                </button>
                             </div>
                             <div class="card-body">
                                 <table class="table">
@@ -72,34 +66,19 @@
                         </section>
                     </div>
                 </div>
-            </main>
-        </section>
+            </section>
 
-        <!-- Vista de Formulario de Producto -->
-        <section class="view" id="formView">
-            <header class="card">
-                <div class="card-header">
-                    <div class="header-content">
-                        <div class="header-icon">
-                            <span class="material-icons">inventory_2</span>
-                        </div>
-                        <div class="header-text">
-                            <h1 id="pageTitle">Nuevo Producto</h1>
-                            <p>Complete la información del producto</p>
-                        </div>
-                    </div>
-                    <div class="header-actions">
-                        <button class="btn secondary" id="backToList">
-                            <span class="material-icons">arrow_back</span>
-                            <span>Volver</span>
-                        </button>
-                    </div>
-                </div>
-            </header>
-            <main>
+            <!-- Vista de Formulario de Producto -->
+            <section class="view" id="formView">
                 <div class="content-grid">
                     <div class="main-content">
                         <section class="card">
+                            <div class="card-header">
+                                <h2><i data-feather="package"></i> Información del Producto</h2>
+                                <button class="btn secondary" id="backToList">
+                                    <i data-feather="arrow-left"></i> Volver
+                                </button>
+                            </div>
                             <div class="card-body">
                                 <form class="product-form" id="productForm">
                                     <div class="form-grid">
@@ -107,14 +86,14 @@
                                             <label for="codigo">Código</label>
                                             <div class="input-container">
                                                 <input type="text" id="codigo" name="codigo" required>
-                                                <span class="material-icons input-icon">tag</span>
+                                                <i data-feather="tag" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
                                             <label for="descripcion">Descripción</label>
                                             <div class="input-container">
                                                 <input type="text" id="descripcion" name="descripcion" required>
-                                                <span class="material-icons input-icon">description</span>
+                                                <i data-feather="file-text" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
@@ -126,7 +105,7 @@
                                                     <option value="Monitores">Monitores</option>
                                                     <option value="Periféricos">Periféricos</option>
                                                 </select>
-                                                <span class="material-icons input-icon">category</span>
+                                                <i data-feather="grid" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
@@ -138,35 +117,35 @@
                                                     <option value="Laptop">Laptop</option>
                                                     <option value="Servidor">Servidor</option>
                                                 </select>
-                                                <span class="material-icons input-icon">category</span>
+                                                <i data-feather="grid" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
                                             <label for="precio1">Precio 1</label>
                                             <div class="input-container">
                                                 <input type="number" id="precio1" name="precio1" step="0.01" min="0" required>
-                                                <span class="material-icons input-icon">attach_money</span>
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
                                             <label for="precio2">Precio 2</label>
                                             <div class="input-container">
                                                 <input type="number" id="precio2" name="precio2" step="0.01" min="0">
-                                                <span class="material-icons input-icon">attach_money</span>
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
                                             <label for="precio3">Precio 3</label>
                                             <div class="input-container">
                                                 <input type="number" id="precio3" name="precio3" step="0.01" min="0">
-                                                <span class="material-icons input-icon">attach_money</span>
+                                                <i data-feather="dollar-sign" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
                                             <label for="existencia">Existencia</label>
                                             <div class="input-container">
                                                 <input type="number" id="existencia" name="existencia" min="0" required>
-                                                <span class="material-icons input-icon">inventory</span>
+                                                <i data-feather="package" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
@@ -177,7 +156,7 @@
                                                     <option value="Almacén Principal">Almacén Principal</option>
                                                     <option value="Almacén Secundario">Almacén Secundario</option>
                                                 </select>
-                                                <span class="material-icons input-icon">store</span>
+                                                <i data-feather="home" class="input-icon"></i>
                                             </div>
                                         </div>
                                         <div class="field">
@@ -189,7 +168,7 @@
                                                     <option value="Caja">Caja</option>
                                                     <option value="Paquete">Paquete</option>
                                                 </select>
-                                                <span class="material-icons input-icon">straighten</span>
+                                                <i data-feather="box" class="input-icon"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -197,7 +176,7 @@
                                         <label for="detalles">Descripción detallada</label>
                                         <div class="input-container">
                                             <textarea id="detalles" name="detalles" rows="3"></textarea>
-                                            <span class="material-icons input-icon">notes</span>
+                                            <i data-feather="file-text" class="input-icon"></i>
                                         </div>
                                     </div>
                                     <div class="image-upload">
@@ -208,7 +187,7 @@
                                         <div class="upload-actions">
                                             <input type="file" id="imagen" name="imagen" accept="image/*" style="display: none;">
                                             <button type="button" class="btn secondary" onclick="document.getElementById('imagen').click()">
-                                                <span class="material-icons">upload</span>
+                                                <i data-feather="upload"></i>
                                                 Seleccionar imagen
                                             </button>
                                         </div>
@@ -219,14 +198,14 @@
                                                 <label for="fcreado">Fecha de Creación</label>
                                                 <div class="input-container">
                                                     <input type="date" id="fcreado" name="fcreado" readonly>
-                                                    <span class="material-icons input-icon">calendar_today</span>
+                                                    <i data-feather="calendar" class="input-icon"></i>
                                                 </div>
                                             </div>
                                             <div class="field">
                                                 <label for="fmodificado">Fecha de Modificación</label>
                                                 <div class="input-container">
                                                     <input type="date" id="fmodificado" name="fmodificado" readonly>
-                                                    <span class="material-icons input-icon">calendar_today</span>
+                                                    <i data-feather="calendar" class="input-icon"></i>
                                                 </div>
                                             </div>
                                         </section>
@@ -240,11 +219,11 @@
                                     </div>
                                     <div class="form-actions main-actions">
                                         <button type="button" id="cancelBtn" class="btn secondary">
-                                            <span class="material-icons">close</span>
+                                            <i data-feather="x"></i>
                                             Cancelar
                                         </button>
                                         <button type="submit" class="btn primary">
-                                            <span class="material-icons">save</span>
+                                            <i data-feather="save"></i>
                                             Guardar
                                         </button>
                                     </div>
@@ -259,21 +238,21 @@
         <!-- Toast Notification -->
         <div id="toast" class="toast">
             <div class="toast-icon">
-                <span class="material-icons">check_circle</span>
+                <i data-feather="check-circle"></i>
             </div>
             <div class="toast-content">
                 <p class="toast-title">Éxito</p>
                 <p class="toast-message" id="toastMessage">Operación realizada correctamente</p>
             </div>
-            <button class="toast-close"><span class="material-icons">close</span></button>
+            <button class="toast-close"><i data-feather="x"></i></button>
         </div>
 
         <!-- Modal para confirmación -->
         <div class="confirm-dialog" id="confirmModal">
             <div class="confirm-dialog-content card">
                 <div class="card-header">
-                    <h3><span class="material-icons">info</span> Confirmación</h3>
-                    <button class="modal-close close"><span class="material-icons">close</span></button>
+                    <h3><i data-feather="info"></i> Confirmación</h3>
+                    <button class="modal-close close"><i data-feather="x"></i></button>
                 </div>
                 <div class="card-body">
                     <div id="modalMessage"></div>

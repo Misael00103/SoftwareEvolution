@@ -52,12 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
         employees.forEach(employee => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${employee.id}</td>
-                <td>${employee.name}</td>
-                <td>${employee.department}</td>
-                <td>${employee.phone}</td>
-                <td>${employee.status}</td>
-                <td>
+                <td data-label="ID Empleado">${employee.id}</td>
+                <td data-label="Nombre">${employee.name}</td>
+                <td data-label="Departamento">${employee.department}</td>
+                <td data-label="Teléfono">${employee.phone}</td>
+                <td data-label="Estado">${employee.status}</td>
+                <td data-label="Acciones">
                     <button class="edit-btn" data-id="${employee.id}">
                         <i data-feather="edit"></i>
                     </button>
@@ -84,18 +84,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Función para cambiar de vista
     function switchView(fromView, toView) {
-        fromView.classList.remove('active');
-        setTimeout(() => {
+        if (fromView) {
+            fromView.classList.remove('active');
+            fromView.style.display = 'none';
+        }
+        if (toView) {
             toView.classList.add('active');
-        }, 100);
+            toView.style.display = 'block';
+        }
     }
 
     // Función para limpiar el formulario
     function resetForm() {
-        employeeForm.reset();
-        formHeaderTitle.textContent = 'Nuevo Empleado';
+        if (employeeForm) {
+            employeeForm.reset();
+        }
+        if (formHeaderTitle) formHeaderTitle.textContent = 'Nuevo Empleado';
         currentEmployeeId = null;
-        employeeId.textContent = generateEmployeeId();
+        if (employeeId) employeeId.textContent = generateEmployeeId();
     }
 
     // Función para generar un ID de empleado
@@ -115,62 +121,70 @@ document.addEventListener('DOMContentLoaded', () => {
             hour: '2-digit',
             minute: '2-digit'
         });
-        employeeDateList.textContent = formattedDate;
-        employeeDate.textContent = formattedDate;
+        if (employeeDateList) employeeDateList.textContent = formattedDate;
+        if (employeeDate) employeeDate.textContent = formattedDate;
     }
 
     // Función para mostrar el formulario para agregar un nuevo empleado
-    addEmployeeBtn.addEventListener('click', () => {
-        resetForm();
-        updateDateTime();
-        switchView(employeeListView, employeeFormView);
-    });
+    if (addEmployeeBtn) {
+        addEmployeeBtn.addEventListener('click', () => {
+            resetForm();
+            updateDateTime();
+            switchView(employeeListView, employeeFormView);
+        });
+    }
 
     // Función para volver a la lista desde el formulario
-    backBtn.addEventListener('click', () => {
-        switchView(employeeFormView, employeeListView);
-    });
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            switchView(employeeFormView, employeeListView);
+        });
+    }
 
     // Función para cancelar la edición/creación
-    cancelBtn.addEventListener('click', () => {
-        switchView(employeeFormView, employeeListView);
-    });
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', () => {
+            switchView(employeeFormView, employeeListView);
+        });
+    }
 
     // Función para guardar un empleado
-    saveBtn.addEventListener('click', () => {
-        const employeeName = document.getElementById('employeeName').value;
-        const employeeLastName = document.getElementById('employeeLastName').value;
-        const department = document.getElementById('department').value;
-        const phone = document.getElementById('phone').value;
-        const status = document.getElementById('status').value;
+    if (saveBtn) {
+        saveBtn.addEventListener('click', () => {
+            const employeeName = document.getElementById('employeeName').value;
+            const employeeLastName = document.getElementById('employeeLastName').value;
+            const department = document.getElementById('department').value;
+            const phone = document.getElementById('phone').value;
+            const status = document.getElementById('status').value;
 
-        if (!employeeName) {
-            showToast('Por favor, ingrese el nombre del empleado.');
-            return;
-        }
+            if (!employeeName) {
+                showToast('Por favor, ingrese el nombre del empleado.');
+                return;
+            }
 
-        const employeeData = {
-            id: currentEmployeeId || generateEmployeeId(),
-            name: `${employeeName} ${employeeLastName}`.trim(),
-            department: department || '',
-            phone: phone || '',
-            status: status || 'Activo'
-        };
+            const employeeData = {
+                id: currentEmployeeId || generateEmployeeId(),
+                name: `${employeeName} ${employeeLastName}`.trim(),
+                department: department || '',
+                phone: phone || '',
+                status: status || 'Activo'
+            };
 
-        if (currentEmployeeId) {
-            // Actualizar empleado existente
-            const index = employees.findIndex(emp => emp.id === currentEmployeeId);
-            employees[index] = employeeData;
-            showToast('Empleado actualizado con éxito.');
-        } else {
-            // Agregar nuevo empleado
-            employees.push(employeeData);
-            showToast('Empleado agregado con éxito.');
-        }
+            if (currentEmployeeId) {
+                // Actualizar empleado existente
+                const index = employees.findIndex(emp => emp.id === currentEmployeeId);
+                employees[index] = employeeData;
+                showToast('Empleado actualizado con éxito.');
+            } else {
+                // Agregar nuevo empleado
+                employees.push(employeeData);
+                showToast('Empleado agregado con éxito.');
+            }
 
-        renderEmployeeList();
-        switchView(employeeFormView, employeeListView);
-    });
+            renderEmployeeList();
+            switchView(employeeFormView, employeeListView);
+        });
+    }
 
     // Función para editar un empleado
     function editEmployee(id) {
@@ -178,8 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!employee) return;
 
         currentEmployeeId = id;
-        formHeaderTitle.textContent = 'Editar Empleado';
-        employeeId.textContent = id;
+        if (formHeaderTitle) formHeaderTitle.textContent = 'Editar Empleado';
+        if (employeeId) employeeId.textContent = id;
         updateDateTime();
 
         // Separar el nombre completo en nombre y apellido (si es posible)
@@ -188,11 +202,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const lastName = nameParts.slice(1).join(' ') || '';
 
         // Llenar el formulario con los datos del empleado
-        document.getElementById('employeeName').value = firstName;
-        document.getElementById('employeeLastName').value = lastName;
-        document.getElementById('department').value = employee.department || '';
-        document.getElementById('phone').value = employee.phone || '';
-        document.getElementById('status').value = employee.status || 'Activo';
+        const employeeNameEl = document.getElementById('employeeName');
+        const employeeLastNameEl = document.getElementById('employeeLastName');
+        const departmentEl = document.getElementById('department');
+        const phoneEl = document.getElementById('phone');
+        const statusEl = document.getElementById('status');
+
+        if (employeeNameEl) employeeNameEl.value = firstName;
+        if (employeeLastNameEl) employeeLastNameEl.value = lastName;
+        if (departmentEl) departmentEl.value = employee.department || '';
+        if (phoneEl) phoneEl.value = employee.phone || '';
+        if (statusEl) statusEl.value = employee.status || 'Activo';
 
         switchView(employeeListView, employeeFormView);
     }
@@ -200,42 +220,60 @@ document.addEventListener('DOMContentLoaded', () => {
     // Función para mostrar el diálogo de confirmación
     function showConfirmDialog(id) {
         currentEmployeeId = id;
-        confirmMessage.textContent = `¿Estás seguro de que deseas eliminar este empleado (${id})?`;
-        confirmDialog.classList.add('show');
+        if (confirmMessage) {
+            confirmMessage.textContent = `¿Estás seguro de que deseas eliminar este empleado (${id})?`;
+        }
+        if (confirmDialog) {
+            confirmDialog.classList.add('show');
+        }
     }
 
     // Función para cerrar el diálogo de confirmación
     function closeConfirmDialog() {
-        confirmDialog.classList.remove('show');
+        if (confirmDialog) {
+            confirmDialog.classList.remove('show');
+        }
         currentEmployeeId = null;
     }
 
     // Eventos del diálogo de confirmación
-    confirmDeleteBtn.addEventListener('click', () => {
-        if (currentEmployeeId) {
-            employees = employees.filter(emp => emp.id !== currentEmployeeId);
-            renderEmployeeList();
-            showToast('Empleado eliminado con éxito.');
-            closeConfirmDialog();
-        }
-    });
+    if (confirmDeleteBtn) {
+        confirmDeleteBtn.addEventListener('click', () => {
+            if (currentEmployeeId) {
+                employees = employees.filter(emp => emp.id !== currentEmployeeId);
+                renderEmployeeList();
+                showToast('Empleado eliminado con éxito.');
+                closeConfirmDialog();
+            }
+        });
+    }
 
-    cancelDialogBtn.addEventListener('click', closeConfirmDialog);
-    closeDialogBtn.addEventListener('click', closeConfirmDialog);
+    if (cancelDialogBtn) {
+        cancelDialogBtn.addEventListener('click', closeConfirmDialog);
+    }
+    if (closeDialogBtn) {
+        closeDialogBtn.addEventListener('click', closeConfirmDialog);
+    }
 
     // Función para mostrar notificaciones toast
     function showToast(message) {
-        toastMessage.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 3000);
+        if (toastMessage) toastMessage.textContent = message;
+        if (toast) {
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
     }
 
     // Cerrar toast manualmente
-    closeToastBtn.addEventListener('click', () => {
-        toast.classList.remove('show');
-    });
+    if (closeToastBtn) {
+        closeToastBtn.addEventListener('click', () => {
+            if (toast) {
+                toast.classList.remove('show');
+            }
+        });
+    }
 
     // Inicializar la fecha y hora
     updateDateTime();

@@ -4,101 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuadre de Caja</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="cuadrecaja.css">
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
     <div class="app-container">
-        <!-- Vista de Listado de Cuadres -->
-        <section class="view" id="cuadreListView">
-            <header class="card header-card">
-                <div class="card-header">
-                    <div class="header-content">
-                        <div class="header-icon">
-                            <span class="material-icons">inventory_2</span>
-                        </div>
-                        <div class="header-text">
-                            <h1>Listado de Cuadres de Caja</h1>
-                            <p>Administre los cuadres de caja diarios</p>
-                        </div>
+        <header class="card">
+            <div class="card-header">
+                <div class="header-content">
+                    <div class="header-icon">
+                        <i data-feather="dollar-sign"></i>
                     </div>
-                    <div class="header-actions">
-                        <div class="action-buttons">
-                            <button class="icon-btn" title="Correo">
-                                <span class="material-icons">mail</span>
-                            </button>
-                            <button class="icon-btn" title="Imprimir">
-                                <span class="material-icons">print</span>
-                            </button>
-                        </div>
+                    <div class="header-text">
+                        <h1>Cuadre de Caja</h1>
+                        <p>Administre los cuadres de caja diarios</p>
                     </div>
                 </div>
-            </header>
-            <div class="content-wrapper">
-                <section class="card">
-                    <div class="card-header">
-                        <h2><span class="material-icons">list</span> Cuadres</h2>
-                        <button class="btn primary" id="addCuadreBtn">
-                            <span class="material-icons">add</span> Nuevo Cuadre
-                        </button>
+                <div class="header-actions">
+                    <div class="action-buttons">
+                        <button class="icon-btn" aria-label="Correo"><i data-feather="mail"></i></button>
+                        <button class="icon-btn" aria-label="Imprimir"><i data-feather="printer"></i></button>
+                        <button class="icon-btn" aria-label="Descargar"><i data-feather="download"></i></button>
                     </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>ID Cuadre</th>
-                                        <th>Fecha</th>
-                                        <th>Sucursal</th>
-                                        <th>Cajero</th>
-                                        <th>Total Efectivo</th>
-                                        <th>Sobrante/Faltante</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="cuadreList"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
+                </div>
             </div>
-        </section>
+        </header>
 
-        <!-- Vista de Formulario de Cuadre -->
-        <section class="view" id="cuadreFormView">
-            <header class="card header-card">
-                <div class="card-header">
-                    <div class="header-content">
-                        <div class="header-icon">
-                            <span class="material-icons">inventory_2</span>
-                        </div>
-                        <div class="header-text">
-                            <h1 id="formTitle">Nuevo Cuadre de Caja</h1>
-                            <p id="cuadreId">CUADRE0001</p>
-                        </div>
-                    </div>
-                    <div class="header-actions">
-                        <div class="action-buttons">
-                            <button class="icon-btn" title="Correo">
-                                <span class="material-icons">mail</span>
-                            </button>
-                            <button class="icon-btn" title="Imprimir" id="printBtn">
-                                <span class="material-icons">print</span>
-                            </button>
-                        </div>
+        <main>
+            <!-- Vista de Listado de Cuadres -->
+            <section class="view active" id="cuadreListView">
+                <div class="content-grid">
+                    <div class="main-content">
+                        <section class="card">
+                            <div class="card-header">
+                                <h2><i data-feather="list"></i> Listado de Cuadres</h2>
+                                <button class="btn primary" id="addCuadreBtn">
+                                    <i data-feather="plus"></i> Nuevo Cuadre
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Cuadre</th>
+                                            <th>Fecha</th>
+                                            <th>Sucursal</th>
+                                            <th>Cajero</th>
+                                            <th>Total Efectivo</th>
+                                            <th>Sobrante/Faltante</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cuadreList"></tbody>
+                                </table>
+                            </div>
+                        </section>
                     </div>
                 </div>
-            </header>
-            <div class="content-wrapper">
-                <div class="card">
-                    <div class="card-header">
-                        <h2><span class="material-icons">account_balance_wallet</span> Cuadre de Caja General</h2>
-                        <button class="btn secondary" id="backBtn">
-                            <span class="material-icons">arrow_left</span> Volver
-                        </button>
-                    </div>
-                    <div class="card-body">
+            </section>
+
+            <!-- Vista de Formulario de Cuadre -->
+            <section class="view" id="cuadreFormView">
+                <div class="content-grid">
+                    <div class="main-content">
+                        <section class="card">
+                            <div class="card-header">
+                                <h2><i data-feather="dollar-sign"></i> Cuadre de Caja General</h2>
+                                <button class="btn secondary" id="backBtn">
+                                    <i data-feather="arrow-left"></i> Volver
+                                </button>
+                            </div>
+                            <div class="card-body">
                         <form id="cuadreForm">
                             <section class="form-section">
                                 <h3>Datos de Arqueo</h3>
@@ -124,8 +101,7 @@
 
                             <section class="form-section">
                                 <h3>Detalle Efectivo</h3>
-                                <div class="table-container">
-                                    <table class="custom-table" id="denominacionesTable">
+                                <table class="table" id="denominacionesTable">
                                         <thead>
                                             <tr>
                                                 <th>Denominación</th>
@@ -187,7 +163,6 @@
                                             </tr>
                                         </tfoot>
                                     </table>
-                                </div>
                             </section>
 
                             <section class="form-section">
@@ -238,29 +213,29 @@
                                 </div>
                             </section>
 
-                            <div class="form-actions">
-                                <button type="button" class="btn secondary" id="obtenerValoresBtn">Obtener Valores</button>
-                                <button type="submit" class="btn primary" id="aceptarBtn">Aceptar</button>
-                                <button type="button" class="btn secondary" id="cancelarBtn">Cancelar</button>
-                            </div>
-                        </form>
-                    </div>
+                                <div class="main-actions">
+                                    <button type="button" class="btn secondary" id="obtenerValoresBtn">Obtener Valores</button>
+                                    <button type="submit" class="btn primary" id="aceptarBtn">Aceptar</button>
+                                    <button type="button" class="btn secondary" id="cancelarBtn">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
                 </div>
             </div>
         </section>
+        </main>
 
         <!-- Toast -->
-        <div class="toast" id="notification">
+        <div id="toast" class="toast">
             <div class="toast-icon">
-                <span class="material-icons">check_circle</span>
+                <i data-feather="check-circle"></i>
             </div>
             <div class="toast-content">
                 <p class="toast-title">Éxito</p>
-                <p class="toast-message">Operación completada correctamente</p>
+                <p class="toast-message" id="toastMessage">Operación completada correctamente</p>
             </div>
-            <button class="toast-close">
-                <span class="material-icons">close</span>
-            </button>
+            <button class="toast-close"><i data-feather="x"></i></button>
         </div>
 
         <!-- Modal -->
@@ -269,7 +244,7 @@
                 <div class="modal-header">
                     <h2>Confirmar Acción</h2>
                     <button class="modal-close-btn" id="modalCloseBtn">
-                        <span class="material-icons">close</span>
+                        <i data-feather="x"></i>
                     </button>
                 </div>
                 <div class="modal-body">
