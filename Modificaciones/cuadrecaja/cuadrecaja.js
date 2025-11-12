@@ -105,8 +105,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <td data-label="Total Efectivo">${formatearNumero(cuadre.totalEfectivo)}</td>
                 <td data-label="Sobrante/Faltante">${formatearNumero(cuadre.sobranteFaltante)}</td>
                 <td data-label="Acciones">
-                    <button class="icon-btn edit-btn" data-index="${index}"><i data-feather="edit"></i></button>
-                    <button class="icon-btn btn-danger" data-index="${index}"><i data-feather="trash-2"></i></button>
+                    <button class="edit-btn" data-index="${index}"><i data-feather="edit"></i></button>
+                    <button class="btn-danger" data-index="${index}"><i data-feather="trash-2"></i></button>
                 </td>
             `;
             cuadreList.appendChild(row);

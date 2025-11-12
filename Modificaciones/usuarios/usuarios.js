@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <td data-label="Estado">${user.activo ? 'Activo' : 'Inactivo'}</td>
               <td data-label="Acciones">
                   <button class="edit-btn" data-index="${index}"><i data-feather="edit"></i></button>
+                  <button class="btn-danger" data-index="${index}"><i data-feather="trash-2"></i></button>
               </td>
           `;
           userList.appendChild(row);
@@ -50,6 +51,17 @@ document.addEventListener('DOMContentLoaded', () => {
           button.addEventListener('click', (e) => {
               const index = e.currentTarget.getAttribute('data-index');
               editUser(index);
+          });
+      });
+      
+      document.querySelectorAll('.btn-danger').forEach(button => {
+          button.addEventListener('click', (e) => {
+              const index = e.currentTarget.getAttribute('data-index');
+              if (confirm('¿Está seguro de que desea eliminar este usuario?')) {
+                  users.splice(index, 1);
+                  localStorage.setItem('users', JSON.stringify(users));
+                  renderUserList();
+              }
           });
       });
   }

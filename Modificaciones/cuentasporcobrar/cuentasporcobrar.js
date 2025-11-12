@@ -28,8 +28,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeConfirmModal = document.getElementById('closeConfirmModal');
     const notification = document.getElementById('notification');
     const notificationCloseBtn = document.querySelector('.toast-close');
+    const registrarPagoRapidoBtn = document.getElementById('registrarPagoRapidoBtn');
+    const verReportesBtn = document.getElementById('verReportesBtn');
+    const enviarRecordatorioBtn = document.getElementById('enviarRecordatorioBtn');
+    const exportarExcelBtn = document.getElementById('exportarExcelBtn');
+    const detailModal = document.getElementById('detailModal');
+    const closeDetailModal = document.getElementById('closeDetailModal');
+    const closeDetailBtn = document.getElementById('closeDetailBtn');
+    const detailContent = document.getElementById('detailContent');
+    const pageInfo = document.querySelector('.page-info');
+    const pagination = document.querySelector('.pagination');
     let elementToDelete = null;
     let deleteType = null;
+    let currentPage = 1;
+    const itemsPerPage = 4;
 
     document.getElementById('fechaFactura').valueAsDate = new Date();
 
@@ -62,17 +74,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     exportarBtn.addEventListener('click', function() {
+        const toastIcon = notification.querySelector('.toast-icon i');
         notification.querySelector('.toast-title').textContent = 'Exportación';
         notification.querySelector('.toast-message').textContent = 'Exportando datos a Excel...';
         notification.style.borderLeftColor = 'var(--info)';
-        notification.querySelector('.toast-icon .material-icons').textContent = 'info';
+        if (toastIcon) {
+            toastIcon.setAttribute('data-feather', 'info');
+            feather.replace();
+        }
         notification.classList.add('show');
         setTimeout(() => notification.classList.remove('show'), 5000);
         setTimeout(() => {
             notification.querySelector('.toast-title').textContent = 'Exportación completada';
             notification.querySelector('.toast-message').textContent = 'Los datos han sido exportados correctamente';
             notification.style.borderLeftColor = 'var(--success)';
-            notification.querySelector('.toast-icon .material-icons').textContent = 'check_circle';
+            if (toastIcon) {
+                toastIcon.setAttribute('data-feather', 'check-circle');
+                feather.replace();
+            }
             notification.classList.add('show');
             setTimeout(() => notification.classList.remove('show'), 5000);
         }, 1500);
@@ -143,16 +162,22 @@ document.addEventListener('DOMContentLoaded', function() {
             notification.querySelector('.toast-title').textContent = 'Error';
             notification.querySelector('.toast-message').textContent = 'Por favor complete todos los campos requeridos';
             notification.style.borderLeftColor = 'var(--danger)';
-            notification.querySelector('.toast-icon .material-icons').textContent = 'error';
+            const toastIcon = notification.querySelector('.toast-icon i');
+            if (toastIcon) {
+                toastIcon.setAttribute('data-feather', 'alert-circle');
+                feather.replace();
+            }
             notification.classList.add('show');
             setTimeout(() => notification.classList.remove('show'), 5000);
             return;
         }
         guardarCuentaBtn.disabled = true;
-        guardarCuentaBtn.innerHTML = '<span class="material-icons">save</span> Guardando...';
+        guardarCuentaBtn.innerHTML = '<i data-feather="save"></i> Guardando...';
+        feather.replace();
         setTimeout(() => {
             guardarCuentaBtn.disabled = false;
-            guardarCuentaBtn.innerHTML = 'Guardar Cuenta';
+            guardarCuentaBtn.innerHTML = '<i data-feather="save"></i> Guardar Cuenta';
+            feather.replace();
             const cliente = document.getElementById('cliente').options[document.getElementById('cliente').selectedIndex].text;
             const factura = document.getElementById('numeroFactura').value;
             const fecha = document.getElementById('fechaFactura').value;
@@ -180,19 +205,25 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td><span class="badge ${estado === 'pagada' ? 'success' : estado === 'vencida' ? 'danger' : 'warning'}">${estado.charAt(0).toUpperCase() + estado.slice(1)}</span></td>
                     <td>
                         <div class="row-actions">
-                            <button class="icon-button payment-btn" title="Registrar pago" data-id="${numCuentas}" ${estado === 'pagada' ? 'disabled' : ''}><span class="material-icons">payments</span></button>
-                            <button class="icon-button edit-btn" title="Editar" data-id="${numCuentas}"><span class="material-icons">edit</span></button>
-                            <button class="icon-button view-btn" title="Ver detalles" data-id="${numCuentas}"><span class="material-icons">visibility</span></button>
-                            <button class="icon-button delete-btn" title="Eliminar" data-id="${numCuentas}"><span class="material-icons">delete</span></button>
+                            <button class="icon-button payment-btn" title="Registrar pago" data-id="${numCuentas}" ${estado === 'pagada' ? 'disabled' : ''}><i data-feather="dollar-sign"></i></button>
+                            <button class="icon-button edit-btn" title="Editar" data-id="${numCuentas}"><i data-feather="edit"></i></button>
+                            <button class="icon-button view-btn" title="Ver detalles" data-id="${numCuentas}"><i data-feather="eye"></i></button>
+                            <button class="icon-button delete-btn" title="Eliminar" data-id="${numCuentas}"><i data-feather="trash-2"></i></button>
                         </div>
                     </td>
                 `;
                 tbody.appendChild(fila);
+                feather.replace();
+                updatePagination();
                 notification.querySelector('.toast-title').textContent = 'Cuenta guardada';
                 notification.querySelector('.toast-message').textContent = 'La cuenta ha sido guardada correctamente';
             }
             notification.style.borderLeftColor = 'var(--success)';
-            notification.querySelector('.toast-icon .material-icons').textContent = 'check_circle';
+            const toastIcon = notification.querySelector('.toast-icon i');
+            if (toastIcon) {
+                toastIcon.setAttribute('data-feather', 'check-circle');
+                feather.replace();
+            }
             notification.classList.add('show');
             setTimeout(() => notification.classList.remove('show'), 5000);
             switchView(formularioCuenta, listadoCuentas);
@@ -238,16 +269,22 @@ document.addEventListener('DOMContentLoaded', function() {
             notification.querySelector('.toast-title').textContent = 'Error';
             notification.querySelector('.toast-message').textContent = 'Por favor complete todos los campos requeridos';
             notification.style.borderLeftColor = 'var(--danger)';
-            notification.querySelector('.toast-icon .material-icons').textContent = 'error';
+            const toastIcon = notification.querySelector('.toast-icon i');
+            if (toastIcon) {
+                toastIcon.setAttribute('data-feather', 'alert-circle');
+                feather.replace();
+            }
             notification.classList.add('show');
             setTimeout(() => notification.classList.remove('show'), 5000);
             return;
         }
         guardarPagoBtn.disabled = true;
-        guardarPagoBtn.innerHTML = '<span class="material-icons">save</span> Guardando...';
+        guardarPagoBtn.innerHTML = '<i data-feather="save"></i> Guardando...';
+        feather.replace();
         setTimeout(() => {
             guardarPagoBtn.disabled = false;
-            guardarPagoBtn.innerHTML = 'Registrar Pago';
+            guardarPagoBtn.innerHTML = '<i data-feather="dollar-sign"></i> Registrar Pago';
+            feather.replace();
             const montoPago = parseFloat(document.getElementById('pagoMonto').value);
             const cuentaId = document.getElementById('pagoIdCuenta').value;
             const row = document.querySelector(`#cuentasTable tbody tr td:nth-child(10) button[data-id="${cuentaId}"]`).closest('tr');
@@ -261,7 +298,11 @@ document.addEventListener('DOMContentLoaded', function() {
             notification.querySelector('.toast-title').textContent = 'Pago registrado';
             notification.querySelector('.toast-message').textContent = 'El pago ha sido registrado correctamente';
             notification.style.borderLeftColor = 'var(--success)';
-            notification.querySelector('.toast-icon .material-icons').textContent = 'check_circle';
+            const toastIcon = notification.querySelector('.toast-icon i');
+            if (toastIcon) {
+                toastIcon.setAttribute('data-feather', 'check-circle');
+                feather.replace();
+            }
             notification.classList.add('show');
             setTimeout(() => notification.classList.remove('show'), 5000);
             switchView(formularioPago, listadoCuentas);
@@ -298,9 +339,14 @@ document.addEventListener('DOMContentLoaded', function() {
             notification.querySelector('.toast-title').textContent = 'Cuenta eliminada';
             notification.querySelector('.toast-message').textContent = 'La cuenta ha sido eliminada correctamente';
             notification.style.borderLeftColor = 'var(--success)';
-            notification.querySelector('.toast-icon .material-icons').textContent = 'check_circle';
+            const toastIcon = notification.querySelector('.toast-icon i');
+            if (toastIcon) {
+                toastIcon.setAttribute('data-feather', 'check-circle');
+                feather.replace();
+            }
             notification.classList.add('show');
             setTimeout(() => notification.classList.remove('show'), 5000);
+            updatePagination();
             elementToDelete = null;
         } else if (deleteType === 'pago' && elementToDelete) {
             elementToDelete.remove();
@@ -322,6 +368,274 @@ document.addEventListener('DOMContentLoaded', function() {
         notification.classList.remove('show');
     });
 
+    // Funciones para acciones rápidas
+    function showNotification(title, message, type = 'success') {
+        const toastTitle = notification.querySelector('.toast-title');
+        const toastMessage = notification.querySelector('.toast-message');
+        const toastIcon = notification.querySelector('.toast-icon i');
+        
+        if (toastTitle) toastTitle.textContent = title;
+        if (toastMessage) toastMessage.textContent = message;
+        
+        if (toastIcon) {
+            if (type === 'error') {
+                toastIcon.setAttribute('data-feather', 'alert-circle');
+                notification.style.borderLeftColor = 'var(--danger)';
+            } else if (type === 'info') {
+                toastIcon.setAttribute('data-feather', 'info');
+                notification.style.borderLeftColor = 'var(--primary)';
+            } else {
+                toastIcon.setAttribute('data-feather', 'check-circle');
+                notification.style.borderLeftColor = 'var(--success)';
+            }
+            feather.replace();
+        }
+        
+        notification.classList.add('show');
+        setTimeout(() => notification.classList.remove('show'), 5000);
+    }
+
+    // Botón Registrar Pago Rápido
+    if (registrarPagoRapidoBtn) {
+        registrarPagoRapidoBtn.addEventListener('click', function() {
+            const tbody = document.querySelector('#cuentasTable tbody');
+            const rows = tbody.querySelectorAll('tr');
+            let hasPendiente = false;
+            
+            rows.forEach(row => {
+                const estadoCell = row.cells[8];
+                if (estadoCell && estadoCell.textContent.trim().toLowerCase() === 'pendiente') {
+                    hasPendiente = true;
+                }
+            });
+            
+            if (!hasPendiente) {
+                showNotification('Información', 'No hay cuentas pendientes para registrar pago', 'info');
+                return;
+            }
+            
+            // Abrir el formulario de pago sin cuenta específica
+            switchView(listadoCuentas, formularioPago);
+            document.getElementById('pagoIdCuenta').value = '';
+            document.getElementById('pagoCliente').value = '';
+            document.getElementById('pagoFactura').value = '';
+            document.getElementById('pagoMontoTotal').value = '';
+            document.getElementById('pagoMontoPendiente').value = '';
+            document.getElementById('pagoFecha').valueAsDate = new Date();
+            showNotification('Registrar Pago', 'Seleccione una cuenta de la lista o complete el formulario', 'info');
+        });
+    }
+
+    // Botón Ver Reportes
+    if (verReportesBtn) {
+        verReportesBtn.addEventListener('click', function() {
+            showNotification('Reportes', 'Generando reportes de cuentas por cobrar...', 'info');
+            setTimeout(() => {
+                showNotification('Reportes', 'Los reportes se han generado correctamente', 'success');
+            }, 1500);
+        });
+    }
+
+    // Botón Enviar Recordatorio
+    if (enviarRecordatorioBtn) {
+        enviarRecordatorioBtn.addEventListener('click', function() {
+            const tbody = document.querySelector('#cuentasTable tbody');
+            const rows = tbody.querySelectorAll('tr');
+            let cuentasVencidas = 0;
+            
+            rows.forEach(row => {
+                const estadoCell = row.cells[8];
+                if (estadoCell && estadoCell.textContent.trim().toLowerCase() === 'vencida') {
+                    cuentasVencidas++;
+                }
+            });
+            
+            if (cuentasVencidas === 0) {
+                showNotification('Información', 'No hay cuentas vencidas para enviar recordatorio', 'info');
+                return;
+            }
+            
+            showNotification('Recordatorio', `Enviando recordatorios a ${cuentasVencidas} cliente(s)...`, 'info');
+            setTimeout(() => {
+                showNotification('Recordatorio', `Se han enviado ${cuentasVencidas} recordatorio(s) correctamente`, 'success');
+            }, 1500);
+        });
+    }
+
+    // Botón Exportar a Excel
+    if (exportarExcelBtn) {
+        exportarExcelBtn.addEventListener('click', function() {
+            // Función para exportar a Excel
+            const table = document.getElementById('cuentasTable');
+            const rows = table.querySelectorAll('tr');
+            let csvContent = 'No.,Cliente,Factura,Fecha,Vencimiento,Monto,Pagado,Pendiente,Estado\n';
+            
+            rows.forEach((row, index) => {
+                if (index === 0) return; // Saltar el encabezado
+                const cells = row.querySelectorAll('td');
+                if (cells.length > 0) {
+                    const rowData = Array.from(cells).map(cell => {
+                        let text = cell.textContent.trim();
+                        // Remover el badge del estado
+                        if (cell.querySelector('.badge')) {
+                            text = cell.querySelector('.badge').textContent.trim();
+                        }
+                        // Escapar comillas y envolver en comillas si contiene comas
+                        text = text.replace(/"/g, '""');
+                        if (text.includes(',') || text.includes('"') || text.includes('\n')) {
+                            text = `"${text}"`;
+                        }
+                        return text;
+                    });
+                    csvContent += rowData.join(',') + '\n';
+                }
+            });
+            
+            // Crear y descargar el archivo
+            const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `cuentas_por_cobrar_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showNotification('Exportación', 'Los datos han sido exportados a Excel correctamente', 'success');
+        });
+    }
+
+    // Cerrar modal de detalles
+    if (closeDetailModal) {
+        closeDetailModal.addEventListener('click', function() {
+            if (detailModal) {
+                detailModal.classList.remove('show');
+            }
+        });
+    }
+
+    if (closeDetailBtn) {
+        closeDetailBtn.addEventListener('click', function() {
+            if (detailModal) {
+                detailModal.classList.remove('show');
+            }
+        });
+    }
+
+    // Cerrar modal al hacer clic fuera
+    if (detailModal) {
+        detailModal.addEventListener('click', function(e) {
+            if (e.target === detailModal) {
+                detailModal.classList.remove('show');
+            }
+        });
+    }
+
+    // Función para actualizar la paginación
+    function updatePagination() {
+        const table = document.getElementById('cuentasTable');
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const totalItems = rows.length;
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        
+        // Actualizar información de página
+        const start = (currentPage - 1) * itemsPerPage + 1;
+        const end = Math.min(currentPage * itemsPerPage, totalItems);
+        if (pageInfo) {
+            pageInfo.textContent = `Mostrando ${start}-${end} de ${totalItems} registros`;
+        }
+        
+        // Mostrar/ocultar filas según la página actual
+        rows.forEach((row, index) => {
+            const pageNumber = Math.floor(index / itemsPerPage) + 1;
+            if (pageNumber === currentPage) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+        
+        // Actualizar botones de paginación
+        if (pagination) {
+            const pageButtons = pagination.querySelectorAll('.page-btn');
+            const prevBtn = pageButtons[0];
+            const nextBtn = pageButtons[pageButtons.length - 1];
+            const numberButtons = Array.from(pageButtons).slice(1, -1);
+            
+            // Actualizar botón anterior
+            if (prevBtn) {
+                prevBtn.disabled = currentPage === 1;
+            }
+            
+            // Actualizar botón siguiente
+            if (nextBtn) {
+                nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+            }
+            
+            // Actualizar números de página
+            numberButtons.forEach((btn, index) => {
+                const pageNum = index + 1;
+                if (pageNum <= totalPages) {
+                    btn.textContent = pageNum;
+                    btn.classList.toggle('active', pageNum === currentPage);
+                    btn.style.display = '';
+                } else {
+                    btn.style.display = 'none';
+                }
+            });
+            
+            // Agregar más botones si hay más páginas
+            if (totalPages > 3) {
+                // Mantener solo 3 botones visibles alrededor de la página actual
+                numberButtons.forEach((btn, index) => {
+                    const pageNum = index + 1;
+                    if (pageNum < currentPage - 1 || pageNum > currentPage + 1) {
+                        if (pageNum !== 1 && pageNum !== totalPages) {
+                            btn.style.display = 'none';
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    // Event listeners para botones de paginación
+    if (pagination) {
+        pagination.addEventListener('click', function(e) {
+            const target = e.target.closest('.page-btn');
+            if (!target || target.disabled) return;
+            
+            const table = document.getElementById('cuentasTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const totalPages = Math.ceil(rows.length / itemsPerPage);
+            
+            if (target.textContent.trim() === '') {
+                // Es un botón de flecha
+                const isNext = target.querySelector('i[data-feather="chevron-right"]');
+                if (isNext && currentPage < totalPages) {
+                    currentPage++;
+                } else if (!isNext && currentPage > 1) {
+                    currentPage--;
+                }
+            } else {
+                // Es un botón de número
+                const pageNum = parseInt(target.textContent.trim());
+                if (!isNaN(pageNum) && pageNum >= 1 && pageNum <= totalPages) {
+                    currentPage = pageNum;
+                }
+            }
+            
+            updatePagination();
+            feather.replace();
+        });
+    }
+
+    // Inicializar paginación
+    updatePagination();
+
     document.getElementById('cuentasTable').addEventListener('click', function(e) {
         const target = e.target.closest('.icon-button');
         if (!target) return;
@@ -341,12 +655,61 @@ document.addEventListener('DOMContentLoaded', function() {
             estadoCuenta.value = row.cells[8].textContent.toLowerCase();
             document.querySelector('#detallePagosTable tbody').innerHTML = '';
         } else if (target.classList.contains('view-btn')) {
-            notification.querySelector('.toast-title').textContent = 'Ver detalle';
-            notification.querySelector('.toast-message').textContent = `Mostrando detalles de la cuenta #${cuentaId}`;
-            notification.style.borderLeftColor = 'var(--info)';
-            notification.querySelector('.toast-icon .material-icons').textContent = 'info';
-            notification.classList.add('show');
-            setTimeout(() => notification.classList.remove('show'), 5000);
+            // Mostrar detalles en un modal
+            const cliente = row.cells[1].textContent;
+            const factura = row.cells[2].textContent;
+            const fecha = row.cells[3].textContent;
+            const vencimiento = row.cells[4].textContent;
+            const monto = row.cells[5].textContent;
+            const pagado = row.cells[6].textContent;
+            const pendiente = row.cells[7].textContent;
+            const estado = row.cells[8].textContent.trim();
+            
+            detailContent.innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <strong>Número de Cuenta:</strong>
+                        <p>#${cuentaId}</p>
+                    </div>
+                    <div>
+                        <strong>Cliente:</strong>
+                        <p>${cliente}</p>
+                    </div>
+                    <div>
+                        <strong>Número de Factura:</strong>
+                        <p>${factura}</p>
+                    </div>
+                    <div>
+                        <strong>Fecha:</strong>
+                        <p>${fecha}</p>
+                    </div>
+                    <div>
+                        <strong>Fecha de Vencimiento:</strong>
+                        <p>${vencimiento}</p>
+                    </div>
+                    <div>
+                        <strong>Estado:</strong>
+                        <p>${estado}</p>
+                    </div>
+                    <div>
+                        <strong>Monto Total:</strong>
+                        <p style="font-size: 1.125rem; font-weight: 600; color: var(--primary);">${monto}</p>
+                    </div>
+                    <div>
+                        <strong>Monto Pagado:</strong>
+                        <p style="font-size: 1.125rem; font-weight: 600; color: var(--success);">${pagado}</p>
+                    </div>
+                    <div>
+                        <strong>Monto Pendiente:</strong>
+                        <p style="font-size: 1.125rem; font-weight: 600; color: var(--warning);">${pendiente}</p>
+                    </div>
+                </div>
+            `;
+            
+            if (detailModal) {
+                detailModal.classList.add('show');
+                feather.replace();
+            }
         } else if (target.classList.contains('delete-btn')) {
             elementToDelete = row;
             deleteType = 'cuenta';

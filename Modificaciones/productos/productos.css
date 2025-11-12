@@ -214,6 +214,8 @@ section.card .card-header {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 32px;
+    height: 32px;
 }
 
 .edit-btn:hover {
@@ -221,8 +223,7 @@ section.card .card-header {
     color: white;
 }
 
-.edit-btn i,
-.btn-danger i {
+.edit-btn i {
     width: 16px;
     height: 16px;
     stroke: currentColor;
@@ -231,8 +232,8 @@ section.card .card-header {
 }
 
 .btn-danger {
-    background-color: var(--danger);
-    color: white;
+    background-color: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
     padding: 0.5rem;
     border-radius: var(--radius);
     border: none;
@@ -241,10 +242,21 @@ section.card .card-header {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 32px;
+    height: 32px;
 }
 
 .btn-danger:hover {
-    background-color: var(--danger-hover);
+    background-color: var(--danger);
+    color: white;
+}
+
+.btn-danger i {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    color: inherit;
 }
 
 main {

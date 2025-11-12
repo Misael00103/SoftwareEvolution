@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td data-label="Estado">${client.activo ? 'Activo' : 'Inactivo'}</td>
                 <td data-label="Acciones">
                     <button class="edit-btn" data-index="${index}"><i data-lucide="edit"></i></button>
+                    <button class="btn-danger" data-index="${index}"><i data-lucide="trash-2"></i></button>
                 </td>
             `;
             clientList.appendChild(row);
@@ -49,6 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', (e) => {
                 const index = e.currentTarget.getAttribute('data-index');
                 editClient(index);
+            });
+        });
+        
+        document.querySelectorAll('.btn-danger').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.currentTarget.getAttribute('data-index');
+                if (confirm('¿Está seguro de que desea eliminar este cliente?')) {
+                    clients.splice(index, 1);
+                    localStorage.setItem('clients', JSON.stringify(clients));
+                    renderClientList();
+                }
             });
         });
     }

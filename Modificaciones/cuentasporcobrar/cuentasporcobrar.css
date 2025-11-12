@@ -189,24 +189,70 @@ header.card .card-header {
     background-color: var(--border);
 }
 
-.icon-button.delete-btn:hover {
-    background-color: var(--border);
-    color: var(--text);
+.icon-button.edit-btn {
+    background-color: var(--warning-light);
+    color: var(--warning);
+    width: 32px;
+    height: 32px;
 }
 
 .icon-button.edit-btn:hover {
-    background-color: var(--primary-light);
-    color: var(--primary-dark);
+    background-color: var(--warning);
+    color: white;
 }
 
-.icon-button.view-btn:hover {
-    background-color: var(--info-light);
-    color: var(--info);
+.icon-button.delete-btn {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
+    width: 32px;
+    height: 32px;
+}
+
+.icon-button.delete-btn:hover {
+    background-color: var(--danger);
+    color: white;
+}
+
+.icon-button.edit-btn i,
+.icon-button.delete-btn i {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    color: inherit;
+}
+
+.icon-button.payment-btn {
+    background-color: var(--success-light);
+    color: var(--success);
+    width: 32px;
+    height: 32px;
 }
 
 .icon-button.payment-btn:hover {
-    background-color: var(--success-light);
-    color: var(--success);
+    background-color: var(--success);
+    color: white;
+}
+
+.icon-button.view-btn {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    width: 32px;
+    height: 32px;
+}
+
+.icon-button.view-btn:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.icon-button.payment-btn i,
+.icon-button.view-btn i {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    color: inherit;
 }
 
 .search-container {
@@ -511,29 +557,68 @@ main .card {
 .table .icon-button,
 .table .eliminar-fila {
     padding: 0.5rem;
-    background-color: var(--border-light);
-    color: var(--text-secondary);
-    border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     transition: var(--transition);
-    width: auto;
-    height: auto;
+    width: 32px;
+    height: 32px;
 }
 
-.table .icon-button:hover,
-.table .eliminar-fila:hover {
-    background-color: var(--border);
-    color: var(--text);
+/* Los estilos específicos de cada botón tienen prioridad */
+.table .icon-button.payment-btn {
+    background-color: var(--success-light);
+    color: var(--success);
+    border: none;
+}
+
+.table .icon-button.payment-btn:hover {
+    background-color: var(--success);
+    color: white;
+}
+
+.table .icon-button.view-btn {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    border: none;
+}
+
+.table .icon-button.view-btn:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.table .icon-button.edit-btn {
+    background-color: var(--warning-light);
+    color: var(--warning);
+    border: none;
+}
+
+.table .icon-button.edit-btn:hover {
+    background-color: var(--warning);
+    color: white;
+}
+
+.table .icon-button.delete-btn {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
+    border: none;
+}
+
+.table .icon-button.delete-btn:hover {
+    background-color: var(--danger);
+    color: white;
 }
 
 .table .icon-button i,
 .table .eliminar-fila i {
     width: 16px;
     height: 16px;
+    stroke: currentColor;
+    fill: none;
+    color: inherit;
 }
 
 .table .numero-fila {
@@ -729,9 +814,71 @@ main .card {
     font-size: 0.875rem;
 }
 
-.quick-actions .action-buttons-grid .btn i {
+.quick-actions .action-buttons-grid .btn i,
+.quick-actions .action-buttons-grid .btn svg {
     width: 16px;
     height: 16px;
+    stroke: currentColor;
+    fill: none;
+    color: inherit;
+    flex-shrink: 0;
+}
+
+.quick-actions .action-buttons-grid .btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quick-action-btn {
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 500;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quick-action-payment {
+    background-color: var(--success-light);
+    color: var(--success);
+}
+
+.quick-action-payment:hover {
+    background-color: var(--success);
+    color: white;
+}
+
+.quick-action-reports {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+.quick-action-reports:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.quick-action-reminder {
+    background-color: var(--warning-light);
+    color: var(--warning);
+}
+
+.quick-action-reminder:hover {
+    background-color: var(--warning);
+    color: white;
+}
+
+.quick-action-export {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    border: none;
+}
+
+.quick-action-export:hover {
+    background-color: var(--primary);
+    color: white;
 }
 
 .toast {
@@ -832,6 +979,17 @@ main .card {
 .modal-header h3 {
     font-size: 1.125rem;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.modal-header h3 i {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    color: inherit;
 }
 
 .modal-close {

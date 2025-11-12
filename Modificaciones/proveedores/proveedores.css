@@ -656,13 +656,16 @@ textarea:focus+.input-icon {
 .edit-btn {
   background-color: var(--warning-light);
   color: var(--warning);
-  padding: 0;
+  padding: 0.5rem;
   border-radius: var(--radius);
   border: none;
   cursor: pointer;
   transition: var(--transition);
-  width: 40px;
-  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
 }
 
 .edit-btn:hover {
@@ -670,13 +673,40 @@ textarea:focus+.input-icon {
   color: white;
 }
 
+.edit-btn i {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  color: inherit;
+}
+
 .btn-danger {
-  background-color: var(--danger-hover);
-  color: white;
+  background-color: rgba(239, 68, 68, 0.15);
+  color: var(--danger);
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
 }
 
 .btn-danger:hover {
   background-color: var(--danger);
+  color: white;
+}
+
+.btn-danger i {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  color: inherit;
 }
 
 .confirm-dialog {

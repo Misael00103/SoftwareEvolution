@@ -90,10 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td data-label="Existencia">${product.existencia}</td>
                 <td data-label="Estado">${product.activo ? 'Activo' : 'Inactivo'}</td>
                 <td data-label="Acciones">
-                    <button class="btn-icon edit-btn" data-index="${index}" title="Editar producto">
+                    <button class="edit-btn" data-index="${index}" title="Editar producto">
                         <i data-feather="edit"></i>
                     </button>
-                    <button class="btn-icon btn-danger" data-index="${index}" title="Eliminar producto">
+                    <button class="btn-danger" data-index="${index}" title="Eliminar producto">
                         <i data-feather="trash"></i>
                     </button>
                 </td>

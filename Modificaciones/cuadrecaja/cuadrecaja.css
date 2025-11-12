@@ -198,6 +198,11 @@ section.card .card-header h2,
     border: none;
     cursor: pointer;
     transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
 }
 
 .edit-btn:hover {
@@ -205,23 +210,32 @@ section.card .card-header h2,
     color: white;
 }
 
+.edit-btn i {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    color: inherit;
+}
+
 .btn-danger {
-    background-color: transparent;
-    color: var(--text-secondary);
+    background-color: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
     padding: 0.5rem;
     border-radius: var(--radius);
-    border: 1px solid var(--border-light);
+    border: none;
     cursor: pointer;
     transition: var(--transition);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 32px;
+    height: 32px;
 }
 
 .btn-danger:hover {
-    background-color: var(--border-light);
-    color: var(--text);
-    border-color: var(--border);
+    background-color: var(--danger);
+    color: white;
 }
 
 .btn-danger i {
@@ -229,13 +243,7 @@ section.card .card-header h2,
     height: 16px;
     stroke: currentColor;
     fill: none;
-}
-
-.edit-btn i {
-    width: 16px;
-    height: 16px;
-    stroke: currentColor;
-    fill: none;
+    color: inherit;
 }
 
 /* Formularios */
