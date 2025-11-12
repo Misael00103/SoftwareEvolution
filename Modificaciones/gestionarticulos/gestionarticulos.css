@@ -2,7 +2,7 @@
     --primary: #fbbf24;
     --primary-hover: #f59e0b;
     --primary-light: #fef3c7;
-    --primary-dark: #ffffff;
+    --primary-dark: #3730a3;
     --danger: #ef4444;
     --danger-hover: #dc2626;
     --success: #10b981;
@@ -36,7 +36,7 @@
 }
 
 body {
-    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background-color: var(--background);
     color: var(--text);
     line-height: 1.5;
@@ -176,6 +176,9 @@ header.card {
 .icon-btn i {
     width: 16px;
     height: 16px;
+    stroke: currentColor;
+    fill: none;
+    color: inherit;
 }
 
 .edit-btn {
@@ -186,6 +189,12 @@ header.card {
     border: none;
     cursor: pointer;
     transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-right: 0.25rem;
 }
 
 .edit-btn:hover {
@@ -193,18 +202,40 @@ header.card {
     color: white;
 }
 
+.edit-btn i {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    color: inherit;
+}
+
 .btn-danger {
-    background-color: var(--danger);
-    color: white;
+    background-color: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
     padding: 0.5rem;
     border-radius: var(--radius);
     border: none;
     cursor: pointer;
     transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
 }
 
 .btn-danger:hover {
-    background-color: var(--danger-hover);
+    background-color: var(--danger);
+    color: white;
+}
+
+.btn-danger i {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    color: inherit;
 }
 
 main {

@@ -174,33 +174,29 @@ section.card .card-header {
 }
 
 .icon-btn {
-    padding: 0;
-    background-color: var(--border-light);
+    padding: 0.5rem;
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
     border: none;
     border-radius: var(--radius);
-    width: 40px;
-    height: 40px;
     cursor: pointer;
     transition: var(--transition);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 
 .icon-btn:hover {
-    background-color: var(--border);
+    background-color: var(--primary);
+    color: white;
 }
 
 .icon-btn i {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     stroke: currentColor;
     fill: none;
-    color: var(--text-secondary);
-}
-
-.icon-btn:hover i {
-    color: var(--text);
+    color: inherit;
 }
 
 .edit-btn {
@@ -216,6 +212,7 @@ section.card .card-header {
     justify-content: center;
     width: 32px;
     height: 32px;
+    margin-right: 0.25rem;
 }
 
 .edit-btn:hover {
@@ -257,6 +254,17 @@ section.card .card-header {
     stroke: currentColor;
     fill: none;
     color: inherit;
+}
+
+/* Asegurar que los botones en la tabla tengan el diseño correcto */
+.table .edit-btn,
+.table .btn-danger {
+    width: 32px;
+    height: 32px;
+    padding: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 main {

@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('fechaFactura').valueAsDate = new Date();
 
     function switchView(hideView, showView) {
+        if (!hideView || !showView) return;
         hideView.classList.remove('active');
         hideView.style.display = 'none';
         showView.classList.add('active');
@@ -123,21 +124,39 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    volverListadoPagoBtn.addEventListener('click', function() {
-        const inputs = pagoForm.querySelectorAll('input, select, textarea');
-        if (Array.from(inputs).some(input => input.value !== '' && input.value !== '0.00')) {
-            confirmMessage.textContent = '¿Está seguro que desea volver al listado? Los cambios no guardados se perderán.';
-            confirmActionBtn.textContent = 'Volver';
-            elementToDelete = function() {
+    if (volverListadoPagoBtn) {
+        volverListadoPagoBtn.addEventListener('click', function() {
+            if (!pagoForm) return;
+            const inputs = pagoForm.querySelectorAll('input, select, textarea');
+            const hasData = Array.from(inputs).some(input => {
+                const value = input.value.trim();
+                return value !== '' && value !== '0.00' && value !== '0';
+            });
+            
+            if (hasData) {
+                if (confirmMessage) {
+                    confirmMessage.textContent = '¿Está seguro que desea volver al listado? Los cambios no guardados se perderán.';
+                }
+                if (confirmActionBtn) {
+                    confirmActionBtn.textContent = 'Volver';
+                }
+                elementToDelete = function() {
+                    switchView(formularioPago, listadoCuentas);
+                    if (pagoForm) pagoForm.reset();
+                    document.getElementById('pagoFecha').valueAsDate = new Date();
+                };
+                if (confirmModal) {
+                    confirmModal.classList.add('show');
+                }
+            } else {
                 switchView(formularioPago, listadoCuentas);
-                pagoForm.reset();
-            };
-            confirmModal.classList.add('show');
-        } else {
-            switchView(formularioPago, listadoCuentas);
-            pagoForm.reset();
-        }
-    });
+                if (pagoForm) pagoForm.reset();
+                if (document.getElementById('pagoFecha')) {
+                    document.getElementById('pagoFecha').valueAsDate = new Date();
+                }
+            }
+        });
+    }
 
     agregarPagoBtn.addEventListener('click', function() {
         const tbody = document.querySelector('#detallePagosTable tbody');
@@ -416,12 +435,25 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Abrir el formulario de pago sin cuenta específica
             switchView(listadoCuentas, formularioPago);
-            document.getElementById('pagoIdCuenta').value = '';
-            document.getElementById('pagoCliente').value = '';
-            document.getElementById('pagoFactura').value = '';
-            document.getElementById('pagoMontoTotal').value = '';
-            document.getElementById('pagoMontoPendiente').value = '';
-            document.getElementById('pagoFecha').valueAsDate = new Date();
+            const pagoIdCuenta = document.getElementById('pagoIdCuenta');
+            const pagoCliente = document.getElementById('pagoCliente');
+            const pagoFactura = document.getElementById('pagoFactura');
+            const pagoMontoTotal = document.getElementById('pagoMontoTotal');
+            const pagoMontoPendiente = document.getElementById('pagoMontoPendiente');
+            const pagoFecha = document.getElementById('pagoFecha');
+            
+            if (pagoIdCuenta) pagoIdCuenta.value = '';
+            if (pagoCliente) pagoCliente.value = '';
+            if (pagoFactura) pagoFactura.value = '';
+            if (pagoMontoTotal) pagoMontoTotal.value = '';
+            if (pagoMontoPendiente) pagoMontoPendiente.value = '';
+            if (pagoFecha) pagoFecha.valueAsDate = new Date();
+            
+            // Asegurar que el botón de volver esté disponible
+            if (volverListadoPagoBtn) {
+                volverListadoPagoBtn.style.display = '';
+            }
+            
             showNotification('Registrar Pago', 'Seleccione una cuenta de la lista o complete el formulario', 'info');
         });
     }
