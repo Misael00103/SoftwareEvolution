@@ -1681,3 +1681,118 @@ textarea {
 .card-body .management-actions {
   margin: 0;
 }
+
+/* Acciones Rápidas */
+.action-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+}
+
+.quick-actions {
+    padding: 1rem;
+    border-top: 1px solid var(--border-light);
+    background-color: var(--card-header);
+}
+
+.quick-actions h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quick-actions h3 i {
+    width: 18px;
+    height: 18px;
+}
+
+.quick-actions .action-buttons-grid .btn {
+    width: 100%;
+    padding: 0.75rem;
+    justify-content: flex-start;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quick-actions .action-buttons-grid .btn i,
+.quick-actions .action-buttons-grid .btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    color: inherit;
+    flex-shrink: 0;
+}
+
+.quick-action-btn {
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 500;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quick-action-payment {
+    background-color: var(--success-light);
+    color: var(--success);
+}
+
+.quick-action-payment:hover {
+    background-color: var(--success);
+    color: white;
+}
+
+.quick-action-reports {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+.quick-action-reports:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.quick-action-reminder {
+    background-color: var(--warning-light);
+    color: var(--warning);
+}
+
+.quick-action-reminder:hover {
+    background-color: var(--warning);
+    color: white;
+}
+
+.quick-action-export {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    border: none;
+}
+
+.quick-action-export:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.quick-action-print {
+    background-color: var(--success-light);
+    color: var(--success);
+}
+
+.quick-action-print:hover {
+    background-color: var(--success);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .quick-actions .action-buttons-grid {
+        grid-template-columns: 1fr;
+    }
+}

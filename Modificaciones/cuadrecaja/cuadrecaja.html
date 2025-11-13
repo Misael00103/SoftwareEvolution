@@ -39,9 +39,19 @@
                         <section class="card">
                             <div class="card-header">
                                 <h2><i data-feather="list"></i> Listado de Cuadres</h2>
-                                <button class="btn primary" id="addCuadreBtn">
-                                    <i data-feather="plus"></i> Nuevo Cuadre
-                                </button>
+                                <div class="header-actions">
+                                    <button class="btn primary" id="addCuadreBtn">
+                                        <i data-feather="plus"></i> Nuevo Cuadre
+                                    </button>
+                                    <button class="btn secondary" id="exportarBtn">
+                                        <i data-feather="download"></i>
+                                        Exportar
+                                    </button>
+                                    <button class="btn secondary" id="imprimirListadoBtnHeader">
+                                        <i data-feather="printer"></i>
+                                        Imprimir
+                                    </button>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <table class="table">
@@ -58,6 +68,34 @@
                                     </thead>
                                     <tbody id="cuadreList"></tbody>
                                 </table>
+                            </div>
+                            <div class="quick-actions">
+                                <h3><i data-feather="zap"></i> Acciones Rápidas</h3>
+                                <div class="action-buttons-grid">
+                                    <button class="btn quick-action-btn quick-action-payment" id="registrarPagoRapidoBtn">
+                                        <i data-feather="dollar-sign"></i>
+                                        Registrar Pago
+                                    </button>
+                                    <button class="btn quick-action-btn quick-action-reports" id="verReportesBtn">
+                                        <i data-feather="bar-chart-2"></i>
+                                        Ver Reportes
+                                    </button>
+                                    <button class="btn quick-action-btn quick-action-reminder" id="enviarRecordatorioBtn">
+                                        <i data-feather="mail"></i>
+                                        Enviar Recordatorio
+                                    </button>
+                                    <button class="btn quick-action-btn quick-action-export" id="exportarExcelBtn">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block;">
+                                            <rect x="5" y="4" width="14" height="16" rx="1.5" fill="#217346" opacity="0.15"/>
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#217346" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <polyline points="14 2 14 8 20 8" stroke="#217346" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <line x1="9" y1="12" x2="15" y2="12" stroke="#217346" stroke-width="1.5" stroke-linecap="round"/>
+                                            <line x1="9" y1="15" x2="15" y2="15" stroke="#217346" stroke-width="1.5" stroke-linecap="round"/>
+                                            <circle cx="12" cy="9" r="1.5" fill="#217346"/>
+                                        </svg>
+                                        Exportar a Excel
+                                    </button>
+                                </div>
                             </div>
                         </section>
                     </div>
